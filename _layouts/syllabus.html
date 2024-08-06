@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% include head.html %}
+    </head>
+    <body class="two-column">
+        {% include header.html %}
+        {% include navigation.html %}
+        {% assign all_content = schedule_simple | append: content %}
+        <main class="syllabus">
+            <aside>
+                {% include toc.html html=all_content class='side-menu' ordered=true %}
+            </aside>
+            <article>
+                {% include page_title.html %} 
+
+                <table class="course-overview">
+                    <tbody>
+                        <tr>
+                          <td><strong>Term</strong></td>
+                          <td>{{ page.term }}</td>
+                        </tr>
+                      <tr>
+                        <td><strong>Course</strong></td>
+                        <td>{{ page.course }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Instructor</strong></td>
+                        <td>
+                            {% for instructor in page.instructors %}
+                                <strong>{{ instructor.name }} ({{ instructor.pronouns }})</strong>
+                                <ul>
+                                    <li>{{ instructor.title }}</li>
+                                    <li>{{ instructor.email }}
+                                        {% if instructor.location %}
+                                            &bull; {{ instructor.location  }}
+                                        {% endif %}
+                                    </li>
+                                    <li>Office Hours: {{ instructor.office_hours }}</li>
+                                </ul>
+                            {% endfor %}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>Prerequisites</strong></td>
+                        <td>{{ page.prerequisites }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Time / Location</strong></td>
+                        <td>{{ page.time_location }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>UNCA Catalog Description</strong></td>
+                        <td>{{ page.catalog_description }}</td>
+                      </tr>
+                    </tbody>
+                </table>
+ 
+                {{ content }}
+
+            </article>  
+        </main>
+
+        {% include footer.html %}
+        {% include scripts.html %}
+        <script type="text/javascript" src="{{site.baseurl}}/assets/js/scrollspy.js"></script>
+    </body>
+</html>
