@@ -28,9 +28,8 @@
                         <td><strong>Instructor</strong></td>
                         <td>
                             {% for instructor in page.instructors %}
-                                <strong>{{ instructor.name }} ({{ instructor.pronouns }})</strong>
+                                {{ instructor.name }} ({{ instructor.pronouns }})
                                 <ul>
-                                    <li>{{ instructor.title }}</li>
                                     <li>{{ instructor.email }}
                                         {% if instructor.location %}
                                             &bull; {{ instructor.location  }}

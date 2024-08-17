@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: "Writing Tests in JavaScript & Python"
 type: lab
-draft: 0
+draft: 1
 points: 6
 abbreviation: Lab 4
 num: 4

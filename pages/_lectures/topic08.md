@@ -1,29 +1,47 @@
 ---
 layout: module
-title: Challenges in Client-Side Engineering
+title: Databases and Object Relational Mappings
 type: module
 num: 8
-draft: 0
-due_date: 2024-10-10
+draft: 1
+due_date: 2024-10-29
 ---
+ 
+## Readings & References
+### PostgreSQL Reference
+* <a href="https://www.postgresql.org/about/" target="_blank">About PostgreSQL</a>
+* <a href="https://www.postgresqltutorial.com/psql-commands/" target="_blank">psql commands</a> (command line)
+* <a href="https://www.postgresql.org/docs/current/tutorial-select.html" target="_blank">Querying a Table</a>
+* <a href="https://www.postgresql.org/docs/current/tutorial-join.html" target="_blank">Joins Between Tables</a>
+* <a href="https://www.postgresql.org/docs/current/tutorial-agg.html" target="_blank">Aggregate Functions</a>
+* <a href="https://www.postgresql.org/docs/current/tutorial-populate.html" target="_blank">Inserts</a>
+* <a href="https://www.postgresql.org/docs/current/tutorial-update.html" target="_blank">Updates</a>
+* <a href="https://www.postgresql.org/docs/current/tutorial-delete.html" target="_blank">Deletions</a>
+{:.compact}
 
-In this unit, we're going to explore some software engineering ideas that are specific to client-side engineering. To do this, we're going to learn some HTML, CSS, JavaScript, and React concepts ***as a means of learning*** various client-side SWE principles (starting with [Lab 6](../assignments/lab06)).
+### SQLAlchemy Reference
 
-Please complete the assigned readings for this unit, as they provide a nice overview of the client-side considerations and challenges we'll be exploring.
+* [Documentation](https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html)
 
-## Assigned Readings
-**[Due 10/17]** <a href="https://nextjs.org/learn/foundations/about-nextjs" target="_blank">NextJS overview of client-side technologies</a>. Please read the following sections:
-1. About Next.js
-1. From JavaScript to React
-1. From React to Next.js
-1. How Next.js works
+
+### PostgreSQL Administrative Commands
+To enter the postgreSQL shell, type: `psql -U postgres` (connecting as the postgres superuser). Once you're in the psql shell, try using the following commands:
+
+{:.admin}
+| Command | Explanation | Example |
+|--|--|--|
+| `\q` | Exits the psql shell | |
+| `\l` | Lists all the available databases | |
+| `\c <dbname> <username>` | Connect to specific database | `\c photo_app_tutorial postgres` |
+| `\dt` | Lists all of the tables in the database you're connected to |
+| `\d <table_name>` | Describes the structure (i.e., "schema") of a table | `\d posts` |
+| `\du` | List all users and their roles | |
+| space bar | If you query data in a table that has multiple pages, the space bar will show you the next set of records.  | |
+| q | If you query data in a table that has multiple pages, and you want to go back to the psql prompt. | |
+
 
 ## Slides
-* Lecture 10: <a href="https://docs.google.com/presentation/d/1Ax5ayU0BX4f8pyMN7K8xz7m0mmAYjSiOUrfDdGavoG4/edit?usp=sharing" target="_blank">Challenges in Client-Side Engineering (Part I)</a>
-* Lecture 11: <a href="https://docs.google.com/presentation/d/1-ALSq8ZmCLhqyIA_2uLOouIa3XihtFLMf4F7ChmCOPY/edit?usp=sharing" target="_blank">Fetch & Building HTML from Data</a>
-* Lecture 12: <a href="https://docs.google.com/presentation/d/1HehB3NsYtJ8oKenTI1AKN1rIjmG0hXxMbJrNfumUIgg/edit?usp=sharing" target="_blank">React</a>
-
+* Lecture 9: <a href="https://docs.google.com/presentation/d/1PTFnOHjnZShjloXJGN2kvmFvy4f4AKCEzM27FG86tzE/edit?usp=sharing" target="_blank">Intro to Relational Databases & ORMs</a>
 
 ## Activities
-* [In-Class Exercises](../course-files/lectures/lecture11.zip) (Tuesday, 10/19)
-* [Lab 6](../assignments/lab06)
+* Today's Repo: <a href="https://github.com/csci338/orm-demo" target="_blank">https://github.com/csci338/orm-demo</a>

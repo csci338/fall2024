@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: Intro to Client-Side Programming with React
 type: lab
-draft: 0
+draft: 1
 points: 6
 abbreviation: Lab 7
 num: 7

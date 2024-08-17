@@ -1,10 +1,14 @@
 ---
 layout: module
-title: "Guest Speaker: Emily Purewal"
+title: "Scalable Software Architectures"
 type: module
 num: 11
-draft: 0
-due_date: 2024-11-12
+draft: 1
+due_date: 2024-11-19
 ---
 
-Emily's Slides are available <a href="/fall2024/assets/readings/ProductDesignMicrosoftUNCA.pdf" target="_blank">here</a>.
+## Readings
+* <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" target="_blank">Kubernetes Basics</a> (Tutorial)
+
+## Slides
+* <a href="https://docs.google.com/presentation/d/1cyXi_ZKqdMzDDWBOerW02yPTl2K8chkoNI5htzjkciE/edit#slide=id.g29c926bd7b1_0_477" target="_blank">Scaling an App</a>

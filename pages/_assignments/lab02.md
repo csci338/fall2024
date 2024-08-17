@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: "Version Control and Branch Management with git and GitHub"
 type: lab
-draft: 0
+draft: 1
 points: 6
 abbreviation: Lab 2
 show_schedule: 2

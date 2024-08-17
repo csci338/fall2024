@@ -3,7 +3,7 @@ layout: module
 title: "Package & Dependency Management"
 type: module
 num: 3
-draft: 0
+draft: 1
 due_date: 2024-09-10
 ---
 
@@ -17,7 +17,9 @@ due_date: 2024-09-10
 * Intro to apt (Ubuntu) -->
 
 ## Slides
-* <a href="https://docs.google.com/presentation/d/1mHWz-llPLb-V-O3VNutWpXyfqx2fwtfUCrpet_zqT5k/edit?usp=sharing" target="_blank">Package & Dependency Management</a>
+Slides will be posted before class.
+
+<!-- * <a href="https://docs.google.com/presentation/d/1mHWz-llPLb-V-O3VNutWpXyfqx2fwtfUCrpet_zqT5k/edit?usp=sharing" target="_blank">Package & Dependency Management</a> -->
 
 
 <!-- ## Activity: Install Node Manually

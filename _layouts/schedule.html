@@ -147,9 +147,8 @@ layout: default
                         {% if assignment.type == "homework" %}
                             {% assign classname = "hw" %}
                         {% endif %} 
-                        {% if assignment.type == "lab" %}   
-                            {{ assignment.abbreviation }}
-                        {% elsif assignment.draft == 1 %}
+                    
+                        {% if assignment.type == "lab" and assignment.draft == 1 %}
                             <strong>{{ assignment.abbreviation }}:</strong> {{ assignment.title }}
                         {% else %} 
                             <a href="{{site.baseurl}}{{assignment.url}}" class="{{classname}}">

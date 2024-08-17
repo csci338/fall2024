@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: Code Editors
 type: lab
-draft: 0
+draft: 1
 points: 6
 abbreviation: Lab 1
 show_schedule: 1

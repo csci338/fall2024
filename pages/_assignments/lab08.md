@@ -3,7 +3,7 @@ layout: assignment-two-column
 title: Storing Your Tasks in a Database
 type: lab
 abbreviation: Lab 8
-draft: 0
+draft: 1
 points: 6
 num: 8
 start_date: 2023-11-02

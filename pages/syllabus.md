@@ -11,7 +11,6 @@ instructors:
   - name: "Dr. Sarah Van Wart"
     email: "svanwart@unca.edu"
     pronouns: "she / her"
-    title: "Instructor of Record"
     office_hours: "MWF 3:30pm - 4:30pm (in person) or by appointment"
     location: "220 Rhoades Robinson Hall"
 catalog_description: "CSCI 338 is project-oriented course in which students working in teams complete one or more projects encompassing software design and development. Students will develop their communication skills by writing project requirements, creating and evaluating prototypes, interfacing with end users, and developing and implementing test plans."
@@ -33,25 +32,25 @@ By the end of this course, our hope is that you will view software engineering a
 {% include schedule-very-simple.html %}
 
 ## Course Format
-The course format includes a mix of assigned readings, lectures, labs, homework, and quizzes. We will generally try to use our Tuesday class time to discuss a "big idea" in software engineering, and our Thursday class time to complete hands-on labs. It is your responsibility to keep up-to-date on class material and announcements, as the schedule is subject to change. This includes material presented and announcements made in class, via email, or on Moodle.
+The course format includes a mix of assigned readings, lectures, labs, projects, quizzes, and exams. We will generally try to use our Tuesday class time to discuss a "big idea" in software engineering, and our Thursday class time to complete hands-on labs. It is your responsibility to keep up-to-date on class material and announcements, as the schedule is subject to change. This includes material presented and announcements made in class, via email, or on Moodle.
 
 ### Class Participation
 Class meetings will be in person. Most class sessions have accompanying readings, which you will be expected to complete before class. Please do your best to be physically and mentally present, and to share your knowledge and experience with one another. 
 
-### Homework
+### Projects
 Over the course of the semester, you will be working with your classmates on a collaborative software development project. During the first half of the semester, you will be assigned 1-2 features that you will need to implement and deploy to the class's shared codebase (individual assignments). During the second half of the semester, you will be working with one or more of your classmates to design, build, and test a feature that you come up with as a team. 
 
 Our hope is that the experience will help you develop more perspective around how software teams organize their work, make decisions, onboard new developers, introduce new features, etc.
 
 {:.blockquote-no-margin}
-> **Note:** We are still figuring out how we will be organizing homework assignments.The current plan (described above) may change.
+> **Note:** I am still figuring out how we will be organizing the projects. The current plan (described above) may change.
 
 
 ### Labs
 Labs are intended to be completed during class on Thursdays (unless otherwise specified), so that we can help you with any questions (or configuration issues) you make have. Each lab is designed to give you practice with a tool, technique, or workflow relevant to building collaborative software.
 
-### Quizzes
-There will also be 1-2 quizzes to assess your understanding of some of the methods we are learning about (e.g., Agile methods, test-driven design, managing trade-offs, navigating constraints and uncertainty, handling upgrades and deprecation, etc.).
+### Exams
+There will also be a midterm and a final exam to assess your understanding of some of the methods we are learning about (e.g., version control, tradeoffs, CI/CD, managing trade-offs, navigating constraints and uncertainty, dependency management, etc.).
 
 
 ## Course Expectations
@@ -65,10 +64,7 @@ There will also be 1-2 quizzes to assess your understanding of some of the metho
 ## Course Materials & Resources
 
 ### Books
-We will be reading selected chapters from two different books:
-* <a href="https://abseil.io/resources/swe-book" target="_blank">Software Engineering at Google</a>. There is a free copy of the book online, or you can order a hardcopy. 
-* <a href="https://www.oreilly.com/library/view/the-agile-samurai/9781680500066/" target="_blank">The Agile Samurai</a>. How Agile masters deliver great software. Jonathan Rasmusson. 
-   * A digital version of this book can be accessed via the UNCA library. Just sign into <a href="https://www.oreilly.com" target="_blank">https://www.oreilly.com</a> with your UNCA email address and then search for the book. 
+We will be reading selected chapters from  <a href="https://abseil.io/resources/swe-book" target="_blank">Software Engineering at Google</a>. There is a free copy of the book online, or you can order a hardcopy. 
 
 ### Software
 This course will utilize many different software packages, libraries, and tools (all free), including the ones listed below. You will probably need around 5GB of disk space to run these programs. Installing and configuring programming software can be a hassle, but it is part of the process of developing your working computing knowledge. We will help you. 
@@ -84,13 +80,14 @@ We will also be compiling a list of cheatsheets, online tutorials, and documenta
 These course materials were developed collaboratively by Sarah Van Wart and Semmy Purewal.
 
 ## Grading
-Your course grade is calculated based on homework, labs, and attendance / participation:
+Your course grade is calculated based on projects, labs, exams, and attendance / participation:
 
 {:.small}
 | **Labs** | 30% |
-| **Homeworks** | 40% |
-| **Attendance & Participation** | 20% |
-| **Quizzes** | 10% |
+| **Projects** | 30% |
+| **Attendance & Participation** | 10% |
+| **Midterm Exam** | 15% |
+| **Final Exam** | 15% |
 
 ### Labs
 Labs will be graded according to the following scale (from 0-3 points):
@@ -102,30 +99,29 @@ Labs will be graded according to the following scale (from 0-3 points):
 
 **Late labs will not be accepted.**
 
-### Homework
-There will be roughly 6 homework assignments. Homework will be graded pass / fail. We will be using a code review workflow to assess you. Here is how the process will work:
+### Projects
+projects involve building part of a larger system, and will be graded according to a rubric. We will be using a code review workflow to assess you. Here is how the process will work:
 
 #### Code Reviews
-1. You will submit your homework as a pull request (PR) on or before the due date.
-1. We will do a code review and either ask for changes or accept your changes. 
+1. You will submit your work as a series of pull requests (PR) on or before the due date.
+1. I will do a code review and either ask for changes or accept your changes. 
     * If your PR is accepted, you're done and will receive full credit for your work.
-    * Otherwise, you will need to implement the requested changes and re-submit within a week (which will initiate another code review cycle).
+    * Otherwise, you will need to implement the requested changes and re-submit before the deadline.
 
 #### Code Review Resubmissions and Late Work
-* All resubmissions are due one week after they are requested.
-* *Each* late submission (including the original submission) -- will incur a 15% penalty. Why? Because your work impacts everyone else's work (as we're building a collaborative system). 
+* All late submissions will incur a 15% penalty. 
 * If you anticipate not being able to complete your feature on time, please talk to the instructors as soon as possible (just as you would if this were your job).
  
 ### Participation
 In this class, participation is defined as:
 
-1. [10%] Attendance – "Half of life is just showing up."
-2. [10%] Engaging with the course ideas and with your peers, including completing the readings and participating in the discussions and activities.
+1. [5%] Attendance – "Half of life is just showing up."
+2. [5%] Engaging with the course ideas and with your peers, including completing the readings and participating in the discussions and activities, and performance on the quizzes.
 
 We will take attendance. You may miss **two** class sessions – no questions asked – without a grade penalty. Any additional absences (beyond your two “freebies”) will impact your participation grade (and more to the point, your capacity to productively engage with the class).
 
-### Quizzes
-Quizzes will be graded according to how thoroughly you answer the questions and drawing from the principles and readings covered of the course.
+### Exams
+Exams will be graded according to how thoroughly you answer the questions and drawing from the principles and readings covered of the course.
 
 ## Course Policies
 
@@ -140,7 +136,7 @@ In the past, there have been a few unfortunate instances in which students have 
 #### Labs
 Helping other students with their in-class labs is allowed and encouraged, but each student should type their own solution unless otherwise specified in the lab instructions.
 
-#### Homework
+#### Projects
 * You are allowed and encouraged to discuss general approaches to solving problems, but all work you submit must be your own (no "outsourcing").
 * Uploading materials from this course to websites that sell such content to students is prohibited by UNCA’s academic integrity policies, and may also put you at risk for violating copyright policies in UNCA’s Student Conduct Code.
 
