@@ -5,6 +5,7 @@ permalink: /resources/
 ---
 
 ## The Command Line
+* [WSL](wsl) (Windows Subsystem for Linux)
 * [Command Line Cheatsheets](command-line)
 * [Zsh/Bash startup files loading order](https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/)  (.bashrc, .zshrc etc.)
 

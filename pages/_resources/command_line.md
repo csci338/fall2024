@@ -23,9 +23,7 @@ category: "Code Editors"
 In this course, we will be using bash. Bash is a Unix shell and command language that runs natively on Mac, Linux, and Unix operating systems. If you are a Windows user, you will be using WSL (see below) to run a GNU/Linux environment.
 
 ### Using Linux Commands on Windows via WSL
-The **Windows Subsystem for Linux** (WSL) lets Windows users run a GNU/Linux environment -- including most command-line tools, utilities, and applications -- directly on Windows, unmodified, without the overhead of a traditional virtual machine or dualboot setup.
-* [About](https://learn.microsoft.com/en-us/windows/wsl/about)
-* [Installation / Configuration](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
+If you are a Windows user, [please install WSL](wsl) in order to practice using the bash commands in a Linux environment. 
 
 ### Environment files
 Environment files set environment variables on your operating system. This allows you to configure shortcuts and run scripts on startup. Here are some relevant resources for configuring these files:

@@ -15,10 +15,8 @@ Please read the following chapters before Thursday in the Software Engineering a
 * <a href="https://abseil.io/resources/swe-book/html/ch01.html" target="_blank">Chapter 1. What is Software Engineering?</a>
 
 ## Slides
-Slides will be posted before class.
-
-<!-- * <a href="https://docs.google.com/presentation/d/1kd3e-BwmrhI-BUV3UGMbqBDdukMOSAmd/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Intro to the Course</a>
-
+* Lecture 1: <a href="https://docs.google.com/presentation/d/1kd3e-BwmrhI-BUV3UGMbqBDdukMOSAmd/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Intro to the Course</a>
+* Lecture 2: What is Software Engineering?
 
 ## Activities
-* <a href="https://docs.google.com/document/d/1lb4iE41b-aJoR9B3M007bYTT-m3p9E8D/edit#heading=h.gl8cimderpa9" target="_blank">Activity 1</a> -->
+* <a href="https://docs.google.com/document/d/1lb4iE41b-aJoR9B3M007bYTT-m3p9E8D/edit#heading=h.gl8cimderpa9" target="_blank">Activity 1</a>

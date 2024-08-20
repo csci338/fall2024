@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: Code Editors
 type: lab
-draft: 1
+draft: 0
 points: 6
 abbreviation: Lab 1
 show_schedule: 1
@@ -24,7 +24,7 @@ Welcome to your first CSCI 338 lab! The goal of today's lab is to get you a litt
 {:#vscode}
 ## 1. VS Code Exercises
 
-### 1.1. Installation
+### 1.1. Install VS Code and Extensions
 Please install [VS Code](https://code.visualstudio.com/download). When you're done, please install the following VS Code Extensions:
 * Live Server (by Ritwick Dey)
 * Prettier (by Prettier should have the blue "verified" badge)
@@ -74,16 +74,20 @@ function foo(a, b) {
     * Edit the file (e.g., add "hello world")
     * Save it
     * Look at it on http://cs.unca.edu/~your_username (e.g., [http://cs.unca.edu/~svanwart](http://cs.unca.edu/~svanwart))
-        * Note that the SSL certificate needs to be updated...will send a message to Dr. Bogert :)
 
 
 {:#command-line}
 ## 2. Complete the Command Line Exercises
-Please complete the following command line exercises with the help of the [Command Line Reference](../resources/command-line) we have compiled for you. Feel free to collaborate with your classmates!
+Please complete the following command line exercises with the help of the [Command Line Reference](../resources/command-line) that has been compiled for you. Feel free to collaborate with your classmates!
+
+{:.blockquote-no-margin}
+> ### Windows Users
+> If you are a Windows user, [you will need to install WSL and a Linux distribution](/fall2024/resources/wsl) (Windows Subsystem for Linux).
 
 ### 2.1. Navigation
 1. Figure out which directory you're in (use `pwd`)
-1. Navigate to the folder where you usually save your coursework (use `cd`). <br>**Pro-tips**:
+    * Windows users: if you type `explorer.exe`, it will open a Windows Explorer window to show you where your files are.
+1. Navigate to the folder where you plan to save your coursework (use `cd`). <br>**Pro-tips**:
     * If any of your folder names have spaces, you'll have to surround the path with quotes
     * Use the tab key to autocomplete the path
     * Use the up and down keys to revive old commands
@@ -190,11 +194,12 @@ Take a look at the new `src` folder (and nested files) that were created by typi
 
 {:#dot-files}
 ## 3. OS Environment Exercises
-Semmy will walk you through some `.dot` file configuration tasks. Here is a sample [dotfile repo](https://github.com/semmypurewal/dotfiles/tree/master/zsh). Afterwards, try making a few adjustments to your `.zshrc` file on your own. Some suggestions:
+Try making a few adjustments to your `.zshrc` file on your own. Some suggestions:
 
-* Create an alias to your `csci338` directory in your `.zshrc` file so that when you type: `338` on the command line, it automatically puts you into the `csci338` directory.
-* Extend the size of your history file
-* Add a new executable to your system path (e.g., node)
+* <a href="https://dev.to/haamid/how-to-define-custom-alias-in-zsh-3b6a" target="_blank">Create an alias</a> to your `csci338` directory in your `.zshrc` file so that when you type: `338` on the command line, it automatically puts you into the `csci338` directory. 
+    * Here is what Sarah's `.zshrc` entry looks like:<br>`alias 338='cd /Users/svanwart/unca/csci338'`
+* Extend the size of your history file (google it)
+* Add a new executable to your system path (e.g., VS Code)
 
 {:#vim-emacs}
 ## 4. Vim / Emacs Exercises
