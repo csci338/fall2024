@@ -336,7 +336,7 @@ table.schedule-simple {
     }
     ul {
         list-style: none;
-        li::before {
+        >li::before {
             font-size: 20px;
             content: "\2022";
             font-weight: bold;
