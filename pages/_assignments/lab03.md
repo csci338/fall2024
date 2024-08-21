@@ -7,8 +7,8 @@ points: 6
 abbreviation: Lab 3
 show_schedule: 1
 num: 3
-start_date: 2023-09-07
-due_date: 2024-09-10
+start_date: 2024-09-12
+due_date: 2024-09-15
 
 ---
 

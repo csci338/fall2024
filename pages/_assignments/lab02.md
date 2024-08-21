@@ -7,8 +7,8 @@ points: 6
 abbreviation: Lab 2
 show_schedule: 2
 num: 2
-start_date: 2023-08-31
-due_date: 2024-09-04
+start_date: 2024-08-29
+due_date: 2024-09-01
 ---
 
 ## Introduction

@@ -141,7 +141,7 @@ Helping other students with their in-class labs is allowed and encouraged, but e
 * Uploading materials from this course to websites that sell such content to students is prohibited by UNCA’s academic integrity policies, and may also put you at risk for violating copyright policies in UNCA’s Student Conduct Code.
 
 #### Using Outside Tools and Materials
-In this class, we encourage you to explore the broader Internet for tutorials, code samples, new coding techniques, libraries, etc. That said, you must *acknowledge all sources contributing to your work.*  If you receive any assistance from any source (Internet, peer, social media, ChatGPT, etc.), please describe your source and that source’s contribution(s). If you have any questions about this, please don't hesitate to contact the.
+In this class, we encourage you to explore the broader Internet for tutorials, code samples, new coding techniques, libraries, etc. That said, you must *acknowledge all sources contributing to your work.*  If you receive any assistance from any source (Internet, peer, social media, ChatGPT, etc.), please describe your source and that source’s contribution(s). If you have any questions about this, please don't hesitate to contact the instructors.
 
 Students violating the academic honesty policy on an assignment will receive a grade of 0 on that assignment for the first offense, and will receive a grade of "F" in the course for the second offense. This will apply to all students involved in the violation, including both the source student and the copying student. It is your responsibility to ensure that your work is not used by other students.
 

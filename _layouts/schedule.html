@@ -148,13 +148,8 @@ layout: default
                             {% assign classname = "hw" %}
                         {% endif %} 
                     
-                        {% if assignment.type == "lab" and assignment.draft == 1 %}
-                            <strong>{{ assignment.abbreviation }}:</strong> {{ assignment.title }}
-                        {% else %} 
-                            <a href="{{site.baseurl}}{{assignment.url}}" class="{{classname}}">
-                                {{ assignment.abbreviation }}
-                                <i class="fa fa-link"></i>
-                            </a> {{ assignment.title }}
+                        {% if assignment.type == "lab" %}
+                            {{ assignment.abbreviation }}
                         {% endif %} 
                     {% endfor %}
                 </td>

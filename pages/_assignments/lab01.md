@@ -7,8 +7,8 @@ points: 6
 abbreviation: Lab 1
 show_schedule: 1
 num: 1
-start_date: 2023-08-24
-due_date: 2024-08-22
+start_date: 2024-08-22
+due_date: 2024-08-25
 ---
 
 ## Introduction
@@ -22,7 +22,7 @@ Welcome to your first CSCI 338 lab! The goal of today's lab is to get you a litt
 
 
 {:#vscode}
-## 1. VS Code Exercises
+## Part 1. VS Code Exercises
 
 ### 1.1. Install VS Code and Extensions
 Please install [VS Code](https://code.visualstudio.com/download). When you're done, please install the following VS Code Extensions:
@@ -75,16 +75,21 @@ function foo(a, b) {
     * Save it
     * Look at it on http://cs.unca.edu/~your_username (e.g., [http://cs.unca.edu/~svanwart](http://cs.unca.edu/~svanwart))
 
+> ### Before Moving On, Verify That...
+>
+>{:.checkbox-list}
+> * VS Code autoformats when you save
+> * You have successfully created a webpage on Arden
 
 {:#command-line}
-## 2. Complete the Command Line Exercises
+## Part 2. Complete the Command Line Exercises
 Please complete the following command line exercises with the help of the [Command Line Reference](../resources/command-line) that has been compiled for you. Feel free to collaborate with your classmates!
 
-{:.blockquote-no-margin}
-> ### Windows Users
-> If you are a Windows user, [you will need to install WSL and a Linux distribution](/fall2024/resources/wsl) (Windows Subsystem for Linux).
+### 2.1 Open a Terminal
+* If you are a Mac user, open the Terminal program
+* If you are a Windows user, [follow these instructions to install WSL and a Linux distribution](/fall2024/resources/wsl) (Windows Subsystem for Linux). Once you're done, open a WSL terminal.
 
-### 2.1. Navigation
+### 2.2. Navigation
 1. Figure out which directory you're in (use `pwd`)
     * Windows users: if you type `explorer.exe`, it will open a Windows Explorer window to show you where your files are.
 1. Navigate to the folder where you plan to save your coursework (use `cd`). <br>**Pro-tips**:
@@ -93,14 +98,23 @@ Please complete the following command line exercises with the help of the [Comma
     * Use the up and down keys to revive old commands
     * Use the `history` command to see the commands you've issued in the past
 
-### 2.2. Create
+### 2.3. Create
 1. Create a directory called `csci338` (use `mkdir`)
 1. Navigate into `csci338`
 1. Create a new file called `index.html` (use `touch`)
 1. Create another new file called `style.css` (use `touch`)
 1. Copy the Google homepage locally as follows: `curl https://www.google.com > google-home.html`
 
-### 2.3. List
+If you did everything correctly, you should have a directory structure that looks like this:
+
+```bash
+csci338
+    ├── google-home.html
+    ├── index.html
+    └── style.css
+```
+
+### 2.4. List
 1. Verify that the two new files exist in your current directory (use `ls`)
 1. List all of the files and folders in your Desktop (use `ls ~/Desktop`)
 1. List all of the files and folders on your Desktop including hidden files (use `ls ~/Desktop -la`)
@@ -109,12 +123,12 @@ Please complete the following command line exercises with the help of the [Comma
     * `tree ~/Desktop -La 2`
     * `tree ~/Desktop`
 
-### 2.4. Read
+### 2.5. Read
 1. Read the contents of the `google-home.html` file you just created (use `cat`)
 1. Inspect the file using some of the other read commands (e.g., `less`, `head`, `tail`, open wc).
     * **Pro-tip**: For `less`, `head`, and `tail`, use the space bar to scroll down, and "q" to quit
 
-### 2.5. Write
+### 2.6. Write
 1. Append the sentence "Hello World" to the contents of the `index.html` file (`echo "Hello World" >> index.html`).
 1. Do it again.
 1. Read the contents of `index.html` (use `cat`)
@@ -125,29 +139,29 @@ Please complete the following command line exercises with the help of the [Comma
 1. Now remove it (rm new.txt)
 1. Make sure you understand the difference between `>>` and `>`?
 
-### 2.6. Move & Copy
+### 2.7. Move & Copy
 1. Copy a directory and all subdirectories (try: `cp -r my_folder copy_of_my_folder`)
 1. Copy a file (try: `cp foo.txt bar.txt`)
 1. Rename a file (try: `mv bar.txt bar1.txt`)
 1. Move a file to a parent directory (try `mv bar.txt ../.`)
 
-### 2.7. Search
+### 2.8. Search
 Use grep to search for files for strings / text...
 1. To find the word "Goodbye" in your current directory or any descendents (try: `grep "Goodbye" ./ -r`)
 1. To find the word "goodbye" -- case insensitive -- in your current directory or any descendents (try: `grep "goodbye" ./ -ri`)
 1. To find the word "goodbye" -- case insensitive -- anywhere on your Desktop or any descendents (try: `grep "goodbye" ~/Desktop -ri`)
 
-### 2.8. Make a bash script
+### 2.9. Make a bash script
 You can also combine multiple commands into a bash script (use the `.sh` extension). Let's make a bash script that sets up a basic web app in your current directory. Try the following:
 * Create a script called `start-web-prj.sh`
 * Add the following lines of code to the script:
 
 ```bash
 # 1. Create a new directory called "src"
-mkdir src
+mkdir my_new_folder
 
 # 2. Navigate into it:
-cd src
+cd my_new_folder
 
 # 3. Create a new starter index.html file:
 echo '''
@@ -183,7 +197,7 @@ body {
 cd ..
 
 # # 6. Open the index.html file in a web browser:
-# open src/index.html
+# open my_new_folder/index.html
 ```
 
 When you're done, execute the script as follows:
@@ -192,17 +206,64 @@ When you're done, execute the script as follows:
 
 Take a look at the new `src` folder (and nested files) that were created by typing: `tree .`
 
+Now, open the HTML file you just made in a new browser:
+`open my_new_folder/index.html`
+
+And finally, open the folder you just made in VS Code:
+
+`code .`
+
+If that didn't work and you're on a Mac, see <a href="https://stackoverflow.com/questions/29955500/code-is-not-working-in-on-the-command-line-for-visual-studio-code-on-os-x-ma" target="_blank">this Stack Overflow post</a>.
+
+
+> ### Before Moving On, Verify That...
+>
+>{:.checkbox-list}
+> * You have practiced working with the following commands:
+>    * cat (read)
+>    * cd (change directories)
+>    * tree (list files and subdirectories)
+>    * touch (create new empty file)
+>    * ls (list files)
+>    * rm (delete a file)
+>    * mv (rename a file)
+>    * cp (copy a file)
+>    * history (view recent bash commands)
+>    * `>>` (append operator)
+>    * `>` (overwrite operator)
+>    * grep (search)
+>    * running a bash script: `bash ./start-web-prj.sh`
+>    {:.compact}
+>
+> * You can open VS Code from the command line
+> * Your file structure looks like the file structure below:
+
+```bash
+csci338
+├── google-home.html
+├── index.html
+├── my_new_folder
+│   ├── index.html
+│   └── style.css
+├── start-web-prj.sh
+└── style.css
+```
+
 {:#dot-files}
-## 3. OS Environment Exercises
+## Part 3. OS Environment Exercises
 Try making a few adjustments to your `.zshrc` file on your own. Some suggestions:
 
 * <a href="https://dev.to/haamid/how-to-define-custom-alias-in-zsh-3b6a" target="_blank">Create an alias</a> to your `csci338` directory in your `.zshrc` file so that when you type: `338` on the command line, it automatically puts you into the `csci338` directory. 
     * Here is what Sarah's `.zshrc` entry looks like:<br>`alias 338='cd /Users/svanwart/unca/csci338'`
-* Extend the size of your history file (google it)
-* Add a new executable to your system path (e.g., VS Code)
+* Extend the size of your history file by adding some variables to your `.zshrc` file (google it).
+
+> ### Before Moving On, Verify That...
+>
+>{:.checkbox-list}
+> * `338` on the command line, it automatically jumps you to the `csci338` directory
 
 {:#vim-emacs}
-## 4. Vim / Emacs Exercises
+## Part 4. Vim / Emacs Exercises
 
 Using either [vim](../resources/vim) or [emacs](../resources/emacs):
 
@@ -212,9 +273,12 @@ Using either [vim](../resources/vim) or [emacs](../resources/emacs):
 4. Exit the editor
 
 ## What do I turn in?
-Nothing to turn in this week! Your lab grade will be based on participation. Some thoughts on how you should be thinking about this lab:
+Under Lab 1, paste the following into the textbox:
+1. A link to your "Hello World" website on Arden.
+2. A dump of your history (type `history` on the command line, copy it, and paste it into the Moodle).
 
-* Make sure you know some basic shell commands, and specifically how to navigate, search, create, delete, copy, read, and move files.
+### Other Thoughts...
 * Make sure you can ssh into another server.
 * Make sure your VS code editor is set up.
+* Make sure you know some basic shell commands, and specifically how to navigate, search, create, delete, copy, read, and move files.
 * Make sure you know how to open, edit, save, and exit either vim or emacs.
