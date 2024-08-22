@@ -16,7 +16,7 @@ Please read the following chapters before Thursday in the Software Engineering a
 
 ## Slides
 * Lecture 1: <a href="https://docs.google.com/presentation/d/1kd3e-BwmrhI-BUV3UGMbqBDdukMOSAmd/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Intro to the Course</a>
-* Lecture 2: What is Software Engineering?
+* Lecture 2: <a href="https://docs.google.com/presentation/d/1DR-1d_XeFVWaaO-ZDs7X6N6nFQICx2gI/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">What is Software Engineering?</a>
 
 ## Activities
 * <a href="https://docs.google.com/document/d/1lb4iE41b-aJoR9B3M007bYTT-m3p9E8D/edit#heading=h.gl8cimderpa9" target="_blank">Activity 1</a>
