@@ -11,7 +11,7 @@ instructors:
   - name: "Dr. Sarah Van Wart"
     email: "svanwart@unca.edu"
     pronouns: "she / her"
-    office_hours: "MWF 3:30pm - 4:30pm (in person) or by appointment"
+    office_hours: "Mo, Tu, Fr 3:30pm - 4:30pm (in person) or by appointment"
     location: "220 Rhoades Robinson Hall"
 catalog_description: "CSCI 338 is project-oriented course in which students working in teams complete one or more projects encompassing software design and development. Students will develop their communication skills by writing project requirements, creating and evaluating prototypes, interfacing with end users, and developing and implementing test plans."
 ---
