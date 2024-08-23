@@ -149,7 +149,7 @@ csci338
 Use grep to search for files for strings / text...
 1. To find the word "Goodbye" in your current directory or any descendents (try: `grep "Goodbye" ./ -r`)
 1. To find the word "goodbye" -- case insensitive -- in your current directory or any descendents (try: `grep "goodbye" ./ -ri`)
-1. To find the word "goodbye" -- case insensitive -- anywhere on your Desktop or any descendents (try: `grep "goodbye" ~/Desktop -ri`)
+1. To find the word "goodbye" -- case insensitive -- anywhere in your home directory or its descendents (try: `grep "goodbye" ~/. -ri`)
 
 ### 2.9. Make a bash script
 You can also combine multiple commands into a bash script (use the `.sh` extension). Let's make a bash script that sets up a basic web app in your current directory. Try the following:
