@@ -116,12 +116,12 @@ csci338
 
 ### 2.4. List
 1. Verify that the two new files exist in your current directory (use `ls`)
-1. List all of the files and folders in your Desktop (use `ls ~/Desktop`)
-1. List all of the files and folders on your Desktop including hidden files (use `ls ~/Desktop -la`)
-1. List all of the files and folders in your Desktop recursively, Try: 
-    * `tree ~/Desktop -La 1`
-    * `tree ~/Desktop -La 2`
-    * `tree ~/Desktop`
+1. List all of the files and folders in your home (use `ls ~/.`)
+1. List all of the files and folders on your home directory including hidden files (use `ls -la`)
+1. List all of the files and folders in your home recursively, Try: 
+    * `tree ~/. -La 1`
+    * `tree ~/. -La 2`
+    * `tree ~/.`
 
 ### 2.5. Read
 1. Read the contents of the `google-home.html` file you just created (use `cat`)
