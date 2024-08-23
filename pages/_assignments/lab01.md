@@ -116,12 +116,12 @@ csci338
 
 ### 2.4. List
 1. Verify that the two new files exist in your current directory (use `ls`)
-1. List all of the files and folders in your home (use `ls ~/.`)
+1. List all of the files and folders in your home (use `ls ~`)
 1. List all of the files and folders on your home directory including hidden files (use `ls -la`)
 1. List all of the files and folders in your home recursively, Try: 
-    * `tree ~/. -La 1`
-    * `tree ~/. -La 2`
-    * `tree ~/.`
+    * `tree ~ -La 1`
+    * `tree ~ -La 2`
+    * `tree ~`
 
 ### 2.5. Read
 1. Read the contents of the `google-home.html` file you just created (use `cat`)
@@ -149,7 +149,7 @@ csci338
 Use grep to search for files for strings / text...
 1. To find the word "Goodbye" in your current directory or any descendents (try: `grep "Goodbye" ./ -r`)
 1. To find the word "goodbye" -- case insensitive -- in your current directory or any descendents (try: `grep "goodbye" ./ -ri`)
-1. To find the word "goodbye" -- case insensitive -- anywhere in your home directory or its descendents (try: `grep "goodbye" ~/. -ri`)
+1. To find the word "goodbye" -- case insensitive -- anywhere in your home directory or its descendents (try: `grep "goodbye" ~ -ri`)
 
 ### 2.9. Make a bash script
 You can also combine multiple commands into a bash script (use the `.sh` extension). Let's make a bash script that sets up a basic web app in your current directory. Try the following:
