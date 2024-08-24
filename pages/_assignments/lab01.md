@@ -8,7 +8,7 @@ abbreviation: Lab 1
 show_schedule: 1
 num: 1
 start_date: 2024-08-22
-due_date: 2024-08-25
+due_date: 2024-08-27
 ---
 
 ## Introduction
