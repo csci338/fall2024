@@ -1,503 +1,549 @@
 ---
 layout: assignment-two-column
-title: Intro to Client-Side Programming with "Vanilla JavaScript"
+title: AsyncIO, FastAPI, and Python
 type: lab
 draft: 1
 points: 6
-abbreviation: Lab 6
+abbreviation: Lab 5
 show_schedule: 1
-num: 6
-start_date: 2023-10-17
-due_date: 2024-10-17
-
+num: 5
+start_date: 2023-09-28
+due_date: 2024-10-10
 ---
 
-<style>
-    .img {
-        width: 80%;
-        border: solid 1px black;
-    }
-    .img-sm {
-        width: 50%;
-        border: solid 1px black;
-        margin: 5px auto;
-        display: block;
-    }
-</style>
+> ## Lab 5 Hints
+> Resources from Tuesday's class (10/03/2023) to help you get started on Lab 5:
+> * [Slides](https://docs.google.com/presentation/d/1VEV7xnxnW_oA-XVCumJL5L7ooYo4DDzqwtWIm3DeMZs/edit?usp=sharing)
+> * [Hints directory](https://github.com/csci338/class-exercises-fall2024/tree/main/lab05/src/hints) in the `main` branch.
+> * <a href="https://drive.google.com/drive/folders/10fr-iDlzEn2Oh06HdUCvhU73sg2sg32C">Video Walkthrough</a>
 
-To become familiar with client-side software engineering considerations, we need a concrete example to work with. Given this, we have decided to delve into client-side web programming -- mostly because web clients are accessible and ubiquitous (and client-side web programming is a valuable skillset). 
+## 1. Reading & Reference Materials
+* <a href="https://realpython.com/async-io-python/" target="_blank">AsyncIO</a>
+* <a href="https://www.pythoncheatsheet.org/cheatsheet/basics" target="_blank">Python Reference</a>
+* <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a>
 
-Therefore, in this lab, you will learn a bit about HTML, CSS, and JavaScript. Please refer to the web resources below to familiarize yourself with these languages. We will also be doing a very brief "crash course" of these languages during class.
+## 2. Setup
 
-## 1. Background Readings and Resources
-* [CSCI 344 HTML Resources](https://csci344.github.io/spring2023/lectures/topic03)
-* [CSCI 344 CSS Resources](https://csci344.github.io/spring2023/lectures/topic04)
-* JavaScript
-    * [Language Features & the DOM](https://csci344.github.io/spring2023/lectures/topic05)
-    * [Looping, Iteration, & Higher-Order Functions](https://csci344.github.io/spring2023/lectures/topic06)
-    * [The Fetch API](https://csci344.github.io/spring2023/lectures/topic07)
-* Slides: Intro to Client-Side Web Tech
+### 1. Get the latest files & make a new branch
+From within your `class-exercises-fall2024` repo on your local computer:
+* Make sure you're at a stopping point and commit all of your current changes.
+* Checkout the `main` branch.
+* Pull down the lastest updates from the `class-exercises-fall2024`
+* You will notice a new folder called `lab05`.
+* From the `main` branch, create a new branch called `lab05-your-username` 
+    * `git checkout -b lab05-your-username`
+* Copy the `lab05` directory into `your-username` folder. When When you’re done, you shoud have a folder structure that looks something like this (within your-username folder):
 
-## 2. Set-up
-> ### Note: Lab 6 builds on Lab 5
-> In order to begin Lab 6, your Lab 5 code needs to be working correctly. If you haven't yet finished Lab 5, please make it a priority.
-
-
-After completing [Lab 5](lab05), you will create a new branch from your existing `lab05-your-username` branch (from within your `class-exercises-fall2024` repository) as follows:
-
-```sh
-git status  # make sure you've committed all of your files
-git branch  # verify that you're on the lab05-your-username branch
-git checkout -b lab06-your-username  # should create a new branch based on your lab05 branch
-git branch  # verify that you're on your new branch
+```
+class-exercises-fall2024
+...
+├── lab04           # original copy
+├── lab05           # original copy
+...
+└── your-username
+    ├── README.md
+    ├── getting-started-app
+    ├── lab04       # your copy -- you may not have this one yet if your changes have not yet been reviewed
+    └── lab05       # your copy -- you will edit the files in this folder
 ```
 
-By branching from your `lab05-your-username` branch, your Lab 5 code will be included in your `lab06-your-username` branch (so that your client can interact with it). When you're done, please make the following modifications to your code:
+### 2. Create the Docker image and container
+**Credit:** Taken from Hayden's Docker file `README.md`
 
-### 1. Edit server.py
-At the top of `server.py`, add the following import statement:
-```python
-from fastapi.staticfiles import StaticFiles
+Make sure docker is installed and the daemon is running.
+
+```bash
+docker --version
 ```
 
-Then, at the very bottom of `server.py`, add this line:
+Build the container image. You only need to do this once:
 
-```python
-app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
+```bash
+docker build -t csci338-lab05:latest .
 ```
 
-This code allows us to server static files from the `ui` directory as if they were coming from the root of the website. Verify that you did it correctly by trying to access these static files via FastAPI (note that the Docker container you made in Lab 5 must be running):
+#### Run the FastAPI app (Lab 5) using Docker
+Run the container using `docker run` followed by any options and the image
+name.
 
-* <a href="http://localhost:8000/js/main.js" target="_blank">http://localhost:8000/js/main.js</a>
-* <a href="http://localhost:8000/css/styles.css" target="_blank">http://localhost:8000/css/styles.css</a>
+The `-d` option runs the container in "Detached" mode, which frees up your terminal.
 
-If you see a JavaScript file and a CSS file, it worked.
+The `-p 8000:8000` option maps port 8000 on your host machine to the
+container's port 8000. Without this option you will not be able to see the app
+from the browser on your host machine.
 
-### 2. Create a new HTML file
-Within the `ui` directory, create a new file called `index.html` and add the following code to it:
+The `-v ./src:/app` option tells docker to map the `./src` directory on your
+host machine to the `/app` directory inside the container. This allows you to
+edit the code on your machine and see the updates in the container without
+restarting the container.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/tasks.css">
-    <script src="/js/main.js" type="text/javascript" defer></script>
-    <title>Web Client</title>
-</head>
-
-<body>
-    <header>
-        <h1>My Tasks</h1>
-    </header>
-
-    <main>
-
-        <section>
-            <h2>Task List</h2>
-            <div class="task-list">
-                <!-- tasks go here -->
-            </div>
-        </section>
-
-        <form class="add-task">
-            <h2>Add New Task</h2>
-            
-            <label for="name">Name:</label>
-            <input type="text" placeholder="Task name" id="name">
-            
-            <label for="description">Description:</label>
-            <input type="text" placeholder="Task description" id="description">
-            
-            <button>Add</button>
-        </form>
-
-    </main>
-</body>
-
-</html>
+```bash
+docker run -d -p 8000:8000 -v ./src:/app csci338-lab05
 ```
 
-### 3. Add a new stylesheet
-Within the `ui/css` directory, create a new file called `tasks.css` and add the following code to it:
+Visit `http://localhost:8000` and behold! The app running in a container!
 
-```css
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-}
 
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 75px;
-    border-bottom: solid 1px #000;
-    margin-bottom: 20px;
-}
+### 3. Activate the Docker Shell
+To run and test individual python files using your Docker container, you need to activate the docker shell, and then run your python files from within the Docker environment. To do this:
 
-main {
-    max-width: 600px;
-    margin: auto;
-}
+List the containers:
 
-section,
-form {
-    border: solid 1px #000;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.item {
-    display: grid;
-    grid-template-columns: auto 100px;
-    align-items: center;
-    margin-bottom: 10px;
-    border: solid 1px #000;
-    padding: 10px;
-}
-
-.item strong,
-.item p {
-    grid-column: 1 / 2;
-    margin: 0;
-}
-
-.item p {
-    grid-row: 2 / 3;
-}
-
-.item button {
-    grid-row: 1 / 3;
-}
-
-.add-task {
-    display: grid;
-    grid-template-columns: 100px auto;
-    row-gap: 10px;
-    column-gap: 10px;
-    align-items: center;
-}
-
-.add-task h2 {
-    grid-column: 1 / 3;
-}
-
-.add-task button {
-    grid-column: 2 / 3;
-    justify-self: flex-start
-}
-
-label {
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-input {
-    border: solid 1px #CCC;
-    border-radius: 4px;
-    padding: 6px 12px;
-}
-
-button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: solid 1px #FFF;
-}
-
-form button {
-    background-color: rgb(79, 67, 182);
-    color: white;
-}
-
-button:hover {
-    border: solid 1px #CCC;
-    font-weight: 600;
-
-}
+```bash
+docker container ls -a     
 ```
 
-You don't really need to understand the style declarations in any detail (save that for CSCI 344). What you do need to know is that this file is in charge of styling your web client and controlling the layout.
+Open the Docker shell for your container of interest:
 
-### 4. View your starter client
-When you're done with steps 1-3 above, you should be able to view your starter client as follows (make sure your Docker container from Lab 5 is running):
-* <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a>
+```bash
+docker exec -it <container-id> bash
+```
 
-If you see something like this in your web browser, you're all set up:
+Activate the poetry shell (virtual environment) and run the tests:
 
-<img class="img" src="../assets/images/lab06-setup.png" alt="Screenshot of what your starter client should look like" />
+```bash
+poetry shell # activates the python virtual environment
+pwd # check that you're in the app directory
+```
 
-## 3. Your Tasks
-Now that you've set up your "starter client," your job is to get your client to interact with the server routes that you implemented in [Lab 5](lab05) using the browser's built-in `fetch` API. 
+
+#### Other Useful Docker Commands (just FYI)
+
+##### Stopping and starting the container
+You do not need to run a new container each time you want to work on the code. Instead, you can restart a stopped container using `docker start` followed by the container name or container id. Some helpful commands:
+
+List all of the containers and their ids:
+
+```bash
+docker container ls -a
+```
+
+Stop the container using `docker stop` followed by the container name or id.
+
+```bash
+docker stop <container-id>
+```
+
+Start the container using `docker start` followed by the container name or id.
+
+```bash
+docker start <container-id>
+```
+
+##### Remove old images
+When a new version of the Dockerfile is available you will need to build the
+image again using `docker build` and run a new container using `docker run`.
+
+After a while you may end up with old versions of the image on your system.
+These can take up quite a bit of disk space, so it is good to check every so
+often and remove old images from your system.
+
+To show the images on your local machine use `docker image ls`.
+
+```bash
+docker image ls
+```
+
+Remove any unneeded images using `docker image rm` followed by a list of one or
+more image ids or image names.
+
+```bash
+docker image rm <image-id>
+```
+
+##### Remove old containers
+You may want to remove old containers after building and running a new image.
+List the containers on your system using `docker container ls`. This will only
+show running containers, add the `-a' flag to see stopped containers as well.
+
+```bash
+docker container ls -a
+```
+
+You can remove any containers you need by using `docker container rm` followed
+by container name or id.
+
+```bash
+docker container rm <container-id>
+```
+
+
+## 3. AsyncIO Walkthrough
 
 {:.blockquote-no-margin}
-> When you are finished with all of the tasks described in this section, your client should function like this:
->
-> <img class="img-sm" src="../assets/images/lab06-demo-client.gif" alt="Animation of what the final product should look like" />
+> ### Note
+> This tutorial was generated with the help of ChatGPT!
 
-Since this is not a webdev class, we're just going to ask you to interact with three of the routes you made in Lab 5:
+The `asyncio` module in Python is a powerful library that provides a framework for writing asynchronous, concurrent code using the `async` and `await` syntax. Asynchronous programming allows you to write programs that can perform multiple tasks concurrently without blocking the main execution thread, making it particularly useful for I/O-bound and network-bound operations.
 
-| Route | Method | Description |
-|--|--|--|
-| `/tasks` | GET | Reads (downloads) the task list from the server |
-| `/tasks` | POST | Creates (adds) a new task on the server in the following format:<br> `{ "name": "Task 1", "description": "Some description." }` |
-| `/tasks/<id>` | DELETE | Deletes the task stored in the `id` slot of the array. Example:<br>`/tasks/3` will delete the task stored in array position 3. |
+In this tutorial, we will cover the following topics:
 
+1. [What is asyncio?](#step1)
+1. [Basic Concepts](#step2)
+1. [Getting Started with asyncio](#step3)
+1. [Defining a coroutine with async](#step4)
+1. [Running multiple coroutines at once](#step5)
+1. [Working with asyncio Event Loops](#step6)
+1. [Using asyncio with I/O Operations](#step7)
+1. [Error Handling](#step8)
+1. [Timeouts and Cancellation](#step9)
+1. [Real-World Example: Fetching Multiple URLs](#step10)
+1. [Conclusion and Further Resources](#step11)
 
-### 1. Read (download) and display all of the tasks
-To display all of the tasks on the client, you are going to create some JavaScript functions. Before you begin, take a look at `index.html`. Note that at the top of the file, there's a link to `main.js`, which indicates that the webpage will have access to all of the logic in the `main.js` file.
+{:#step1}
+### 1. What is asyncio?
+asyncio is a Python library that provides a framework for asynchronous programming. It is designed to handle concurrent I/O operations efficiently and is particularly useful for network programming, web scraping, and other tasks where you might otherwise be waiting for data to arrive.
 
-```html
-    <script src="/js/main.js" type="text/javascript" defer></script>
+{:#step2}
+### 2. Basic Concepts
+Before diving into asyncio, it's essential to understand some basic concepts:
+
+* **Coroutines**: Coroutines are special functions defined with the async keyword. They can be paused and resumed, allowing non-blocking execution of tasks.
+* **Event Loop**: An event loop is the core component of asyncio. It manages and schedules the execution of coroutines.
+* **Tasks**: Tasks represent units of work in asyncio. You can create and manage multiple tasks within an event loop.
+
+{:#step3}
+### 3. Getting Started with asyncio
+To use `asyncio`, you need Python 3.5 or later. Most modern Python installations come with asyncio built-in, so you don't need to install it separately.
+
+{:#step4}
+### 4. Defining a coroutine with async
+To create a coroutine, use the `async` keyword:
+
+```python
+import asyncio
+
+async def my_coroutine():
+    print("Hello, asyncio!")
+
+# To run a coroutine, you need an event loop.
+loop = asyncio.get_event_loop()
+loop.run_until_complete(my_coroutine())
+loop.close()
 ```
 
-The "defer" attribute indicates that the script will only run after the entire HTML page has been loaded and rendered. Currently, `main.js` outputs "Hello world" to the console. Use the browser's built-in inspector to view the console output.
+{:.blockquote-no-margin}
+> #### Your Turn
+> **See demo file:** `lab05/asyncio-exercises/demo1_coroutine.py`
 
 
-#### Get the tasks
-Your first job is to create a JavaScript function to fetch all of the server tasks, and then display them to the screen. To do this, add the following function definition and invocation to `main.js`:
+#### To test your python files from Docker, you need to activate the docker shell. To do this:
 
-```js
-// definition
-async function getTasks() {
-    const response = await fetch("/tasks");
-    const tasks = await response.json();
-    console.log(tasks);
-}
+List the containers:
 
-// invocation
-getTasks();
+```bash
+docker container ls -a     
 ```
 
-Now, refresh your web browser and take a look at the console. It should have outputted all of your tasks to the screen. A few notes on this code:
+Open the Docker shell:
 
-* Like with Python's asyncio, fetching is asynchronous.
-* Fetching data is a two step process: 
-    * The first function invocation -- `fetch("/tasks")` -- returns the response headers from the server.
-    * The second function invocation -- `response.json()` -- returns the actual response payload (data). 
-* The `await` keywords means that the next statement will not execute until the asynchronous function resolves.
-
-
-#### Display a task
-Now that you know how to get data back from the server using fetch, your next step is to display the tasks in a visual form on the browser screen. To do this, we need to build some HTML. Let's create a function that converts a task object to an HTML snippet:
-
-```js
-function taskToHTML(task) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-        </div>
-    `;
-}
+```bash
+docker exec -it <container-id> /bin/bash
 ```
 
-This function takes a task objet as an argument and returns an HTML representation of the task. A few notes about this code:
-* In JavaScript, a template literal (everything surrounded by the "backtick" character) is evaluated as a "smart string" (linebreaks OK).
-* Within the template literal, anything surrounded by the `${ }` symbol is treated like a JavaScript expression. Any expression inside of this symbol -- within a template literal -- will be evaluated. For example:
-    * `${ 2 + 2 }` evaluates to 4.
-    * `${ foo }` evaluates to the value stored inside of `foo`.
+Activate the poetry shell (virtual environment) and run the tests:
 
-#### Display all of the tasks
-Finally, you're going to modify the `getTasks()` function you just made so that it iterates through the task array and appends each HTML representation of the task to the screen. 
-
-Final code:
-
-```js
-
-function taskToHTML(task) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-        </div>
-    `;
-}
-
-async function getTasks() {
-    // access an existing HTML element (from index.html):
-    const listEl = document.querySelector(".task-list");
-    listEl.innerHTML = "";
-
-    // go get the data:
-    const response = await fetch("/tasks");
-    const tasks = await response.json();
-    console.log(tasks);
-
-    // append each task as an HTML element to the DOM:
-    if (tasks.length === 0) {
-        listEl.innerHTML = "No tasks found.";
-    } else {
-        // loop through 
-        tasks.forEach((task, idx) => {
-            listEl.insertAdjacentHTML("beforeend", taskToHTML(task));
-        });
-    }
-}
-
-// kick off the fetch
-getTasks();
+```bash
+poetry shell # activates virtual environment
+pwd # check that you're in the app directory
+cd asyncio-exercises
+python demo1_coroutine.py
 ```
 
-This code should display all of the tasks to the screen.
+{:#step5}
+### 5. Running multiple asynchronous coroutines at once
+You can create and run tasks concurrently:
 
-> #### Pro Tips
-> * Before moving on to the next section, make sure you can follow the logic of the code above (as you'll need to understand it for Homework 2).
-> * To test the code, add some hard-coded tasks to `taskdb` in the `server.py` file (see below).
+```python
+import asyncio
 
-```py
-taskdb = [{
-    "name": "Lab 5",
-    "description": "Finish implementing and writing tests for Lab 5"
-}, {
-    "name": "Topic 8 Readings",
-    "description": "Make sure you do this week's readings for CSCI338!"
-}]
+
+async def coroutine1():
+    await asyncio.sleep(3)
+    print("Coroutine 1 completed")
+    return 6  # fake data to be returned
+
+
+async def coroutine2():
+    await asyncio.sleep(1.5)
+    print("Coroutine 2 completed")
+    return 9  # fake data to be returned
+
+
+async def main():
+    result1, result2 = await asyncio.gather(
+        coroutine1(), coroutine2()
+    )
+
+    # Note that the statements below only execute once both
+    # coroutines have executed. This is because of the "await"
+    # keyword.
+    print(result1)
+    print(result2)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+loop.close()
 ```
 
-### 2. Create new tasks on the server from the web client
-We can now fetch and display tasks (from the server). But how do we create new tasks? Well, we can use fetch for this too! 
+* `asyncio.gather` -- a function in the asyncio library -- allows you to concurrently execute multiple coroutines and collect their results. It's a way to run multiple asynchronous tasks concurrently and wait for all of them to complete.
+* `asyncio` also has an event loop that manages coroutine execution.
+* `await` -- used if you don't want the next statement in your current execution block to start until your asynchronous task completes.
 
-#### Creating a hard-coded task
-To create a new task, we'll need to issue a POST request to `/tasks`. To do this, we'll start by adding another function to `main.js`:
+{:.blockquote-no-margin}
+> #### Your Turn
+> **See demo file:** `lab05/asyncio-exercises/demo2_two_coroutines.py`
 
-```js
-// function definition:
-async function createTask() {
 
-    // create a fake task:
-    const name = "New Task";
-    const description = "Description of new task.";
-    const newTask = {
-        "name": name,
-        "description": description
-    }
+{:#step6}
+### 6. Working with asyncio Event Loops
+The event loop serves as the core of `asyncio`, managing the execution of asynchronous tasks (also known as coroutines) and coordinating their execution without blocking the main program's execution. 
 
-    // post the task to the server using the "POST" method:
-    const response = await fetch("/tasks", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-    });
-    data = await response.json();
-    console.log(data);
+In the example below, the `sleep` statement doesn't block other coroutines from completing.
 
-    // requery and redraw the tasks (lazy, but OK for now)
-    await getTasks();
-}
+```python
+import asyncio
 
-// function invocation:
-createTask();
+async def my_coroutine():
+    await asyncio.sleep(1)
+    print("Coroutine executed")
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(my_coroutine())
+loop.close()
 ```
 
-After adding this code, refresh your browser. You should see that a new task has been created. Refresh your browser again. You should see another new task (with the same name and description).
-* Each time you refresh your browser, a new task is created, because the `createTask()` always runs once (when the page first loads).
-* This is obviously not how we ultimately want the program to function, but it's a start!
+`asyncio` encourages an event-driven programming style where you define event handlers (coroutines) that react to specific events, such as incoming network data or user input -- which we will see in more detail when we work with FastAPI.
 
-Please study the code above carefully:
-* Note that unlike with a GET request, a POST request typically has a payload -- stored in a data field called `body`. 
-* Also note that the header of the request specifies the data format that's being sent (in this case, we're sending JSON over the network).
+{:#step7}
+### 7. Using asyncio with I/O Operations
+`asyncio` excels at I/O-bound operations. Here's an example of reading files asynchronously:
 
-#### Creating a task when the user clicks the add button
-Hopefully you're asking yourself: how do I only create a new task when I actually click the "Add" button (versus when the page loads)? Well, to do this, we need to add an **event handler** to our form, and override the default action that the browser takes when a form gets submitted.
+```python
+import asyncio
+import aiofiles
 
-##### HTML Edit
-Please add an event handler to the form tag of `index.html`. The event handler tells your browser that when the user submits the form, it should invoke the `createTask` function:
+async def read_file(filename):
+    async with aiofiles.open(filename, 'r') as file:
+        content = await file.read()
+        print(f"Read {len(content)} characters from {filename}")
+        print(content)
 
-```html
-<form class="add-task" onsubmit="createTask(event)">
+loop = asyncio.get_event_loop()
+loop.run_until_complete(read_file('example.txt'))
+loop.close()
 ```
 
-##### JavaScript Edit
-You will also need to modify the `createTask` function as follows:
+Certain kinds of tasks -- like File I/O, database calls, and queries over the network -- are slow. Given this, if you execute these kinds of commands serially, where they block other processes, this can be inefficient. Hence, running I/O processes as coroutines conserves resources.
 
-```js
-// function definition:
-async function createTask(ev) {
-    ev.preventDefault();
+Sidebar:
+* You can also do this with threads, but then you have to manage the shared memory (which can be complicated, and is overkill for webdev).
 
-    // everything else stays the same
-    ...
-}
-// createTask();
+{:.blockquote-no-margin}
+> #### Your Turn
+> **See demo file:** `lab05/asyncio-exercises/demo3_file_io.py`
+
+
+{:#step8}
+### 8. Error Handling
+Use try and except to handle errors within coroutines:
+
+```python
+import asyncio
+
+async def my_coroutine():
+    try:
+        # Your code here
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(my_coroutine())
+loop.close()
 ```
 
-This change allows us to pass a browser event object as an argument into the function (so that we can override its behavior). The `ev.preventDefault()` invocation basically says to the browser, "instead of doing what the form is supposed to do, execute my code instead." Note that you will also comment out the `createTask()` invocation so that the function not longer runs on pageload. 
+{:#step9}
+### 9. Timeouts and Cancellation
+asyncio allows you to set timeouts and cancel tasks:
 
-Now that you have made these changes, you can add a new task by clicking the "Add" button.
+```python
+import asyncio
 
+async def timeout_task():
+    try:
+        await asyncio.wait_for(long_running_task(), timeout=1)
+    except asyncio.TimeoutError:
+        print("Task timed out")
 
-#### Allowing the user to specify the name and description
-Although we're making progress, we're still not able to name or describe the task (because it's hard coded). To fix this, let's have our function read from the form inputs given by our user by making the following changes to the `createTask()` function:
-
-```js
-// function definition:
-async function createTask(ev) {
-    ev.preventDefault();
-
-    // modify the name and description variables to read from the DOM (instead of using hard-coded values):
-    const name = document.getElementById("name").value;
-    const description = document.getElementById("description").value;
-
-    // everything else stays the same
-    ...
-
-
-
-    // at the very end, clear out the form:
-    document.getElementById("name").value = "";
-    document.getElementById("description").value = "";
-
-}
+loop = asyncio.get_event_loop()
+loop.run_until_complete(timeout_task())
+loop.close()
 ```
 
-Now test again by filling in actual values into the form fields. Hopefully, you can now add your own tasks to the server!
+Sometimes, services are just down (not running, network glitches, etc.). In this case, think about how you would handle errors like this gracefully using timeouts (so as not to use up resources needlessly).
 
-### 3. Delete a task
-You've now created a bunch of tasks! But how do you delete them? To answer this question, we need to both add a new `deleteTask()` function and also modify the `taskToHTML()` function so that each task has a corresponding delete button. Please make the following modifications:
+{:#step10}
+### 10. Real-World Example: Fetching Multiple URLs
+Here's a simple example of fetching multiple URLs concurrently using `aiohttp`. This is a good use of `asyncio` because retrieving resources over the network can be slow and unpredictable, making blocking inefficient.
 
-#### A. taskToHTML() changes
-Modify the `taskToHTML()` function as follows:
+```python
+import asyncio
+import aiohttp
 
-```js
-function taskToHTML(task, idx) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-            <button onclick="deleteTask(${idx})">Delete</button>
-        </div>
-    `;
-}
+async def fetch_url(url, message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            data = await response.text()
+            print("Message:", message)
+            return data
+
+async def main():
+    urls = ["https://openai.com", "https://example.com"]
+    tasks = [fetch_url(url, url) for url in urls]
+
+    # delegate execution management to the event loop via the gather method:
+    results = await asyncio.gather(*tasks)
+
+    # once all of the coroutines have completed, output the results
+    for url, result in zip(urls, results):
+        print(f"Fetched {len(result)} bytes from {url}")
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+loop.close()
 ```
 
-* Note that the function now accepts a second argument, `idx`
-* Note that a new HTML tag -- a button -- has been added to the HTML snippet. When the button is clicked, it will invoke the `deleteTask()` function and pass it the position (index) of the task to be removed.
+{:.blockquote-no-margin}
+> #### Your Turn
+> **See demo files:** 
+> * `lab05/asyncio-exercises/demo4_remote_data.py`
+> * `lab05/asyncio-exercises/demo5_remote_data_timed.py` (times the sequential v. parallel to see which one is faster)
 
-#### B. deleteTask()
-To complete this tutorial, you will add a `deleteTask()` function:
+For those of you who are new to Python:
 
-```js
-async function deleteTask(idx) {
-    const response = await fetch(`/tasks/${idx}`, { method: "DELETE" });
-    const data = await response.json();
-    console.log(data);
+```python
+# this...
+tasks = [fetch_url(url, url) for url in urls]
 
-    // requery and redraw the tasks (lazy, but OK for now)
-    await getTasks();
-}
+# is a shortcut for this...
+tasks = []
+for url in urls:
+    tasks.append(fetch_url(url, url))
 ```
 
-Study this function. You should be able to figure out what it does (ask if you don't understand something...or google it...or use ChatGPT).
 
-Create, read, and delete have now been implemented. If you want, you can implement update (PUT) for extra credit.
+{:#step11}
+### 11. Conclusion and Further Resources
+This tutorial provides a basic introduction to the asyncio module in Python. Asynchronous programming can significantly improve the performance of I/O-bound tasks and concurrent operations. To dive deeper into asyncio, explore the official documentation and try building more complex applications.
+
+Official asyncio documentation: <a href="https://docs.python.org/3/library/asyncio.html" target="_blank"></a>
+
+Remember that asynchronous programming can be complex, so practice and experimentation are essential for mastering it.
+
+## 4. Fast API Walkthrough
+This Fast API walkthrough will use the same poetry environment as the **app** application (HW1), but we've downgraded the python dependency to >= 3.8 to better accommodate WSL users. 
+
+* `asyncio` was introduced to Python in version 3.5.
+* `uvicorn` was introduced in Python 3.8 (it's a method to manage asyncronous loops via our web server)
+
+To run the Fast API server, make sure that you are in **your version** of the `lab05/src` folder on the CLI. Then run your Docker container using the commands described above in the Docker section.
+
+This should start your webserver on this address: <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>. Go check it out.
+
+### Walkthrough of Existing Endpoints
+Please open `server.py` in the `src` directory and take a look at it. In this file, there are 6 "endpoints" defined that can be accessed through <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>
+
+| Route | Address |
+|--|--|
+| / | <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a> |
+| /items/{item_id} | <a href="http://127.0.0.1:8000/items/123?search_term=chocolate" target="_blank">http://127.0.0.1:8000/items/123?search_term=chocolate</a> |
+| /data/yelp | <a href="http://127.0.0.1:8000/data/yelp" target="_blank">http://127.0.0.1:8000/data/yelp</a> |
+| /data/spotify | <a href="http://127.0.0.1:8000/data/spotify" target="_blank">http://127.0.0.1:8000/data/spotify</a> |
+| /ui/yelp | <a href="http://127.0.0.1:8000/ui/yelp" target="_blank">http://127.0.0.1:8000/ui/yelp</a> |
+| /ui/spotify | <a href="http://127.0.0.1:8000/ui/spotify" target="_blank">http://127.0.0.1:8000/ui/spotify</a> |
 
 
-## 4. What to Turn In
-Please create a pull request with the fully implemented web client (which should be completed inside of your version of your `lab05` folder).
+Note that the last 4 endpoints fetch data over the network (remote calls), which present some unique challenges for testing -- something we will discuss in more detail when we get to integration testing.
+
+#### Run the starter tests
+
+To run the tests, you will need to navigate to the Docker shell and run `pytest` (our Python testing framework). To to this:
+
+Find your container id:
+
+```bash
+docker container ls -a     
+```
+
+Open the Docker shell:
+
+```bash
+docker exec -it <container-id> /bin/bash
+```
+
+Activate the poetry shell (virtual environment) and run the tests: 
+
+```bash
+poetry shell # activates virtual environment
+pwd # check that you're in the app directory
+pytest --disable-warnings
+```
+
+### Your Task
+For your Lab 5 submission, you will be creating a few additional endpoints for managing a list of tasks. 
+Begin by doing the following:
+1. rename the current `server.py` file to `server_old.py`
+1. rename the current `test_server.py` file to `test_server_old.py`
+1. create a brand new `server.py` file
+1. create a brand new `test_server.py` file
+
+The requirements are as follows:
+
+#### 1. Implement Endpoints
+
+Start by adding the relevant code and import statements into your new `server.py` file:
+
+```python
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+
+import aiohttp
+import json
+
+app = FastAPI()
+
+
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    return 'Hello world!'
+```
+
+Then, create a FastAPI application with the following endpoints:
+
+* `GET /tasks`: Retrieve a list of all tasks.
+* `GET /tasks/{task_id}`: Retrieve details of a specific task by its `task_id`.
+* `POST /tasks`: Create a new task with a JSON request body containing a `title` and description.
+* `PUT /tasks/{task_id}`: Update an existing task's title and description using a JSON request body.
+* `DELETE /tasks/{task_id}`: Delete a task by its `task_id`.
+
+#### 2. Data Storage
+Implement data storage using an in-memory data structure (e.g., a Python list or dictionary) to store tasks. You don't need to use a database for this assignment.
+
+#### 3. Validation
+Implement validation for request payloads:
+
+* Ensure that the title and description fields are present and non-empty when creating or updating a task.
+* Return appropriate error responses with clear error messages for invalid requests.
+* Provide interactive API documentation using FastAPI's built-in Swagger UI or ReDoc. The documentation should include details of all endpoints, request/response formats, and example requests and responses.
+
+#### 4. Testing
+* Write unit tests to ensure the functionality and correctness of your API endpoints.
+
+
+#### 5. Bonus (Optional)
+* Add features like task priority, due dates, and status (e.g., "completed" or "in progress") to the task model.
+* Implement query parameters to filter tasks based on their status, priority, or other attributes.
+
+
+## 5. What to Turn In
+Please create a pull request with all of your `lab05` files.

@@ -1,203 +1,502 @@
 ---
 layout: assignment-two-column
-title: "Intro to Docker"
+title: "Version Control and Branch Management with git and GitHub"
 type: lab
 draft: 1
 points: 6
 abbreviation: Lab 3
-show_schedule: 1
 num: 3
-start_date: 2024-09-12
-due_date: 2024-09-15
-
+start_date: 2024-09-05
+due_date: 2024-09-08
 ---
 
-## 1. Background
-* <a href="https://learn.microsoft.com/en-us/training/modules/intro-to-docker-containers/" target="_blank">What is Docker?</a>
+The goals with this lab are as follows:
 
-## 2. Install Docker
-### Mac
-You can either install the binary from the Docker website or use `brew` (brew instructions below):
+1. Let's get more familiar with git!
+2. Practice adding and committing.
+3. More practice with the linux command line.
 
-```shell
-brew install --cask docker  # use "cask" b/c it's a system-level package
-# verify version:
-docker --version
+## Basics
+
+1. Sync your fork of the `class-exercises-fall2024` repository in Github.
+1. On your laptop, navigate to your version of `class-exercises-fall2024`, located inside of your `csci338` folder.
+1. Check with branch you're on using the `git branch` command.
+1. Check if you have any changes you haven't yet staged and committed using the `git status` command. If you have lingering changes, stage and commit them. 
+1. Checkout the main branch: `git checkout main`
+1. Pull the latest changes from your remote main branch into your local main branch: `git pull origin main`
+1. Creatr a new branch to do our work for lab 3: `git checkout -b my_lab3_work`
+
+Now create a new file inside the `lab3` directory called
+`answers.md`. Use this markdown file to answer questions as you're
+going through the lab.
+
+**Note:** Whenever the lab says "What do you see?" that means to copy
+  the command and the output to your `answers.md` file. You should do
+  this in Markdown's preformatted mode which is simply 3 backticks
+  before and after the block. You can see examples throughout this
+  file (open it as plain text in your text editor).
+
+### Getting Help
+
+Git has fairly good documentation that's easily available (and often
+faster than using Chat GPT). Read through
+[this](https://git-scm.com/book/en/v2/Getting-Started-Getting-Help) to
+see how to access it.
+
+### Create a New Git Repository
+
+We're going to create a new repository for code exercises. Start by
+creating a directory called `exercises` using the `mkdir` command.
+
+```
+$ mkdir exercises
 ```
 
-Next, run the Docker service by looking for `Docker.app` using Spotlight (magnifying glass). Once it starts, go back to the Terminal and issue:
+Now confirm it's created using the `ls` command, and -- assuming it is
+-- change your working directory to the new directory.
 
-```shell
-# install hello world container:
-docker run hello-world
+Let's start by creating a new markdown file called `readme.md`. Add a
+header to the top.
+
+Great! First let's try to commit this.
+
+```
+$ git add readme.md
 ```
 
-You should see that it outputs a message similar to the one shown below to the command line:
+Oh no! Something went wrong. What error do you see?
 
-{:#f1}
-#### Figure 1
-Docker output after running `docker run hello-world`:
+The problem is we haven't created a repository yet. Before we fix
+this, let's take a look at what we have in the directory using the
+`ls` command, along with the flags to show all hidden files. If you
+don't remember those flags, go back and check out lab 2.
 
-```shell
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-70f5ac315c5a: Pull complete 
-Digest: sha256:dcba6daec718f547568c562956fa47e1b03673dd010fe6ee58ca806767031d1c
-Status: Downloaded newer image for hello-world:latest
+You should see a single file, the `readme.md` file you made. Now let's
+initialize the our new git repository.
 
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-    (arm64v8)
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
+```
+$ git init
 ```
 
-### Windows
-Follow the instructions on Microsoft's website: <a href="https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop" target="_blank">https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop</a>. 
+Git will initialize a repository for you and give you a hint. Read the
+hint. Let's use `main` for our default branch name and set it as such
+in our git config as described in the hint. You can confirm the change
+was made by catting your `~/.gitconfig` file. Copy the result of the
+`cat` command to your `answers.md` file.
 
-Then, activate WSL and type the following into your WSL shell:
+Let's also rename the current default branch to `main` as described in
+the hint.
 
-```shell
-docker run hello-world
+Now let's list the contents of the directory again. Do you see
+anything new? Is it a directory or a file? How can you tell?
+
+List the contents of the new directory. What do you see? This is Git's
+internal implementation. You generally won't have to look in here, but
+whenever you're working in a Git repository, this special directory
+will exist.
+
+### Our First Commit!
+
+Git is _stateful_ and _modal_, which means that it sometimes behaves
+differently depending on what state or mode it's in. It's a good idea
+to get in the habit of checking Git's state prior to making any
+changes. Let's do that now with the `status` subcommand.
+
+```
+$ git status
 ```
 
-You should see output similar to the output above ([Figure 1](#f1))
+What do you see? Copy the output to your `answers.md` file.
 
-## 3. FAQs
-### What is a container?
-A container is an isolated process (process that can't interact w/any other parts of your OS) that runs on a host machine (i.e., your laptop).
-* It can run on any machine (and be easily ported to the cloud)
-* It's isolated from any other containers and processes
-* Created from "images" (OS configurations), and can be stopped, started, or deleted
-* Source: <a href="https://docs.docker.com/get-started/" target="_blank">https://docs.docker.com/get-started/</a>
+The key things you're looking for is the `branch` you're on (in this
+case, `main`) and a list of untracked files (in this case, just
+`readme.md`).
 
-### What is an image?
-"A running container uses an isolated filesystem. This isolated filesystem is provided by an image, and the image must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configurations for the container, such as environment variables, a default command to run, and other metadata."
+Let's add `readme.md` to Git's staging area using the `add`
+subcommand.
 
-* Source: <a href="https://docs.docker.com/get-started/" target="_blank">https://docs.docker.com/get-started/</a>
-
-### What is a Dockerfile?
-"A `Dockerfile` is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image." Example of a `Dockerfile`:
-
-```shell
-# syntax=docker/dockerfile:1
-
-# the base image (you're augmenting this image)
-FROM node:18-alpine             
-WORKDIR /app
-COPY . .
-
-# yarn is yet another package manager for installing dependencies
-RUN yarn install --production  
-
-# runs this command on startup
-CMD ["node", "src/index.js"]    
-EXPOSE 3000
+```
+$ git add readme.md
 ```
 
-**Important**: In the example above, it is assumed that a Node project already exists with `src/index.js` file and a `package.json` file with a set of Node dependencies. See the tutorial (link below) for more instructions on that.
+Hmmmm, there was no output from that command. What to do? Is there a
+way you can check the state of git to confirm that your file was added
+(hint: see above)?
 
-* Source: <a href="https://docs.docker.com/get-started/02_our_app/" target="_blank">https://docs.docker.com/get-started/02_our_app/</a>
+Note that `readme.md` is under the `Changes to be committed` header
+now. That means this file will be included on our next commit. Let's
+do that now.
 
-### How do I create a Dockerfile?
-Check out the <a href="https://docs.docker.com/engine/reference/builder/" target="_blank">Dockerfile reference</a>. Note that some of these configuration settings are a little complicated, but over time, after going through various tutorials, you will get more exposure to what the different commands do.
-
-### How do you build an image?
-You can build an image using a `Dockerfile`. In the context of the Dockerfile shown above, issuing this command will build the image:
-
-```shell
-docker build -t getting-started .
+```
+$ git commit -m "add readme.md to the repository"
 ```
 
-* The `-t` flag tags the image: "Assign the tag "getting-started" to the image I'm building."
-* The `.` at the end of the docker build command tells Docker that it should look for the `Dockerfile` in the current directory.
-* Source: <a href="https://docs.docker.com/get-started/02_our_app/" target="_blank">https://docs.docker.com/get-started/02_our_app/</a>
+What do you see? After you commit this, let's check the state of the
+repository. What do you see?
 
-### How do you start an App Container?
-Once you've built an image, you can run it using the `docker run` command (where you specify the name of your image). There are many optional flags you can use with the `run` command (e.g. `-d`, `-p`, but the only required argument is the name of the image you want to run:
+Now that our repository has history, let's explore that history. To do
+that, we use the `log` subcommand.
 
-```shell
-docker run -dp 127.0.0.1:3000:3000 getting-started
+```
+$ git log
 ```
 
-* `-d` flag means **detatch** -- "run in the background and don't tie up my command line".
-* `-p` flag means **publish**, which creates a port mapping between the host and the container. If the process is running on port 3000 on the host container, forward that to port 3000 on the host computer (i.e., your laptop) so that the process is accessible to the host computer's services (browser, command line, etc.).
-* After a few seconds, open your web browser to <a href="" target="_blank">http://localhost:3000</a>. You should see your app.
+What do you see? The [`log`
+subcommand](https://git-scm.com/docs/git-log) has a lot of great
+features that we'll want to use going forward, but for now let's just
+bask in the glory of the fact we've created a brand new git repository
+and made our first commit to it!
 
-### Docker Cheatsheet
-This just lists the commands we'll be using in today's tutorial:
+Now let's modify our file.  Open `readme.md` and add the following
+description of the first problem we are going to solve, and then save
+the file.
 
-#### Images
-
-| **docker images** | Lists available images |
-| **docker rmi `<your-image-id>`** | Removes an image |
-| **<a href="https://hub.docker.com/search?q=&type=image&image_filter=official" target="_blank">Docker Hub Image registry</a>** | Shows you all the available pre-defined images |
-
-#### Containers
-
-| **docker build .** | Builds a container from a Dockerfile in the current directory (`.`) | 
-| **docker build -t `<name-of-container>` .** | Builds a container from a Dockerfile in the current directory (`.`) and tags it with the name `my-container` | 
-| **docker run `<name-of-container>`** | Creates and runs a new container from an image (including images in the <a href="https://hub.docker.com/search?q=&type=image&image_filter=official" target="_blank">Docker Hub Image registry</a>) |
-| **docker ps** | Lists Docker processes that are currently running |
-| **docker stop `<pid>`** | Stops Docker container from running (by process id) | 
-| **docker start `<pid>`** | Starts Docker container from running (by process id) | 
-| **docker rm `<pid>`** | Deletes Docker container from running (by process id) | 
-
-
-
-## 4. Your Tasks
-
-### 4.1. Complete Steps 1-3 of the "Get Started" Tutorial
-For today's lab, you will complete Parts 1-3 of the Getting Started tutorial: <a href="https://docs.docker.com/get-started/" target="_blank">https://docs.docker.com/get-started/</a>. 
-
-#### Before you begin, a few notes:
-
-* Make sure that your Docker App is running.
-* All of your work will be done within the **class-exercises-fall2024** repo inside your directory.
-* Pull down the latest from `main` before you begin the lab:
-    * `git checkout main`
-    * `git pull`
-* Create a new branch called `lab03-your-username`. 
-    * Example: `git checkout -b lab03-vanwars`
-* When it's time to issue the `git clone https://github.com/docker/getting-started-app.git` command, issue it inside of *your directory*. For instance:
-    * `cd class-exercises-fall2024/vanwars`
-    * `git clone https://github.com/docker/getting-started-app.git`
-* After you've cloned, delete the **`class-exercises-fall2024/<your-username>/getting-started-app/.git`** folder (so that you don't have a repo inside a repo):
-    * `cd getting-started-app`
-    * `rm -rf .git`
-* Other tips:
-    * Take your time, go slow, and make sure you understand what each of the commands and flags does
-    * If you encounter an error, use the Docker GUI to help you diagnose the problem
-
-### 4.2. Create a .dockerignore file
-A `.dockerignore` file is a configuration file that describes files and directories that you want to exclude when building a Docker image. Used for excluding large files / directories that could be installed via package manager and/or sensitive information.
-
-After completing steps 1-3, create a `.dockerignore` file and add the following files:
-
-```shell
-.DS_Store
-node_modules
+```
+1. Write a function that takes in a list of integers as an argument
+and returns true if it contains two integers that are the same, false
+otherwise.
 ```
 
-### 4.3. Submit
-To submit this lab:
-1. Stage, commit, and push your **lab03-your-username** branch to GitHub. The branch should include all of the files from your `getting-started-app`, as well as the `.dockerignore` file you just created.
-2. Create a PR.
-4. On the course moodle, submit a screenshot of your running TODO app on port 5000.
-3. Once your PR has been approved, you can rebase / merge your changes into the main branch.
+Now that we have a change, let's check Git's state. What's different
+about this message than when we first added the `readme.md` file?
 
+You can see what has changed between the previous commit and now with
+the `diff` subcommand.
+
+```
+$ git diff
+```
+
+What do you see? Let's add this change to Git's staging area and
+commit it with a commit message "add first problem".
+
+### Reflection and Review
+
+We've learned 5 git subcommands now. In your `answers.md` file,
+describe each of them in your own words.
+
+### Practice
+
+**DO NOT USE CHAT GPT FOR THIS SECTION**
+
+You may use Google, but you may not cut and paste any code.
+
+Let's write some code. Create a new directory called `java` and let's
+answer that first coding question in a file called `OneLoop.java`. Use
+nested loops for this one, and your `main` function should create a
+few examples to confirm that it's working correctly.
+
+You can compile and run your code using:
+
+```
+$ javac OneLoop.java
+$ java OneLoop
+```
+
+Once you have that working, let's add it and commit it to the
+repository.
+
+## Github
+
+Github is not Git. Github is essentially a code management platform
+that creates an ecosystem of software-related tools around Git. It's a
+solid choice for code management if you're using Git, but it does have
+limitations.
+
+In this section, we'll push our repository to Github.
+
+### Create a New Repository
+
+On Github, click the "New" button that's next to your list of
+repos. Let's call it "lab3" or something similar. You may make it
+Private, but if you do you'll need to add me as a collaborator lately.
+
+You can leave everything else unchecked (i.e. Add README, Add
+.gitignore, Choose license) for now.
+
+Once you click the green "Create repository" button, you'll see some
+instructions. We're going to follow the ones labeled "push an existing
+repository from the command line."
+
+Note that the second command is redundant since we already call our
+default branch `main`. But let's go ahead and do it anyway.
+
+Once you push, reload the Github page in your browser, and you should
+see your readme file in all its glory!
+
+### Git is Distributed
+
+What we've done is we've created a _copy_ of our repository on
+Github's servers. In Git, a copy of the repo living somewhere else is
+called a `remote`. Note that this doesn't mean that Github is the
+"source of truth" for our code, it just means that Github is a
+copy. By convention, we can think of the Github version of our code as
+the source of truth, and the clones that live everywhere else as
+secondary, but we don't have to.
+
+We can even create other remotes, other than "origin" if we want. The
+`remote` subcommand will list all of our remotes (using the `-v` flag
+will show us 'verbose' details).
+
+```
+$ git remote -v
+```
+
+Once we make a _local_ change to our repository, we have to _push_ the
+changes to our remote to see them reflected.
+
+### More Practice
+
+**DO NOT USE CHAT GPT FOR THIS SECTION**
+
+You may use Google, but you may not cut and paste any code.
+
+Let's add a directory called `python` and repeat this exercise in
+Python. Generally, Python doesn't use CamelCase for filenames, so name
+your file `one_loop.py`. Here's a basic python skeleton program you
+can run.
+
+```
+def one_loop(l: list) -> bool:
+    print(l)
+
+if __name__ == "__main__":
+    one_loop([1,2,3,4]);
+```
+
+You can run it like this:
+
+```
+$ python one_loop.py
+```
+
+Go ahead and modify the `one_loop` function so it works as we
+described. Once you have it working, add it and commit it to the
+repository. Take a look at your Git history. What do you see? Take a
+look at your repo on Github and click on the "commits" link. Do you
+see the commit you just made?
+
+Let's take a look at the state of our local repository first. What do
+you see? Do you see any messages that suggest that there's a
+difference between your local repository and the remote repository?
+
+Now let's push these changes to our remote.
+
+```
+$ git push origin main
+```
+
+Reload the `commits` page in Github and you should see your
+changes. Check the state of your local repository and notice that the
+message describing the difference is now gone!
+
+## Branching
+
+So far we've been committing directly to the `main` branch and pushing
+that branch to the remote. This is fine for personal projects, or
+experimental codebases. It's not fine for production projects that
+have users.
+
+Generally speaking, on collaborative projects we'll consider our
+`main` branch on our `origin` remote sacred. Indeed, it's probably
+good practice to keep the `main` branch of your local repository
+sacred as well. Generally, this means we will never commit _directly_
+to the `main` branch anywhere. Instead we will commit to a local
+_branch_ and then use a process called a Pull Request to get our local
+branch into our remote `main` branch, then we'll use `fetch` and
+`pull` to sync our local branch with the remote.
+
+This is convenient because it allows us to apply some basic _process_
+to our pull requests (e.g. static analysis, testing, code review) to
+make sure only quality, working code makes it into our _main_ branch.
+
+Let's start by listing all of our branches using the `branch`
+subcommand.
+
+```
+$ git branch
+* main
+```
+
+You only have the main branch. Let's create a new branch in our
+`exercises` repository.
+
+```
+$ git branch one-set
+```
+
+Hmmmm. No output. Let's rerun the command from above to see our
+branches.
+
+```
+$ git branch
+* main
+  one-set
+```
+
+The asterisk (*) means you are still on the `main` branch. You can
+also see this by checking the state of your repository. Do that. Where
+do you see that specified?
+
+Let's `checkout` the `one-set` branch.
+
+```
+$ git checkout one-set
+```
+
+I just described two ways to determine which branch you're currently
+on. Do both of those to confirm you are indeed on the `one-set`
+branch.
+
+Let's open up our `readme.md` file again and under question one, let's
+describe the two different solutions in english. The first solution is
+the nested loop solution. The second solution is to use a set or a map
+as I described in class. Describe both in as much detail as you can
+(with no code) and describe the trade-offs between the two solutions.
+
+Now let's commit our code. Note that as long as you're on the correct
+branch, all git operations will happen on that branch. Maybe check
+you're on the correct branch one more time? Once you're confident, add
+and commit your changes.
+
+Now let's look at our history again. You should have several commits
+now. One of those commits is the top of `main` and one of those
+commits is the top of `one-set`. There's also one that's labeled
+`HEAD`. Which one?
+
+Now let's checkout our `main` branch and check our history
+again. What's different? Is `HEAD` the same? Describe in english what
+happened here.
+
+### Still More Practice
+
+**DO NOT USE CHAT GPT FOR THIS SECTION**
+
+You may use Google, but you may not cut and paste any code. It's much
+better to only use the documentation for the [Python
+Set](https://docs.python.org/3/tutorial/datastructures.html#sets) or
+the [Java
+Set](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html).
+
+Now we're going to solve the question one using a Set data structure
+instead of nested loops. You may do this in either Python or Java,
+just make sure to name your new file appropriately.
+
+Once you're done, commit your changes to the `one-set` branch. Double
+check you're on the right branch before committing.
+
+Remember the `diff` subcommand? Note that you can use the `diff`
+subcommand to compare your two branches!
+
+```
+$ git diff main..one-set
+```
+
+### Pull Requests
+
+Let's create a pull request by pushing our local branch to our
+remote. Previously, we pushed to `main` but we don't want to do that
+anymore. Instead, we want to push to our new branch.
+
+```
+$ git push origin one-set
+```
+
+What do you see? Note that there's a URL there that will take you to a
+page that allows you to immediately create a pull request. Instead of
+doing that, visit the homepage of your repository on Github. Notice
+that at the top it also allows you to create a pull request.
+
+Before doing that, notice that the dropdown that says `main` also
+shows your new branch! You can click the drop-down and explore the
+code in your branch before making a pull request.
+
+Let's make a pull request now. You can do it in either of the two ways
+that I described above.
+
+Notice that the pull request title is pre-populated based on your
+commit message. That may be okay, but if you have multiple commits in
+your branch you might want to change it.
+
+More interesting is the `Preview` tab. Github supports Markdown for
+your pull request description! This means you can easily add links,
+lists, and preformatted code snippets to your pull request
+description. Add all of those things.
+
+You can also add screenshots fairly easily. Take a screenshot of your
+VS Code instance or of your SSH window. Once it's on your clipboard,
+you can paste it directly in the description edit box. It will upload
+the image and add some markdown. Now click on the Preview tab and you
+will see it!
+
+Create your pull request. In the upper right hand section, you'll see
+the "Reviewers" section. Add me as a reviewer. If your repository is
+private, you'll need to add me to it first by going into the
+repository settings and adding me under "Collaborators".
+
+### Merging a Pull Request
+
+Click on the drop-down arrow in the green "Merge pull request"
+button. There are three options there. Based on our discusssion in
+class, what do the three options mean? Add them to your `answers.md`
+file.
+
+No need to wait for me to actually review it. Go ahead and choose
+"Rebase and Merge" and then delete the branch.
+
+### Post Merge
+
+Perhaps interestingly, merging doesn't actually change anything in
+your local repository. You can confirm this by examining the state of
+both of your branches in your local repository.
+
+You can pull the latest updates in your remote repository without
+affecting your local repositories by using the `fetch` subcommand.
+
+```
+$ git fetch
+```
+
+Now check the state of the two branches on your local repository. What
+do you see?
+
+You can use `pull` to actually pull the latest changes into your local
+branch. In this case, on the main branch, pull the changes.
+
+```
+$ git pull
+```
+
+Now you can delete your local `one-set` branch since we don't need it
+anymore.
+
+```
+$ git branch -D one-set
+```
+
+## Submission
+
+Commit your `answers.md` to your branch in the `software-engineering` repository and make a pull request. Include some markdown and a screenshot (or some other pic) in your Github description.
+
+## Summary
+
+We've learned a lot about Git in this lab, but much of it should have
+been familiar from Lab 1 and Lab 2. You should be comfortable with the following git subcommands:
+
+* init
+* add
+* commit
+* log
+* diff
+* remote
+* push
+* branch
+* checkout
+* fetch
+
+Now that you're finished, let's read the the following sections in
+[Pro Git](https://git-scm.com/book/en/v2). They should be mostly
+review at this point, but there's a few new things in there.
+
+* Chapter 2, sections 1, 2, 3, 4, 5
+* Chapter 3, sections 1, 2, 3, 6

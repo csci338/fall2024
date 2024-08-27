@@ -12,19 +12,7 @@ due_date: 2024-08-27
 
 
 ## Slides
-Slides will be posted before class.
-
-<!-- * <a href="https://docs.google.com/presentation/d/1U-aDFuJ2hTWsYJ8MC0YMaMC934uSisVpqVlR77IIua0/edit?usp=sharing" target="_blank">Big Ideas in Software Engineering & Intro to Version Control</a> (8/29)
-* <a href="https://docs.google.com/presentation/d/1J1B26cenXIK7uhuX1MBr3KT1_GLrRfgKdsFmsHRF978/edit?usp=sharing" target="_blank">Version Control Continued</a> (9/5) -->
-
-<!-- ## Activities
-### 8/29
-1. Bash + `.zshrc` practice (see slides)
-2. Coding exercise (see slides)
-3. Working with `.git` locally (see slides)
-
-### 9/5
-* Finish Lab 2
-* Create PR for "check duplicates" code. -->
+* <a href="https://docs.google.com/presentation/d/1Caf-Ri8A5TNeYjTNC4yL5aD074NYNJAD/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Big Ideas in Software Engineering & Intro to Version Control</a> (8/29)
+<!-- * <a href="https://docs.google.com/presentation/d/1J1B26cenXIK7uhuX1MBr3KT1_GLrRfgKdsFmsHRF978/edit?usp=sharing" target="_blank">Version Control Continued</a> (9/5) -->
 
 

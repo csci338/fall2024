@@ -27,7 +27,7 @@ If you haven't already, please register for a GitHub account, and then add your 
 * Note that **you will have to confirm this invitation** via email.
 
 {:#authentication}
-### 2. Set up public / private key authentication for GitHub (and Arden)
+### 2. Set up public / private key authentication for GitHub
 When accessing a remote server (including a GitHub server), a common authentication strategy involves using public and private keys. Below, you will go through the process of generating a public / private key. Your private key is for you and you alone. It is your secret, and should not be shared with anyone. Your public key, on the other hand, is typically copied to a server for which you have access.
 
 In the workflow outlined below, all commands should be run from the command line on your  **local computer** (not arden). If you're a Windows user, activate WSL.
@@ -39,27 +39,14 @@ To generate a public / private key pair:
 * This will generate your private key inside the `.ssh` folder inside your home directory. Typically, the private key is  called `id_rsa` and the public key is called `id_rsa.pub`.
 * Verify that this worked by typing `ls -la ~/.ssh`. You should see both files (with today's timestamp).
 
-#### 2.2. Copy your public key to the appropriate place 
+#### 2.2. Copy your public key to GitHub
+* Follow the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account" target="_blank">GitHub instructions</a>
+* More on public / private keys here: <a href="https://kb.iu.edu/d/aews" target="_blank">https://kb.iu.edu/d/aews</a>
 
-##### On GitHub
-1. Follow the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account" target="_blank">GitHub instructions</a>
-
-##### On Arden (Optional but Recommended)
-1. Copy your public key into your home directory on arden. One way of doing this is by using the **`rsync`** utility:<br>`rsync ~/.ssh/id_rsa.pub <your_arden_username>@arden.cs.unca.edu:~/.`
-1. Configure your public key on arden:
-    * ssh into arden: `ssh <your_arden_username>@arden.cs.unca.edu`
-    * Verify that the `id_rsa.pub` file is now in your home directory.
-    * If your home directory on the remote server doesn't already contain a `~/.ssh/authorized_keys` file, create oneas follows:
-        * `mkdir -p ~/.ssh`<br>`touch ~/.ssh/authorized_keys`
-    * Then, append your public key to the `authorized_keys` file: `cat ~/id_rsa.pub >> ~/.ssh/authorized_keys`
-    * Finally, delete your public key from your home directory on arden (you don't need it anymore):<br>`rm ~/id_rsa.pub`
-
-That should be it! Read More here: <a href="https://kb.iu.edu/d/aews" target="_blank">https://kb.iu.edu/d/aews</a>
-
-### 3. Set up a local copy of the coursework repository
+### 3. Fork the Course Repository
 In this class, we're going to have two repositories:
-* **`class-exercises-fall2024`** -- For in-class exercises and labs
-* **`app`** -- for our class project
+* **`class-exercises-fall2024`** -- For in-class exercises and labs. You will have your own personal copy of this repository on Github that you will periodically sync with the class repo.
+* **`app-fall2024`** -- Repo that you will be interacting with directly via your local git.
 
 Before we get into the details of the GitHub workflow, let's set up a clone of **`class-exercises-fall2024`** on your laptop while practicing some basic git commands. Please complete the following tasks:
 
