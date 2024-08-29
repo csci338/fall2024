@@ -57,6 +57,7 @@ Now, on your laptop, make a copy of your repo locally as follows:
 
 1. Navigate to your `csci338` directory on the command line.<br><br>
 1. Within your `csci338` directory, clone the `class-exercises-fall2024` repo using the **ssh method** using the following command:<br><br>`git clone git@github.com:<your-github-username>/class-exercises-fall2024.git`<br><br>Please replace `<your-github-username>` with your GitHub username<br><br>
+1. Navigate into the `class-exercises-fall2024` folder (that was just created)
 1. Look at commit history (`git log`)
 
 ### 5. Make a new branch
@@ -72,6 +73,7 @@ Now, on your laptop, make a copy of your repo locally as follows:
 1. Inside of your `lab02` folder, create a text file called `ContainsPair.java`
 1. Within the `ContainsPair.java` file, implement one of the "contains pair" solutions we discussed in class (ideally the fastest one).
 1. Compile it on the command line using the `javac` command (e.g., `javac ContainsPair.java`). Make sure you're in the right directory. This should generate the compiled `Java.class` file.
+    * If you're on WSL and `javac` is not installed, you can install it using the apt package manager as follows:<br>`sudo apt install default-jdk`
 1. Run your program on the command line by typing `java ContainsPair`
 
 ### 7. Exclude all `.class` files
