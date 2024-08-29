@@ -6,6 +6,13 @@ type: resource
 category: "Version Control"
 ---
 
+<style>
+
+    td:first-child {
+        min-width: 120px;
+    }
+</style>
+
 
 ## Useful Online Resources
 
@@ -46,7 +53,10 @@ Assumptions:
 
 ### A: Great question! Here are the steps
 
-#### Step 1: Get to a stopping point on your my-feature branch
+#### Step 1: Sync your GitHub repo
+Since you've forked your version of the repo from the class's repo, you'll want to make sure you've got the most recent changes on the `main` branch. To do this, navigate to **your version of the class repo** on GitHub and click the "Sync Fork" button (located right underneath the green button).
+
+#### Step 2: Get to a stopping point on your my-feature branch
 When you're at a stopping point, stage and commit your changes to the `my-feature` branch:
 
 ```bash
@@ -55,7 +65,7 @@ git add .       # stage all of your changes
 git commit -m "Meaningful commit message"   # commit them
 ```
 
-#### Step 2: Checkout your main branch and pull the latest changes down from GitHub
+#### Step 3: Checkout your main branch and pull the latest changes down from GitHub
 
 ```bash
 git checkout main   # switch your active branch to main
@@ -63,7 +73,7 @@ git branch          # verify that you're on main (should have an asterik next to
 git pull            # download all the new main changes
 ```
 
-#### Step 3: Go back to your my-feature branch and rebase
+#### Step 4: Go back to your my-feature branch and rebase
 ```bash
 git checkout my-feature     # switch your active branch to my-feature
 git branch                  # verify that you're on my-feature (should have an asterik next to it)
@@ -73,7 +83,7 @@ git rebase main             # incorporate the latest changes from main into your
 git rebase --continue       # continue rebasing
 ```
 
-#### Step 4: When your my-feature branch is ready, push it to GitHub
+#### Step 5: When your my-feature branch is ready, push it to GitHub
 One caveat: if you've rebased `my-feature` from `main` on your local machine but you've already created a remote `my-feature` branch on GitHub, you will need to use the force flag to upload your new changes to GitHub:
 
 ```bash

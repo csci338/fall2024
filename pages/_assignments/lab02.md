@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: "Version Control and Branch Management with git and GitHub"
 type: lab
-draft: 1
+draft: 0
 points: 6
 abbreviation: Lab 2
 show_schedule: 2
@@ -12,28 +12,26 @@ due_date: 2024-09-01
 ---
 
 ## Introduction
-Today we will be practicing collaborating on code by using **git** and **GitHub**. Here are <a href="https://docs.google.com/presentation/d/1_2F_vWW3rLR5vpurtKyS4dnb3EfOVk4aDjLNnwd_HYs/edit?usp=sharing" target="_blank">today's slides</a>.
+Today we will be configuring your lab repo using **git** and **GitHub**. Next week we will be working on ***collaboration workflows***.
 
-### Lab Readings
+Here are the <a href="https://docs.google.com/presentation/d/11HyT_sktBgkhoM2_LgQ3cHB68YZj_AZZ/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Lab 2 slides</a>.
 
-| <span class="pj">required</span> | <a href="https://www.youtube.com/watch?v=_wQdY_5Tb5Q" target="_blank">Collaborating using Git and GitHub</a>: Branches, Pull Requests, Merging vs Rebasing (Video walkthrough) |
-| <span class="badge">recommended</span> | <a href="https://www.youtube.com/watch?v=_UZEXUrj-Ds" target="_blank">What is git rebase?</a> |
-| <span class="badge">recommended</span> | <a href="https://www.atlassian.com/git/tutorials/comparing-workflows" target="_blank">Article explaining how to rebase + handle merge conflicts</a> |
 
 ## Your Tasks
 
 ### 1. Add your GitHub username to the spreadsheet
-If you haven't already, please register for a GitHub account, and then add your full name and your GitHub username to <a href="https://docs.google.com/spreadsheets/d/1UYLm8ZoEivGhikw6pbh2CTGSh3lixfvceGENRD3z-No/edit?usp=sharing" target="_blank">this spreadsheet</a>. Semmy and I will invite you to be a contributor to the relevant repos.
+If you haven't already, please register for a GitHub account, and then add your full name and your GitHub username to <a href="https://docs.google.com/spreadsheets/d/1CZ0PcwqBflEvliUh_Wc4hH648teQb4Q3q3gIXBBLKfM/edit?gid=0#gid=0" target="_blank">this spreadsheet</a>. I will invite you to be a contributor to the relevant repos.
 * Note that **you will have to confirm this invitation** via email.
+* I recommend that you use your UNCA email account because you can get some student perks later from GitHub.
 
 {:#authentication}
 ### 2. Set up public / private key authentication for GitHub
-When accessing a remote server (including a GitHub server), a common authentication strategy involves using public and private keys. Below, you will go through the process of generating a public / private key. Your private key is for you and you alone. It is your secret, and should not be shared with anyone. Your public key, on the other hand, is typically copied to a server for which you have access.
+When accessing a remote server (including a GitHub server), a common authentication strategy involves using public and private keys. Below, you will go through the process of generating a public / private key. Your private key is for you and you alone. It is your secret, and should not be shared with anyone. Your public key, on the other hand, is typically copied to a server to which you have access.
 
 In the workflow outlined below, all commands should be run from the command line on your  **local computer** (not arden). If you're a Windows user, activate WSL.
 
 #### 2.1. Generate a public / private key pair
-To generate a public / private key pair:
+To generate a public / private key pair (use WSL if you're a Windows user):
 
 * Type the following command: **`ssh-keygen`**
 * This will generate your private key inside the `.ssh` folder inside your home directory. Typically, the private key is  called `id_rsa` and the public key is called `id_rsa.pub`.
@@ -44,75 +42,77 @@ To generate a public / private key pair:
 * More on public / private keys here: <a href="https://kb.iu.edu/d/aews" target="_blank">https://kb.iu.edu/d/aews</a>
 
 ### 3. Fork the Course Repository
-In this class, we're going to have two repositories:
-* **`class-exercises-fall2024`** -- For in-class exercises and labs. You will have your own personal copy of this repository on Github that you will periodically sync with the class repo.
-* **`app-fall2024`** -- Repo that you will be interacting with directly via your local git.
+In this class, we're going to be working with two repositories:
+* **`class-exercises-fall2024`** -- For in-class exercises and labs. You will have your own personal copy of this repository on Github that you will periodically sync with the class repo. This will be for doing individual work and activities.
+* [Next Week] **`app-fall2024`** -- Shared repo that you will directly pushing to / pulling from from your local computer.
 
-Before we get into the details of the GitHub workflow, let's set up a clone of **`class-exercises-fall2024`** on your laptop while practicing some basic git commands. Please complete the following tasks:
+Before we get into the details of the GitHub workflow, you will create a copy of the course repo -- one that **you own** -- on GitHub. To do this:
+1. Navigate to the course repository: <a href="https://github.com/csci338/class-exercises-fall2024" target="_blank">https://github.com/csci338/class-exercises-fall2024</a>
+1. Click the "Fork" button (towards the top of the page on the right hand side)
+1. Confirm where you would like the repo to be forked (choose your GitHub account). 
 
-1. Within your `csci338` directory, clone the `class-exercises-fall2024` repo using the **ssh method** (while in the `csci338` directory on your local computer): <br>`git clone git@github.com:csci338/class-exercises-fall2024.git`
+
+### 4. Set up the course repo on your local computer
+Now, on your laptop, make a copy of your repo locally as follows:
+
+1. Navigate to your `csci338` directory on the command line.<br><br>
+1. Within your `csci338` directory, clone the `class-exercises-fall2024` repo using the **ssh method** using the following command:<br><br>`git clone git@github.com:<your-github-username>/class-exercises-fall2024.git`<br><br>Please replace `<your-github-username>` with your GitHub username<br><br>
 1. Look at commit history (`git log`)
-1. Create a new branch called `<your-username>`
-    * For instance, Sarah would create a branch called **vanwars**: `git checkout -b vanwars`
-1. Create a folder named `<your-github-username>` (e.g. Sarah would create a folder called `vanwars`) within the `class-exercises-fall2024` folder on your new branch.
-1. Within the `<your-github-username>` folder, create a text file called `README.md` (note the case). 
-1. Within the `README.md` file, add the sentence “hello world!” (or anything, really). You can use vim, VS Code, or another text editor.
-1. Issue the `git status` command. What happened?
+
+### 5. Make a new branch
+1. Create a new branch called `lab02`
+    * See the <a href="/fall2024/resources/github">git cheatsheat</a>
+1. Switch to the branch you just made (if you haven't already)
+1. Verify that you are now on the `lab02` branch (see cheatsheet)
+
+
+### 6. Write some code
+1. Open the entire `class-exercises-fall2024` folder in VS Code.
+1. Create a folder named `lab02`
+1. Inside of your `lab02` folder, create a text file called `ContainsPair.java`
+1. Within the `ContainsPair.java` file, implement one of the "contains pair" solutions we discussed in class (ideally the fastest one).
+1. Compile it on the command line using the `javac` command (e.g., `javac ContainsPair.java`). Make sure you're in the right directory. This should generate the compiled `Java.class` file.
+1. Run your program on the command line by typing `java ContainsPair`
+
+### 7. Exclude all `.class` files
+When working with version control, you don't want to commit compiled code, system files, passwords, or third-party libraries. Luckily, the `.gitignore` file makes this easy.
+
+From the command line
+1. Type `git status -u`. What happened?
+    * This command should tell you all of the untracked changes you've made.
+1. Edit the `.gitignore` file by adding this line: `*.class`
+1. Type `git status -u` again. What happened?
+
+If you did it correctly, git is now ignoring your `*.class` file.
+
+### 8. Stage and commit your changes
 1. Stage your changes using `git add .` (the dot indicates that you want to stage all of the files that have been added / deleted / edited).
-1. Commit your changes using `git commit -am "adding my user directory"`.
-1. Push your branch to GitHub (`git push`)
-    * Note, typing `git push` will display an error with a suggested push command (e.g., `git push --set-upstream origin <your-branch-name>`).
-1. Create a pull request.
+1. Commit your changes using `git commit -am "lab02"`.
+
+### 9. Push (upload) your changes to GitHub
+1. Push your branch to GitHub using the `git push` command
+    * This command should display an error with a suggested push command (e.g., `git push --set-upstream origin <your-branch-name>`). This is telling you that there is no branch called `lab02` in the GitHub repository.
+1. Try again by typing `git push --set-upstream origin lab02`
+
+
+### 10. Create a pull request
+Now that your code is on GitHub, you're going to make a "Pull Request" so that I can review your code. This can be done on **your version** of the `class-exercises-fall2024` on GitHub.
 
 #### A note on your origin path
 Within git, your **`remote origin`** variable holds both the address and the protocol you will be using to interact with a remote server (like GitHub). Some of you are accessing the remote server using the **https** protocol while others are using the **ssh** protocol. For the sake of simplicity, let's all use **ssh**. To check your origin, type: `git remote show origin`.
 
-If it prints `git@github.com:csci338/class-exercises-fall2024`, you don't have to do anything. Otherwise, let's switch up your origin protocol to ssh as follows:
+If it prints `git@github.com:<your-user-name>/class-exercises-fall2024`, you don't have to do anything. Otherwise, let's switch up your origin protocol to ssh as follows:
 
 ```bash
 git remote rm origin  # removes current references
-git remote add origin git@github.com:csci338/class-exercises-fall2024.git  # adds new reference
+git remote add origin git@github.com:<your-user-name>/class-exercises-fall2024.git  # adds new reference
 git remote show origin  # prints the new origin (which should be the correct one).
 ```
 
-### 4. Set up the course project repo
-
-#### 4.1. Clone app
-1. Within your `csci338` directory, clone the course app repo **via ssh**:<br>`git clone git@github.com:csci338/app.git`
-    * Be sure you don't accidentially put `app` underneath `class-exercises-fall2024`.
-
-#### 4.2. Make a new branch
-1. Create a new branch called `<your-username-readme>` 
-    * For instance, Sarah would create a branch called **vanwars-readme**: `git checkout -b vanwars-readme`
-1. Open the existing `README.md` file. At the bottom, add an entry with your name and your GitHub username. Please add your information so that the table is sorted in alphabetical order by last name. 
-2. `add`, `commit`, and `push` your changes to a remote branch of the same name.
-3. Create a pull request
-
-#### 4.3. Resolve push / pull conflicts
-1. Once your branch is approved, check it to ensure that there are no conflicts with the `main` branch.
-1. If there are conflicts, follow the steps below:
-
-##### Workflow for resolving conflicts
-```bash
-git checkout main  # checkout the main branch again
-git pull # pull down the changes that have happened since you last pulled / cloned
-git checkout <your-username>-readme # switch back to your branch
-git rebase main # try to rebase
-
-# Manually resolve the conflict and then continue steps below...
-
-git status
-git rebase --continue  # continue the process
-git push # should reject your change
-git push --force # force the change
-```
-
-#### 4.4. Incorporate your changes to main
-When you're done, ask Semmy or Sarah to incorporate your changes to main.
-
 ## What to Turn In
-Make sure that the following are completed before Wednesday (9/6) at midnight:
+Please paste a link to your pull request in the Moodle submission box. Also, please verify that...
 
 {:.checkbox-list}
-* You have successfully committed and pushed your **username** directory and `README.md` file to the `class-exercises-fall2024` repo (<a href="https://github.com/csci338/class-exercises-fall2024" target="_blank">https://github.com/csci338/class-exercises-fall2024</a>).
-* You have successfully committed and pushed your `README.md` edits to the `app` repo (<a href="https://github.com/csci338/app" target="_blank">https://github.com/csci338/app</a>).
+* You created a branch called `lab02`
+* You have a working `ContainsPair.java` file in it
+* You have edited your `.gitignore` file so that `ContainsPair.class` is not checked into version control.
