@@ -111,6 +111,15 @@ git remote add origin git@github.com:<your-user-name>/class-exercises-fall2024.g
 git remote show origin  # prints the new origin (which should be the correct one).
 ```
 
+If you get a "Please tell me who you are." error message, please set the following environment variables on your machine (you will only have to do this once):
+
+```
+git config --global user.name "Sarah"
+git config --global user.email "my_email@gmail.com"
+```
+
+Please use the email you used to register with GitHub
+
 ## What to Turn In
 Please paste a link to your pull request in the Moodle submission box. Also, please verify that...
 
