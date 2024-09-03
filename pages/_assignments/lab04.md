@@ -4,9 +4,9 @@ title: "Intro to Docker"
 type: lab
 draft: 1
 points: 6
-abbreviation: Lab 3
+abbreviation: Lab 4
 show_schedule: 1
-num: 3
+num: 4
 start_date: 2024-09-12
 due_date: 2024-09-15
 

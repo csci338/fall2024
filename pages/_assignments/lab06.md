@@ -4,9 +4,9 @@ title: AsyncIO, FastAPI, and Python
 type: lab
 draft: 1
 points: 6
-abbreviation: Lab 5
+abbreviation: Lab 6
 show_schedule: 1
-num: 5
+num: 7
 start_date: 2023-09-28
 due_date: 2024-10-10
 ---

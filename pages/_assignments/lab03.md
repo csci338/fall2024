@@ -10,6 +10,9 @@ start_date: 2024-09-05
 due_date: 2024-09-08
 ---
 
+> Credit: This activity was designed by Semmy Purewall
+
+
 ## Lab Readings
 
 | <span class="pj">required</span> | <a href="https://www.youtube.com/watch?v=_wQdY_5Tb5Q" target="_blank">Collaborating using Git and GitHub</a>: Branches, Pull Requests, Merging vs Rebasing (Video walkthrough) |
@@ -51,23 +54,35 @@ see how to access it.
 
 ### Create a New Git Repository
 
-We're going to create a new repository for code exercises. Start by
-creating a directory called `exercises` using the `mkdir` command.
+We're going to create a new repository for code exercises inside of your `csci338` directory. By the end of this section, your `csci338` folder structure should end up looking something like this (note that `class-exercises-fall2024` and `lab03-exercises` are siblings, each with their own `.git` repository):
+
+```bash
+csci338
+├── ...
+├── class-exercises-fall2024
+│   ├── .git
+│   ├── .gitignore
+│   └── lab02
+├── lab03-exercises
+│   └── .git
+└── ...
+```
+
+Create a directory called `lab03-exercises` using the `mkdir` command.
 
 ```
-$ mkdir exercises
+$ mkdir lab03-exercises
 ```
 
-Now confirm it's created using the `ls` command, and -- assuming it is
--- change your working directory to the new directory.
+Now confirm it's created using the `ls` command. Then, change your working directory to the new directory.
 
-Let's start by creating a new markdown file called `readme.md`. Add a
+Let's start by creating a new markdown file called `README.md`. Add a
 header to the top.
 
 Great! First let's try to commit this.
 
 ```
-$ git add readme.md
+$ git add README.md
 ```
 
 Oh no! Something went wrong. What error do you see?
@@ -77,7 +92,7 @@ this, let's take a look at what we have in the directory using the
 `ls` command, along with the flags to show all hidden files. If you
 don't remember those flags, go back and check out lab 2.
 
-You should see a single file, the `readme.md` file you made. Now let's
+You should see a single file, the `README.md` file you made. Now let's
 initialize the our new git repository.
 
 ```
@@ -108,7 +123,7 @@ differently depending on what state or mode it's in. It's a good idea
 to get in the habit of checking Git's state prior to making any
 changes. Let's do that now with the `status` subcommand.
 
-```
+```bash
 $ git status
 ```
 
@@ -116,25 +131,25 @@ What do you see? Copy the output to your `answers.md` file.
 
 The key things you're looking for is the `branch` you're on (in this
 case, `main`) and a list of untracked files (in this case, just
-`readme.md`).
+`README.md`).
 
-Let's add `readme.md` to Git's staging area using the `add`
+Let's add `README.md` to Git's staging area using the `add`
 subcommand.
 
-```
-$ git add readme.md
+```bash
+$ git add README.md
 ```
 
 Hmmmm, there was no output from that command. What to do? Is there a
 way you can check the state of git to confirm that your file was added
 (hint: see above)?
 
-Note that `readme.md` is under the `Changes to be committed` header
+Note that `README.md` is under the `Changes to be committed` header
 now. That means this file will be included on our next commit. Let's
 do that now.
 
-```
-$ git commit -m "add readme.md to the repository"
+```bash
+$ git commit -m "add README.md to the repository"
 ```
 
 What do you see? After you commit this, let's check the state of the
@@ -143,7 +158,7 @@ repository. What do you see?
 Now that our repository has history, let's explore that history. To do
 that, we use the `log` subcommand.
 
-```
+```bash
 $ git log
 ```
 
@@ -153,18 +168,18 @@ features that we'll want to use going forward, but for now let's just
 bask in the glory of the fact we've created a brand new git repository
 and made our first commit to it!
 
-Now let's modify our file.  Open `readme.md` and add the following
+Now let's modify our file.  Open `README.md` and add the following
 description of the first problem we are going to solve, and then save
 the file.
 
-```
+```bash
 1. Write a function that takes in a list of integers as an argument
 and returns true if it contains two integers that are the same, false
 otherwise.
 ```
 
 Now that we have a change, let's check Git's state. What's different
-about this message than when we first added the `readme.md` file?
+about this message than when we first added the `README.md` file?
 
 You can see what has changed between the previous commit and now with
 the `diff` subcommand.
@@ -354,7 +369,7 @@ I just described two ways to determine which branch you're currently
 on. Do both of those to confirm you are indeed on the `one-set`
 branch.
 
-Let's open up our `readme.md` file again and under question one, let's
+Let's open up our `README.md` file again and under question one, let's
 describe the two different solutions in english. The first solution is
 the nested loop solution. The second solution is to use a set or a map
 as I described in class. Describe both in as much detail as you can

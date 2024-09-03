@@ -2,10 +2,10 @@
 layout: assignment-two-column
 title: Storing Your Tasks in a Database
 type: lab
-abbreviation: Lab 8
+abbreviation: Lab 9
 draft: 1
 points: 6
-num: 8
+num: 9
 start_date: 2023-11-02
 due_date: 2024-11-14
 ---

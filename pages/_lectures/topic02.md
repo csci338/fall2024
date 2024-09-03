@@ -20,6 +20,9 @@ due_date: 2024-08-27
 
 ## Slides
 * <a href="https://docs.google.com/presentation/d/1Caf-Ri8A5TNeYjTNC4yL5aD074NYNJAD/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Big Ideas in Software Engineering & Intro to Version Control</a> (8/27)
-<!-- * <a href="https://docs.google.com/presentation/d/1J1B26cenXIK7uhuX1MBr3KT1_GLrRfgKdsFmsHRF978/edit?usp=sharing" target="_blank">Version Control Continued</a> (9/5) -->
+* <a href="https://docs.google.com/presentation/d/11HyT_sktBgkhoM2_LgQ3cHB68YZj_AZZ/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Lab 2 Slides</a> (8/29)
+* <a href="https://docs.google.com/presentation/d/1Jw5noRHBzAtxJL-j13OCawd615ca7swk/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Version Control and Collaborative Workflows</a> (9/3)
 
 
+## Activities
+* [Merging / Rebasing Exercise](/fall2024/activities/git-in-class-activity)

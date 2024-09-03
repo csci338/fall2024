@@ -4,8 +4,8 @@ title: "Writing Tests in JavaScript & Python"
 type: lab
 draft: 1
 points: 6
-abbreviation: Lab 4
-num: 4
+abbreviation: Lab 5
+num: 5
 start_date: 2024-09-19
 due_date: 2024-09-22
 

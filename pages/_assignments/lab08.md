@@ -4,8 +4,8 @@ title: Intro to Client-Side Programming with React
 type: lab
 draft: 1
 points: 6
-abbreviation: Lab 7
-num: 7
+abbreviation: Lab 8
+num: 8
 start_date: 2023-10-26
 due_date: 2024-10-31
 
