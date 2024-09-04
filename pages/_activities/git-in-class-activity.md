@@ -28,9 +28,10 @@ $ mkdir merge-activity
 1. Navigate into the directory (`cd merge-activity`)
 2. Initialize a new git repository (`git init`)
 3. Create a README.md file with a header
+1. State your `README.md` file using `git add .`
 4. Commit it (`git commit -m "Added README.md"`)
 
-Next add a `code.py` file. It should look like this.
+Next add a `my_code.py` file. It should look like this.
 
 ```py
 def say_hello() -> None:
@@ -59,8 +60,11 @@ $ git clone git@github.com:<owner-username>/merge-activity.git <your-username>-m
 For instance, if Sarah was cloning Walter's repository, she would type:
 
 ```bash
-$ git clone git@github.com:walter/merge-activity.git sarah-merge-activity
+$ git clone git@github.com:walter/merge-activity.git walter-merge-activity
 ```
+
+* Sarah's repository: merge-activity
+* Walter's repository: walter-merge-activity
 
 Now you should have two versions of the respository: yours (`merge-activity`) and your partners (`<owner-username>-merge-activity`). List the contents of your `csci338` directory to confirm that this is the case.
 

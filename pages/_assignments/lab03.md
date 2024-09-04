@@ -2,7 +2,7 @@
 layout: assignment-two-column
 title: "Version Control and Branch Management with git and GitHub"
 type: lab
-draft: 1
+draft: 0
 points: 6
 abbreviation: Lab 3
 num: 3
@@ -27,23 +27,22 @@ The goals with this lab are as follows:
 
 ## Basics
 
-1. Sync your fork of the `class-exercises-fall2024` repository in Github.
+1. Sync your fork of the `class-exercises-fall2024` repository on Github.
 1. On your laptop, navigate to your version of `class-exercises-fall2024`, located inside of your `csci338` folder.
 1. Check with branch you're on using the `git branch` command.
 1. Check if you have any changes you haven't yet staged and committed using the `git status` command. If you have lingering changes, stage and commit them. 
 1. Checkout the main branch: `git checkout main`
 1. Pull the latest changes from your remote main branch into your local main branch: `git pull origin main`
-1. Creatr a new branch to do our work for lab 3: `git checkout -b my_lab3_work`
+1. If you did it correctly, you should notice that you should now have a `lab03` directory inside of your `class-exercises-fall2024` folder.
+1. Create a new branch to do our work for lab 3: `git checkout -b my_lab3_work`
 
-Now create a new file inside the `lab3` directory called
-`answers.md`. Use this markdown file to answer questions as you're
+Use the `lab03/answers.md` markdown file to answer questions as you're
 going through the lab.
 
 **Note:** Whenever the lab says "What do you see?" that means to copy
   the command and the output to your `answers.md` file. You should do
   this in Markdown's preformatted mode which is simply 3 backticks
-  before and after the block. You can see examples throughout this
-  file (open it as plain text in your text editor).
+  before and after the block. 
 
 ### Getting Help
 
@@ -53,31 +52,13 @@ faster than using Chat GPT). Read through
 see how to access it.
 
 ### Create a New Git Repository
-
-We're going to create a new repository for code exercises inside of your `csci338` directory. By the end of this section, your `csci338` folder structure should end up looking something like this (note that `class-exercises-fall2024` and `lab03-exercises` are siblings, each with their own `.git` repository):
-
-```bash
-csci338
-├── ...
-├── class-exercises-fall2024
-│   ├── .git
-│   ├── .gitignore
-│   └── lab02
-├── lab03-exercises
-│   └── .git
-└── ...
-```
-
-Create a directory called `lab03-exercises` using the `mkdir` command.
+Create a new repository for code exercises inside of your `csci338` directory. To do this, create a directory called `lab03-exercises` using the `mkdir` command.
 
 ```
 $ mkdir lab03-exercises
 ```
 
-Now confirm it's created using the `ls` command. Then, change your working directory to the new directory.
-
-Let's start by creating a new markdown file called `README.md`. Add a
-header to the top.
+Now confirm it's created using the `ls -la` command. Then, change your working directory to the new directory. Create a new markdown file called `README.md`. Add a header to the top.
 
 Great! First let's try to commit this.
 
@@ -90,7 +71,7 @@ Oh no! Something went wrong. What error do you see?
 The problem is we haven't created a repository yet. Before we fix
 this, let's take a look at what we have in the directory using the
 `ls` command, along with the flags to show all hidden files. If you
-don't remember those flags, go back and check out lab 2.
+don't remember the flag to look for hidden files, take a look at the command line cheatsheet on the course website.
 
 You should see a single file, the `README.md` file you made. Now let's
 initialize the our new git repository.
@@ -99,21 +80,12 @@ initialize the our new git repository.
 $ git init
 ```
 
-Git will initialize a repository for you and give you a hint. Read the
-hint. Let's use `main` for our default branch name and set it as such
-in our git config as described in the hint. You can confirm the change
-was made by catting your `~/.gitconfig` file. Copy the result of the
-`cat` command to your `answers.md` file.
+Git will initialize a repository for you. Now let's list the contents of the directory again (including hidden files). Do you see anything new? Is it a directory or a file? How can you tell? List the contents of the new directory. 
 
-Let's also rename the current default branch to `main` as described in
-the hint.
+> 1.1. What do you see? Copy the output to your `answers.md` file.
+{:.blockquote-no-margin}
 
-Now let's list the contents of the directory again. Do you see
-anything new? Is it a directory or a file? How can you tell?
-
-List the contents of the new directory. What do you see? This is Git's
-internal implementation. You generally won't have to look in here, but
-whenever you're working in a Git repository, this special directory
+This is Git's internal implementation. You generally won't have to look in here, but whenever you're working in a Git repository, this special directory
 will exist.
 
 ### Our First Commit!
@@ -127,7 +99,8 @@ changes. Let's do that now with the `status` subcommand.
 $ git status
 ```
 
-What do you see? Copy the output to your `answers.md` file.
+> 1.2. What do you see? Copy the output to your `answers.md` file.
+{:.blockquote-no-margin}
 
 The key things you're looking for is the `branch` you're on (in this
 case, `main`) and a list of untracked files (in this case, just
@@ -152,8 +125,10 @@ do that now.
 $ git commit -m "add README.md to the repository"
 ```
 
-What do you see? After you commit this, let's check the state of the
-repository. What do you see?
+What do you see? After you commit this, let's check the state of the repository. 
+
+> 1.3. What do you see? Copy the output to your `answers.md` file.
+{:.blockquote-no-margin}
 
 Now that our repository has history, let's explore that history. To do
 that, we use the `log` subcommand.
@@ -161,22 +136,20 @@ that, we use the `log` subcommand.
 ```bash
 $ git log
 ```
+> 1.4. What do you see? Copy the output to your `answers.md` file.
+{:.blockquote-no-margin}
 
-What do you see? The [`log`
-subcommand](https://git-scm.com/docs/git-log) has a lot of great
+The [`log` subcommand](https://git-scm.com/docs/git-log) has a lot of great
 features that we'll want to use going forward, but for now let's just
 bask in the glory of the fact we've created a brand new git repository
 and made our first commit to it!
 
-Now let's modify our file.  Open `README.md` and add the following
-description of the first problem we are going to solve, and then save
+Now let's modify our file.  Open `README.md` and add the following description of the first problem we are going to solve, and then save
 the file.
 
-```bash
-1. Write a function that takes in a list of integers as an argument
-and returns true if it contains two integers that are the same, false
-otherwise.
-```
+> ### Exercise 1
+> Write a function that takes in a list of integers and returns the mode of the list. If there is more than one mode, return one of them.
+
 
 Now that we have a change, let's check Git's state. What's different
 about this message than when we first added the `README.md` file?
@@ -187,13 +160,14 @@ the `diff` subcommand.
 ```
 $ git diff
 ```
+> 1.5. What do you see? Copy the output to your `answers.md` file.
+{:.blockquote-no-margin}
 
-What do you see? Let's add this change to Git's staging area and
-commit it with a commit message "add first problem".
+Let's add this change to Git's staging area and commit it with a commit message "add first problem".
 
 ### Reflection and Review
 
-We've learned 5 git subcommands now. In your `answers.md` file,
+We've learned 6 git subcommands now. In your `answers.md` file,
 describe each of them in your own words.
 
 ### Practice
@@ -203,15 +177,13 @@ describe each of them in your own words.
 You may use Google, but you may not cut and paste any code.
 
 Let's write some code. Create a new directory called `java` and let's
-answer that first coding question in a file called `OneLoop.java`. Use
-nested loops for this one, and your `main` function should create a
-few examples to confirm that it's working correctly.
+answer that first coding question in a file called `FindModeNestedLoop.java`. Use nested loops for this one, and your `main` function should create a few examples to confirm that it's working correctly.
 
 You can compile and run your code using:
 
 ```
-$ javac OneLoop.java
-$ java OneLoop
+$ javac FindModeNestedLoop.java
+$ java FindModeNestedLoop
 ```
 
 Once you have that working, let's add it and commit it to the
@@ -238,6 +210,9 @@ You can leave everything else unchecked (i.e. Add README, Add
 Once you click the green "Create repository" button, you'll see some
 instructions. We're going to follow the ones labeled "push an existing
 repository from the command line."
+
+> ### Important: Use the ssh protocol
+You'll note that when you make a new repository, there are two ways to interact with GitHub: HTTPS and SSH. Please make sure that the **SSH** button is selected (not HTTPS) and that your origin looks something like this: `git@github.com:csci338/your-repo.git`
 
 Note that the second command is redundant since we already call our
 default branch `main`. But let's go ahead and do it anyway.
@@ -274,24 +249,24 @@ You may use Google, but you may not cut and paste any code.
 
 Let's add a directory called `python` and repeat this exercise in
 Python. Generally, Python doesn't use CamelCase for filenames, so name
-your file `one_loop.py`. Here's a basic python skeleton program you
+your file `find_mode_nested_loop.py`. Here's a basic python skeleton program you
 can run.
 
 ```
-def one_loop(l: list) -> bool:
+def find_mode_nested_loop(l: list) -> int:
     print(l)
 
 if __name__ == "__main__":
-    one_loop([1,2,3,4]);
+    find_mode_nested_loop([1,2,2,5,1,6,8,3,4]);
 ```
 
 You can run it like this:
 
 ```
-$ python one_loop.py
+$ python3 find_mode_nested_loop.py
 ```
 
-Go ahead and modify the `one_loop` function so it works as we
+Go ahead and modify the `find_mode_nested_loop` function so it works as we
 described. Once you have it working, add it and commit it to the
 repository. Take a look at your Git history. What do you see? Take a
 look at your repo on Github and click on the "commits" link. Do you
@@ -307,9 +282,7 @@ Now let's push these changes to our remote.
 $ git push origin main
 ```
 
-Reload the `commits` page in Github and you should see your
-changes. Check the state of your local repository and notice that the
-message describing the difference is now gone!
+Reload your Github repository and you should now see your latest commit on GitHub.
 
 ## Branching
 
