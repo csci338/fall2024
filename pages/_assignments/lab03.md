@@ -27,23 +27,25 @@ The goals with this lab are as follows:
 
 ## 1. Git Basics
 
-1. Sync your fork of the `class-exercises-fall2024` repository on Github.
-1. On your laptop, navigate to your version of `class-exercises-fall2024`, located inside of your `csci338` folder.
-1. Check with branch you're on using the `git branch` command.
+On GitHub: 
+1. Navigate to your fork of the `class-exercises-fall2024` repository. Sync your fork to incorporate new changes into the main branch by clicking the "sync fork" button (below the green "Code" button).
+
+On your laptop: 
+1. Navigate to your version of `class-exercises-fall2024`, located inside of your `csci338` folder.
+1. Check which branch you're on using the `git branch` command.
 1. Check if you have any uncommitted changes using the `git status` command. 
     * If you have lingering changes, stage and commit them. 
 1. Checkout the main branch: `git checkout main`
 1. Pull the latest changes from your remote main branch into your local main branch: `git pull origin main`
 1. If you did it correctly, you should notice that you should now have a `lab03` directory inside of your `class-exercises-fall2024` folder.
-1. Create a new branch to do our work for lab 3: `git checkout -b my_lab3_work`
+1. Create a new branch (while on the main branch) to do our work for lab 3: `git checkout -b my_lab3_work`
+    * Note that branches are created from the branch you're currently on (in this case `main`). Therefore, it's important to pay attention to which branch you're on before making new branches.
+    * Typically, you always branch from `main`. 
 
 Use the `lab03/answers.md` markdown file to answer questions as you're
 going through the lab.
 
-**Note:** Whenever the lab says "What do you see?" that means to copy
-  the command and the output to your `answers.md` file. You should do
-  this in Markdown's preformatted mode which is simply 3 backticks
-  before and after the block. 
+**Note:** Whenever the lab says "What do you see?" that usually means to copy the command and the output to your `answers.md` file. You should do this in Markdown's preformatted mode which is simply 3 backticks before and after the block. 
 
 ### Getting Help
 
