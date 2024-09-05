@@ -150,6 +150,11 @@ layout: default
                     
                         {% if assignment.type == "lab" %}
                             {{ assignment.abbreviation }}
+                        {% else %}
+                            <a href="{{site.baseurl}}{{lab_start.url}}" class="{{classname}}">
+                                {{ assignment.abbreviation }}
+                                <i class="fa fa-link"></i>
+                            </a>
                         {% endif %} 
                     {% endfor %}
                 </td>

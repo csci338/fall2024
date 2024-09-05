@@ -7,7 +7,7 @@ points: 6
 abbreviation: Lab 3
 num: 3
 start_date: 2024-09-05
-due_date: 2024-09-08
+due_date: 2024-09-10
 ---
 
 > Credit: This activity was designed by Semmy Purewall
@@ -25,12 +25,13 @@ The goals with this lab are as follows:
 2. Practice adding and committing.
 3. More practice with the linux command line.
 
-## Basics
+## 1. Git Basics
 
 1. Sync your fork of the `class-exercises-fall2024` repository on Github.
 1. On your laptop, navigate to your version of `class-exercises-fall2024`, located inside of your `csci338` folder.
 1. Check with branch you're on using the `git branch` command.
-1. Check if you have any changes you haven't yet staged and committed using the `git status` command. If you have lingering changes, stage and commit them. 
+1. Check if you have any uncommitted changes using the `git status` command. 
+    * If you have lingering changes, stage and commit them. 
 1. Checkout the main branch: `git checkout main`
 1. Pull the latest changes from your remote main branch into your local main branch: `git pull origin main`
 1. If you did it correctly, you should notice that you should now have a `lab03` directory inside of your `class-exercises-fall2024` folder.
@@ -147,8 +148,9 @@ and made our first commit to it!
 Now let's modify our file.  Open `README.md` and add the following description of the first problem we are going to solve, and then save
 the file.
 
-> ### Exercise 1
-> Write a function that takes in a list of integers and returns the mode of the list. If there is more than one mode, return one of them.
+> ### Add to README.md
+> #### Find All Duplicates
+> Write a function (or static method in the case of Java) that accepts a list of integers and returns a list of only those integers that appear more than once. 
 
 
 Now that we have a change, let's check Git's state. What's different
@@ -177,13 +179,42 @@ describe each of them in your own words.
 You may use Google, but you may not cut and paste any code.
 
 Let's write some code. Create a new directory called `java` and let's
-answer that first coding question in a file called `FindModeNestedLoop.java`. Use nested loops for this one, and your `main` function should create a few examples to confirm that it's working correctly.
+answer that first coding question in a file called `FindDuplicates.java`. In it, create a static method called `findModeNestedLoops` that takes a list of integers as an argument and returns a list of integers that have duplicates. Use a "nested loop" strategy to implement your method. Then, in your `main` function, invoke your `findModeNestedLoops` method with a few examples to confirm it's working correctly. Here's a sample stub of `FindDuplicates.java`:
+
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class FindDuplicates {
+
+    public static List<Integer> findModeNestedLoops(List<Integer> l) {
+        // replace "return null" with your code:
+
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        // some test strings:
+        List<Integer> sample1 = new ArrayList<Integer>(Arrays.asList(3, 7, 5, 6, 7, 4, 8, 5, 7, 66));
+        List<Integer> sample2 = new ArrayList<Integer>(Arrays.asList(3, 5, 6, 4, 4, 5, 66, 6, 7, 6));
+        List<Integer> sample3 = new ArrayList<Integer>(Arrays.asList(3, 0, 5, 1, 0));
+        List<Integer> sample4 = new ArrayList<Integer>(Arrays.asList(3));
+        System.out.println("Sample 1: " + findModeNestedLoops(sample1));
+        System.out.println("Sample 2: " + findModeNestedLoops(sample2));
+        System.out.println("Sample 3: " + findModeNestedLoops(sample3));
+        System.out.println("Sample 4: " + findModeNestedLoops(sample4));
+    }
+
+}
+```
 
 You can compile and run your code using:
 
 ```
-$ javac FindModeNestedLoop.java
-$ java FindModeNestedLoop
+$ javac FindDuplicates.java
+$ java FindDuplicates
 ```
 
 Once you have that working, let's add it and commit it to the
@@ -192,20 +223,12 @@ repository.
 ## Github
 
 Github is not Git. Github is essentially a code management platform
-that creates an ecosystem of software-related tools around Git. It's a
-solid choice for code management if you're using Git, but it does have
-limitations.
-
-In this section, we'll push our repository to Github.
+that creates an ecosystem of software-related tools around Git. In this section, we'll push our repository to Github.
 
 ### Create a New Repository
 
 On Github, click the "New" button that's next to your list of
-repos. Let's call it "lab3" or something similar. You may make it
-Private, but if you do you'll need to add me as a collaborator lately.
-
-You can leave everything else unchecked (i.e. Add README, Add
-.gitignore, Choose license) for now.
+repos. Let's call it `lab03-exercises` (same as our local repo name, though you could name it something different). Please make it **public**. Leave all of the GitHub options unchecked (i.e. Add README, Add .gitignore, Choose license).
 
 Once you click the green "Create repository" button, you'll see some
 instructions. We're going to follow the ones labeled "push an existing
@@ -249,24 +272,33 @@ You may use Google, but you may not cut and paste any code.
 
 Let's add a directory called `python` and repeat this exercise in
 Python. Generally, Python doesn't use CamelCase for filenames, so name
-your file `find_mode_nested_loop.py`. Here's a basic python skeleton program you
+your file `find_duplicates.py`. In it, you will implement a function called `find_duplicates_nested_loop`. Here's a basic python skeleton program you
 can run.
 
-```
-def find_mode_nested_loop(l: list) -> int:
-    print(l)
+```py
+def find_duplicates_nested_loop(l: list) -> list:
+    # Replace "return None" with your code
+    return None
 
 if __name__ == "__main__":
-    find_mode_nested_loop([1,2,2,5,1,6,8,3,4]);
+    sample1 = [3, 7, 5, 6, 7, 4, 8, 5, 7, 66]
+    sample2 = [3, 5, 6, 4, 4, 5, 66, 6, 7, 6]
+    sample3 = [3, 0, 5, 1, 0]
+    sample4 = [3]
+    
+    print("Sample 1:", find_duplicates_nested_loop(sample1))
+    print("Sample 2:", find_duplicates_nested_loop(sample2))
+    print("Sample 3:", find_duplicates_nested_loop(sample3))
+    print("Sample 4:", find_duplicates_nested_loop(sample4))
 ```
 
 You can run it like this:
 
 ```
-$ python3 find_mode_nested_loop.py
+$ python3 find_duplicates.py
 ```
 
-Go ahead and modify the `find_mode_nested_loop` function so it works as we
+Go ahead and modify the `find_duplicates_nested_loop` function so it works as we
 described. Once you have it working, add it and commit it to the
 repository. Take a look at your Git history. What do you see? Take a
 look at your repo on Github and click on the "commits" link. Do you
@@ -282,20 +314,21 @@ Now let's push these changes to our remote.
 $ git push origin main
 ```
 
-Reload your Github repository and you should now see your latest commit on GitHub.
+Some notes:
+* If you reload your Github repository and you should now see your latest commit on GitHub.
+* Similarly, if you type `git status` on the command line again, you can see that your current and remote branches are the same.
 
 ## Branching
 
-So far we've been committing directly to the `main` branch and pushing
-that branch to the remote. This is fine for personal projects, or
-experimental codebases. It's not fine for production projects that
-have users.
+So far we've been committing directly to the `main` branch and pushing that branch to the remote. This is fine for personal projects, or experimental codebases. It's not fine for production projects that have users.
 
-Generally speaking, on collaborative projects we'll consider our
-`main` branch on our `origin` remote sacred. Indeed, it's probably
-good practice to keep the `main` branch of your local repository
-sacred as well. Generally, this means we will never commit _directly_
-to the `main` branch anywhere. Instead we will commit to a local
+Generally speaking, on collaborative projects we'll consider our `main` branch on our `origin` remote sacred. Indeed, it's probably good practice to keep the `main` branch of your local repository
+sacred as well. 
+
+> Generally, this means we will never commit _directly_ to the `main` branch anywhere. 
+{:.blockquote-no-margin}
+
+Instead we will commit to a local
 _branch_ and then use a process called a Pull Request to get our local
 branch into our remote `main` branch, then we'll use `fetch` and
 `pull` to sync our local branch with the remote.
@@ -338,29 +371,23 @@ Let's `checkout` the `one-set` branch.
 $ git checkout one-set
 ```
 
-I just described two ways to determine which branch you're currently
-on. Do both of those to confirm you are indeed on the `one-set`
-branch.
+Confirm you are indeed on the `one-set`
+branch (use `git status`)
 
-Let's open up our `README.md` file again and under question one, let's
-describe the two different solutions in english. The first solution is
-the nested loop solution. The second solution is to use a set or a map
-as I described in class. Describe both in as much detail as you can
-(with no code) and describe the trade-offs between the two solutions.
+> ### Add to README.md
+> #### Describe Different Approaches to Solving This Problem
+> Describe the two different ways to figure out all of the duplicate values of a list of integers in english. The first solution is the nested loop solution. The second solution is to use a dictionary or a map (similar to the `containsPair` method we wrote in class. Describe both in as much detail as you can (with no code) and describe the trade-offs between the two solutions.
 
-Now let's commit our code. Note that as long as you're on the correct
-branch, all git operations will happen on that branch. Maybe check
-you're on the correct branch one more time? Once you're confident, add
-and commit your changes.
+Now let's commit this change to our `README.md` file. Note that as long as you're on the correct branch, all git operations will happen on that branch. Maybe check you're on the correct branch one more time? Once you're confident, add and commit your changes.
 
-Now let's look at our history again. You should have several commits
-now. One of those commits is the top of `main` and one of those
-commits is the top of `one-set`. There's also one that's labeled
+Now let's look at our history again. You should have several commits now. One of those commits is the top of `main` and one of those commits is the top of `one-set`. There's also one that's labeled
 `HEAD`. Which one?
 
-Now let's checkout our `main` branch and check our history
-again. What's different? Is `HEAD` the same? Describe in english what
-happened here.
+Now let's checkout our `main` branch and check our history again. What's different? 
+* Is `HEAD` the same? 
+* If you look at your `README.md` file in VS Code (or by "catting" it), is it the same?
+
+Describe in english what happened here.
 
 ### Still More Practice
 
@@ -372,9 +399,8 @@ Set](https://docs.python.org/3/tutorial/datastructures.html#sets) or
 the [Java
 Set](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html).
 
-Now we're going to solve the question one using a Set data structure
-instead of nested loops. You may do this in either Python or Java,
-just make sure to name your new file appropriately.
+Now we're going to solve the question one using a dictionary (or hashmap) data structure
+instead of nested loops. You may do this in either your Python file or in the Java file that you've already made.
 
 Once you're done, commit your changes to the `one-set` branch. Double
 check you're on the right branch before committing.
@@ -432,10 +458,12 @@ repository settings and adding me under "Collaborators".
 
 Click on the drop-down arrow in the green "Merge pull request"
 button. There are three options there. Based on our discusssion in
-class, what do the three options mean? Add them to your `answers.md`
+class, what do the three options mean? 
+
+> What do the three "Merge pull request" options mean? Add them to your `answers.md`
 file.
 
-No need to wait for me to actually review it. Go ahead and choose
+No need to wait for Sarah to actually review it. Go ahead and choose
 "Rebase and Merge" and then delete the branch.
 
 ### Post Merge
@@ -468,10 +496,6 @@ anymore.
 $ git branch -D one-set
 ```
 
-## Submission
-
-Commit your `answers.md` to your branch in the `software-engineering` repository and make a pull request. Include some markdown and a screenshot (or some other pic) in your Github description.
-
 ## Summary
 
 We've learned a lot about Git in this lab, but much of it should have
@@ -494,3 +518,7 @@ review at this point, but there's a few new things in there.
 
 * Chapter 2, sections 1, 2, 3, 4, 5
 * Chapter 3, sections 1, 2, 3, 6
+
+## What to Submit
+
+Commit your `answers.md` to your branch in the `class-exercises-fall2024` repository and make a pull request. Include some markdown and a screenshot (or some other pic) in your Github description. Then paste a link to your pull request in the Moodle. Make sure that Sarah has been added as a collaborator on your version of the `class-exercises-fall2024` repo (`svanwart`).
