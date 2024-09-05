@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Testing
+title: Static Analysis & Testing
 type: module
 num: 5
 draft: 1
