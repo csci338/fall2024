@@ -109,12 +109,13 @@ This just lists the commands we'll be using in today's tutorial:
 | **docker stop `<pid>`** | Stops Docker container from running (by process id) | 
 | **docker start `<pid>`** | Starts Docker container from running (by process id) | 
 | **docker rm `<pid>`** | Deletes Docker container from running (by process id) | 
+| **docker exec -it <name-of-container> sh** | Runs a shell inside a running Docker container |
+| **docker exec -it <name-of-container> python** | Runs python inside a Docker container (provided that python is installed) |
 
 
 ## 4. Your Tasks
-Your tasks will be published shortly!
 
-<!-- For this week's lab, you will be completing the "Getting Started" Docker Tutorial. 
+For this week's lab, you will be completing the "Getting Started" Docker Tutorial. 
 
 > ### Before you begin, get the latest code from `class-exercises-fall2024`
 > **On GitHub:**
@@ -146,4 +147,13 @@ Begin the Docker tutorial as follows:
     1. Using Docker Compose
     1. *Image Building Best Practices (Optional)*
     {:.compact}
-1. Answer the questions in the `class-exercises-fall2024/lab04/answers.md` file. -->
+1. Answer the questions in the `class-exercises-fall2024/lab04/answers.md` file.
+
+
+## What to Turn In
+After answering all of the questions in your `class-exercises-fall2024/labo04/answers.md` file...
+
+1. Make sure that your app folder is inside of your lab04 folder (including your Dockerfile and docker-compose.yml files).
+2. Then, stage, commit, and push the 'lab04' branch of your `class-exercises-fall2024` repo to GitHub.
+3. Create a Pull Request (but do not merge your pull request -- that doesn't happen until Sarah reviews it).
+4. Paste a link to your pull request in the Lab04 submission
