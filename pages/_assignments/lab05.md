@@ -1,13 +1,13 @@
 ---
 layout: assignment-two-column
-title: "Writing Tests in JavaScript & Python"
+title: "Understanding Package Managers"
 type: lab
 draft: 1
 points: 6
 abbreviation: Lab 5
 num: 5
-start_date: 2024-09-26
-due_date: 2024-09-30
+start_date: 2024-09-19
+due_date: 2024-09-22
 
 ---
 

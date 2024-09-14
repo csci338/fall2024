@@ -1,549 +1,317 @@
 ---
 layout: assignment-two-column
-title: AsyncIO, FastAPI, and Python
+title: "Writing Tests in JavaScript & Python"
 type: lab
 draft: 1
 points: 6
 abbreviation: Lab 6
-show_schedule: 1
-num: 7
-start_date: 2023-09-28
-due_date: 2024-10-10
+num: 6
+start_date: 2024-09-26
+due_date: 2024-09-29
+
 ---
 
-> ## Lab 5 Hints
-> Resources from Tuesday's class (10/03/2023) to help you get started on Lab 5:
-> * [Slides](https://docs.google.com/presentation/d/1VEV7xnxnW_oA-XVCumJL5L7ooYo4DDzqwtWIm3DeMZs/edit?usp=sharing)
-> * [Hints directory](https://github.com/csci338/class-exercises-fall2024/tree/main/lab05/src/hints) in the `main` branch.
-> * <a href="https://drive.google.com/drive/folders/10fr-iDlzEn2Oh06HdUCvhU73sg2sg32C">Video Walkthrough</a>
-
 ## 1. Reading & Reference Materials
-* <a href="https://realpython.com/async-io-python/" target="_blank">AsyncIO</a>
-* <a href="https://www.pythoncheatsheet.org/cheatsheet/basics" target="_blank">Python Reference</a>
-* <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a>
 
-## 2. Setup
+* <a href="https://circleci.com/blog/unit-testing-vs-integration-testing" target="_blank">High-level overview of unit v. integration testing.
+* <a href="https://abseil.io/resources/swe-book/html/ch11.html" target="_blank">Chapter 11. Testing Overview</a>
+* <a href="https://programmingwithmosh.com/wp-content/uploads/2019/02/Python-Cheat-Sheet.pdf" target="_blank">Python Reference</a>
+* <a href="https://quickref.me/javascript.html" target="_blank">JavaScript Reference</a>
 
-### 1. Get the latest files & make a new branch
-From within your `class-exercises-fall2024` repo on your local computer:
-* Make sure you're at a stopping point and commit all of your current changes.
-* Checkout the `main` branch.
-* Pull down the lastest updates from the `class-exercises-fall2024`
-* You will notice a new folder called `lab05`.
-* From the `main` branch, create a new branch called `lab05-your-username` 
-    * `git checkout -b lab05-your-username`
-* Copy the `lab05` directory into `your-username` folder. When When you’re done, you shoud have a folder structure that looks something like this (within your-username folder):
+## 2. Introduction & Background
+In a few weeks -- once we get the skeleton of our app working and our workflow down -- we will be collaboratively building a full-stack web application using Python and JavaScript. To successfully pull this off, you will need some familiarity with these languages, as well as knowledge of how to write good tests. Give this, Lab 4 has been designed to help you practice these skills.
 
+In this lab you will be doing a few things:
+* Pulling down the latest changes ([described below](#3-set-up)) from the main branch of the <a href="https://github.com/csci338/class-exercises-fall2024" target="_blank">class-exercises-fall2024</a> repo.
+* Doing some JavaScript tasks ([described below](#4-javascript-tasks)), including:
+    * Implementing a "rock paper scissors" function
+    * Writing "vanilla" unit tests for your function
+    * Re-writing your tests using the `mocha` module (a testing framework)
+* Doing some Python tasks -- doing the same stuff you did in JavaScript, but in Python ([described below](#5-python-tasks)), including:
+    * Implementing the same "rock paper scissors" function
+    * Writing "vanilla" unit tests
+    * Re-writing your tests using the `unittest` module
+* Creating a pull request when you're done ([described below](#6-what-to-submit))
+
+## 3. Set Up
+Navigate to your `csci338/class-exercises-fall2024` folder on the CLI (CLI stands for "command line interface").
+Then check which branch you're on:
+
+```bash
+git branch
 ```
+
+Check that all of your changes have been committed:
+
+```bash
+git status
+```
+
+If there are any modified files, stage and commit them:
+
+```bash
+git add .
+git commit -m "some meaningful message"
+```
+
+Now switch to your main branch (if you're not already on it) and verify that you're on it:
+
+```bash
+git checkout main
+git branch    # should be an asterik next to main
+```
+
+Pull down the new code for `lab04`:
+
+```bash
+git pull
+```
+
+Create a new branch from main (with the updated code files) called `lab04-your-username`, and verify that you're on the new branch:
+
+```bash
+git checkout -b lab04-your-username
+git branch    # should be an asterik next to lab04-your-username
+```
+
+{:.blockquote-no-margin}
+> **Did you know...** 
+> 
+> When you create a new branch via the **`git checkout -b <branch name>`** command, the new branch "branches" from the most recent commit of the branch you were just on. So when making a new branch: 
+> * Be sure you understand which branch your currently on (which is the baseline for the new branch)
+> 
+> As a rule of thumb (at least for now), always create new branches from the `main` branch. Ask Sarah or Semmy if you have questions about this.
+
+Finally, make a copy of the `lab04` folder in your "username" directory. When you're done, you shoud have a folder structure that looks something like this (within `your-username` folder):
+
+```bash
+
 class-exercises-fall2024
 ...
 ├── lab04           # original copy
-├── lab05           # original copy
 ...
 └── your-username
-    ├── README.md
-    ├── getting-started-app
-    ├── lab04       # your copy -- you may not have this one yet if your changes have not yet been reviewed
-    └── lab05       # your copy -- you will edit the files in this folder
+    ├── README.md
+    ├── getting-started-app
+    └── lab04       # your copy -- you will edit the files in this folder
 ```
 
-### 2. Create the Docker image and container
-**Credit:** Taken from Hayden's Docker file `README.md`
+You will be editing **your copy of the `lab04` files** (inside the `your-username` folder). Don't edit or delete the original `lab04` files.
 
-Make sure docker is installed and the daemon is running.
+## 4. JavaScript Tasks
+Begin by completing the JavaScript tasks, which are located in the `javascript_rps` folder (`rps` stands for "rock paper scissors"), as described below:
+
+### 4.1. Implement the "Rock Paper Scissors" function
+Open `your-task.js` and take a look at the `rps` function, which should look like this:
+
+```js
+export function rps(hand1, hand2) {
+    // finish this code:
+    if (hand1 === "rock" && hand2 === "paper") {
+        return "Paper wins!";
+    } else {
+        return "invalid";
+    }
+}
+```
+
+Your job is to implement the following "rock paper scissors" logic and return the corresponding message (exactly as it is shown below):
+* If one hand is **rock** and the other is **paper**, return the string **"Paper wins!"**
+* If one hand is **paper** and the other is **scissors**, return the string **"Scissors wins!"**
+* If one hand is **scissors** and the other is **rock**, return the string **"Rock wins!"**
+* If both hands are the same (and have valid arguments), return **"Tie!"**
+* If anything other than rock, paper, or scissors are passed in, return **"Invalid"**
+
+### 4.2. Writing tests without a framework
+As you are writing your `rps` function, write corresponding tests to verify your implementation for different possible arguments that a user might pass in. 
+
+You will first write some tests **without** a framework. To help you, we have written two helper functions in `helpers.js`. The high-level point here is that anyone can write and run tests without using a fancy testing library. Please open the `run-tests-vanilla.js` file to inspect how these two helper functions are used. Pause and try and understand what this code does.
+
+When you've thought about it, please run the test suite by navigating into the `javascript_rps` file and running the following command:
+
+```shell
+npm test
+```
+
+Your should see the following output:
+
+```shell
+> node run-tests-vanilla.js
+
+----------------------------------------------------
+✅ Success: it returns "Hello world!"
+✅ Success: paper beats rock
+❌ Failure: paper beats rock (flipped)
+----------------------------------------------------
+
+😬 Only  2 out of 3 tests passed.
+```
+
+To understand what the `npm test` command did, open the `package.json` file and see if you can see what the `npm test` command actually invoked.
+
+Please write additional tests to ensure that all possible inputs yield the expected output. As you make new test functions, don't forget to add the name of the function definition to the list of tests that are passed into the `runAllTests` function (at the bottom of the file).
+
+
+### 4.3. Writing rests with a framework (Mocha)
+Now that you have implemented the `rps` function and written the corresponding tests using "vanilla" JavaScript, you are going to rewrite your tests to use **Mocha** -- a JavaScript testing framework. 
+
+#### Install Mocha
+Mocha offers a set of functions and objects that organize your tests and make them easier to define and write. It also requires that all tests be placed in a folder called `tests`. Install Mocha via the npm package manager by typing the following command on the CLI:
 
 ```bash
-docker --version
+npm install
 ```
 
-Build the container image. You only need to do this once:
+This command reads the `package.json` file and installs all of the specified dependencies in a folder called `node_modules`. Open up the `node_modules` folder and look at all of the dependencies that were just created! Is `leftpad` in there :)?
+
+
+#### Run the mocha tests
+To run the tests, you must do two things. First, modify `package.json` by setting the test value to "mocha" (instead of "node run-tests-vanilla.js"):
+
+```json
+"scripts": {
+    "test": "mocha"
+}
+```
+
+Second, issue the following command on the CLI:
+    
+```
+npm test
+```
+
+If you did it correctly you should see output that looks like the following:
 
 ```bash
-docker build -t csci338-lab05:latest .
-```
-
-#### Run the FastAPI app (Lab 5) using Docker
-Run the container using `docker run` followed by any options and the image
-name.
-
-The `-d` option runs the container in "Detached" mode, which frees up your terminal.
-
-The `-p 8000:8000` option maps port 8000 on your host machine to the
-container's port 8000. Without this option you will not be able to see the app
-from the browser on your host machine.
-
-The `-v ./src:/app` option tells docker to map the `./src` directory on your
-host machine to the `/app` directory inside the container. This allows you to
-edit the code on your machine and see the updates in the container without
-restarting the container.
-
-```bash
-docker run -d -p 8000:8000 -v ./src:/app csci338-lab05
-```
-
-Visit `http://localhost:8000` and behold! The app running in a container!
+> mocha
 
 
-### 3. Activate the Docker Shell
-To run and test individual python files using your Docker container, you need to activate the docker shell, and then run your python files from within the Docker environment. To do this:
 
-List the containers:
+  Hello World Tests
+    ✔ returns "Hello world!"
 
-```bash
-docker container ls -a     
-```
+  Rock Paper Scissors Tests
+    1) knows that paper beats rock
 
-Open the Docker shell for your container of interest:
 
-```bash
-docker exec -it <container-id> bash
-```
+  1 passing (3ms)
+  1 failing
 
-Activate the poetry shell (virtual environment) and run the tests:
+  1) Rock Paper Scissors Tests
+       knows that paper beats rock:
 
-```bash
-poetry shell # activates the python virtual environment
-pwd # check that you're in the app directory
+      AssertionError [ERR_ASSERTION]: 'invalid' == 'Paper wins!'
+      + expected - actual
+
+      -invalid
+      +Paper wins!
+      
+      at Context.<anonymous> (file:///Users/svanwart/unca/csci338/fall2024/course-website/course-files/labs/lab04/javascript_rps/test/run-tests-mocha.js:60:16)
+      at process.processImmediate (node:internal/timers:478:21)
 ```
 
 
-#### Other Useful Docker Commands (just FYI)
+#### Rewrite your tests using the Mocha conventions
+Once you have successfully run the tests, open the `tests/run-tests-mocha.js` file and see if you can understand what's going on. Pause and think. What is the same and what is different?
 
-##### Stopping and starting the container
-You do not need to run a new container each time you want to work on the code. Instead, you can restart a stopped container using `docker start` followed by the container name or container id. Some helpful commands:
+After inspecting the code, please add new mocha tests to exhaustively test the `rps` function using the Mocha helper functions. Note that instead of your functions returning **true** or **false**, you need to use Node's built-in `assert` module.
 
-List all of the containers and their ids:
+## 5. Python Tasks
+When you've completed your JavaScript tasks, you're going to do the same thing all over again, using Python. The Python version of these files is located in the `python_rps` folder. Please navigate to it using your CLI.
 
-```bash
-docker container ls -a
-```
-
-Stop the container using `docker stop` followed by the container name or id.
-
-```bash
-docker stop <container-id>
-```
-
-Start the container using `docker start` followed by the container name or id.
-
-```bash
-docker start <container-id>
-```
-
-##### Remove old images
-When a new version of the Dockerfile is available you will need to build the
-image again using `docker build` and run a new container using `docker run`.
-
-After a while you may end up with old versions of the image on your system.
-These can take up quite a bit of disk space, so it is good to check every so
-often and remove old images from your system.
-
-To show the images on your local machine use `docker image ls`.
-
-```bash
-docker image ls
-```
-
-Remove any unneeded images using `docker image rm` followed by a list of one or
-more image ids or image names.
-
-```bash
-docker image rm <image-id>
-```
-
-##### Remove old containers
-You may want to remove old containers after building and running a new image.
-List the containers on your system using `docker container ls`. This will only
-show running containers, add the `-a' flag to see stopped containers as well.
-
-```bash
-docker container ls -a
-```
-
-You can remove any containers you need by using `docker container rm` followed
-by container name or id.
-
-```bash
-docker container rm <container-id>
-```
-
-
-## 3. AsyncIO Walkthrough
-
-{:.blockquote-no-margin}
-> ### Note
-> This tutorial was generated with the help of ChatGPT!
-
-The `asyncio` module in Python is a powerful library that provides a framework for writing asynchronous, concurrent code using the `async` and `await` syntax. Asynchronous programming allows you to write programs that can perform multiple tasks concurrently without blocking the main execution thread, making it particularly useful for I/O-bound and network-bound operations.
-
-In this tutorial, we will cover the following topics:
-
-1. [What is asyncio?](#step1)
-1. [Basic Concepts](#step2)
-1. [Getting Started with asyncio](#step3)
-1. [Defining a coroutine with async](#step4)
-1. [Running multiple coroutines at once](#step5)
-1. [Working with asyncio Event Loops](#step6)
-1. [Using asyncio with I/O Operations](#step7)
-1. [Error Handling](#step8)
-1. [Timeouts and Cancellation](#step9)
-1. [Real-World Example: Fetching Multiple URLs](#step10)
-1. [Conclusion and Further Resources](#step11)
-
-{:#step1}
-### 1. What is asyncio?
-asyncio is a Python library that provides a framework for asynchronous programming. It is designed to handle concurrent I/O operations efficiently and is particularly useful for network programming, web scraping, and other tasks where you might otherwise be waiting for data to arrive.
-
-{:#step2}
-### 2. Basic Concepts
-Before diving into asyncio, it's essential to understand some basic concepts:
-
-* **Coroutines**: Coroutines are special functions defined with the async keyword. They can be paused and resumed, allowing non-blocking execution of tasks.
-* **Event Loop**: An event loop is the core component of asyncio. It manages and schedules the execution of coroutines.
-* **Tasks**: Tasks represent units of work in asyncio. You can create and manage multiple tasks within an event loop.
-
-{:#step3}
-### 3. Getting Started with asyncio
-To use `asyncio`, you need Python 3.5 or later. Most modern Python installations come with asyncio built-in, so you don't need to install it separately.
-
-{:#step4}
-### 4. Defining a coroutine with async
-To create a coroutine, use the `async` keyword:
+### 5.1. Implement the "Rock Paper Scissors" function
+Open `your-task.py` and take a look at the rps function, which should look like this:
 
 ```python
-import asyncio
-
-async def my_coroutine():
-    print("Hello, asyncio!")
-
-# To run a coroutine, you need an event loop.
-loop = asyncio.get_event_loop()
-loop.run_until_complete(my_coroutine())
-loop.close()
+def rps(hand1, hand2):
+    # finish this code:
+    if hand1 == "rock" and hand2 == "paper":
+        return "Paper wins!"
+    else:
+        return "Invalid"
 ```
 
-{:.blockquote-no-margin}
-> #### Your Turn
-> **See demo file:** `lab05/asyncio-exercises/demo1_coroutine.py`
+Your job is to implement the function using the same logic as described above.
 
 
-#### To test your python files from Docker, you need to activate the docker shell. To do this:
+### 5.2. Writing tests without a framework
+As you are writing your rps function, write corresponding tests to verify your implementation for different possible arguments that a user might pass in.
 
-List the containers:
+Like before, you will first write your tests without a framework. To help you, we have written two helper functions in `helpers.py`. Please open the `run_tests_vanilla.py` file to inspect how these two helper functions are used. Pause and try and understand what this code does.
+
+When you’ve thought about it, please run the test suite by navigating into the `python_rps` folder and running the following command:
 
 ```bash
-docker container ls -a     
+python3 run_tests_vanilla.py
 ```
 
-Open the Docker shell:
+You should see the following output:
 
 ```bash
-docker exec -it <container-id> /bin/bash
+python3 run_tests_vanilla.py
+--------------------------------------------------
+✅ Success: It returns "Hello world!"
+✅ Success: Paper beats rock
+❌ Failure: Paper beats rock (flipped)
+--------------------------------------------------
+
+😬 Only  2 out of 3 tests passed.
 ```
 
-Activate the poetry shell (virtual environment) and run the tests:
+Please write additional tests to ensure that all possible inputs yield the expected output. As you make new test functions, don’t forget to add the name of the function definition to the list of tests that are passed into the `run_all_tests` function (at the bottom of the file).
+
+### 5.3. Writing rests with a framework (unittest)
+Now that you have implemented the rps function and written the corresponding tests using “vanilla” Python, you are going to rewrite your tests to use **unittest** – a built-in Python module is part of the Python language. Like Mocha, **unittest** offers programmers a set of convenience functions and classes for organizing and writing tests.
+
+Learn more here: <a href="https://docs.python.org/3/library/unittest.html" target="_blank">https://docs.python.org/3/library/unittest.html</a>
+
+
+Please open `run_tests_framework.py`. In this file, a "starter" test class has been defined for you. It includes two starter tests that you can use a model for writing your tests. 
+
+#### Run the unittest tests
+To run the `unittest` version of your tests, issue the following command on the CLI (from within the python_rps directory):
 
 ```bash
-poetry shell # activates virtual environment
-pwd # check that you're in the app directory
-cd asyncio-exercises
-python demo1_coroutine.py
+python3 run_tests_framework.py --verbose
 ```
 
-{:#step5}
-### 5. Running multiple asynchronous coroutines at once
-You can create and run tasks concurrently:
-
-```python
-import asyncio
-
-
-async def coroutine1():
-    await asyncio.sleep(3)
-    print("Coroutine 1 completed")
-    return 6  # fake data to be returned
-
-
-async def coroutine2():
-    await asyncio.sleep(1.5)
-    print("Coroutine 2 completed")
-    return 9  # fake data to be returned
-
-
-async def main():
-    result1, result2 = await asyncio.gather(
-        coroutine1(), coroutine2()
-    )
-
-    # Note that the statements below only execute once both
-    # coroutines have executed. This is because of the "await"
-    # keyword.
-    print(result1)
-    print(result2)
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
-loop.close()
-```
-
-* `asyncio.gather` -- a function in the asyncio library -- allows you to concurrently execute multiple coroutines and collect their results. It's a way to run multiple asynchronous tasks concurrently and wait for all of them to complete.
-* `asyncio` also has an event loop that manages coroutine execution.
-* `await` -- used if you don't want the next statement in your current execution block to start until your asynchronous task completes.
-
-{:.blockquote-no-margin}
-> #### Your Turn
-> **See demo file:** `lab05/asyncio-exercises/demo2_two_coroutines.py`
-
-
-{:#step6}
-### 6. Working with asyncio Event Loops
-The event loop serves as the core of `asyncio`, managing the execution of asynchronous tasks (also known as coroutines) and coordinating their execution without blocking the main program's execution. 
-
-In the example below, the `sleep` statement doesn't block other coroutines from completing.
-
-```python
-import asyncio
-
-async def my_coroutine():
-    await asyncio.sleep(1)
-    print("Coroutine executed")
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(my_coroutine())
-loop.close()
-```
-
-`asyncio` encourages an event-driven programming style where you define event handlers (coroutines) that react to specific events, such as incoming network data or user input -- which we will see in more detail when we work with FastAPI.
-
-{:#step7}
-### 7. Using asyncio with I/O Operations
-`asyncio` excels at I/O-bound operations. Here's an example of reading files asynchronously:
-
-```python
-import asyncio
-import aiofiles
-
-async def read_file(filename):
-    async with aiofiles.open(filename, 'r') as file:
-        content = await file.read()
-        print(f"Read {len(content)} characters from {filename}")
-        print(content)
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(read_file('example.txt'))
-loop.close()
-```
-
-Certain kinds of tasks -- like File I/O, database calls, and queries over the network -- are slow. Given this, if you execute these kinds of commands serially, where they block other processes, this can be inefficient. Hence, running I/O processes as coroutines conserves resources.
-
-Sidebar:
-* You can also do this with threads, but then you have to manage the shared memory (which can be complicated, and is overkill for webdev).
-
-{:.blockquote-no-margin}
-> #### Your Turn
-> **See demo file:** `lab05/asyncio-exercises/demo3_file_io.py`
-
-
-{:#step8}
-### 8. Error Handling
-Use try and except to handle errors within coroutines:
-
-```python
-import asyncio
-
-async def my_coroutine():
-    try:
-        # Your code here
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(my_coroutine())
-loop.close()
-```
-
-{:#step9}
-### 9. Timeouts and Cancellation
-asyncio allows you to set timeouts and cancel tasks:
-
-```python
-import asyncio
-
-async def timeout_task():
-    try:
-        await asyncio.wait_for(long_running_task(), timeout=1)
-    except asyncio.TimeoutError:
-        print("Task timed out")
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(timeout_task())
-loop.close()
-```
-
-Sometimes, services are just down (not running, network glitches, etc.). In this case, think about how you would handle errors like this gracefully using timeouts (so as not to use up resources needlessly).
-
-{:#step10}
-### 10. Real-World Example: Fetching Multiple URLs
-Here's a simple example of fetching multiple URLs concurrently using `aiohttp`. This is a good use of `asyncio` because retrieving resources over the network can be slow and unpredictable, making blocking inefficient.
-
-```python
-import asyncio
-import aiohttp
-
-async def fetch_url(url, message):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            data = await response.text()
-            print("Message:", message)
-            return data
-
-async def main():
-    urls = ["https://openai.com", "https://example.com"]
-    tasks = [fetch_url(url, url) for url in urls]
-
-    # delegate execution management to the event loop via the gather method:
-    results = await asyncio.gather(*tasks)
-
-    # once all of the coroutines have completed, output the results
-    for url, result in zip(urls, results):
-        print(f"Fetched {len(result)} bytes from {url}")
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
-loop.close()
-```
-
-{:.blockquote-no-margin}
-> #### Your Turn
-> **See demo files:** 
-> * `lab05/asyncio-exercises/demo4_remote_data.py`
-> * `lab05/asyncio-exercises/demo5_remote_data_timed.py` (times the sequential v. parallel to see which one is faster)
-
-For those of you who are new to Python:
-
-```python
-# this...
-tasks = [fetch_url(url, url) for url in urls]
-
-# is a shortcut for this...
-tasks = []
-for url in urls:
-    tasks.append(fetch_url(url, url))
-```
-
-
-{:#step11}
-### 11. Conclusion and Further Resources
-This tutorial provides a basic introduction to the asyncio module in Python. Asynchronous programming can significantly improve the performance of I/O-bound tasks and concurrent operations. To dive deeper into asyncio, explore the official documentation and try building more complex applications.
-
-Official asyncio documentation: <a href="https://docs.python.org/3/library/asyncio.html" target="_blank"></a>
-
-Remember that asynchronous programming can be complex, so practice and experimentation are essential for mastering it.
-
-## 4. Fast API Walkthrough
-This Fast API walkthrough will use the same poetry environment as the **app** application (HW1), but we've downgraded the python dependency to >= 3.8 to better accommodate WSL users. 
-
-* `asyncio` was introduced to Python in version 3.5.
-* `uvicorn` was introduced in Python 3.8 (it's a method to manage asyncronous loops via our web server)
-
-To run the Fast API server, make sure that you are in **your version** of the `lab05/src` folder on the CLI. Then run your Docker container using the commands described above in the Docker section.
-
-This should start your webserver on this address: <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>. Go check it out.
-
-### Walkthrough of Existing Endpoints
-Please open `server.py` in the `src` directory and take a look at it. In this file, there are 6 "endpoints" defined that can be accessed through <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>
-
-| Route | Address |
-|--|--|
-| / | <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a> |
-| /items/{item_id} | <a href="http://127.0.0.1:8000/items/123?search_term=chocolate" target="_blank">http://127.0.0.1:8000/items/123?search_term=chocolate</a> |
-| /data/yelp | <a href="http://127.0.0.1:8000/data/yelp" target="_blank">http://127.0.0.1:8000/data/yelp</a> |
-| /data/spotify | <a href="http://127.0.0.1:8000/data/spotify" target="_blank">http://127.0.0.1:8000/data/spotify</a> |
-| /ui/yelp | <a href="http://127.0.0.1:8000/ui/yelp" target="_blank">http://127.0.0.1:8000/ui/yelp</a> |
-| /ui/spotify | <a href="http://127.0.0.1:8000/ui/spotify" target="_blank">http://127.0.0.1:8000/ui/spotify</a> |
-
-
-Note that the last 4 endpoints fetch data over the network (remote calls), which present some unique challenges for testing -- something we will discuss in more detail when we get to integration testing.
-
-#### Run the starter tests
-
-To run the tests, you will need to navigate to the Docker shell and run `pytest` (our Python testing framework). To to this:
-
-Find your container id:
+If you did it correctly you should see output that looks like the following:
 
 ```bash
-docker container ls -a     
+test_hello_world (__main__.TestStringMethods.test_hello_world) ... ok
+test_paper_beats_rock (__main__.TestStringMethods.test_paper_beats_rock) ... FAIL
+
+======================================================================
+FAIL: test_paper_beats_rock (__main__.TestStringMethods.test_paper_beats_rock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/svanwart/unca/csci338/fall2024/course-website/course-files/labs/lab04/python_rps/run_tests_framework.py", line 51, in test_paper_beats_rock
+    self.assertEqual(rps('paper', 'rock'), 'Paper wins!')
+AssertionError: 'Invalid' != 'Paper wins!'
+- Invalid
++ Paper wins!
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)
 ```
 
-Open the Docker shell:
+#### Rewrite your tests using the unittest conventions
+Once you have successfully run the tests, open the `run_tests_framework.py` file and see if you can understand what’s going on. Pause and think. What is the same and what is different?
 
-```bash
-docker exec -it <container-id> /bin/bash
-```
+After inspecting the code, please add new `unittest` tests to exhaustively test the rps function using the helper functions. Note that instead of having your functions return **True** or **False**, you will now need to use the unittest.TestCase methods. Examples:
 
-Activate the poetry shell (virtual environment) and run the tests: 
+* `self.assertTrue`
+* `self.assertEqual`
 
-```bash
-poetry shell # activates virtual environment
-pwd # check that you're in the app directory
-pytest --disable-warnings
-```
+A list of possible methods is described here: <a href="https://docs.python.org/3/library/unittest.html" target="_blank">https://docs.python.org/3/library/unittest.html</a>
 
-### Your Task
-For your Lab 5 submission, you will be creating a few additional endpoints for managing a list of tasks. 
-Begin by doing the following:
-1. rename the current `server.py` file to `server_old.py`
-1. rename the current `test_server.py` file to `test_server_old.py`
-1. create a brand new `server.py` file
-1. create a brand new `test_server.py` file
+## 6. What to Submit
+When you're done, please do the following:
+1. Push your `lab04-your-username` branch to GitHub
+2. Create a pull request
+3. When your PR is approved by either Semmy or Sarah, please merge it into main.
 
-The requirements are as follows:
-
-#### 1. Implement Endpoints
-
-Start by adding the relevant code and import statements into your new `server.py` file:
-
-```python
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-
-import aiohttp
-import json
-
-app = FastAPI()
-
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    return 'Hello world!'
-```
-
-Then, create a FastAPI application with the following endpoints:
-
-* `GET /tasks`: Retrieve a list of all tasks.
-* `GET /tasks/{task_id}`: Retrieve details of a specific task by its `task_id`.
-* `POST /tasks`: Create a new task with a JSON request body containing a `title` and description.
-* `PUT /tasks/{task_id}`: Update an existing task's title and description using a JSON request body.
-* `DELETE /tasks/{task_id}`: Delete a task by its `task_id`.
-
-#### 2. Data Storage
-Implement data storage using an in-memory data structure (e.g., a Python list or dictionary) to store tasks. You don't need to use a database for this assignment.
-
-#### 3. Validation
-Implement validation for request payloads:
-
-* Ensure that the title and description fields are present and non-empty when creating or updating a task.
-* Return appropriate error responses with clear error messages for invalid requests.
-* Provide interactive API documentation using FastAPI's built-in Swagger UI or ReDoc. The documentation should include details of all endpoints, request/response formats, and example requests and responses.
-
-#### 4. Testing
-* Write unit tests to ensure the functionality and correctness of your API endpoints.
-
-
-#### 5. Bonus (Optional)
-* Add features like task priority, due dates, and status (e.g., "completed" or "in progress") to the task model.
-* Implement query parameters to filter tasks based on their status, priority, or other attributes.
-
-
-## 5. What to Turn In
-Please create a pull request with all of your `lab05` files.
+You will have one week to complete this assignment.
