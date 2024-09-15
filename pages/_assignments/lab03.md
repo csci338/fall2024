@@ -181,7 +181,7 @@ describe each of them in your own words.
 You may use Google, but you may not cut and paste any code.
 
 Let's write some code. Create a new directory called `java` and let's
-answer that first coding question in a file called `FindDuplicates.java`. In it, create a static method called `findModeNestedLoops` that takes a list of integers as an argument and returns a list of integers that have duplicates. Use a "nested loop" strategy to implement your method. Then, in your `main` function, invoke your `findModeNestedLoops` method with a few examples to confirm it's working correctly. Here's a sample stub of `FindDuplicates.java`:
+answer that first coding question in a file called `FindDuplicates.java`. In it, create a static method called `findDuplicatesNestedLoops` that takes a list of integers as an argument and returns a list of integers that have duplicates. Use a "nested loop" strategy to implement your method. Then, in your `main` function, invoke your `findDuplicatesNestedLoops` method with a few examples to confirm it's working correctly. Here's a sample stub of `FindDuplicates.java`:
 
 ```java
 import java.util.ArrayList;
@@ -190,7 +190,7 @@ import java.util.List;
 
 public class FindDuplicates {
 
-    public static List<Integer> findModeNestedLoops(List<Integer> l) {
+    public static List<Integer> findDuplicatesNestedLoops(List<Integer> l) {
         // replace "return null" with your code:
 
 
@@ -203,10 +203,10 @@ public class FindDuplicates {
         List<Integer> sample2 = new ArrayList<Integer>(Arrays.asList(3, 5, 6, 4, 4, 5, 66, 6, 7, 6));
         List<Integer> sample3 = new ArrayList<Integer>(Arrays.asList(3, 0, 5, 1, 0));
         List<Integer> sample4 = new ArrayList<Integer>(Arrays.asList(3));
-        System.out.println("Sample 1: " + findModeNestedLoops(sample1));
-        System.out.println("Sample 2: " + findModeNestedLoops(sample2));
-        System.out.println("Sample 3: " + findModeNestedLoops(sample3));
-        System.out.println("Sample 4: " + findModeNestedLoops(sample4));
+        System.out.println("Sample 1: " + findDuplicatesNestedLoops(sample1));
+        System.out.println("Sample 2: " + findDuplicatesNestedLoops(sample2));
+        System.out.println("Sample 3: " + findDuplicatesNestedLoops(sample3));
+        System.out.println("Sample 4: " + findDuplicatesNestedLoops(sample4));
     }
 
 }
