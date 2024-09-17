@@ -26,13 +26,11 @@ This week our topic is package and dependency management. Please read the follow
 
 
 ## Slides
-Slides will be posted before class.
-
-<!-- * <a href="https://docs.google.com/presentation/d/1mHWz-llPLb-V-O3VNutWpXyfqx2fwtfUCrpet_zqT5k/edit?usp=sharing" target="_blank">Package & Dependency Management</a> -->
+* <a href="https://docs.google.com/presentation/d/1L7iqwWTZELObQ8vFDuB7aAc9Kkw5U1EN/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Package & Dependency Management</a>
 
 
-<!-- ## Activity: Install Node Manually
+## Activity: Install Node Manually
 * Overview of Poetry
 * Overview of NPM
-* Overview of Apt
-* When should you install packages from source? -->
+* Overview of Apt / Brew
+* When should you install packages from source (versus relying on a package manager)?
