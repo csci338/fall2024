@@ -2,12 +2,12 @@
 layout: assignment-two-column
 title: "Understanding Package Managers"
 type: lab
-draft: 1
+draft: 0
 points: 6
 abbreviation: Lab 5
 num: 5
 start_date: 2024-09-19
-due_date: 2024-09-22
+due_date: 2024-09-23
 
 ---
 
@@ -32,6 +32,7 @@ By the end of the lab, you should understand how to install, update, remove, and
 > **On GitHub:**
 >
 > * Sync the latest changes from the class version of `class-exercises-fall2024` to your copy of the repo.
+>
 > **On your local computer:**
 > * Make sure that all of your changes from the last lab are staged and committed.
 > * Checkout your main branch: `git checkout main`
@@ -39,7 +40,8 @@ By the end of the lab, you should understand how to install, update, remove, and
 >     * If you did it correctly, you will notice that a new `lab05` folder has been created.
 > * Create a new branch called lab05: `git checkout -b lab05`
 > * Verify that you’re on your new branch: `git branch`
-> * After going through the lab, answer the questions in the `lab05/answers.md` file.
+> * You are going to do some coding / package manager activities within your `class-exercises-fall2024/lab05` directory
+> * After going through the lab, be sure to answer the questions in `lab05/answers.md`.
 
 
 {:#p1a}
@@ -67,7 +69,12 @@ By the end of the lab, you should understand how to install, update, remove, and
     wget https://www.google.com
     ```
 
-If it worked, an `index.html` file should have been copied to your local directory. Use the `cat` command to view it. Then remove it using the `rm` command.
+    If it worked, an `index.html` file should have been copied to your local directory. Use the `cat` command to view it. Then remove it using the `rm` command.
+
+6. Finally, list all of the packages that brew manages on your Mac as follows:
+    ```bash
+    brew list
+    ```
 
 ### Exercise 1(a).2: Updating and Removing Packages
 1. Update all installed packages using:<br><br>
@@ -171,6 +178,7 @@ If it worked, an `google.html` file should have been created to your local direc
     │   └── answers.md
     └── lab05
         ├── answers.md
+        ├── node-demo
         └── poetry-demo
    ```
 
@@ -185,36 +193,42 @@ If it worked, an `google.html` file should have been created to your local direc
    ```
 
 ### Exercise 5: Running the Project in a Virtual Environment
-1. Create a new file in your `poetry-demo` folder called `lab05-experiments.py`. Paste the following starter code inside of it:
-   ```py
-    import requests
+Create a new file in your `poetry-demo` folder called `lab05-experiments.py`. Paste the following starter code inside of it:
 
-    def main():
-        print("hello world")
-        # user_agent makes it seem like the request is coming from a web browser (versus a bot)
-        user_agent = {'User-agent': 'Mozilla/5.0'}
-        response = requests.get("https://new.cs.unca.edu/", headers=user_agent)
-        print(response.content)
+```py
+import requests
 
-    if __name__ == "__main__":
-        main()
-    ```
-3. Run this file on the command line using the python virtual environment you just made:<br><br>
-    ```bash
-    poetry run python lab05-experiments.py
-    ```
-    It should have outputted the web page from the URL given to the screen.
-4. Now run the same python file again (outside of your virtual environment):<br><br>
-    ```bash
-    python lab05-experiments.py
-    ```
-    You should see an error.
+def main():
+    print("hello world")
+    # user_agent makes it seem like the request is coming from a web browser (versus a bot)
+    user_agent = {'User-agent': 'Mozilla/5.0'}
+    response = requests.get("https://new.cs.unca.edu/", headers=user_agent)
+    print(response.content)
+
+if __name__ == "__main__":
+    main()
+```
+
+Now, run this file on the command line using the python virtual environment you just made:
+
+```bash
+poetry run python lab05-experiments.py
+```
+
+It should have outputted the web page from the URL given to the screen.
+
+Now run the same python file again (outside of your virtual environment):
+
+```bash
+python lab05-experiments.py
+```
+You should see an error because `requests` and `bs4` are not installed for your system-level python installation.
 
 ### Exercise 6:
-Now we are going to make the beginnings of a simple web crawler that extracts all of the links from the <a href="https://new.cs.unca.edu/" target="_blank">https://new.cs.unca.edu/</a> page, using another package called beautiful soup. To do this, you will:
+Now we are going to make the beginnings of a simple web crawler that extracts all of the links from the <a href="https://new.cs.unca.edu/" target="_blank">https://new.cs.unca.edu/</a> page, using another package called beautiful soup. To do this, you will install "Beautiful Soup" -- a python module with various utilities that makes it easy to extract items from web pages. Please do the following:
 
 1. Install the `bs4` package using poetry
-2. Modify the `main` function inside of `lab05-experiments.py` to only output the URLs of any links on the CS homepage.
+2. Modify the `main` function inside of `lab05-experiments.py` so that it only output the URLs of any links on the CS homepage.
 
 If you wrote your code correctly, this should be the output (there should be around 85 links total):
 
@@ -228,9 +242,16 @@ https://new.cs.unca.edu/computer-systems-major/
 ...
 ```
 
-Hints:
-* Beautiful soup is a set of utilities that makes it easy to extract items from web pages. 
-* Ask Google or Chat GPT something like: "How to I extract URLs from web pages using the requests and bs4 modules in python?"
+#### Hints:
+* Make sure you import Beautiful soup at the top of your python file:<br><br>
+    ```py
+from bs4 import BeautifulSoup
+    ```
+* Create a BeautifulSoup object from the HTML:<br><br>
+    ```py
+soup = BeautifulSoup(response.content, 'html.parser')
+    ```
+* Use the built-in BeautifulSoup functions to extract all of the links. Feel free to ask Google or Chat GPT something like: "How to I extract URLs using beautiful soup?"
 
 
 ### Exercise 6: Removing Dependencies
@@ -257,50 +278,149 @@ Hints:
 
 {:#p3}
 ## Part 3 (Everyone): npm (Node.js)
-**npm** is the default package manager for Node.js. It helps manage project dependencies.
+**npm** is the default package manager for Node.js. It helps manage project dependencies. Before you begin, check to see whether node is already installed by running the following on the command line:
+
+```
+node -v
+```
+* If your version of Node is less than version 18x, talk to Sarah. 
+* If Node.js is not installed, follow the installation instructions for your respective OS
+* Otherwise, skip down to Exercise 7
+
+### Installation Instructions 
+
+#### Mac
+Use brew:
+```bash
+brew install node
+node -v
+```
+
+#### Ubuntu / WSL
+Because `apt` has a very outdated node version, you're going to add a new debian source so that apt can pull down a more recent version of node. The specific instructions you want are as follows:
+
+```bash
+sudo apt-get install -y curl
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo -E bash nodesource_setup.sh
+sudo apt-get install -y nodejs
+node -v
+```
+Source: <a href="https://github.com/nodesource/distributions/blob/master/README.md" target="_blank">https://github.com/nodesource/distributions/blob/master/README.md</a>
+
 
 ### Exercise 7: Initializing a Node.js Project
-1. Open a terminal and initialize a new Node.js project:
+1. Open a terminal and navigate into the `lab05/node-demo` folder. Note that there are already some files in this folder for a "starter" React project. However, the underlying dependencies are not installed. Then, from within the `node-demo` folder, initialize a new node project using the node package manager:<br><br>
    ```bash
-   mkdir node-demo
-   cd node-demo
    npm init -y
    ```
 
-### Exercise 8: Installing a Dependency
-1. Install the `lodash` package:
+   The `npm init` command should have created two new files within `node-demo`: `package.json` and `    package-lock.json`. Verify this.
+
+### Exercise 8: Install the React and Vite Dependencies
+1. Install the `react`, `react-dom`, and `vite` packages through the node package manager as shown below:<br><br>
    ```bash
-   npm install lodash
+   npm install react react-dom vite
    ```
 2. Verify that the package was installed by checking the `node_modules` folder and `package.json` file.
+3. Modify the `package.json` file by replacing the entire "scripts" entry with this one:<br><br>
+    ```json
+    "scripts": {
+        "start": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
+    },
+    ```
+4. When you're done, issue the following command in the terminal from within your `node-demo` folder: 
+    ```bash
+    npm start
+    ```
+    Then navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173/</a> in your web browser.
 
-### Exercise 9: Using the Installed Package
-1. Create a file `index.js` with the following content:
-   ```javascript
-   const _ = require('lodash');
-   console.log(_.chunk(['a', 'b', 'c', 'd'], 2));
-   ```
-2. Run the script:
-   ```bash
-   node index.js
-   ```
+    If you did everything correctly, you should see a simple screen that says **Hello world!**
 
-### Exercise 10: Removing a Dependency
-1. Uninstall the `lodash` package:
-   ```bash
-   npm uninstall lodash
-   ```
+### Exercise 9: Add a new dependency
+Now that you have a working react app, stop your vite process (Control + C on the Terminal). We will now install a design system package called "Ant", which includes some nice react widgets that we can use to accelerate our development process:
+
+```bash
+npm install antd
+```
+
+Now, open `src/App.js` and replace the current code with this code:
+
+```jsx
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
+const App = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+    return (
+        <>
+            <Button type="primary" onClick={showModal}>
+                Open Modal
+            </Button>
+            <Modal
+                title="Basic Modal"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <img
+                    alt="example"
+                    src="https://picsum.photos/400/300"
+                    width="400"
+                    height="300"
+                    style={
+                        {
+                            width: "100%",
+                        }
+                    }
+                />
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
+        </>
+    );
+};
+export default App;
+```
+
+Finally, run your react app again...
+
+```bash
+npm start
+```
+...and then navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173/</a>.
+
+If you did it correctly, you should see a modal:
+
+<img src="/fall2024/assets/images/labs/lab05/modal.png" class="large" />
+
+If you are new to web development, this modal may not look like much, but building components like modals from scratch is a pain! Thanks to the React components built into the Ant Design System (and there are many other design systems out there), we can just import some packages and hit the ground running!
 
 {:#p4}
 ## Part 4: Answer the Discussion Questions
-Discussion Questions
+Please answer all of the discussion questions in the `class-exercises-fall2024/lab04/answers.md` file.
 
----
 
 ### Submission
-Submit your reflection and screenshots of your terminal for each package manager task to the course’s submission portal.
+Please verify that you completed the Lab 5 tasks:
 
----
+{:.checkbox-list}
+* You experimented with your operating system's package manager (Part 1)
+* You created a python app in poetry that extracts and prints URLs from the UNCA Computer Science homepage (Part 2)
+* You have created an interactive modal box using React (Part 3)
+* You have answered all of the questions in `answers.md`.
 
+Then, push your `lab05` branch to GitHub and make a pull request. Please ensure that the destination (left-hand side) is pointing to the `main` branch of **your repo** and the source (right-hand side) is pointing to the `lab05` branch of **your repo**
 
-
+Paste a link to your repo in the Moodle submission.
