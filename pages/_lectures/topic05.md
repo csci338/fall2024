@@ -16,8 +16,6 @@ due_date: 2024-09-24
 
 
 ## Slides
-Slides will be posted before class.
-
-<!-- * <a href="https://docs.google.com/presentation/d/1aG-tQJL0L1FKAEiM21JVAPm63Ai0sevQQHdfugEyjds/edit?usp=sharing" target="_blank">Testing</a> -->
+* <a href="https://docs.google.com/presentation/d/1FP8lJuy1C6AzzPxpulNOu9al_SIub2zF/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Testing & Static Analysis</a>
 
 
