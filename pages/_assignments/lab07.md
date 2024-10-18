@@ -7,8 +7,8 @@ draft: 1
 points: 6
 abbreviation: Lab 7
 num: 7
-start_date: 2024-10-17
-due_date: 2024-10-20
+start_date: 2024-11-05
+due_date: 2024-11-07
 ---
 
 

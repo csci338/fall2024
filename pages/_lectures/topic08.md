@@ -1,10 +1,10 @@
 ---
 layout: module
 title: UX / UI Design Patterns
-type: module
+type: topic
 draft: 1
 num: 8
-due_date: 2024-10-29
+due_date: 2024-11-12
 ---
 
 ## UX / UI Readings & Resources

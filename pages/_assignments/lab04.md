@@ -109,8 +109,8 @@ This just lists the commands we'll be using in today's tutorial:
 | **docker stop `<pid>`** | Stops Docker container from running (by process id) | 
 | **docker start `<pid>`** | Starts Docker container from running (by process id) | 
 | **docker rm `<pid>`** | Deletes Docker container from running (by process id) | 
-| **docker exec -it <name-of-container> sh** | Runs a shell inside a running Docker container |
-| **docker exec -it <name-of-container> python** | Runs python inside a Docker container (provided that python is installed) |
+| **docker exec -it `<pid>` sh** | Runs a shell inside a running Docker container |
+| **docker exec -it `<pid>` python** | Runs python inside a Docker container (provided that python is installed) |
 
 
 ## 4. Your Tasks

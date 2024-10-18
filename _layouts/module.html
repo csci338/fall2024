@@ -3,141 +3,201 @@ layout: two-column
 show_outline: 1
 show_schedule: 1
 ---
+<style>
+    .module-table td:nth-child(2),
+    module-table th:nth-child(2) {
+        min-width: 100px;
+        width: 100px;
+    }
 
-{% if page.exercise_url %}
-    <h3 id="code">{{num}}. Download the Exercise Files</h3> 
-    <a class="nu-button" href="{{site.baseurl}}/course-files/lectures/{{page.exercise_url}}" target="_blank">
-        Exercise Files <i class="fas fa-download"></i>
-    </a>
-    {% assign num = num | plus: 1 %}
-{% endif %}
+    .module-table td:nth-child(1),
+    module-table th:nth-child(1) {
+        min-width: 30px;
+        width: 30px;
+    }
+
+    .module-table {
+        border-width: 0;
+    }
+</style>
+
+
+<p>{{page.description}}</p>
 
 
 {% if page.readings %}
-    <h2 id="readings">Readings</h2>
-    {% include page_readings.html %} 
-    {% assign num = num | plus: 1 %}
+<h2 id="readings">Assigned Readings</h2>
+    <p>Please read / watch the following before class on the date they are due:</p>
+    {% assign readings = page.readings | where: 'required', 1 %}
+    {% if readings %}
+        <h3>Required</h3>
+        <ol>
+        {% for reading in readings %}
+            <li>
+                <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span> 
+                {{reading.link}} 
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
+    {% assign readings = page.readings | where_exp: "reading", "reading.required != 1" %}
+    {% if readings %}
+        <h3>Recommended but optional</h3>
+        <ol>
+        {% for reading in readings %}
+            <li>
+                <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span> 
+                {{reading.link}} 
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</table>
 {% endif %}
 
+<h2 id="slides">Slides</h2>
 {% if page.slides %}
-    <h3 id="slides">{{num}}. Review the Slides</h3>  
-    {% assign num = num | plus: 1 %}
-
+    {% assign num = 1 %}
     <ol>
-    {% for slide in page.slides %}
+        {% for slide in page.slides %}
         <li>
-            <a href="{{slide.url}}" target="_blank">{{slide.title}}</a>
+            <span class="badge">{{slide.date | date: "%a, %m/%-d" }}</span> 
+            {{slide.link}}
         </li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>Slides will be posted before class</p>
+{% endif %}
+
+{% if page.questions %}
+    <h2>Study Questions</h2>
+    <ol>
+    {% for question in page.questions %}
+        <li>{{question}}</li>
     {% endfor %}
     </ol>
 {% endif %}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% if page.videos %}
-<h3 id="videos">{{num}}. Watch the Lecture Video(s)</h3>
+<h2 id="videos">{{num}}. Watch the Lecture Video(s)</h2>
 {% assign num = num | plus: 1 %}
 
-    <table class="medium module">
-        <thead>
-            <tr>
-                <th>Link</th>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Duration</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="medium module">
+    <thead>
+        <tr>
+            <th>Link</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
         {% assign vnum = 1 %}
         {% for video in page.videos %}
-            {% assign className = "recorded" %}
-            {% assign type = "pre-recorded" %}
-            {% if video.live %}
-                {% assign className = "live" %}
-                {% assign type = "lecture" %}
-            {% endif %}
-            {% assign label = "Video" | append: " " | append: vnum %}
-            {% if video.chat %}
-                {% assign label = "Chat" %}
-                {% assign type = "chat" %}
-            {% endif %}
-            <tr>
-                <td>
-                    <a class="{{ className }}" href="{{video.url}}" target="_blank">
-                        {{label}} <i class="fa fa-link"></i>
-                    </a>
-                </td>
-                <td>
-                    {{video.title}}
-                </td>
-                <td>
-                    {{ type }}
-                </td>
-                <td>
-                    {{ video.duration }}
-                </td>
-            </tr>
-            {% assign vnum = vnum | plus: 1 %}
+        {% assign className = "recorded" %}
+        {% assign type = "pre-recorded" %}
+        {% if video.live %}
+        {% assign className = "live" %}
+        {% assign type = "lecture" %}
+        {% endif %}
+        {% assign label = "Video" | append: " " | append: vnum %}
+        {% if video.chat %}
+        {% assign label = "Chat" %}
+        {% assign type = "chat" %}
+        {% endif %}
+        <tr>
+            <td>
+                <a class="{{ className }}" href="{{video.url}}" target="_blank">
+                    {{label}} <i class="fa fa-link"></i>
+                </a>
+            </td>
+            <td>
+                {{video.title}}
+            </td>
+            <td>
+                {{ type }}
+            </td>
+            <td>
+                {{ video.duration }}
+            </td>
+        </tr>
+        {% assign vnum = vnum | plus: 1 %}
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 {% endif %}
 
 {% if page.code %}
 <h3 id="videos">{{num}}. Review the Code from Class</h3>
 <p>The live coding files that Sarah made are posted here:</p>
 {% assign num = num | plus: 1 %}
-<ol>      
+<ol>
     {% for code in page.code %}
-        <li>
-            <a href="{{code.url}}" target="_blank">{{code.title}}</a>
-            {% if code.notes %}
-                {{code.notes}}
-            {% endif %}
-        </li>
+    <li>
+        <a href="{{code.url}}" target="_blank">{{code.title}}</a>
+        {% if code.notes %}
+        {{code.notes}}
+        {% endif %}
+    </li>
     {% endfor %}
 </ol>
 {% endif %}
 
 {% if page.quiz_url %}
-    <h3 id="quiz">{{ num }}. Take the Practice (Ungraded) Quiz</h3>
-    <p>
-        Note: The quiz is to help you test your own understanding 
-        of the concepts. It is not graded, and is designed to help you to see 
-        what you already know and what you should review / ask about.<br>
-        <a href="{{page.quiz_url}}" target="_blanl">{{page.quiz_url}}</a>
-    </p>
-    {% assign num = num | plus: 1 %}
+<h3 id="quiz">{{ num }}. Take the Practice (Ungraded) Quiz</h3>
+<p>
+    Note: The quiz is to help you test your own understanding
+    of the concepts. It is not graded, and is designed to help you to see
+    what you already know and what you should review / ask about.<br>
+    <a href="{{page.quiz_url}}" target="_blanl">{{page.quiz_url}}</a>
+</p>
+{% assign num = num | plus: 1 %}
 {% endif %}
 
 {% if page.extras %}
-    <h2 id="reminders">Reminders</h2>
-    <ul>
-        {% for extra in page.extras %}
-            <li>
-                {% if extra.url %}
-                    <a href="{{extra.url}}">{{extra.title}}</a>
-                {% else %}
-                    {{extra.title}}
-                {% endif %}
-                <br>{{extra.comments}}
-                
-            </li>
-        {% endfor %}
-    </ul>
+<h2 id="reminders">Reminders</h2>
+<ul>
+    {% for extra in page.extras %}
+    <li>
+        {% if extra.url %}
+        <a href="{{extra.url}}">{{extra.title}}</a>
+        {% else %}
+        {{extra.title}}
+        {% endif %}
+        <br>{{extra.comments}}
+
+    </li>
+    {% endfor %}
+</ul>
 {% endif %}
 
 {% if page.include_page %}
-    {% capture my_include %}{% include_relative {{ page.include_page }} %}{% endcapture %}
-    {{ my_include | markdownify }}
+{% capture my_include %}{% include_relative {{ page.include_page }} %}{% endcapture %}
+{{ my_include | markdownify }}
 {% endif %}
 
 {% if page.include_pages %}
-    {% for inc in page.include_pages %}
-        {% capture my_include %}{% include_relative {{ inc }} %}{% endcapture %}
-        {{ my_include | markdownify }}
-        {% assign num = num | plus: 1 %}
-    {% endfor %}
+{% for inc in page.include_pages %}
+{% capture my_include %}{% include_relative {{ inc }} %}{% endcapture %}
+{{ my_include | markdownify }}
+{% assign num = num | plus: 1 %}
+{% endfor %}
 {% endif %}
 
 
 {{content}}
-

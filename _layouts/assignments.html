@@ -25,44 +25,22 @@ layout: default
             </tr>
         </thead>
         <tbody>
-        {% assign last_week = 0 %}
-        {% assign sortedAssignments = site.assignments | sort: 'due_date' %}
-        {% assign labs = site.lectures | sort: 'due_date' | where: "type", "lab" %}
-        {% assign exams = site.lectures | sort: 'due_date' | where: "type", "exam" %}
-        {% assign assignments = sortedAssignments | concat: labs  | concat: exams | sort: 'due_date' %}
+        {% assign __labs = site.lectures | where: "type", "lab" %}
+        {% assign __exams = site.lectures | where: "type", "exam" %}
+        {% assign assignments = site.assignments | concat: __labs  | concat: __exams | sort: 'due_date' %}
+
+        {% assign lastWeek = "" %}
         {% for assignment in assignments %}
-            {% assign dueDate = assignment.due_date | date: '%s' %}
-            {% assign diffSeconds = dueDate | minus: dateStart %}
-            {% assign diffDays = diffSeconds | divided_by: 3600 | divided_by: 24 | plus: 1 %}
-            {% assign week = diffDays | divided_by: 7 | plus: 1 %}
-            {% assign className = 'pj' %}
-            {% if assignment.type == 'homework' %}
-                {% assign className = 'hw' %}
-            {% endif %}
-            {% if assignment.type == 'lab' %}
-                {% assign className = 'lab' %}
-            {% endif %}
-            {% if assignment.type == 'extra credit' %}
-                {% assign className = 'ec' %}
-            {% endif %}
             <tr>
-                <td>{% if week != last_week %}
+                <td>
+                    {% assign week = site.term_start_date | get_week_number: assignment.due_date %}
+                    {% if lastWeek != week %}
                         Week {{week}}
+                        {% assign lastWeek = week %}
                     {% endif %}
                 </td>
                 <td>
-                    {% assign abbreviation = assignment.abbreviation %}
-                    {% unless assignment.abbreviation %}
-                        {% assign abbreviation = "Exam" | append: assignment.num %}
-                    {% endunless %} 
-                    {% if assignment.draft == 1 %}
-                        {{ abbreviation }}
-                    {% else %} 
-                        <a class="{{ className }}" href="{{site.baseurl}}{{assignment.url}}">
-                            {{ abbreviation }} 
-                            <i class="fas fa-link"></i>
-                        </a> 
-                    {% endif %}                   
+                    {{ assignment | display_link_or_badge: true }}                 
                 </td>
                 <td>{{ assignment.title }}</span>
                 <td>
@@ -77,7 +55,6 @@ layout: default
                     </span> 
                 </td>
             </tr>
-            {% assign last_week = week %}
         {% endfor %}
         </tbody>
     </table>

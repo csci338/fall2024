@@ -1,7 +1,7 @@
 ---
 layout: module
 title: Static Analysis & Testing
-type: module
+type: topic
 num: 5
 draft: 0
 due_date: 2024-09-24
@@ -16,6 +16,6 @@ due_date: 2024-09-24
 
 
 ## Slides
-* <a href="https://docs.google.com/presentation/d/1FP8lJuy1C6AzzPxpulNOu9al_SIub2zF/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Testing & Static Analysis</a>
+* <a href="https://docs.google.com/presentation/d/1FP8lJuy1C6AzzPxpulNOu9al_SIub2zF/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Testing & Static Analysis</a> (from 9/24)
 
 

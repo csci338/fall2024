@@ -1,7 +1,10 @@
 ---
 layout: two-column
 title: Intro to Software Engineering
-type: module
+description: > 
+    An introduction to software engineering, including how it's similar and different 
+    from programming, and some considerations for building software that is scalable and maintainable over time.  
+type: topic
 num: 1
 draft: 0
 due_date: 2024-08-20

@@ -26,8 +26,12 @@
         //     color: #777;
         // }
         .hw, a.hw, 
-        .pj, a.pj, 
+        .homework, a.homework, 
+        .pj, a.pj,  
+        .project, a.project,
         .lec, a.lec, 
+        .topic, a.topic, 
+        .project, a.pj,
         .lab, a.lab,
         .quiz, a.quiz,
         .ec, a.ec {
@@ -47,8 +51,11 @@
     flex-direction: column;
     
     .badge, a.badge,
+    .topic, a.topic, 
     .hw, a.hw, 
+    .homework, a.homework, 
     .pj, a.pj, 
+    .project, a.project, 
     .lec, a.lec, 
     .lab, a.lab, 
     .quiz, a.quiz, 
@@ -71,16 +78,19 @@
         background: $lightgrey;
         color: #444;
     }
-    .hw, .hw:hover {
+    .hw, .hw:hover, .homework, .hw:hover {
         background: $river;
     }
     .quiz, .quiz:hover {
         background: $mapleRed;
     }
-    .pj, .pj:hover {
+    .pj, .pj:hover, .project, .project:hover {
         background: $clay;
     }
     .lec, .lec:hover, a.lec {
+        background: $nightSky;
+    }
+    .topic, .topic:hover, a.topic {
         background: $nightSky;
     }
     .lab, .lab:hover {

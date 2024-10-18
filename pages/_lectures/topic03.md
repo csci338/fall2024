@@ -1,7 +1,7 @@
 ---
 layout: module
 title: "Everything As Code (+ Docker)"
-type: module
+type: topic
 num: 3
 draft: 0
 due_date: 2024-09-10

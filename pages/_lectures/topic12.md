@@ -1,10 +1,10 @@
 ---
 layout: module
-title: "Scalable Software Architectures"
+title: "Course Review"
 type: topic
-num: 11
+num: 12
 draft: 1
-due_date: 2024-12-03
+due_date: 2024-12-05
 ---
 
 ## Readings

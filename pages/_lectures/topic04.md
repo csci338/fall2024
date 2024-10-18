@@ -1,7 +1,7 @@
 ---
 layout: module
 title: "Package & Dependency Management"
-type: module
+type: topic
 num: 4
 draft: 0
 due_date: 2024-09-17

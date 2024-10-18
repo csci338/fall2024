@@ -1,10 +1,10 @@
 ---
 layout: module
-title: "Mid-Semester Review"
-type: module
-num: 7
+title: Midterm Review & Next Steps
+type: topic
+num: 6
 draft: 1
-due_date: 2024-10-01
+due_date: 2024-10-29
 
 ---
 

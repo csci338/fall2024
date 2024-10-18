@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<style>
+    .assignments.topics td:nth-child(1),
+    .assignments.topicsth:nth-child(1) {
+        width: 100px !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
+    }
+
+    .assignments.topics td:nth-child(2),
+    .assignments.topics th:nth-child(2) {
+        min-width: 250px !important;
+        max-width: none !important;
+        width: auto !important;
+    }
+
+    .assignments.topics p {
+        margin: 0;
+        line-height: 1.3em;
+    }
+</style>
+
+{{content}}
+
+{% assign dateStart = site.term_start_date | date: '%s' %}
+{% assign now = 'now' | date: '%s' %}
+
+<section class="assignments topics">
+    <table>
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% assign topics = site.lectures | where: "type", "topic" | sort: 'due_date' %}
+            {% for topic in topics %}
+            <tr>
+                <td>
+                    {{ topic | display_link_or_badge: true }}
+                </td>
+                <td>
+                    <strong>{{ topic.title }}</strong>
+                    <p>{{ topic.description }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
