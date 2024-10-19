@@ -11,20 +11,15 @@
         <a href="../assignments/">Assignments</a> >
         {{page.abbreviation}}: {{ page.title }}
     </h1>
-    {% elsif page.type == 'module' %}
+    {% elsif page.type == 'topic' %}
 
         {% assign prefix = "" %}
         {% if page.num %}
             {% assign prefix = page.num | append: ". " %}
         {% endif %}
         <h1>
-            <a href="../">Schedule</a> > {{prefix}} {{ page.title }}
+            Topic {{prefix}} {{ page.title }}
         </h1>
-        <div class="subtitle">
-            {% if page.due_date %}
-                {{ page.due_date | date: "%a, %b %-d" }}
-            {% endif %}
-        </div>
     {% elsif page.type == "lab" %}
         <h1>
             <a href="../">Schedule</a> > Lab {{ page.num }}. {{ page.title }}

@@ -4,10 +4,10 @@
         </li>
         <li {% if page.url=="/" or page.url contains "/schedule/" %}class="active" {% endif %}><a
                 href="{{site.baseurl}}/">Schedule</a></li>
-        <!-- <li {% if page.url contains "/topics/" %}class="active" {% endif %}><a
-                href="{{site.baseurl}}/topics/">Topics</a></li> -->
-        <li {% if page.url contains "/assignments/" %}class="active" {% endif %}><a
-            href="{{site.baseurl}}/assignments/">Assignments</a></li>
+        <li {% if page.url contains "/topics/" %}class="active" {% endif %}><a
+                href="{{site.baseurl}}/topics/">Topics</a></li>
+            <li {% if page.url contains "/assignments/" %}class="active" {% endif %}><a
+                href="{{site.baseurl}}/assignments/">Assignments</a></li>
         <li {% if page.url contains "resources" %}class="active" {% endif %}><a
             href="{{site.baseurl}}/resources/">Resources</a></li> 
         <li {% if page.url contains "repos" %}class="active" {% endif %}><a href="{{site.baseurl}}/repos/">Repos</a>

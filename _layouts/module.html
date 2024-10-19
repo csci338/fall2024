@@ -19,65 +19,77 @@ show_schedule: 1
     .module-table {
         border-width: 0;
     }
+
+    code {
+        font-weight: bold;
+    }
 </style>
 
 
-<p>{{page.description}}</p>
+<p>{{content}}</p>
 
 
-{% if page.readings %}
-<h2 id="readings">Assigned Readings</h2>
-    <p>Please read / watch the following before class on the date they are due:</p>
-    {% assign readings = page.readings | where: 'required', 1 %}
-    {% if readings %}
-        <h3>Required</h3>
-        <ol>
-        {% for reading in readings %}
-            <li>
-                <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span> 
-                {{reading.link}} 
-            </li>
-        {% endfor %}
-        </ol>
-    {% endif %}
-
-    {% assign readings = page.readings | where_exp: "reading", "reading.required != 1" %}
-    {% if readings %}
-        <h3>Recommended but optional</h3>
-        <ol>
-        {% for reading in readings %}
-            <li>
-                <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span> 
-                {{reading.link}} 
-            </li>
-        {% endfor %}
-        </ol>
-    {% endif %}
-</table>
-{% endif %}
-
+<!-- Slides -->
 <h2 id="slides">Slides</h2>
 {% if page.slides %}
-    {% assign num = 1 %}
-    <ol>
-        {% for slide in page.slides %}
-        <li>
-            <span class="badge">{{slide.date | date: "%a, %m/%-d" }}</span> 
-            {{slide.link}}
-        </li>
-        {% endfor %}
-    </ol>
+<ol>
+    {% for slide in page.slides %}
+    <li>
+        <span class="badge">{{slide.date | date: "%a, %m/%-d" }}</span>
+        {{slide.link}}
+    </li>
+    {% endfor %}
+</ol>
 {% else %}
     <p>Slides will be posted before class</p>
 {% endif %}
 
-{% if page.questions %}
-    <h2>Study Questions</h2>
-    <ol>
-    {% for question in page.questions %}
-        <li>{{question}}</li>
+
+<!-- Readings -->
+{% if page.readings %}
+    <h2 id="readings">Assigned Readings</h2>
+    {% if page.reading_instructions %}
+        <p>{{page.reading_instructions}}</p>
+    {% else %}
+        <p>Please read / watch the following before class on the date they are due:</p>
+    {% endif %}
+{% endif %}
+
+{% assign readings = page.readings | where: 'required', 1 %}
+{% if readings %}
+<h3>Required</h3>
+<ol>
+    {% for reading in readings %}
+    <li>
+        <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span>
+        {{reading.link}}
+    </li>
     {% endfor %}
-    </ol>
+</ol>
+{% endif %}
+
+{% assign readings = page.readings | where_exp: "reading", "reading.required != 1" %}
+{% if readings %}
+<h3>Recommended but optional</h3>
+<ol>
+    {% for reading in readings %}
+    <li>
+        <span class="badge">{{reading.due_date | date: "%a, %m/%-d" }}</span>
+        {{reading.link}}
+    </li>
+    {% endfor %}
+</ol>
+{% endif %}
+
+
+<!-- Discussion Questions -->
+{% if page.questions %}
+<h2>Discussion Questions</h2>
+<ol>
+    {% for question in page.questions %}
+    <li>{{question}}</li>
+    {% endfor %}
+</ol>
 {% endif %}
 
 
@@ -198,6 +210,3 @@ show_schedule: 1
 {% assign num = num | plus: 1 %}
 {% endfor %}
 {% endif %}
-
-
-{{content}}

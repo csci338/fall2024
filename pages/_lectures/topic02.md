@@ -1,9 +1,12 @@
 ---
 layout: module
 title: Version Control & Branch Management
+num: 2
+type: topic
+draft: 0
+due_date: 2024-08-27
 description: >
-    Version control is perhaps one of the most important topics in software engineering. It allows teams to collaborate on projects, review one another's code, experiment with new features and ideas, and revert to previous versions when needed. In this unit, we will explore different approaches that teams can take to collaborate on code. We will also do various hands-on activities so that you can familiarize yourself with bash and git commands, and practice branching, merging, rebasing, and writing good commit messages.
-
+    How teams to collaborate on projects, review one another's code, experiment with new features and ideas, and revert changes when needed. You will learn about different types of version control systems, practice using the command line, and experiment with git (e.g., branching, merging, rebasing, committing, etc).
 readings: 
     - due_date: "2024-08-27"
       link: > 
@@ -26,7 +29,6 @@ readings:
     - due_date: "2024-09-05"
       link: >
         <a href="https://www.atlassian.com/git/tutorials/comparing-workflows" target="_blank">Article explaining how to rebase + handle merge conflicts</a>
-
 slides: 
     - date: "2024-08-27"
       link: > 
@@ -37,7 +39,6 @@ slides:
     - date: "2024-09-3"
       link: > 
         <a href="https://docs.google.com/presentation/d/1Jw5noRHBzAtxJL-j13OCawd615ca7swk/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Version Control and Collaborative Workflows</a>
-
 questions:
     - Why is version control important?
     - Why is code history important?
@@ -45,15 +46,16 @@ questions:
     - What is the problem with having long-running dev branches? What is the solution?
     - What is the one version rule?
     - What is Hyrum's Law?
-    - What are the tradeoffs of having a Monorepo versus multiple repos?
+    - What are the tradeoffs of having a "monorepo" versus multiple repos?
     - What is the difference between git and GitHub?
-
-num: 2
-type: topic
-draft: 0
-due_date: 2024-08-27
+    - What is the difference between a merge commit and rebasing? What would you want to do one over the other (i.e., what are the the tradeoffs of each)?
+    - > 
+        Be familiar with the following git commands:
+        <code>clone</code>, <code>status</code>,
+        <code>add</code>, <code>log</code>, <code>commit</code>, <code>push</code>, <code>pull</code>, <code>merge</code>, <code>rebase</code>
+activities:
+    - <a href="/fall2024/activities/git-in-class-activity">Merging / Rebasing Exercise</a>
 ---
 
+Version control is perhaps one of the most important topics in software engineering. Version control systems allow teams to collaborate on projects, review one another's code, experiment with new features and ideas, and revert to previous versions when needed. In this unit, we will explore different approaches that teams can take to collaborate on code. We will also do various hands-on activities so that you can familiarize yourself with bash and git commands, and practice branching, merging, rebasing, and writing good commit messages.
 
-## In-Class Activities
-* [Merging / Rebasing Exercise](/fall2024/activities/git-in-class-activity)
