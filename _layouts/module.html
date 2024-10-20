@@ -9,6 +9,27 @@ layout: two-column
         width: 100px;
     }
 
+    .no-bullets li::before{
+        content: "" !important;
+    }
+    .no-bullets li li::before{
+        content: "\2022" !important;
+    }
+
+    .card-holder {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 20px 0 40px 0;
+    }
+
+    .card {
+        border: solid 1px #F9F9F9;
+        border-radius: 6px;
+        padding: 20px;
+        background-color: #F6F6F6;
+    }
+
     .module-table td:nth-child(1),
     module-table th:nth-child(1) {
         min-width: 30px;
@@ -34,62 +55,60 @@ layout: two-column
 
 </style>
 
+<p>
+    {{ page.description }}
+</p>
+
 {{content}}
 
-<div class="hr"></div>
+<div class="card-holder">
 {% assign idx = 1 %}
 {% assign module_dates = page | get_module_dates: site %}
 {% assign lastWeek = "" %}
 {% for date in module_dates %}
-    {{ page.slides.size }}
-    {% assign slides = page.slides | filter_list_by_date: date %}
-    {% assign activities = page.activities | filter_list_by_date: date %}
-    {% assign labs = page | get_labs_by_module_by_date: site, date %}
-    {% assign materials = slides | concat: activities | concat : labs %}
-    {% assign readings = page.readings | filter_list_by_date: date %}
     
+    <div class="card">
+        <h2>{{ date | date: "%A, %-m/%-d" }}</h2>
 
-    <h2>{{ date | date: "%A, %-m/%-d" }}</h2>
+        <!-- Slides & Activities -->
+        {% assign slides = page.slides | filter_list_by_date: date %}
+        {% assign activities = page.activities | filter_list_by_date: date %}
+        {% assign labs = page | get_labs_by_module_by_date: site, date %}
+        {% assign projects = page | get_projects_by_module_by_date: site, date %}
+        {% assign materials = slides | concat: activities | concat : labs | concat: projects %}
+        <h3 id="slides_{{idx}}">Slides & Activities</h3>
+        <ul class="no-bullets">
+            {% for material in materials %}
+                <li>
+                    {{ material | display_link_or_badge: false, false, false }}
+                    {% if material.notes %}
+                        <ul>
+                            <li>{{material.notes}}</li>
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
 
-    <!-- Slides & Activities -->
-    <h3 id="slides_{{idx}}">Slides & Activities</h3>
-    <ul>
-        {% for material in materials %}
-        <li>{{ material | display_link_or_badge: false, false, true }}</li>
-        {% endfor %}
-    </ul>
-
-    {% if readings.size > 0 %}
-    <h3 id="readings_{{idx}}">Readings</h3>
-    <ul class="compact">
-        {% for reading in readings %}
-        <li>
-            <a href="{{reading.url | get_url }}">{{reading.title}}</a>
-            {% if reading.required == 1 %}
-            <span class="badge">required</span>
-            {% else %}
-            <span class="badge">optional</span>
-            {% endif %}
-            <br>
-            {{ reading.instructions}}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="hr"></div>
+        <!-- Readings-->
+        {% include page_readings.html %}
+    </div>
     {% assign idx = idx | plus: 1 %}
 {% endfor %}
+</div>
 
 
 
 <!-- Study Questions -->
 {% if page.questions %}
-<h2 id="dqs">Study Questions</h2>
-<ol>
-    {% for question in page.questions %}
-    <li>{{question}}</li>
-    {% endfor %}
-</ol>
+<div class="card">
+    <h2 id="dqs">Study Questions</h2>
+    <ol>
+        {% for question in page.questions %}
+        <li>{{question}}</li>
+        {% endfor %}
+    </ol>
+</div>
 {% endif %}
 
 

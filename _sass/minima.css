@@ -904,8 +904,9 @@ blockquote.quote.slim:before {
 }
 
 .two-column main h1, .two-column main h2, .two-column main h3, .two-column main h4 {
-  padding-top: 85px;
-  margin-top: -70px;
+  /* padding-top: 85px;
+  margin-top: -70px; */
+  scroll-margin-top: 85px;
 }
 
 .two-column main h2, .two-column main h3, .two-column main h4 {

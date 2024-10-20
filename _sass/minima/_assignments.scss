@@ -34,6 +34,7 @@
         .topic, a.topic, 
         .project, a.pj,
         .lab, a.lab,
+        .video, video.lab,
         .quiz, a.quiz,
         .ec, a.ec {
             // opacity: 0.6;
@@ -52,6 +53,7 @@
     flex-direction: column;
     
     .badge, a.badge,
+    .badge-dark, a.badge-dark,
     .topic, a.topic, 
     .hw, a.hw, 
     .homework, a.homework, 
@@ -60,8 +62,11 @@
     .lec, a.lec, 
     .activity, a.activity,
     .reading, a.reading,
+    .video, a.video,
     .lecture, a.lecture, 
     .lab, a.lab, 
+    .optional, a.optional, 
+    .required, a.required, 
     .quiz, a.quiz, 
     .live, .recorded, 
     .ec, a.ec {
@@ -98,6 +103,9 @@
     .activity, .activity:hover, a.activity {
         background-color: $gold;
     }
+    .video, .video:hover {
+        background: $clay;
+    }
     .reading, a.reading {
         background: $autumn;
         // color: #222;
@@ -108,6 +116,11 @@
     .lab, .lab:hover {
         background: $br1;
         // font-weight: 600;
+    }
+    .optional, .optional:hover, .required, 
+    .required:hover, .badge-dark, .badge-dark:hover {
+        background: #DDD;
+        color: #222;
     }
     .ec, .ec:hover {
         background: $nightSky;
@@ -223,6 +236,14 @@ ol.readings, ul.readings {
         }
     }
 }
+
+blockquote.info {
+    background-color: #0076a514;
+    padding: 25px 50px;
+    border-width: 0;
+    padding: 20px 0px 20px 40px;
+    border-radius: 10px;
+} 
 
 blockquote.caveat {
     margin: 20px 0px 20px 40px;

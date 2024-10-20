@@ -1,10 +1,9 @@
 ---
 layout: assignment-two-column
-title: "Version Control and Branch Management with git and GitHub"
+title: "Configuring git and GitHub"
 type: lab
 draft: 0
 points: 6
-topic: 2
 abbreviation: Lab 2
 num: 2
 start_date: 2024-08-29

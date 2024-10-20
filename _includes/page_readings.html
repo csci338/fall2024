@@ -1,20 +1,29 @@
-<ol class="readings">
-{% for item in page.readings %}
-    {% assign optional = 0 %}
-    {% if item.optional == 1 %}
-        {% assign optional = 1 %}
-    {% else %}
-        {% include reading.html %} 
+{% assign readings = page.readings | filter_list_by_date: date %}
+{% assign required_readings = page.readings | where: "required", 1 | filter_list_by_date: date  %}
+{% assign optional_readings = page.readings | where_exp: "item", "item.required != 1" | filter_list_by_date: date %}
+{% if readings.size > 0 %}
+    <h3 id="readings_{{idx}}">Readings</h3>
+    <p>{{ page.reading_instructions | default: "Please read the following before class:" }}</p>
+    <ul class="compact">
+        {% for reading in required_readings %}
+            <li>
+                <a href="{{reading.url | get_url }}">{{reading.title}}</a>
+                <span class="required">required</span>
+                <br>
+                {{ reading.notes}}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if optional_readings.size > 0 %}
+    <p>The following additional readings are optional, but recommended:</p>
+    <ul class="compact">
+        {% for reading in optional_readings %}
+            <li>
+                <a href="{{reading.url | get_url }}">{{reading.title}}</a>
+                <span class="optional">optional</span>
+                <br>
+                {{ reading.notes}}
+            </li>
+        {% endfor %}
     {% endif %}
-{% endfor %}
-</ol>
-{% if optional == 1 %}
-    <h3>Optional Readings</h3>
-    <ol class="readings">
-    {% for item in page.readings %}
-        {% if item.optional == 1 %}
-            {% include reading.html %} 
-        {% endif %}
-    {% endfor %}
-    </ol>
 {% endif %}
