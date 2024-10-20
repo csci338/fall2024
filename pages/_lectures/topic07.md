@@ -4,7 +4,7 @@ title: Challenges in Client-Side Engineering
 type: topic
 num: 7
 draft: 1
-due_date: 2024-10-31
+start_date: 2024-10-31
 ---
 
 In this unit, we're going to explore some software engineering ideas that are specific to client-side engineering. To do this, we're going to learn some HTML, CSS, JavaScript, and React concepts ***as a means of learning*** various client-side SWE principles (starting with [Lab 6](../assignments/lab06)).

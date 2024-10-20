@@ -6,15 +6,15 @@ description: >
 type: topic
 num: 1
 draft: 0
-due_date: 2024-08-20
+start_date: 2024-08-20
 reading_instructions: >
     Please read the following chapters before Thursday in the Software Engineering at Google book:
 readings: 
-    - due_date: "2024-08-22"
+    - start_date: "2024-08-22"
       link: > 
         <a href="https://abseil.io/resources/swe-book/html/pr01.html" target="_blank">Preface</a>
       required: 1
-    - due_date: "2024-08-22"
+    - start_date: "2024-08-22"
       link: > 
         <a href="https://abseil.io/resources/swe-book/html/ch01.html" target="_blank">Chapter 1. What is Software Engineering?</a>
       required: 1

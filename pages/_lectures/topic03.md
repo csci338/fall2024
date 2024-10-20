@@ -4,7 +4,7 @@ title: "Everything As Code (+ Docker)"
 type: topic
 num: 3
 draft: 0
-due_date: 2024-09-10
+start_date: 2024-09-10
 ---
 
 ## Readings

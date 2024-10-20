@@ -77,11 +77,11 @@ layout: default
 </style>
 
 {{content}}
-
+{% comment %}
 {% assign lastWeek = "" %}
 <section class="assignments topics">
     <div class="grid-two-col1">
-        {% assign topics = site.lectures | where: "type", "topic" | sort: 'due_date' %}
+        {% assign topics = site.lectures | where: "type", "topic" | sort: 'start_date' %}
         {% for topic in topics %}
 
         <div>
@@ -92,8 +92,8 @@ layout: default
             <h3>
                 {% assign week = site.term_start_date | get_week_number: date %}
                 {% if lastWeek != week %}
-                    Week {{week}}
-                    {% assign lastWeek = week %}
+                Week {{week}}
+                {% assign lastWeek = week %}
                 {% endif %}
             </h3>
             <div class="grid-three-col-inner">
@@ -141,4 +141,6 @@ layout: default
         {% endfor %}
     </div>
 
+
 </section>
+{% endcomment %}

@@ -173,7 +173,8 @@ module Jekyll
 
 
       def filter_list_by_date(list, date)
-        list.select{ |item| convert_to_date_if_not_already(item['start_date']) == date if item['start_date'] } 
+            list.select{ |item| item['start_date'] == date if item['start_date'] } 
+        []
       end
   
     end

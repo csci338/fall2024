@@ -4,7 +4,7 @@ title: UX / UI Design Patterns
 type: topic
 draft: 1
 num: 8
-due_date: 2024-11-12
+start_date: 2024-11-12
 ---
 
 ## UX / UI Readings & Resources

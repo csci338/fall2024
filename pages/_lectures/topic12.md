@@ -4,7 +4,7 @@ title: "Course Review"
 type: topic
 num: 12
 draft: 1
-due_date: 2024-12-05
+start_date: 2024-12-05
 ---
 
 ## Readings

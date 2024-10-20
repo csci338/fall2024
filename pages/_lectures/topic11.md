@@ -4,7 +4,7 @@ title: "Scalable Software Architectures"
 type: topic
 num: 11
 draft: 1
-due_date: 2024-12-03
+start_date: 2024-12-03
 ---
 
 ## Readings

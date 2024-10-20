@@ -41,12 +41,13 @@ layout: two-column
 {% assign module_dates = page | get_module_dates: site %}
 {% assign lastWeek = "" %}
 {% for date in module_dates %}
-
+    {{ page.slides.size }}
     {% assign slides = page.slides | filter_list_by_date: date %}
     {% assign activities = page.activities | filter_list_by_date: date %}
     {% assign labs = page | get_labs_by_module_by_date: site, date %}
     {% assign materials = slides | concat: activities | concat : labs %}
     {% assign readings = page.readings | filter_list_by_date: date %}
+    
 
     <h2>{{ date | date: "%A, %-m/%-d" }}</h2>
 

@@ -31,7 +31,7 @@ layout: default
         <tbody>
             {% assign lastWeek = "" %}
             {% for date in dates %}
-                {% assign __todays_topics = site.lectures | where: 'due_date', date %}
+                {% assign __todays_topics = site.lectures | where: 'start_date', date %}
                 {% assign __todays_labs = site.assignments | where: 'start_date', date | where: 'type', 'lab' %}
                 
                 {% assign todays_topics_labs = __todays_topics | concat: __todays_labs %}

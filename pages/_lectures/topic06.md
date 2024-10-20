@@ -4,8 +4,7 @@ title: Midterm Review & Next Steps
 type: topic
 num: 6
 draft: 1
-due_date: 2024-10-29
-
+start_date: 2024-10-29
 ---
 
 ## Agenda

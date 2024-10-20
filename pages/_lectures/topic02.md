@@ -4,7 +4,7 @@ title: Version Control & Branch Management
 num: 2
 type: topic
 draft: 0
-due_start_date: 2024-08-27
+start_date: 2024-08-27
 description: >
     How teams to collaborate on projects, review one another's code, experiment with new features and ideas, and revert changes when needed. You will learn about different types of version control systems, practice using the command line, and experiment with git (e.g., branching, merging, rebasing, committing, etc).
 slides: 
@@ -22,7 +22,7 @@ slides:
       url: https://docs.google.com/presentation/d/11HyT_sktBgkhoM2_LgQ3cHB68YZj_AZZ/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
       link: > 
         Lab 2: <a href="https://docs.google.com/presentation/d/11HyT_sktBgkhoM2_LgQ3cHB68YZj_AZZ/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Introduction to Lab 2</a>
-    - start_date: "2024-09-3"
+    - start_date: "2024-09-03"
       num: 4
       type: lecture
       title: Version Control and Collaborative Workflows
