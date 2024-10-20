@@ -17,7 +17,13 @@ permalink: /resources/
 ## Version Control & Collaboration
 * [Git & GitHub](github)
 
-## JavaScript Resources
+## Design Systems
+* [Design & Design Systems](design-systems)
+
+## PostgreSQL Resources
+* [Databases](databases)
+
+<!-- ## JavaScript Resources
 TBD
 
 ## React Resources
@@ -35,4 +41,4 @@ TBD
 ## Accessibility Resources
 TBD
 
-...
+... -->

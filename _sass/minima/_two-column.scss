@@ -10,12 +10,13 @@ $twocolHeaderHeight: 164px;
         grid-template-columns: 300px auto;
 
         h1, h2, h3, h4, h5 {
-            padding-top: 80px;
-            margin-top: -70px;
+            // padding-top: 80px;
+            // margin-top: -70px;
+            // scroll-margin-top: -200px;
         }
-        h2, h3, h4, h5 {
-            z-index: -1;
-        }
+        // h2, h3, h4, h5 {
+        //     z-index: -1;
+        // }
 
         > article {
             // width: calc(100vw - 300px);
@@ -81,12 +82,12 @@ $twocolHeaderHeight: 164px;
         }
         .side-menu {
             width: 100%;
-            padding: 0px;
+            padding: 30px 0px;
             a {
-                font-size: 1.05em;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
+                font-size: 0.9em;
+                // text-overflow: ellipsis;
+                // white-space: nowrap;
+                // overflow: hidden;
                 padding-right: 20px !important;
             }
             a:hover {
@@ -95,29 +96,31 @@ $twocolHeaderHeight: 164px;
             >li {
                 a {
                     display: block;
-                    padding-top: 5px;
+                    padding-top: 3px;
                     &.active {
                         background: $br2;
-                        color: white;
+                        color: white !important;
                     }
                 }
                 >a:first-child {
-                    padding: 4px 0px 3px 10px;
+                    padding: 4px 0px 3px 20px;
                     font-weight: 500;
+                    color: #444;
                 }
-                ol {
+                >ol {
                     margin-top: 0px;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                     li {
                         a {
                             color: #444;
-                            font-size: 0.9em;
+                            font-size: 0.85em;
                             padding-left: 20px;
+                            padding: 2px 0px 2px 30px;
                         }
 
                         ol li {
                             a {
-                                color: #666;
+                                color: #888;
                                 font-size: 0.9em;
                                 padding-left: 45px;
                             }

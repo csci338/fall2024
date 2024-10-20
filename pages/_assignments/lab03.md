@@ -1,10 +1,9 @@
 ---
 layout: assignment-two-column
-title: "Version Control and Branch Management with git and GitHub"
+title: "A Tour of git Commands"
 type: lab
 draft: 0
 points: 6
-topic: 2
 abbreviation: Lab 3
 num: 3
 start_date: 2024-09-05

@@ -5,32 +5,57 @@ type: topic
 num: 4
 draft: 0
 start_date: 2024-09-17
+description: >
+   When developing software, it is common to rely on dependencies -- code that has been developed by other people. However, <em>your code</em> isn't the only code that changes. Dependencies (and their dependencies, and their dependencies' dependencies) also evolve over time as new features are added and bugs are patched. Given this, in this unit we will examine some tools, approaches, and considerations for managing code dependencies. We will also experiment with a few different dependency management tools, such as npm, poetry, and apt.
+videos:
+    - start_date: "2024-09-17"
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/1gLVi5z-bXfYlI40dGHObFj-2kKNrorkV/view?usp=drive_link
+slides: 
+    - start_date: "2024-09-17"
+      num: 6
+      type: lecture
+      title: Package & Dependency Management
+      url: https://docs.google.com/presentation/d/1L7iqwWTZELObQ8vFDuB7aAc9Kkw5U1EN/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
+labs: [5]
+readings:
+    - start_date: "2024-09-17"
+      title: Chapter 21. Dependency Management
+      type: reading
+      url: https://abseil.io/resources/swe-book/html/ch21.html
+      required: 1
+    - start_date: "2024-09-17"
+      title: How one programmer broke the internet by deleting a tiny piece of code.
+      type: reading
+      url: https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code
+      required: 1
+    - start_date: "2024-09-17"
+      title: NPM’s "everything" debacle.
+      type: reading
+      url: https://socket.dev/blog/when-everything-becomes-too-much
+      required: 1
+    - start_date: "2024-09-17"
+      title: Havoc Pennington's 2017 blog post
+      type: reading
+      url: https://blog.ometer.com/2017/01/10/dear-package-managers-dependency-resolution-results-should-be-in-version-control/
+      notes: Outlines the problems with non-exact dependency resolution
+    - start_date: "2024-09-17"
+      title: Facebook's blog post upon the release of yarn
+      type: reading
+      url: https://engineering.fb.com/2016/10/11/web/yarn-a-new-package-manager-for-javascript/
+      notes: How did Facebook solve some of the dependency resolution challenges noted in our other readings?
+
+questions:
+    - What do we mean by "dependency management"?
+    - What happened in the "leftpad" debacle? What happened in the "everything" debacle? Why should we care?
+    - What are the trade-offs associated with relying on dependencies?
+    - What should you consider before adding a new dependency to your software project?
+    - What are some challenges with upgrading dependencies?
+    - What are some dependencies that we have used in this class?
+    - What are some common features of a good dependency management system?
+    - What is the purpose of the Poetry lock file and the package.json lock file?
+    - > 
+        Different dependency management systems are used for different parts of the software stack. What are some examples of dependency managers that are used for: <em>operating systems</em>, <em>software languages (e.g., python, node.js, ruby, etc.</em>, <em>server configuration</em>?
+
 ---
-
-<style>
-    .image {
-        height: 400px;
-    }
-</style>
-
-## Readings
-This week our topic is package and dependency management. Please read the following:
-
-* <a href="https://abseil.io/resources/swe-book/html/ch21.html" target="_blank">Chapter 21. Dependency Management</a>
-* <a href="https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code" target="_blank">How one programmer broke the internet by deleting a tiny piece of code</a>. Keith Collins. Quartz Magazine. March, 2016.
-* <a href="https://socket.dev/blog/when-everything-becomes-too-much" target="_blank">NPM's "everything" debacle</a>. Earlier this year.
-
-### Recommended
-* Read Havoc Pennington's blog post from 2017 <a href="https://blog.ometer.com/2017/01/10/dear-package-managers-dependency-resolution-results-should-be-in-version-control/" target="_blank">outlining the problems with non-exact dependency resolution</a>.
-* Read <a href="https://engineering.fb.com/2016/10/11/web/yarn-a-new-package-manager-for-javascript/" target="_blank">Facebook's blog post upon the release of `yarn`</a>. How did Facebook solve some of the problems in the readings above?
-
-
-## Slides
-* <a href="https://docs.google.com/presentation/d/1L7iqwWTZELObQ8vFDuB7aAc9Kkw5U1EN/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Package & Dependency Management</a>
-
-
-## Activity: Install Node Manually
-* Overview of Poetry
-* Overview of NPM
-* Overview of Apt / Brew
-* When should you install packages from source (versus relying on a package manager)?

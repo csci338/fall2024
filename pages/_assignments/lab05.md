@@ -50,7 +50,7 @@ By the end of the lab, you should understand how to install, update, remove, and
 
 **Homebrew** is a package manager for macOS that simplifies the installation of software.
 
-### Exercise 1(a).1: Installing a Package
+### 1.1. Installing a Package
 1. Open a terminal and check if you already have `brew` installed by typing: `brew`
 2. If Homebrew is not already installed, install it by following the official installation instructions (see <a href="https://brew.sh/" target="_blank">https://brew.sh/</a> for more info):<br><br>
    ```bash
@@ -76,7 +76,7 @@ By the end of the lab, you should understand how to install, update, remove, and
     brew list
     ```
 
-### Exercise 1(a).2: Updating and Removing Packages
+### 1.2. Updating and Removing Packages
 1. Update all installed packages using:<br><br>
    ```bash
    brew update
@@ -102,7 +102,7 @@ By the end of the lab, you should understand how to install, update, remove, and
 
 **APT** is a package management system used by Debian-based Linux distributions (e.g., Ubuntu).
 
-### Exercise 1(b).1: Installing a Package
+### 1.1. Installing a Package
 1. Open a terminal in a Debian-based Linux environment.
 2. Update the local package index:<br><br>
    ```bash
@@ -124,7 +124,7 @@ By the end of the lab, you should understand how to install, update, remove, and
 
 If it worked, an `google.html` file should have been created to your local directory. Use the `cat` command to view it. Then remove it using the `rm` command.
 
-### Exercise 1(b).2: Updating and Removing Packages
+### 1.2. Updating and Removing Packages
 1. Upgrade all installed packages:
    ```bash
    sudo apt-get upgrade
@@ -148,7 +148,7 @@ If it worked, an `google.html` file should have been created to your local direc
 ## Part 2 (Everyone): Poetry (Python)
 **Poetry** is a dependency manager for Python projects that handles dependencies and packaging.
 
-### Exercise 3: Creating a Python Project with Poetry
+### 3. Creating a Python Project with Poetry
 1. Verify that you're on a local branch called `lab05` (`git branch`). If you're not, jump to the top and re-read the "Before You Begin" section.
 1. Check if poetry is already installed by typing `poetry` at your Terminal / WSL command prompt.
 3. If it's not, install Poetry:<br><br>
@@ -182,7 +182,7 @@ If it worked, an `google.html` file should have been created to your local direc
         └── poetry-demo
    ```
 
-### Exercise 4: Adding Dependencies
+### 4. Adding Dependencies
 1. Add a dependency, e.g., `requests`, to the project:<br><br>
    ```bash
    poetry add requests
@@ -192,7 +192,7 @@ If it worked, an `google.html` file should have been created to your local direc
    poetry show
    ```
 
-### Exercise 5: Running the Project in a Virtual Environment
+### 5. Running the Project in a Virtual Environment
 Create a new file in your `poetry-demo` folder called `lab05-experiments.py`. Paste the following starter code inside of it:
 
 ```py
@@ -224,7 +224,7 @@ python lab05-experiments.py
 ```
 You should see an error because `requests` and `bs4` are not installed for your system-level python installation.
 
-### Exercise 6:
+### 6. Install more dependencies + modify your code
 Now we are going to make the beginnings of a simple web crawler that extracts all of the links from the <a href="https://new.cs.unca.edu/" target="_blank">https://new.cs.unca.edu/</a> page, using another package called beautiful soup. To do this, you will install "Beautiful Soup" -- a python module with various utilities that makes it easy to extract items from web pages. Please do the following:
 
 1. Install the `bs4` package using poetry
@@ -254,7 +254,7 @@ soup = BeautifulSoup(response.content, 'html.parser')
 * Use the built-in BeautifulSoup functions to extract all of the links. Feel free to ask Google or Chat GPT something like: "How to I extract URLs using beautiful soup?"
 
 
-### Exercise 6: Removing Dependencies
+### 7. Removing Dependencies
 1. Remove the `requests` and `bs4` packages from the project:<br><br>
    ```bash
    poetry remove requests
@@ -285,7 +285,7 @@ node -v
 ```
 * If your version of Node is less than version 18x, talk to Sarah. 
 * If Node.js is not installed, follow the installation instructions for your respective OS
-* Otherwise, skip down to Exercise 7
+* Otherwise, skip down to 7
 
 ### Installation Instructions 
 
@@ -309,7 +309,7 @@ node -v
 Source: <a href="https://github.com/nodesource/distributions/blob/master/README.md" target="_blank">https://github.com/nodesource/distributions/blob/master/README.md</a>
 
 
-### Exercise 7: Initializing a Node.js Project
+### 8. Initializing a Node.js Project
 1. Open a terminal and navigate into the `lab05/node-demo` folder. Note that there are already some files in this folder for a "starter" React project. However, the underlying dependencies are not installed. Then, from within the `node-demo` folder, initialize a new node project using the node package manager:<br><br>
    ```bash
    npm init -y
@@ -317,7 +317,7 @@ Source: <a href="https://github.com/nodesource/distributions/blob/master/README.
 
    The `npm init` command should have created two new files within `node-demo`: `package.json` and `    package-lock.json`. Verify this.
 
-### Exercise 8: Install the React and Vite Dependencies
+### 9. Install the React and Vite Dependencies
 1. Install the `react`, `react-dom`, and `vite` packages through the node package manager as shown below:<br><br>
    ```bash
    npm install react react-dom vite
@@ -339,7 +339,7 @@ Source: <a href="https://github.com/nodesource/distributions/blob/master/README.
 
     If you did everything correctly, you should see a simple screen that says **Hello world!**
 
-### Exercise 9: Add a new dependency
+### 10. Add a new dependency
 Now that you have a working react app, stop your vite process (Control + C on the Terminal). We will now install a design system package called "Ant", which includes some nice react widgets that we can use to accelerate our development process:
 
 ```bash

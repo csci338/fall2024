@@ -18,27 +18,20 @@
 
 .assignments, .lectures, .readings, .syllabus, .schedule {
     .passed {
-        // color: #777;
-        // td, th {
-        //     background: #F9F9F9;
+        // .hw, a.hw, 
+        // .homework, a.homework, 
+        // .pj, a.pj,  
+        // .project, a.project,
+        // .lec, a.lec, 
+        // .activity, a.activity, 
+        // .topic, a.topic, 
+        // .project, a.pj,
+        // .lab, a.lab,
+        // .video, video.lab,
+        // .quiz, a.quiz,
+        // .ec, a.ec {
+        //     background: #CCC;
         // }
-        // li, li::before {
-        //     color: #777;
-        // }
-        .hw, a.hw, 
-        .homework, a.homework, 
-        .pj, a.pj,  
-        .project, a.project,
-        .lec, a.lec, 
-        .activity, a.activity, 
-        .topic, a.topic, 
-        .project, a.pj,
-        .lab, a.lab,
-        .quiz, a.quiz,
-        .ec, a.ec {
-            // opacity: 0.6;
-            background: #CCC;
-        }
         strong, th {
             font-weight: 200;
             color: #5c5962;
@@ -52,6 +45,7 @@
     flex-direction: column;
     
     .badge, a.badge,
+    .badge-dark, a.badge-dark,
     .topic, a.topic, 
     .hw, a.hw, 
     .homework, a.homework, 
@@ -60,8 +54,12 @@
     .lec, a.lec, 
     .activity, a.activity,
     .reading, a.reading,
+    .video, a.video,
     .lecture, a.lecture, 
     .lab, a.lab, 
+    .optional, a.optional, 
+    .required, a.required, 
+    .skim, a.skim
     .quiz, a.quiz, 
     .live, .recorded, 
     .ec, a.ec {
@@ -74,12 +72,13 @@
         text-decoration: none;
         padding: 3px 7px;
         border-bottom: solid transparent 1px;
-        min-width: 42px;
+        // min-width: 42px;
         margin-right: 5px;
         text-indent: 0px;
     }
     .badge, .badge:hover {
-        background: $lightgrey;
+        // background: $lightgrey;
+        background: #DDD;
         color: #444;
     }
     .hw, .hw:hover, .homework, .hw:hover {
@@ -98,6 +97,9 @@
     .activity, .activity:hover, a.activity {
         background-color: $gold;
     }
+    .video, .video:hover {
+        background: $clay;
+    }
     .reading, a.reading {
         background: $autumn;
         // color: #222;
@@ -108,6 +110,12 @@
     .lab, .lab:hover {
         background: $br1;
         // font-weight: 600;
+    }
+    .optional, .optional:hover, .required, 
+    .required:hover, .badge-dark, .badge-dark:hover,
+    .skim, .skim:hover {
+        background: #DDD;
+        color: #222;
     }
     .ec, .ec:hover {
         background: $nightSky;
@@ -223,6 +231,14 @@ ol.readings, ul.readings {
         }
     }
 }
+
+blockquote.info {
+    background-color: #0076a514;
+    padding: 25px 50px;
+    border-width: 0;
+    padding: 20px 0px 20px 40px;
+    border-radius: 10px;
+} 
 
 blockquote.caveat {
     margin: 20px 0px 20px 40px;

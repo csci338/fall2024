@@ -1,13 +1,13 @@
 ---
-title: AsyncIO, FastAPI, and Python
 layout: assignment-two-column
+title: AsyncIO, FastAPI, and Python
 type: lab
 draft: 1
 points: 6
 abbreviation: Lab 9
 num: 9
 start_date: 2024-11-19
-due_date: 2024-11-21
+due_date: 2024-11-24
 
 ---
 
@@ -198,8 +198,8 @@ asyncio is a Python library that provides a framework for asynchronous programmi
 ### 2. Basic Concepts
 Before diving into asyncio, it's essential to understand some basic concepts:
 
-* **Coroutines**: Coroutines are special functions defined with the async keyword. They can be paused and resumed, allowing non-blocking execution of tasks.
-* **Event Loop**: An event loop is the core component of asyncio. It manages and schedules the execution of coroutines.
+* **Coroutines (Asynchronous Functions)**: Coroutines are special functions defined with the async keyword. They can be paused and resumed, allowing non-blocking execution of tasks.
+* **Event Loop**: The event loop manages and schedules the execution of coroutines.
 * **Tasks**: Tasks represent units of work in asyncio. You can create and manage multiple tasks within an event loop.
 
 {:#step3}

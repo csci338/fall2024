@@ -43,11 +43,7 @@ module Jekyll
         combined = arr1.concat(arr2)
         # Parse the date strings to Date objects if they are strings
         combined.map! do |date|
-            if date.is_a?(String)
-                Date.strptime(date, '%Y-%m-%d')  # Parse string to Date
-            elsif date.is_a?(Date)
-                date  # If it's already a Date object, use it as is
-            end
+            convert_to_date_if_not_already(date)
         end
         combined.compact.uniq.sort
       end
@@ -68,11 +64,11 @@ module Jekyll
 
       def get_url(url)
         return "" if not url
-        if url.start_with?("http")
-            url
-        else
-            "/fall2024#{url}"
-        end
+        url.start_with?("http") ? url: "/fall2024#{url}"
+      end
+
+      def get_target(url)
+        (url && url.start_with?("http")) ? "_blank" : ""
       end
 
 
@@ -80,18 +76,32 @@ module Jekyll
         type = page['type'] == "homework" ? "hw" : page['type']
         link_class = simple ? "" : type
         class_name = new_line ? "block" : "inline-block"
+        badge_text = type ? type.capitalize : ""
+        badge_text = simple ? page['title'] : "#{badge_text} #{page['num']}"
+        url = get_url(page['url'])
+        target = get_target(page['url'])
+        title = (hide_title || simple) ? "" : "<span>#{page['title']}</span>"
+        link_icon = simple ? "" : " <i class='fa-solid fa-link'></i>"
+        extras = (page['type'] == "reading" and page['required'] == nil) ? " <span class='optional'>optional</span>" : ""
+        extras = (page['type'] == "reading" and page['skim'] == 1) ? " <span class='optional'>skim</span>" : extras
+        colon = "<span style='display: none'>: </span>"
         
         if page['draft'] == 0 or page['draft'] == nil
           # Return an anchor (<a>) tag if the url exists
-          link = "<span class='mb-1 #{class_name}'>
-                <a class='#{link_class}' href='#{get_url(page['url'])}'>
-                    #{type ? type.capitalize : ""} #{page['num']}
-                </a>#{simple ? ":" : ""}
-                #{hide_title ? "" : "<span>#{page['title']}</span>"}
-            </span>"
+          "<span class='mb-1 #{class_name}' target=''>"\
+                "#{extras}"\
+                "<a class='#{link_class}' href='#{url}' target='#{target}'>"\
+                    "#{link_icon} #{badge_text}"\
+                "</a>#{colon}"\
+                "#{title}"\
+            "</span>"
         else
           # Return a span if no url exists
-          "<span class='mb-1 #{class_name}'><span class='badge'>#{page['type']} #{page['num']}</span> #{hide_title ? "" : page['title']}</span>"
+          "<span class='mb-1 #{class_name}'>"\
+             "#{extras}"\
+             "<span class='badge'>#{badge_text}</span>#{colon}"\
+                "#{title}"\
+            "</span>"
         end
       end
       
@@ -134,7 +144,11 @@ module Jekyll
       def get_labs_by_module_by_date(page, site, date)
         labs = get_labs_by_module(page, site)
         labs = labs.select { |lab| lab['start_date'] == date }
-        
+      end
+
+      def get_projects_by_module_by_date(page, site, date)
+        projects = get_projects_by_module(page, site)
+        projects = projects.select { |project| convert_to_date_if_not_already(project['start_date']) == date }
       end
 
 
@@ -146,18 +160,38 @@ module Jekyll
         return labs
       end
 
+      def get_projects_by_module(page, site)
+        projects = []
+        if page['projects'] # Ensure page['labs'] is not nil before using it
+            projects = site['assignments'].select { |item| page['projects'].include?(item['num']) && item['type'] == 'project' }
+        end
+        return projects
+      end
+
 
       def get_all_module_activities(page, site)
         resources = []
         slides = page['slides'] || []
         readings = page['readings'] || []
         activities = page['activities'] || []
-        exercise_files = page['exercise_files'] || []  
+        exercise_files = page['exercise_files'] || [] 
+        videos = page['videos'] || []   
         labs = []
         if page['labs'] # Ensure page['labs'] is not nil before using it
-            labs = site['assignments'].select { |item| page['labs'].include?(item['num']) }
+            labs = site['assignments']\
+                .select { |item| page['labs'].include?(item['num']) }\
+                .select { |item| item['type'] == 'lab' }
         end
-        resources.concat(slides).concat(readings).concat(activities).concat(exercise_files).concat(labs)
+        projects = []
+        if page['projects'] # Ensure page['labs'] is not nil before using it
+            projects = site['assignments']\
+                .select { |item| page['projects'].include?(item['num']) }\
+                .select { |item| item['type'] == 'project' }
+        end
+        resources = resources.concat(slides).concat(readings)\
+            .concat(activities).concat(videos).concat(exercise_files)\
+            .concat(labs).concat(projects)
+        return resources
       end
 
 
@@ -173,8 +207,10 @@ module Jekyll
 
 
       def filter_list_by_date(list, date)
-            list.select{ |item| item['start_date'] == date if item['start_date'] } 
-        []
+        if !list.nil?
+            return list.select{ |item| convert_to_date_if_not_already(item['start_date']) == date if item['start_date'] } 
+        end
+        return []
       end
   
     end

@@ -16,6 +16,15 @@ instructors:
 catalog_description: "CSCI 338 is project-oriented course in which students working in teams complete one or more projects encompassing software design and development. Students will develop their communication skills by writing project requirements, creating and evaluating prototypes, interfacing with end users, and developing and implementing test plans."
 ---
 
+{:.info}
+> ## Post-Helene Updates
+> Welcome back! Due to the time lost because of Helene, the following schedule adjustments have been made:
+> 
+> 1. The midterm has been cancelled. There will still be a cumulative final exam, which will count as 30% of your grade.
+> 1. We will still be meeting synchronously during regularly scheduled class time on Zoom. All class meetings will be recorded. 
+> 1. I will still be taking attendance in order to foster participation and active learning. 
+>       * If you are not able to attend the class synchronously, you can still earn full credit for "attendance" completing a 1-page reflection that you will submit to Sarah weekly by email (svanwart@unca.edu). Your reflection should answer at least three of the discussion questions listed under the current topic, which are posted on the [schedule](../). 
+
 > ## Acknowledgements
 > This course was designed in partnership with <a href="https://semmy.me/" target="_blank">Dr. Semmy Purewal</a>. We are very grateful to Semmy for bringing his industry knowledge to this class and helping the next generation of software engineers here at UNC Asheville learn from it. 
 

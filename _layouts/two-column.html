@@ -8,7 +8,9 @@
         {% include navigation.html %}
         <main>
             <aside>
-                {% include toc.html html=content class='side-menu' ordered=true %}
+                
+                {% assign h_max = page.h_max | default: 3 %}
+                {% include toc.html html=content class='side-menu' ordered=true sanitize=true h_max=h_max %}
             </aside>
             <article>
                 {% include page_title.html %} 

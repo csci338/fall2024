@@ -5,26 +5,66 @@ type: topic
 num: 3
 draft: 0
 start_date: 2024-09-10
+description: >
+   In this unit, we will explore the idea of formalizing your entire software stack using code (e.g. operating system configurations, dependencies, documentation, and more). Even if your team is collaborating on the same codebase, if each team member is developing software with a different compiler, interpreter, language version, operating system, etc., you will likely run into conflicts and inconsistencies. Give this, you will learn about why "everything as code" is such an important idea, and some tools and strategies for managing your system stack over time.
+slides: 
+    - start_date: "2024-09-10"
+      num: 5
+      type: lecture
+      title: Everything as Code
+      url: https://docs.google.com/presentation/d/1DBnb_LjGQLmL4DEBMc0mOFfyUCsyyO6V/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
+reading_instructions: >
+    Readings are a bit light in this unit because I'm hoping you'll spend your outside-of-class time getting oriented with Docker:
+readings: 
+    - start_date: "2024-09-10"
+      type: reading
+      title: Everything as Code
+      num: 1
+      required: 1
+      url: https://youtu.be/HcmPi7-IVQo
+      instructions: > 
+        Watch Seth Vargo's talk. You can also read the transcript <a href="https://www.hashicorp.com/resources/everything-as-code-the-future-of-ops-tools" target="_blank">here</a>
+    - start_date: "2024-09-10"
+      type: reading
+      title: Docker Wikipedia article
+      required: 1
+      url: https://en.wikipedia.org/wiki/Docker_(software)
+      num: 2
+    - start_date: "2024-09-12"
+      type: reading
+      num: 3
+      title: Docker cheat sheet reference
+      url: https://docs.docker.com/get-started/docker_cheatsheet.pdf
+activities:
+    - start_date: "2024-09-10"
+      title: Git Collaboration Activity
+      num: 1
+      type: activity
+      url: /activities/git-in-class-activity
+videos:
+    - start_date: "2024-09-10"
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/1suHYsB0z3enApGFIMMZ5B75UzZ8Dl7DB/view?usp=drive_link
+labs: [4]
+questions:
+    - What were servers "back in the day"? What are servers now?
+    - What kinds of challenges do current server administrators need to be able to navigate gracefully?
+    - What is virtualization? What is containerization? How are they different?
+    - What is the difference between declarative and imperative code? What are some examples of each?
+    - Besides your application's source code, what other kinds of things should you also represent as code?
+    - What are some of the advantages of putting all aspects of your system in terms of code?
+    - What is Docker and why is it useful?
+    - > 
+       Be able to explain the following Docker concepts:
+        <em>image</em>, <em>container</em>, <em>volume</em>, <em>bind mount</em>
+
 ---
 
 ## Readings
 This week our topic is "Everything as Code."  Readings are a bit light
 because I'm hoping you'll spend your outside-of-class time getting
 oriented with Docker.
-
-* Watch Seth Vargo's <a href="https://youtu.be/HcmPi7-IVQo" target="_blank">Everything as Code</a> talk. You can also read the transcript <a href="https://www.hashicorp.com/resources/everything-as-code-the-future-of-ops-tools" target="_blank">here</a>.
-* Read the <a href="https://en.wikipedia.org/wiki/Docker_(software)" target="_blank">Wikipedia Article on Docker</a>.
-* For your reference: <a href="https://docs.docker.com/get-started/docker_cheatsheet.pdf" target="_blank">Docker Cheatsheet</a>
-
-### Optional but Recommended
-There's a great online [Docker Tutorial](https://www.docker.com/101-tutorial/) that you can work through. This is the one where you run the following command:
-
-```bash
-$ docker run -dp 80:80 docker/getting-started
-```
-
-Then you can open [localhost](http://localhost) in your browser to
-complete the tutorial. We will be doing this in class.
 
 ## Slides
 * <a href="https://docs.google.com/presentation/d/1DBnb_LjGQLmL4DEBMc0mOFfyUCsyyO6V/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true" target="_blank">Everything As Code</a> (9/10)

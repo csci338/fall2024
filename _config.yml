@@ -11,6 +11,8 @@ github_username:  jekyll
 timezone: "America/New_York"
 # Build settings
 markdown: kramdown
+kramdown:
+  auto_id_prefix: "id_"
 # kramdown:
 #   syntax_highlighter_opts:
 #     block:

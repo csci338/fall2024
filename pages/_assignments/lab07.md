@@ -1,14 +1,13 @@
 ---
-title: AsyncIO, FastAPI, and Python
 layout: assignment-two-column
-title: Intro to Client-Side Programming with "Vanilla JavaScript"
+title: Build a "Vanilla" Web Client
 type: lab
 draft: 1
 points: 6
 abbreviation: Lab 7
 num: 7
-start_date: 2024-11-05
-due_date: 2024-11-07
+start_date: 2024-11-07
+due_date: 2024-11-10
 ---
 
 

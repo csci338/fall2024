@@ -7,7 +7,7 @@ points: 6
 abbreviation: Lab 6
 num: 6
 start_date: 2024-10-29
-due_date: 2024-11-06
+due_date: 2024-11-03
 
 ---
 

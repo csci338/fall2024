@@ -1,20 +1,12 @@
-<ol class="readings">
-{% for item in page.readings %}
-    {% assign optional = 0 %}
-    {% if item.optional == 1 %}
-        {% assign optional = 1 %}
-    {% else %}
-        {% include reading.html %} 
-    {% endif %}
-{% endfor %}
-</ol>
-{% if optional == 1 %}
-    <h3>Optional Readings</h3>
-    <ol class="readings">
-    {% for item in page.readings %}
-        {% if item.optional == 1 %}
-            {% include reading.html %} 
-        {% endif %}
+{% assign readings = page.readings | filter_list_by_date: date %}
+{% if readings.size > 0 %}
+    <h3 id="readings_{{idx}}">Readings</h3>
+    <ul>
+    {% for reading in readings %}
+        <li>
+            {{ reading | display_link_or_badge: true, false, true }}
+            <br>{{ reading.notes}}
+        </li>
     {% endfor %}
-    </ol>
+    </ul>
 {% endif %}

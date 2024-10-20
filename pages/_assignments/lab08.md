@@ -6,8 +6,8 @@ draft: 1
 points: 6
 abbreviation: Lab 8
 num: 8
-start_date: 2024-11-07
-due_date: 2024-11-09
+start_date: 2024-11-12
+due_date: 2024-11-17
 ---
 
 

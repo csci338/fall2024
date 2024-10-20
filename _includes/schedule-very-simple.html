@@ -1,5 +1,5 @@
-{% assign lectures = site.lectures | where: 'type', 'module' %}
-{% assign labs = site.assignments | where: 'type', 'lab' %}
+{% assign lectures = site.lectures | where: 'type', 'topic' %}
+{% assign assignments = site.assignments %}
 
 
 <div class="schedule-simple">
@@ -8,7 +8,7 @@
         <p>Note that these topics are subject to change.</p>
     </div>
     <div class="group">
-        <h3>Topics</h3>
+        <h3 id="topics">Topics</h3>
         <ol>
         {% for lecture in lectures %}
             <li>
@@ -24,15 +24,15 @@
     </div>
 
     <div class="group">
-        <h3>Labs</h3>
+        <h3 id="labs">Labs & Projects</h3>
         <ol>
-        {% for lab in labs %}
+        {% for assignment in assignments %}
             <li>
                 
-                {% if lab.draft == 1 %}
-                    {{ lab.title }}
+                {% if assignment.draft == 1 %}
+                    {{ assignment.title }}
                 {% else %} 
-                    <a href="{{site.baseurl}}{{lab.url}}">{{ lab.title }}</a>
+                    <a href="{{site.baseurl}}{{lab.url}}">{{ assignment.title }}</a>
                 {% endif %}
             </li>
         {% endfor %}
