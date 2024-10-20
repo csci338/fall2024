@@ -30,6 +30,7 @@
         .pj, a.pj,  
         .project, a.project,
         .lec, a.lec, 
+        .activity, a.activity, 
         .topic, a.topic, 
         .project, a.pj,
         .lab, a.lab,
@@ -57,6 +58,9 @@
     .pj, a.pj, 
     .project, a.project, 
     .lec, a.lec, 
+    .activity, a.activity,
+    .reading, a.reading,
+    .lecture, a.lecture, 
     .lab, a.lab, 
     .quiz, a.quiz, 
     .live, .recorded, 
@@ -87,8 +91,16 @@
     .pj, .pj:hover, .project, .project:hover {
         background: $clay;
     }
+    .lecture, .lecture:hover, a.lecture,
     .lec, .lec:hover, a.lec {
-        background: $nightSky;
+        background: $forest;
+    }
+    .activity, .activity:hover, a.activity {
+        background-color: $gold;
+    }
+    .reading, a.reading {
+        background: $autumn;
+        // color: #222;
     }
     .topic, .topic:hover, a.topic {
         background: $nightSky;

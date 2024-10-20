@@ -4,8 +4,8 @@ title: Code Editors
 type: lab
 draft: 0
 points: 6
+topic: 1
 abbreviation: Lab 1
-show_schedule: 1
 num: 1
 start_date: 2024-08-22
 due_date: 2024-08-27

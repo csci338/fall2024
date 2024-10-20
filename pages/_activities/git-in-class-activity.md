@@ -1,5 +1,5 @@
 ---
-layout: module
+layout: two-column
 title: Git Collaboration Activity
 type: activity
 

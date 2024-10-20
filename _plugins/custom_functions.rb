@@ -44,9 +44,9 @@ module Jekyll
         # Parse the date strings to Date objects if they are strings
         combined.map! do |date|
             if date.is_a?(String)
-            Date.strptime(date, '%Y-%m-%d')  # Parse string to Date
+                Date.strptime(date, '%Y-%m-%d')  # Parse string to Date
             elsif date.is_a?(Date)
-            date  # If it's already a Date object, use it as is
+                date  # If it's already a Date object, use it as is
             end
         end
         combined.compact.uniq.sort
@@ -66,25 +66,44 @@ module Jekyll
       end
 
 
-      def display_link_or_badge(page, hide_title=false)
-        type = page['type'] == "homework" ? "hw" : page['type']
-        if page['draft'] == 0
-          # Return an anchor (<a>) tag if the url exists
-          link = "<div class='mb-1'><a class='#{type}' href='/fall2024#{page['url']}'>#{type} #{page['num']}</a> #{hide_title ? "" : page['title']}</div>"
+      def get_url(url)
+        return "" if not url
+        if url.start_with?("http")
+            url
         else
-          # Return a span if no url exists
-          "<div class='mb-1'><span class='badge'>#{page['type']} #{page['num']}</span> #{hide_title ? "" : page['title']}</div>"
+            "/fall2024#{url}"
         end
       end
 
 
-      def display_assignment(page, hide_title=false)
+      def display_link_or_badge(page, hide_title=false, new_line=true, simple=false)
+        type = page['type'] == "homework" ? "hw" : page['type']
+        link_class = simple ? "" : type
+        class_name = new_line ? "block" : "inline-block"
+        
+        if page['draft'] == 0 or page['draft'] == nil
+          # Return an anchor (<a>) tag if the url exists
+          link = "<span class='mb-1 #{class_name}'>
+                <a class='#{link_class}' href='#{get_url(page['url'])}'>
+                    #{type ? type.capitalize : ""} #{page['num']}
+                </a>#{simple ? ":" : ""}
+                #{hide_title ? "" : "<span>#{page['title']}</span>"}
+            </span>"
+        else
+          # Return a span if no url exists
+          "<span class='mb-1 #{class_name}'><span class='badge'>#{page['type']} #{page['num']}</span> #{hide_title ? "" : page['title']}</span>"
+        end
+      end
+      
+
+
+      def display_assignment(page, hide_title=false, new_line=true)
         if page['type'] == 'lab'
           # Return an anchor (<a>) tag if the url exists
           "<div class='mb-1'>Lab #{page['num']}</div>"
         else
           # Return a span if no url exists
-          display_link_or_badge(page, hide_title=hide_title)
+          display_link_or_badge(page, hide_title=hide_title, new_line=new_line)
         end
       end
 
@@ -99,6 +118,62 @@ module Jekyll
         end
         # Return false if no page matches
         false
+      end
+
+
+      def convert_to_date_if_not_already(date)
+        # date.is_a?(Time) ? Date.parse(date.to_s) : Date.parse(date)
+        if date.is_a?(String)
+            Date.strptime(date, '%Y-%m-%d')  # Parse string to Date
+        elsif date.is_a?(Date)
+            date  # If it's already a Date object, use it as is
+        end
+      end
+
+
+      def get_labs_by_module_by_date(page, site, date)
+        labs = get_labs_by_module(page, site)
+        labs = labs.select { |lab| lab['start_date'] == date }
+        
+      end
+
+
+      def get_labs_by_module(page, site)
+        labs = []
+        if page['labs'] # Ensure page['labs'] is not nil before using it
+            labs = site['assignments'].select { |item| page['labs'].include?(item['num']) && item['type'] == 'lab' }
+        end
+        return labs
+      end
+
+
+      def get_all_module_activities(page, site)
+        resources = []
+        slides = page['slides'] || []
+        readings = page['readings'] || []
+        activities = page['activities'] || []
+        exercise_files = page['exercise_files'] || []  
+        labs = []
+        if page['labs'] # Ensure page['labs'] is not nil before using it
+            labs = site['assignments'].select { |item| page['labs'].include?(item['num']) }
+        end
+        resources.concat(slides).concat(readings).concat(activities).concat(exercise_files).concat(labs)
+      end
+
+
+
+      def get_module_dates(page, site)
+        items = get_all_module_activities(page, site)  
+        items.map { |item| 
+            # Parse the due_date string into a Date object
+            convert_to_date_if_not_already(item['start_date']) if item['start_date'] 
+        }.compact.uniq.sort
+      end
+
+
+
+      def filter_list_by_date(list, date)
+        list.select{ |item| convert_to_date_if_not_already(item['start_date']) == date if item['start_date'] } 
       end
   
     end

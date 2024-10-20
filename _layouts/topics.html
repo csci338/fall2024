@@ -3,53 +3,142 @@ layout: default
 ---
 
 <style>
-    .assignments.topics td:nth-child(1),
-    .assignments.topicsth:nth-child(1) {
+    .grid-two-col {
+        display: grid;
+        grid-template-columns: 80px auto;
+        gap: 20px;
+    }
+
+    .mb-1 {
+        margin-bottom: 10px;
+    }
+
+    .reading {
+        vertical-align: bottom;
+    }
+
+    .inline-block span {
+        font-weight: 500;
+    }
+
+    .grid-three-col-inner {
+        display: grid;
+        grid-template-columns: 90px 130px auto;
+        column-gap: 10px;
+        /* margin: 0 0 30px 0; */
+        padding: 10px;
+        border-bottom: solid 1px #CCC;
+    }
+
+    .grid-three-col-inner ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .grid-two-col-inner-inner {
+        display: grid;
+        grid-template-columns: 150px auto;
+        column-gap: 20px;
+        row-gap: 10px;
+    }
+
+    /* .assignments.topics td:nth-child(1),
+    .assignments.topics th:nth-child(1) {
         width: 100px !important;
         min-width: 100px !important;
         max-width: 100px !important;
+    } */
+
+    /* .assignments.topics td:nth-child(1),
+    .assignments.topics th:nth-child(1) {
+        width: 80px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
     }
+
 
     .assignments.topics td:nth-child(2),
     .assignments.topics th:nth-child(2) {
         min-width: 250px !important;
         max-width: none !important;
         width: auto !important;
+    } */
+
+    .assignments .compact li {
+        line-height: 1.1em;
+        margin-bottom: 10px;
     }
 
-    .assignments.topics p {
-        margin: 0;
-        line-height: 1.3em;
+    .assignments.topics p,
+    .assignments.li {
+        margin-bottom: 10;
+        line-height: 1.4em;
     }
 </style>
 
 {{content}}
 
-{% assign dateStart = site.term_start_date | date: '%s' %}
-{% assign now = 'now' | date: '%s' %}
-
+{% assign lastWeek = "" %}
 <section class="assignments topics">
-    <table>
-        <thead>
-            <tr>
-                <th>Topic</th>
-                <th>Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% assign topics = site.lectures | where: "type", "topic" | sort: 'due_date' %}
-            {% for topic in topics %}
-            <tr>
-                <td>
-                    {{ topic | display_link_or_badge: true }}
-                </td>
-                <td>
-                    <strong>{{ topic.title }}</strong>
-                    <p>{{ topic.description }}</p>
-                </td>
-            </tr>
+    <div class="grid-two-col1">
+        {% assign topics = site.lectures | where: "type", "topic" | sort: 'due_date' %}
+        {% for topic in topics %}
+
+        <div>
+            {{ topic | display_link_or_badge: true, false }} <strong>{{ topic.title }}</strong>
+            <p>{{ topic.description }}</p>
+            {% assign module_dates = topic | get_module_dates: site %}
+            {% for date in module_dates %}
+            <h3>
+                {% assign week = site.term_start_date | get_week_number: date %}
+                {% if lastWeek != week %}
+                    Week {{week}}
+                    {% assign lastWeek = week %}
+                {% endif %}
+            </h3>
+            <div class="grid-three-col-inner">
+                <span></span>
+                <strong>{{ date | date: "%A, %-m/%-d" }}</strong>
+
+                <div class="grid-two-col-inner-inner">
+                    <div>Slides & Activities</div>
+                    <div>
+                        <!-- Slides -->
+                        {% assign slides = topic.slides | filter_list_by_date: date %}
+                        {% for slide in slides %}
+                        {{ slide | display_link_or_badge: false, true }}
+                        {% endfor %}
+
+                        <!-- Activities -->
+                        {% assign activities = topic.activities | filter_list_by_date: date %}
+                        {% for activity in activities %}
+                        {{ activity | display_link_or_badge: false, true }}
+                        {% endfor %}
+
+                        <!-- Labs -->
+                        {% assign labs = topic | get_labs_by_module_by_date: site, date %}
+                        {% for lab in labs %}
+                        {{ lab | display_link_or_badge: false, true }}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Readings -->
+                    <div>Readings</div>
+                    <ul class="compact">
+                        {% assign readings = topic.readings | filter_list_by_date: date %}
+                        {% for reading in readings %}
+                        <li>
+                            {{ reading | display_link_or_badge: false, false }} <p>{{ reading.instructions}}</p>
+                            <!-- {{ reading.link }} -->
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+        {% endfor %}
+    </div>
 
 </section>
