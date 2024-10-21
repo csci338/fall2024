@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Testing & Static Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_1-reading--reference-materials">1. Reading &amp; Reference Materials</a></li>
+  <li><a href="#id_2-introduction--background">2. Introduction &amp; Background</a></li>
+  <li><a href="#id_3-set-up">3. Set Up</a></li>
+  <li><a href="#id_4-javascript-tasks">4. JavaScript Tasks</a>
+    <ol>
+      <li><a href="#id_41-implement-the-rock-paper-scissors-function">4.1. Implement the “Rock Paper Scissors” function</a></li>
+      <li><a href="#id_42-writing-tests-without-a-framework">4.2. Writing tests without a framework</a></li>
+      <li><a href="#id_43-writing-tests-with-a-framework-mocha">4.3. Writing tests with a framework (Mocha)</a></li>
+      <li><a href="#id_44-running-the-static-analysis--code-formatting-tools">4.4. Running the static analysis / code formatting tools</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_5-python-tasks">5. Python Tasks</a>
+    <ol>
+      <li><a href="#id_51-implement-the-rock-paper-scissors-function">5.1. Implement the “Rock Paper Scissors” function</a></li>
+      <li><a href="#id_52-writing-tests-without-a-framework">5.2. Writing tests without a framework</a></li>
+      <li><a href="#id_53-writing-rests-with-a-framework-unittest">5.3. Writing rests with a framework (unittest)</a></li>
+      <li><a href="#id_54-running-the-static-analysis--code-formatting-tools">5.4. Running the static analysis / code formatting tools</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_6-what-to-submit">6. What to Submit</a></li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 6: Testing & Static Analysis
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Wed, 11/06 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<h2 id="id_1-reading--reference-materials">1. Reading &amp; Reference Materials</h2>
+
+<ul>
+  <li><a href="https://circleci.com/blog/unit-testing-vs-integration-testing" target="_blank">High-level overview of unit v. integration testing.</a></li>
+  <li><a href="https://abseil.io/resources/swe-book/html/ch11.html" target="_blank">Chapter 11. Testing Overview</a></li>
+  <li><a href="https://programmingwithmosh.com/wp-content/uploads/2019/02/Python-Cheat-Sheet.pdf" target="_blank">Python Reference</a></li>
+  <li><a href="https://quickref.me/javascript.html" target="_blank">JavaScript Reference</a></li>
+</ul>
+
+<h2 id="id_2-introduction--background">2. Introduction &amp; Background</h2>
+<p>For the final class project, we will be collaboratively building a full-stack web application using Python and JavaScript. To successfully pull this off, you will need some familiarity with these languages, as well as knowledge of how to write good tests. Give this, this lab has been designed to help you practice these skills.</p>
+
+<p>In this lab you will be doing a few things:</p>
+<ol>
+  <li>Syncing the latest changes from  <a href="https://github.com/csci338/class-exercises-fall2024" target="_blank">class-exercises-fall2024</a>.</li>
+  <li>Doing some JavaScript tasks (<a href="#4-javascript-tasks">described below</a>), including:
+    <ul>
+      <li>Implementing a “rock paper scissors” function</li>
+      <li>Writing “vanilla” unit tests for your function</li>
+      <li>Re-writing your tests using the <code class="highlighter-rouge">mocha</code> module (a testing framework)</li>
+      <li>Running the JavaScript static analysis and code formatting tools to ensure clean, consistent code</li>
+    </ul>
+  </li>
+  <li>Doing some Python tasks – doing the same stuff you did in JavaScript, but in Python (<a href="#5-python-tasks">described below</a>), including:
+    <ul>
+      <li>Implementing the same “rock paper scissors” function</li>
+      <li>Writing “vanilla” unit tests</li>
+      <li>Re-writing your tests using the <code class="highlighter-rouge">unittest</code> module</li>
+      <li>Running the Python static analysis and code formatting tools to ensure clean, consistent code</li>
+    </ul>
+  </li>
+  <li>Creating a pull request when you’re done (<a href="#6-what-to-submit">described below</a>)</li>
+</ol>
+
+<h2 id="id_3-set-up">3. Set Up</h2>
+<p>Before you begin, get the latest code from class-exercises-fall2024</p>
+
+<p><strong>On GitHub:</strong></p>
+<ul>
+  <li>Sync the latest changes from the class version of <code class="highlighter-rouge">class-exercises-fall2024</code> to your copy of the repo.</li>
+</ul>
+
+<p><strong>On your local computer:</strong></p>
+<ul>
+  <li>Make sure that all of your changes from the last lab are staged and committed.</li>
+  <li>Checkout your main branch: <code class="highlighter-rouge">git checkout main</code></li>
+  <li>Pull down the latest changes: <code class="highlighter-rouge">git pull</code>
+    <ul>
+      <li>If you did it correctly, you will notice that a new <code class="highlighter-rouge">lab06</code> folder has been created.</li>
+    </ul>
+  </li>
+  <li>Create a new branch called lab06: <code class="highlighter-rouge">git checkout -b lab06</code></li>
+  <li>Verify that you’re on your new branch: <code class="highlighter-rouge">git branch</code></li>
+</ul>
+
+<p>You will be editing <strong>your copy of the <code class="highlighter-rouge">lab06</code> files</strong> (inside the <code class="highlighter-rouge">your-username</code> folder). Don’t edit or delete the original <code class="highlighter-rouge">lab06</code> files.</p>
+
+<h2 id="id_4-javascript-tasks">4. JavaScript Tasks</h2>
+<p>Begin by completing the JavaScript tasks, which are located in the <code class="highlighter-rouge">javascript_rps</code> folder (<code class="highlighter-rouge">rps</code> stands for “rock paper scissors”), as described below:</p>
+
+<h3 id="id_41-implement-the-rock-paper-scissors-function">4.1. Implement the “Rock Paper Scissors” function</h3>
+<p>Open <code class="highlighter-rouge">your-task.js</code> and take a look at the <code class="highlighter-rouge">rps</code> function, which should look like this:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">rps</span><span class="p">(</span><span class="nx">hand1</span><span class="p">,</span> <span class="nx">hand2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// finish this code:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">hand1</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">rock</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">hand2</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">paper</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">Paper wins!</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">invalid</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Your job is to implement the following “rock paper scissors” logic and return the corresponding message (exactly as it is shown below):</p>
+<ul>
+  <li>If one hand is <strong>rock</strong> and the other is <strong>paper</strong>, return the string <strong>“Paper wins!”</strong></li>
+  <li>If one hand is <strong>paper</strong> and the other is <strong>scissors</strong>, return the string <strong>“Scissors wins!”</strong></li>
+  <li>If one hand is <strong>scissors</strong> and the other is <strong>rock</strong>, return the string <strong>“Rock wins!”</strong></li>
+  <li>If both hands are the same (and have valid arguments), return <strong>“Tie!”</strong></li>
+  <li>If anything other than rock, paper, or scissors are passed in, return <strong>“Invalid”</strong></li>
+</ul>
+
+<h3 id="id_42-writing-tests-without-a-framework">4.2. Writing tests without a framework</h3>
+<p>As you are writing your <code class="highlighter-rouge">rps</code> function, write corresponding tests to verify your implementation for different possible arguments that a user might pass in.</p>
+
+<p>You will first write some tests <em>without</em> a framework. To help you, I have written two helper functions in <code class="highlighter-rouge">helpers.js</code>. The high-level point here is that <strong>anyone can write and run tests – simply and easily – without using a fancy testing library</strong>. Please open the <code class="highlighter-rouge">run-tests-vanilla.js</code> file to inspect how these two helper functions are used. Pause and try and understand what this code does.</p>
+
+<p>When you’ve thought about it, please run the test suite by navigating into the <code class="highlighter-rouge">javascript_rps</code> file and running the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">test</span>
+</code></pre></div></div>
+
+<p>Your should see the following output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> node run-tests-vanilla.js
+
+<span class="nt">----------------------------------------------------</span>
+✅ Success: it returns <span class="s2">"Hello world!"</span>
+✅ Success: paper beats rock
+❌ Failure: paper beats rock <span class="o">(</span>flipped<span class="o">)</span>
+<span class="nt">----------------------------------------------------</span>
+
+😬 Only  2 out of 3 tests passed.
+</code></pre></div></div>
+
+<p>To understand what the <code class="highlighter-rouge">npm test</code> command did, open the <code class="highlighter-rouge">package.json</code> file and see if you can see what the <code class="highlighter-rouge">npm test</code> command does.</p>
+
+<p>Please write all the tests to ensure that the relevant possible inputs yield the expected output. As you make new test functions, don’t forget to add the name of the function definition to the list of tests that are passed into the <code class="highlighter-rouge">runAllTests</code> function (at the bottom of the file).</p>
+
+<h3 id="id_43-writing-tests-with-a-framework-mocha">4.3. Writing tests with a framework (Mocha)</h3>
+<p>Now that you have implemented the <code class="highlighter-rouge">rps</code> function and written the corresponding tests using “vanilla” JavaScript, you are going to rewrite your tests to use <strong>Mocha</strong> – a JavaScript testing framework.</p>
+
+<h4 id="id_install-mocha">Install Mocha</h4>
+<p>Mocha offers a set of functions and objects that organize your tests and make them easier to define and write. It also requires that all tests be placed in a folder called <code class="highlighter-rouge">tests</code>. Install Mocha via the npm package manager by typing the following command on the CLI:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>This command reads the <code class="highlighter-rouge">package.json</code> file and installs all of the specified dependencies in a folder called <code class="highlighter-rouge">node_modules</code>. Open up the <code class="highlighter-rouge">node_modules</code> folder and look at all of the dependencies that were just created! Is <code class="highlighter-rouge">leftpad</code> in there :)?</p>
+
+<h4 id="id_run-the-mocha-tests">Run the mocha tests</h4>
+<p>To run the tests, you must do two things. First, modify <code class="highlighter-rouge">package.json</code> by setting the test value to “mocha” (instead of “node run-tests-vanilla.js”):</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Second, issue the following command on the CLI:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm test
+</code></pre></div></div>
+
+<p>If you did it correctly you should see output that looks like the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> mocha
+
+
+
+  Hello World Tests
+    ✔ returns <span class="s2">"Hello world!"</span>
+
+  Rock Paper Scissors Tests
+    1<span class="o">)</span> knows that paper beats rock
+
+
+  1 passing <span class="o">(</span>3ms<span class="o">)</span>
+  1 failing
+
+  1<span class="o">)</span> Rock Paper Scissors Tests
+       knows that paper beats rock:
+
+      AssertionError <span class="o">[</span>ERR_ASSERTION]: <span class="s1">'invalid'</span> <span class="o">==</span> <span class="s1">'Paper wins!'</span>
+      + expected - actual
+
+      <span class="nt">-invalid</span>
+      +Paper wins!
+      
+      at Context.&lt;anonymous&gt; <span class="o">(</span>file:///Users/svanwart/unca/csci338/fall2024/course-website/course-files/labs/lab06/javascript_rps/test/run-tests-mocha.js:60:16<span class="o">)</span>
+      at process.processImmediate <span class="o">(</span>node:internal/timers:478:21<span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="id_rewrite-your-tests-using-the-mocha-conventions">Rewrite your tests using the Mocha conventions</h4>
+<p>Once you have successfully run the tests, open the <code class="highlighter-rouge">tests/run-tests-mocha.js</code> file and see if you can understand what’s going on. Pause and think. What is the same and what is different?</p>
+
+<p>After inspecting the code, please add new mocha tests to exhaustively test the <code class="highlighter-rouge">rps</code> function using the Mocha helper functions. Note that instead of your functions returning <strong>true</strong> or <strong>false</strong>, you need to use Node’s built-in <code class="highlighter-rouge">assert</code> module.</p>
+
+<h3 id="id_44-running-the-static-analysis--code-formatting-tools">4.4. Running the static analysis / code formatting tools</h3>
+<p>TBD:</p>
+<ol>
+  <li>Install X, Y, and Z</li>
+  <li>Modify the <code class="highlighter-rouge">package.json</code> as follows:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TBD
+</code></pre></div>    </div>
+  </li>
+  <li>Run X command. What happened?</li>
+  <li>Run Y command. What happened?</li>
+</ol>
+
+<p>Weee.</p>
+
+<h2 id="id_5-python-tasks">5. Python Tasks</h2>
+<p>When you’ve completed your JavaScript tasks, you’re going to do the same thing all over again, using Python. The Python version of these files is located in the <code class="highlighter-rouge">python_rps</code> folder. Please navigate to it using your CLI.</p>
+
+<h3 id="id_51-implement-the-rock-paper-scissors-function">5.1. Implement the “Rock Paper Scissors” function</h3>
+<p>Open <code class="highlighter-rouge">your-task.py</code> and take a look at the rps function, which should look like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">rps</span><span class="p">(</span><span class="n">hand1</span><span class="p">,</span> <span class="n">hand2</span><span class="p">):</span>
+    <span class="c1"># finish this code:
+</span>    <span class="k">if</span> <span class="n">hand1</span> <span class="o">==</span> <span class="s">"rock"</span> <span class="ow">and</span> <span class="n">hand2</span> <span class="o">==</span> <span class="s">"paper"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Paper wins!"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Invalid"</span>
+</code></pre></div></div>
+
+<p>Your job is to implement the function using the same logic as described above.</p>
+
+<h3 id="id_52-writing-tests-without-a-framework">5.2. Writing tests without a framework</h3>
+<p>As you are writing your rps function, write corresponding tests to verify your implementation for different possible arguments that a user might pass in.</p>
+
+<p>Like before, you will first write your tests without a framework. To help you, I have written two helper functions in <code class="highlighter-rouge">helpers.py</code>. Please open the <code class="highlighter-rouge">run_tests_vanilla.py</code> file to inspect how these two helper functions are used. Pause and try and understand what this code does.</p>
+
+<p>When you’ve thought about it, please run the test suite by navigating into the <code class="highlighter-rouge">python_rps</code> folder and running the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 run_tests_vanilla.py
+</code></pre></div></div>
+
+<p>You should see the following output:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 run_tests_vanilla.py
+<span class="nt">--------------------------------------------------</span>
+✅ Success: It returns <span class="s2">"Hello world!"</span>
+✅ Success: Paper beats rock
+❌ Failure: Paper beats rock <span class="o">(</span>flipped<span class="o">)</span>
+<span class="nt">--------------------------------------------------</span>
+
+😬 Only  2 out of 3 tests passed.
+</code></pre></div></div>
+
+<p>Please write additional tests to ensure that all possible inputs yield the expected output. As you make new test functions, don’t forget to add the name of the function definition to the list of tests that are passed into the <code class="highlighter-rouge">run_all_tests</code> function (at the bottom of the file).</p>
+
+<h3 id="id_53-writing-rests-with-a-framework-unittest">5.3. Writing rests with a framework (unittest)</h3>
+<p>Now that you have implemented the rps function and written the corresponding tests using “vanilla” Python, you are going to rewrite your tests to use <strong>unittest</strong> – a built-in Python module is part of the Python language. Like Mocha, <strong>unittest</strong> offers programmers a set of convenience functions and classes for organizing and writing tests.</p>
+
+<p>Learn more here: <a href="https://docs.python.org/3/library/unittest.html" target="_blank">https://docs.python.org/3/library/unittest.html</a></p>
+
+<p>Please open <code class="highlighter-rouge">run_tests_framework.py</code>. In this file, a “starter” test class has been defined for you. It includes two starter tests that you can use a model for writing your tests.</p>
+
+<h4 id="id_run-the-unittest-tests">Run the unittest tests</h4>
+<p>To run the <code class="highlighter-rouge">unittest</code> version of your tests, issue the following command on the CLI (from within the python_rps directory):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 run_tests_framework.py <span class="nt">--verbose</span>
+</code></pre></div></div>
+
+<p>If you did it correctly you should see output that looks like the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test_hello_world <span class="o">(</span>__main__.TestStringMethods.test_hello_world<span class="o">)</span> ... ok
+test_paper_beats_rock <span class="o">(</span>__main__.TestStringMethods.test_paper_beats_rock<span class="o">)</span> ... FAIL
+
+<span class="o">======================================================================</span>
+FAIL: test_paper_beats_rock <span class="o">(</span>__main__.TestStringMethods.test_paper_beats_rock<span class="o">)</span>
+<span class="nt">----------------------------------------------------------------------</span>
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">"/Users/svanwart/unca/csci338/fall2024/course-website/course-files/labs/lab06/python_rps/run_tests_framework.py"</span>, line 51, <span class="k">in </span>test_paper_beats_rock
+    self.assertEqual<span class="o">(</span>rps<span class="o">(</span><span class="s1">'paper'</span>, <span class="s1">'rock'</span><span class="o">)</span>, <span class="s1">'Paper wins!'</span><span class="o">)</span>
+AssertionError: <span class="s1">'Invalid'</span> <span class="o">!=</span> <span class="s1">'Paper wins!'</span>
+- Invalid
++ Paper wins!
+
+
+<span class="nt">----------------------------------------------------------------------</span>
+Ran 2 tests <span class="k">in </span>0.000s
+
+FAILED <span class="o">(</span><span class="nv">failures</span><span class="o">=</span>1<span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="id_rewrite-your-tests-using-the-unittest-conventions">Rewrite your tests using the unittest conventions</h4>
+<p>Once you have successfully run the tests, open the <code class="highlighter-rouge">run_tests_framework.py</code> file and see if you can understand what’s going on. Pause and think. What is the same and what is different?</p>
+
+<p>After inspecting the code, please add new <code class="highlighter-rouge">unittest</code> tests to exhaustively test the rps function using the helper functions. Note that instead of having your functions return <strong>True</strong> or <strong>False</strong>, you will now need to use the unittest.TestCase methods. Examples:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">self.assertTrue</code></li>
+  <li><code class="highlighter-rouge">self.assertEqual</code></li>
+</ul>
+
+<p>A list of possible methods is described here: <a href="https://docs.python.org/3/library/unittest.html" target="_blank">https://docs.python.org/3/library/unittest.html</a></p>
+
+<h3 id="id_54-running-the-static-analysis--code-formatting-tools">5.4. Running the static analysis / code formatting tools</h3>
+<p>Performing</p>
+
+<h2 id="id_6-what-to-submit">6. What to Submit</h2>
+<p>When you’re done, push your <code class="highlighter-rouge">lab06</code> branch to GitHub and make a pull request. Please ensure that the destination (left-hand side) is pointing to the <code class="highlighter-rouge">main</code> branch of <strong>your repo</strong> and the source (right-hand side) is pointing to the <code class="highlighter-rouge">lab06</code> branch of <strong>your repo</strong></p>
+
+<p>You will have one week to complete this assignment.</p>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+    </body>
+</html>

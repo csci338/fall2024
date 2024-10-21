@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Intro to Client-Side Programming with React</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_1-background-readings-and-resources">1. Background Readings and Resources</a></li>
+  <li><a href="#id_2-set-up">2. Set-up</a>
+    <ol>
+      <li><a href="#id_note-lab-6-builds-on-lab-5">Note: Lab 6 builds on Lab 5</a></li>
+      <li><a href="#id_1-edit-serverpy">1. Edit server.py</a></li>
+      <li><a href="#id_2-create-a-new-html-file">2. Create a new HTML file</a></li>
+      <li><a href="#id_3-add-a-new-stylesheet">3. Add a new stylesheet</a></li>
+      <li><a href="#id_4-view-your-starter-client">4. View your starter client</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_3-your-tasks">3. Your Tasks</a>
+    <ol>
+      <li><a href="#id_1-read-download-and-display-all-of-the-tasks">1. Read (download) and display all of the tasks</a></li>
+      <li><a href="#id_2-create-new-tasks-on-the-server-from-the-web-client">2. Create new tasks on the server from the web client</a></li>
+      <li><a href="#id_3-delete-a-task">3. Delete a task</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_4-what-to-turn-in">4. What to Turn In</a></li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 8: Intro to Client-Side Programming with React
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Thu, 11/07 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<style>
+    .img {
+        width: 80%;
+        border: solid 1px black;
+    }
+    .img-sm {
+        width: 50%;
+        border: solid 1px black;
+        margin: 5px auto;
+        display: block;
+    }
+</style>
+
+<p>To become familiar with client-side software engineering considerations, we need a concrete example to work with. Given this, we have decided to delve into client-side web programming – mostly because web clients are accessible and ubiquitous (and client-side web programming is a valuable skillset).</p>
+
+<p>Therefore, in this lab, you will learn a bit about HTML, CSS, and JavaScript. Please refer to the web resources below to familiarize yourself with these languages. We will also be doing a very brief “crash course” of these languages during class.</p>
+
+<h2 id="id_1-background-readings-and-resources">1. Background Readings and Resources</h2>
+<ul>
+  <li><a href="https://csci344.github.io/spring2023/lectures/topic03">CSCI 344 HTML Resources</a></li>
+  <li><a href="https://csci344.github.io/spring2023/lectures/topic04">CSCI 344 CSS Resources</a></li>
+  <li>JavaScript
+    <ul>
+      <li><a href="https://csci344.github.io/spring2023/lectures/topic05">Language Features &amp; the DOM</a></li>
+      <li><a href="https://csci344.github.io/spring2023/lectures/topic06">Looping, Iteration, &amp; Higher-Order Functions</a></li>
+      <li><a href="https://csci344.github.io/spring2023/lectures/topic07">The Fetch API</a></li>
+    </ul>
+  </li>
+  <li>Slides: Intro to Client-Side Web Tech</li>
+</ul>
+
+<h2 id="id_2-set-up">2. Set-up</h2>
+<blockquote>
+  <h3 id="id_note-lab-6-builds-on-lab-5">Note: Lab 6 builds on Lab 5</h3>
+  <p>In order to begin Lab 6, your Lab 5 code needs to be working correctly. If you haven’t yet finished Lab 5, please make it a priority.</p>
+</blockquote>
+
+<p>After completing <a href="lab05">Lab 5</a>, you will create a new branch from your existing <code class="highlighter-rouge">lab05-your-username</code> branch (from within your <code class="highlighter-rouge">class-exercises-fall2024</code> repository) as follows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status  <span class="c"># make sure you've committed all of your files</span>
+git branch  <span class="c"># verify that you're on the lab05-your-username branch</span>
+git checkout <span class="nt">-b</span> lab06-your-username  <span class="c"># should create a new branch based on your lab05 branch</span>
+git branch  <span class="c"># verify that you're on your new branch</span>
+</code></pre></div></div>
+
+<p>By branching from your <code class="highlighter-rouge">lab05-your-username</code> branch, your Lab 5 code will be included in your <code class="highlighter-rouge">lab06-your-username</code> branch (so that your client can interact with it). When you’re done, please make the following modifications to your code:</p>
+
+<h3 id="id_1-edit-serverpy">1. Edit server.py</h3>
+<p>At the top of <code class="highlighter-rouge">server.py</code>, add the following import statement:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi.staticfiles</span> <span class="kn">import</span> <span class="n">StaticFiles</span>
+</code></pre></div></div>
+
+<p>Then, at the very bottom of <code class="highlighter-rouge">server.py</code>, add this line:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">app</span><span class="p">.</span><span class="n">mount</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s">"ui"</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">"ui"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This code allows us to server static files from the <code class="highlighter-rouge">ui</code> directory as if they were coming from the root of the website. Verify that you did it correctly by trying to access these static files via FastAPI (note that the Docker container you made in Lab 5 must be running):</p>
+
+<ul>
+  <li><a href="http://localhost:8000/js/main.js" target="_blank">http://localhost:8000/js/main.js</a></li>
+  <li><a href="http://localhost:8000/css/styles.css" target="_blank">http://localhost:8000/css/styles.css</a></li>
+</ul>
+
+<p>If you see a JavaScript file and a CSS file, it worked.</p>
+
+<h3 id="id_2-create-a-new-html-file">2. Create a new HTML file</h3>
+<p>Within the <code class="highlighter-rouge">ui</code> directory, create a new file called <code class="highlighter-rouge">index.html</code> and add the following code to it:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/css/tasks.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/main.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Web Client<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;header&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>My Tasks<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/header&gt;</span>
+
+    <span class="nt">&lt;main&gt;</span>
+
+        <span class="nt">&lt;section&gt;</span>
+            <span class="nt">&lt;h2&gt;</span>Task List<span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"task-list"</span><span class="nt">&gt;</span>
+                <span class="c">&lt;!-- tasks go here --&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/section&gt;</span>
+
+        <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"add-task"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2&gt;</span>Add New Task<span class="nt">&lt;/h2&gt;</span>
+            
+            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Task name"</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"description"</span><span class="nt">&gt;</span>Description:<span class="nt">&lt;/label&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Task description"</span> <span class="na">id=</span><span class="s">"description"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;button&gt;</span>Add<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+
+    <span class="nt">&lt;/main&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="id_3-add-a-new-stylesheet">3. Add a new stylesheet</h3>
+<p>Within the <code class="highlighter-rouge">ui/css</code> directory, create a new file called <code class="highlighter-rouge">tasks.css</code> and add the following code to it:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="n">Arial</span><span class="p">,</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">header</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">75px</span><span class="p">;</span>
+    <span class="nl">border-bottom</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#000</span><span class="p">;</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">main</span> <span class="p">{</span>
+    <span class="nl">max-width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">section</span><span class="o">,</span>
+<span class="nt">form</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#000</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.item</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+    <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">auto</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#000</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.item</span> <span class="nt">strong</span><span class="o">,</span>
+<span class="nc">.item</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">grid-column</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">2</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.item</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">grid-row</span><span class="p">:</span> <span class="m">2</span> <span class="p">/</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.item</span> <span class="nt">button</span> <span class="p">{</span>
+    <span class="nl">grid-row</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.add-task</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+    <span class="py">grid-template-columns</span><span class="p">:</span> <span class="m">100px</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="py">row-gap</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">column-gap</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.add-task</span> <span class="nt">h2</span> <span class="p">{</span>
+    <span class="nl">grid-column</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.add-task</span> <span class="nt">button</span> <span class="p">{</span>
+    <span class="nl">grid-column</span><span class="p">:</span> <span class="m">2</span> <span class="p">/</span> <span class="m">3</span><span class="p">;</span>
+    <span class="py">justify-self</span><span class="p">:</span> <span class="n">flex-start</span>
+<span class="p">}</span>
+
+<span class="nt">label</span> <span class="p">{</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.9em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">input</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#CCC</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">6px</span> <span class="m">12px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">button</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">6px</span> <span class="m">12px</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#FFF</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">form</span> <span class="nt">button</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">79</span><span class="p">,</span> <span class="m">67</span><span class="p">,</span> <span class="m">182</span><span class="p">);</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="m">#CCC</span><span class="p">;</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="m">600</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You don’t really need to understand the style declarations in any detail (save that for CSCI 344). What you do need to know is that this file is in charge of styling your web client and controlling the layout.</p>
+
+<h3 id="id_4-view-your-starter-client">4. View your starter client</h3>
+<p>When you’re done with steps 1-3 above, you should be able to view your starter client as follows (make sure your Docker container from Lab 5 is running):</p>
+<ul>
+  <li><a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a></li>
+</ul>
+
+<p>If you see something like this in your web browser, you’re all set up:</p>
+
+<p><img class="img" src="../assets/images/lab06-setup.png" alt="Screenshot of what your starter client should look like" /></p>
+
+<h2 id="id_3-your-tasks">3. Your Tasks</h2>
+<p>Now that you’ve set up your “starter client,” your job is to get your client to interact with the server routes that you implemented in <a href="lab05">Lab 5</a> using the browser’s built-in <code class="highlighter-rouge">fetch</code> API.</p>
+
+<blockquote class="blockquote-no-margin">
+  <p>When you are finished with all of the tasks described in this section, your client should function like this:</p>
+
+  <p><img class="img-sm" src="../assets/images/lab06-demo-client.gif" alt="Animation of what the final product should look like" /></p>
+</blockquote>
+
+<p>Since this is not a webdev class, we’re just going to ask you to interact with three of the routes you made in Lab 5:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Route</th>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">/tasks</code></td>
+      <td>GET</td>
+      <td>Reads (downloads) the task list from the server</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">/tasks</code></td>
+      <td>POST</td>
+      <td>Creates (adds) a new task on the server in the following format:<br /> <code class="highlighter-rouge">{ "name": "Task 1", "description": "Some description." }</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">/tasks/&lt;id&gt;</code></td>
+      <td>DELETE</td>
+      <td>Deletes the task stored in the <code class="highlighter-rouge">id</code> slot of the array. Example:<br /><code class="highlighter-rouge">/tasks/3</code> will delete the task stored in array position 3.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="id_1-read-download-and-display-all-of-the-tasks">1. Read (download) and display all of the tasks</h3>
+<p>To display all of the tasks on the client, you are going to create some JavaScript functions. Before you begin, take a look at <code class="highlighter-rouge">index.html</code>. Note that at the top of the file, there’s a link to <code class="highlighter-rouge">main.js</code>, which indicates that the webpage will have access to all of the logic in the <code class="highlighter-rouge">main.js</code> file.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/main.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>The “defer” attribute indicates that the script will only run after the entire HTML page has been loaded and rendered. Currently, <code class="highlighter-rouge">main.js</code> outputs “Hello world” to the console. Use the browser’s built-in inspector to view the console output.</p>
+
+<h4 id="id_get-the-tasks">Get the tasks</h4>
+<p>Your first job is to create a JavaScript function to fetch all of the server tasks, and then display them to the screen. To do this, add the following function definition and invocation to <code class="highlighter-rouge">main.js</code>:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// definition</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getTasks</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// invocation</span>
+<span class="nx">getTasks</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Now, refresh your web browser and take a look at the console. It should have outputted all of your tasks to the screen. A few notes on this code:</p>
+
+<ul>
+  <li>Like with Python’s asyncio, fetching is asynchronous.</li>
+  <li>Fetching data is a two step process:
+    <ul>
+      <li>The first function invocation – <code class="highlighter-rouge">fetch("/tasks")</code> – returns the response headers from the server.</li>
+      <li>The second function invocation – <code class="highlighter-rouge">response.json()</code> – returns the actual response payload (data).</li>
+    </ul>
+  </li>
+  <li>The <code class="highlighter-rouge">await</code> keywords means that the next statement will not execute until the asynchronous function resolves.</li>
+</ul>
+
+<h4 id="id_display-a-task">Display a task</h4>
+<p>Now that you know how to get data back from the server using fetch, your next step is to display the tasks in a visual form on the browser screen. To do this, we need to build some HTML. Let’s create a function that converts a task object to an HTML snippet:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">taskToHTML</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`
+        &lt;div class="item"&gt;
+            &lt;strong&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/strong&gt;
+            &lt;p&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="p">}</span><span class="s2">&lt;/p&gt;
+        &lt;/div&gt;
+    `</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This function takes a task objet as an argument and returns an HTML representation of the task. A few notes about this code:</p>
+<ul>
+  <li>In JavaScript, a template literal (everything surrounded by the “backtick” character) is evaluated as a “smart string” (linebreaks OK).</li>
+  <li>Within the template literal, anything surrounded by the <code class="highlighter-rouge">${ }</code> symbol is treated like a JavaScript expression. Any expression inside of this symbol – within a template literal – will be evaluated. For example:
+    <ul>
+      <li><code class="highlighter-rouge">${ 2 + 2 }</code> evaluates to 4.</li>
+      <li><code class="highlighter-rouge">${ foo }</code> evaluates to the value stored inside of <code class="highlighter-rouge">foo</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="id_display-all-of-the-tasks">Display all of the tasks</h4>
+<p>Finally, you’re going to modify the <code class="highlighter-rouge">getTasks()</code> function you just made so that it iterates through the task array and appends each HTML representation of the task to the screen.</p>
+
+<p>Final code:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">function</span> <span class="nx">taskToHTML</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`
+        &lt;div class="item"&gt;
+            &lt;strong&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/strong&gt;
+            &lt;p&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="p">}</span><span class="s2">&lt;/p&gt;
+        &lt;/div&gt;
+    `</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getTasks</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// access an existing HTML element (from index.html):</span>
+    <span class="kd">const</span> <span class="nx">listEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.task-list</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">listEl</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+
+    <span class="c1">// go get the data:</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
+
+    <span class="c1">// append each task as an HTML element to the DOM:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">listEl</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">No tasks found.</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// loop through </span>
+        <span class="nx">tasks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">task</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">listEl</span><span class="p">.</span><span class="nx">insertAdjacentHTML</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeend</span><span class="dl">"</span><span class="p">,</span> <span class="nx">taskToHTML</span><span class="p">(</span><span class="nx">task</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// kick off the fetch</span>
+<span class="nx">getTasks</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>This code should display all of the tasks to the screen.</p>
+
+<blockquote>
+  <h4 id="id_pro-tips">Pro Tips</h4>
+  <ul>
+    <li>Before moving on to the next section, make sure you can follow the logic of the code above (as you’ll need to understand it for Homework 2).</li>
+    <li>To test the code, add some hard-coded tasks to <code class="highlighter-rouge">taskdb</code> in the <code class="highlighter-rouge">server.py</code> file (see below).</li>
+  </ul>
+</blockquote>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">taskdb</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Lab 5"</span><span class="p">,</span>
+    <span class="s">"description"</span><span class="p">:</span> <span class="s">"Finish implementing and writing tests for Lab 5"</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Topic 8 Readings"</span><span class="p">,</span>
+    <span class="s">"description"</span><span class="p">:</span> <span class="s">"Make sure you do this week's readings for CSCI338!"</span>
+<span class="p">}]</span>
+</code></pre></div></div>
+
+<h3 id="id_2-create-new-tasks-on-the-server-from-the-web-client">2. Create new tasks on the server from the web client</h3>
+<p>We can now fetch and display tasks (from the server). But how do we create new tasks? Well, we can use fetch for this too!</p>
+
+<h4 id="id_creating-a-hard-coded-task">Creating a hard-coded task</h4>
+<p>To create a new task, we’ll need to issue a POST request to <code class="highlighter-rouge">/tasks</code>. To do this, we’ll start by adding another function to <code class="highlighter-rouge">main.js</code>:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// function definition:</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">createTask</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// create a fake task:</span>
+    <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">New Task</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Description of new task.</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">newTask</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="nx">description</span>
+    <span class="p">}</span>
+
+    <span class="c1">// post the task to the server using the "POST" method:</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">newTask</span><span class="p">),</span>
+    <span class="p">});</span>
+    <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+    <span class="c1">// requery and redraw the tasks (lazy, but OK for now)</span>
+    <span class="k">await</span> <span class="nx">getTasks</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// function invocation:</span>
+<span class="nx">createTask</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>After adding this code, refresh your browser. You should see that a new task has been created. Refresh your browser again. You should see another new task (with the same name and description).</p>
+<ul>
+  <li>Each time you refresh your browser, a new task is created, because the <code class="highlighter-rouge">createTask()</code> always runs once (when the page first loads).</li>
+  <li>This is obviously not how we ultimately want the program to function, but it’s a start!</li>
+</ul>
+
+<p>Please study the code above carefully:</p>
+<ul>
+  <li>Note that unlike with a GET request, a POST request typically has a payload – stored in a data field called <code class="highlighter-rouge">body</code>.</li>
+  <li>Also note that the header of the request specifies the data format that’s being sent (in this case, we’re sending JSON over the network).</li>
+</ul>
+
+<h4 id="id_creating-a-task-when-the-user-clicks-the-add-button">Creating a task when the user clicks the add button</h4>
+<p>Hopefully you’re asking yourself: how do I only create a new task when I actually click the “Add” button (versus when the page loads)? Well, to do this, we need to add an <strong>event handler</strong> to our form, and override the default action that the browser takes when a form gets submitted.</p>
+
+<h5 id="id_html-edit">HTML Edit</h5>
+<p>Please add an event handler to the form tag of <code class="highlighter-rouge">index.html</code>. The event handler tells your browser that when the user submits the form, it should invoke the <code class="highlighter-rouge">createTask</code> function:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"add-task"</span> <span class="na">onsubmit=</span><span class="s">"createTask(event)"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h5 id="id_javascript-edit">JavaScript Edit</h5>
+<p>You will also need to modify the <code class="highlighter-rouge">createTask</code> function as follows:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// function definition:</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">createTask</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="c1">// everything else stays the same</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">// createTask();</span>
+</code></pre></div></div>
+
+<p>This change allows us to pass a browser event object as an argument into the function (so that we can override its behavior). The <code class="highlighter-rouge">ev.preventDefault()</code> invocation basically says to the browser, “instead of doing what the form is supposed to do, execute my code instead.” Note that you will also comment out the <code class="highlighter-rouge">createTask()</code> invocation so that the function not longer runs on pageload.</p>
+
+<p>Now that you have made these changes, you can add a new task by clicking the “Add” button.</p>
+
+<h4 id="id_allowing-the-user-to-specify-the-name-and-description">Allowing the user to specify the name and description</h4>
+<p>Although we’re making progress, we’re still not able to name or describe the task (because it’s hard coded). To fix this, let’s have our function read from the form inputs given by our user by making the following changes to the <code class="highlighter-rouge">createTask()</code> function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// function definition:</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">createTask</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="c1">// modify the name and description variables to read from the DOM (instead of using hard-coded values):</span>
+    <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+
+    <span class="c1">// everything else stays the same</span>
+    <span class="p">...</span>
+
+
+
+    <span class="c1">// at the very end, clear out the form:</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now test again by filling in actual values into the form fields. Hopefully, you can now add your own tasks to the server!</p>
+
+<h3 id="id_3-delete-a-task">3. Delete a task</h3>
+<p>You’ve now created a bunch of tasks! But how do you delete them? To answer this question, we need to both add a new <code class="highlighter-rouge">deleteTask()</code> function and also modify the <code class="highlighter-rouge">taskToHTML()</code> function so that each task has a corresponding delete button. Please make the following modifications:</p>
+
+<h4 id="id_a-tasktohtml-changes">A. taskToHTML() changes</h4>
+<p>Modify the <code class="highlighter-rouge">taskToHTML()</code> function as follows:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">taskToHTML</span><span class="p">(</span><span class="nx">task</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`
+        &lt;div class="item"&gt;
+            &lt;strong&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/strong&gt;
+            &lt;p&gt;</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="p">}</span><span class="s2">&lt;/p&gt;
+            &lt;button onclick="deleteTask(</span><span class="p">${</span><span class="nx">idx</span><span class="p">}</span><span class="s2">)"&gt;Delete&lt;/button&gt;
+        &lt;/div&gt;
+    `</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Note that the function now accepts a second argument, <code class="highlighter-rouge">idx</code></li>
+  <li>Note that a new HTML tag – a button – has been added to the HTML snippet. When the button is clicked, it will invoke the <code class="highlighter-rouge">deleteTask()</code> function and pass it the position (index) of the task to be removed.</li>
+</ul>
+
+<h4 id="id_b-deletetask">B. deleteTask()</h4>
+<p>To complete this tutorial, you will add a <code class="highlighter-rouge">deleteTask()</code> function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">deleteTask</span><span class="p">(</span><span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/tasks/</span><span class="p">${</span><span class="nx">idx</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span> <span class="p">});</span>
+    <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+    <span class="c1">// requery and redraw the tasks (lazy, but OK for now)</span>
+    <span class="k">await</span> <span class="nx">getTasks</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Study this function. You should be able to figure out what it does (ask if you don’t understand something…or google it…or use ChatGPT).</p>
+
+<p>Create, read, and delete have now been implemented. If you want, you can implement update (PUT) for extra credit.</p>
+
+<h2 id="id_4-what-to-turn-in">4. What to Turn In</h2>
+<p>Please create a pull request with the fully implemented web client (which should be completed inside of your version of your <code class="highlighter-rouge">lab05</code> folder).</p>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+    </body>
+</html>
