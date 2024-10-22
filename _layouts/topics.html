@@ -82,16 +82,6 @@ layout: two-column
     <h2 id="topic_{{topic.num}}">{{ topic | display_link_or_badge: false, true }}</h2>
 
     <p>{{ topic.description }}</p>
-    {% if topic.questions %}
-    <div class="card">
-        <h3 id="dqs_{{topic.num}}">Study Questions</h3>
-        <ol class="compact">
-            {% for question in topic.questions %}
-            <li>{{question}}</li>
-            {% endfor %}
-        </ol>
-    </div>
-    {% endif %}
 
     {% assign module_dates = topic | get_module_dates: site %}
     {% if module_dates.size > 0 %}
@@ -152,7 +142,7 @@ layout: two-column
                     <!-- Readings -->
                     {% assign readings = topic.readings | filter_list_by_date: date %}
                     {% for reading in readings %}
-                        {{ reading | display_link_or_badge: false, true, true }}
+                    {{ reading | display_link_or_badge: false, true, true }}
                     {% endfor %}
                 </td>
             </tr>
@@ -161,6 +151,17 @@ layout: two-column
     </table>
     {% else %}
     <p>Coming Soon!</p>
+    {% endif %}
+
+    {% if topic.questions %}
+    <div class="card">
+        <h3 id="dqs_{{topic.num}}">Study Questions</h3>
+        <ol class="compact">
+            {% for question in topic.questions %}
+            <li>{{question}}</li>
+            {% endfor %}
+        </ol>
+    </div>
     {% endif %}
     {% endfor %}
     </div>

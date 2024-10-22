@@ -23,7 +23,7 @@ slides:
       url: https://docs.google.com/presentation/d/1FP8lJuy1C6AzzPxpulNOu9al_SIub2zF/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
     - start_date: 2024-10-29
       type: lecture
-      draft: 1
+      draft: 0
       num: 8
       title: Shifting Left with Testing, Static Analysis, & Continuous Integration
       url: https://docs.google.com/presentation/d/1Fp1aWWNRoO9D3PPUf3xbU7mEZec1j8gY/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
