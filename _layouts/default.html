@@ -1,18 +1,22 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        {% include head.html %}
-    </head>
-    <body class="one-column">
-        <div class="container">
-            {% include header.html %}
-            {% include navigation.html %}
-            <main>
-                {% include page_title.html %}   
-                {{ content }}
-            </main>
-            {% include footer.html %}
-        </div>
-        {% include scripts.html %}
-    </body>
+
+<head>
+    {% include head.html %}
+</head>
+
+<body class="one-column">
+    <div class="container">
+        {% include header.html %}
+        {% include navigation.html %}
+        <main>
+            {% include page_title.html %}
+            {{ content }}
+        </main>
+        {% include footer.html %}
+    </div>
+    {% include scripts.html %}
+    <script type="text/javascript" src="{{site.baseurl}}/assets/js/expandable.js"></script>
+</body>
+
 </html>

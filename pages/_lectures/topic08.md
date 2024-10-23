@@ -11,6 +11,9 @@ readings:
       title: Design Systems
       skim: 1
       url: /resources/design-systems
+    - start_date: 2024-11-12
+      type: reading
+      notes: Readings are light this week so that you can work on <a href="/fall2024/assignments/project01">Project 1</a>!
 slides: 
     - start_date: 2024-11-12
       draft: 1

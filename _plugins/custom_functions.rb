@@ -63,7 +63,7 @@ module Jekyll
 
 
       def get_url(url)
-        return "" if not url
+        return nil if not url
         url.start_with?("http") ? url: "/fall2024#{url}"
       end
 
@@ -72,10 +72,10 @@ module Jekyll
       end
 
 
-      def display_link_or_badge(page, hide_title=false, new_line=true, simple=false)
+      def display_link_or_badge(page, hide_title=false, new_line=true, simple=false, show_notes=true)
         type = page['type'] == "homework" ? "hw" : page['type']
         link_class = simple ? "" : type
-        class_name = new_line ? "block" : "inline-block"
+        class_name = new_line ? "block" : "inline"
         badge_text = type ? type.capitalize : ""
         badge_text = simple ? page['title'] : "#{badge_text} #{page['num']}"
         url = get_url(page['url'])
@@ -85,24 +85,36 @@ module Jekyll
         extras = (page['type'] == "reading" and page['required'] == nil) ? " <span class='optional'>optional</span>" : ""
         extras = (page['type'] == "reading" and page['skim'] == 1) ? " <span class='optional'>skim</span>" : extras
         colon = "<span style='display: none'>: </span>"
-        
-        if page['draft'] == 0 or page['draft'] == nil
+        is_draft = (page['draft'] == 1)
+        notes = show_notes ? "<div>#{page['notes']}</div>" : ""
+
+        if !is_draft && url
           # Return an anchor (<a>) tag if the url exists
-          "<span class='mb-1 #{class_name}' target=''>"\
+          return "<span class='mb-1 #{class_name}' target=''>"\
                 "#{extras}"\
                 "<a class='#{link_class}' href='#{url}' target='#{target}'>"\
                     "#{link_icon} #{badge_text}"\
                 "</a>#{colon}"\
                 "#{title}"\
-            "</span>"
-        else
-          # Return a span if no url exists
-          "<span class='mb-1 #{class_name}'>"\
-             "#{extras}"\
-             "<span class='badge'>#{badge_text}</span>#{colon}"\
-                "#{title}"\
-            "</span>"
+            "</span>"\
+            "#{notes}"
         end
+
+        if is_draft
+            # Return a span if no url exists
+            return "<span class='mb-1 #{class_name}'>"\
+               "#{extras}"\
+               "<span class='badge'>#{badge_text}</span>#{colon}"\
+                  "#{title}"\
+              "</span>"\
+              "#{notes}"
+        end
+        
+        if page['notes'] != nil
+            return page['notes']
+        end
+
+        return ""
       end
       
 
@@ -212,7 +224,7 @@ module Jekyll
         end
         return []
       end
-  
+
     end
   end
   

@@ -3,10 +3,7 @@
     <h3 id="readings_{{idx}}">Readings</h3>
     <ul>
     {% for reading in readings %}
-        <li>
-            {{ reading | display_link_or_badge: true, false, true }}
-            <br>{{ reading.notes}}
-        </li>
+        <li>{{ reading | display_link_or_badge: true, false, true }}</li>
     {% endfor %}
     </ul>
 {% endif %}

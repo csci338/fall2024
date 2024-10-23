@@ -33,29 +33,10 @@ layout: two-column
         border-width: 0px;
     }
 
-    .assignments.topics table thead tr:first-child {
+    .assignments.topics table tr {
+        display: grid;
+        grid-template-columns: 80px 80px 1fr 1fr;
         border-bottom: dotted 1px #CCC;
-    }
-
-
-    .assignments.topics td:nth-child(1),
-    .assignments.topics th:nth-child(1) {
-        width: 80px !important;
-        min-width: 80px !important;
-        max-width: 80px !important;
-    }
-
-
-    .assignments.topics td:nth-child(2),
-    .assignments.topics th:nth-child(2) {
-        min-width: 90px !important;
-        max-width: 90px !important;
-        width: 90px !important;
-    }
-
-    .assignments .compact li {
-        line-height: 1.4em;
-        margin-bottom: 4px;
     }
 
     .assignments.topics p,
@@ -71,7 +52,31 @@ layout: two-column
         background-color: #FAFAFA;
         margin-bottom: 20px;
     }
+
+
+
+    @media screen and (max-width: 1000px) {
+        main {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .assignments.topics table tr {
+            display: grid;
+            grid-template-columns: 80px 80px 1fr;
+        }
+
+        .assignments.topics table tr td:nth-child(4) {
+            grid-column: 3 / 4;
+        }
+
+        .assignments.topics table tr th:nth-child(4) {
+            display: none;
+        }
+    }
 </style>
+
+{% include toggle-button.html %}
 
 {{content}}
 <section class="assignments topics">
@@ -85,83 +90,92 @@ layout: two-column
 
     {% assign module_dates = topic | get_module_dates: site %}
     {% if module_dates.size > 0 %}
-    <h3 id="ra_{{topic.num}}">Readings & Activities</h3>
-    <table>
-        <thead>
-            <th>Week</th>
-            <th></th>
-            <th>Slides / Activities</th>
-            <th>Readings</th>
-        </thead>
-        <tbody>
-            <!-- Topic Details -->
-            {% for date in module_dates %}
-            {% assign week = site.term_start_date | get_week_number: date %}
-            <tr>
-                <td>
-                    {% if lastWeek != week %}
-                    <strong>Week {{week}}</strong>
-                    {% assign lastWeek = week %}
-                    {% endif %}
-                </td>
-                <td>
-                    {{ date | date: "%a, %-m/%-d" }}
-                </td>
-                <td>
-                    <!-- Slides -->
-                    {% assign slides = topic.slides | filter_list_by_date: date %}
-                    {% for slide in slides %}
-                    {{ slide | display_link_or_badge: false, true }}
-                    {% endfor %}
+{% expandable expanded="true" %}
+<h3 id="ra_{{topic.num}}">Readings & Activities</h3>
+<table>
+    <thead>
+        <th>Week</th>
+        <th></th>
+        <th>Slides / Activities</th>
+        <th>Readings</th>
+    </thead>
+    <tbody>
+        <!-- Topic Details -->
+        {% for date in module_dates %}
+        {% assign week = site.term_start_date | get_week_number: date %}
+        <tr>
+            <td>
+                {% if lastWeek != week %}
+                <strong>Week {{week}}</strong>
+                {% assign lastWeek = week %}
+                {% endif %}
+            </td>
+            <td>
+                {{ date | date: "%a, %-m/%-d" }}
+            </td>
+            <td>
+                <!-- Slides -->
+                {% assign slides = topic.slides | filter_list_by_date: date %}
+                {% for slide in slides %}
+                {{ slide | display_link_or_badge: false, true }}
+                {% endfor %}
 
-                    <!-- Videos -->
-                    {% assign videos = topic.videos | filter_list_by_date: date %}
-                    {% for video in videos %}
-                    {{ video | display_link_or_badge: false, true }}
-                    {% endfor %}
+                <!-- Videos -->
+                {% assign videos = topic.videos | filter_list_by_date: date %}
+                {% for video in videos %}
+                {{ video | display_link_or_badge: false, true }}
+                {% endfor %}
 
-                    <!-- Activities -->
-                    {% assign activities = topic.activities | filter_list_by_date: date %}
-                    {% for activity in activities %}
-                    {{ activity | display_link_or_badge: false, true }}
-                    {% endfor %}
+                <!-- Activities -->
+                {% assign activities = topic.activities | filter_list_by_date: date %}
+                {% for activity in activities %}
+                {{ activity | display_link_or_badge: false, true }}
+                {% endfor %}
 
-                    <!-- Labs -->
-                    {% assign labs = topic | get_labs_by_module_by_date: site, date %}
-                    {% for lab in labs %}
-                    {{ lab | display_link_or_badge: false, true }}
-                    {% endfor %}
+                <!-- Labs -->
+                {% assign labs = topic | get_labs_by_module_by_date: site, date %}
+                {% for lab in labs %}
+                {{ lab | display_link_or_badge: false, true }}
+                {% endfor %}
 
-                    <!-- Projects -->
-                    {% assign projects = topic | get_projects_by_module_by_date: site, date %}
-                    {% for project in projects %}
-                    {{ project | display_link_or_badge: false, true }}
-                    {% endfor %}
-                </td>
-                <td>
-                    <!-- Readings -->
-                    {% assign readings = topic.readings | filter_list_by_date: date %}
+                <!-- Projects -->
+                {% assign projects = topic | get_projects_by_module_by_date: site, date %}
+                {% for project in projects %}
+                {{ project | display_link_or_badge: false, true }}
+                {% endfor %}
+            </td>
+            <td>
+                <!-- Readings -->
+                {% assign readings = topic.readings | filter_list_by_date: date %}
+                <ul>
                     {% for reading in readings %}
-                    {{ reading | display_link_or_badge: false, true, true }}
+                    <li>
+                        {{ reading | display_link_or_badge: true, false, true }}
+                    </li>
                     {% endfor %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endexpandable %}
     {% else %}
     <p>Coming Soon!</p>
     {% endif %}
+    
 
     {% if topic.questions %}
-    <div class="card">
-        <h3 id="dqs_{{topic.num}}">Study Questions</h3>
-        <ol class="compact">
-            {% for question in topic.questions %}
-            <li>{{question}}</li>
-            {% endfor %}
-        </ol>
-    </div>
+{% expandable expanded="true" %}
+<div class="card">
+    <h3 id="dqs_{{topic.num}}">Study Questions</h3>
+    <ol class="compact">
+        {% for question in topic.questions %}
+        <li>{{question}}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endexpandable %}
     {% endif %}
     {% endfor %}
     </div>

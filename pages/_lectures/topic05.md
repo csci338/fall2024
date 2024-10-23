@@ -28,6 +28,9 @@ slides:
       title: Shifting Left with Testing, Static Analysis, & Continuous Integration
       url: https://docs.google.com/presentation/d/1Fp1aWWNRoO9D3PPUf3xbU7mEZec1j8gY/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
 readings:
+    - start_date: 2024-09-24
+      type: reading
+      notes: Forgot to post the readings :(
     - start_date: 2024-10-29
       type: reading
       title: High-level overview of unit v. integration testing

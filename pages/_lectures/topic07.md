@@ -14,16 +14,12 @@ readings:
       url: https://chat.openai.com/
       required: 1
       notes: >
-        "Be ready to have a conversation about the discussion questions, 
+        Be ready to have a conversation about the discussion questions, 
         including what you learned from ChatGPT (and whether you 
-        think ChatGPT got it right)."
-    # - start_date: 2024-11-12
-    #   type: reading
-    #   title: NextJS overview of client-side technologies
-    #   url: https://nextjs.org/learn/foundations/about-nextjs
-    #   required: 1
-    #   notes: >
-    #     Please read the following sections: (1)1 About Next.js, (2) From JavaScript to React, (3) From React to Next.js, and (4) How Next.js works
+        think ChatGPT got it right).
+    - start_date: 2024-11-05
+      type: reading
+      notes: Readings are light this week so that you can work on <a href="/fall2024/assignments/project01">Project 1</a>!
     - start_date: 2024-11-12
       type: reading
       title: How A Small Team of Developers Created React at Facebook (video)
