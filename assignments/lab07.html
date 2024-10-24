@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Build a "Vanilla" Web Client</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_1-background-readings-and-resources">1. Background Readings and Resources</a>
+    <ol>
+      <li><a href="#id_other-references-as-needed">Other References (As Needed)</a></li>
+      <li><a href="#id_slides--video-recordings">Slides &amp; Video Recordings</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_2-set-up">2. Set-up</a>
+    <ol>
+      <li><a href="#id_tips-before-you-begin">Tips before you begin</a></li>
+      <li><a href="#id_21-create-a-lab07-your-username-branch">2.1. Create a lab07-your-username branch</a></li>
+      <li><a href="#id_22-modify-existing-files-and-add-some-new-ones">2.2. Modify existing files and add some new ones</a></li>
+      <li><a href="#id_23-build-new-docker-images--container">2.3. Build New Docker Images &amp; Container</a></li>
+      <li><a href="#id_24-setup-your-app-to-work-with-react">2.4. Setup your app to work with React</a></li>
+      <li><a href="#id_25-test-your-formatter-and-linter">2.5. Test your formatter and linter</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_3-implement-your-react-application">3. Implement Your React Application</a>
+    <ol>
+      <li><a href="#id_31-create-component-stubs">3.1. Create Component Stubs</a></li>
+      <li><a href="#id_32-making-the-task-component-data-driven">3.2. Making the Task component data-driven</a></li>
+      <li><a href="#id_33-fetching-data-from-the-server">3.3. Fetching data from the server</a></li>
+      <li><a href="#id_34-displaying-server-data-in-tasklist">3.4. Displaying server data in TaskList</a></li>
+      <li><a href="#id_35-deleting-tasks">3.5. Deleting Tasks</a></li>
+      <li><a href="#id_36-notifying-tasklist-that-a-task-has-been-deleted">3.6. Notifying TaskList that a task has been deleted</a></li>
+      <li><a href="#id_37-creating-a-new-task">3.7. Creating a new task</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_4-what-to-turn-in">4. What to Turn In</a></li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 7: Build a "Vanilla" Web Client
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Sun, 11/10 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<style>
+
+    .img {
+        width: 80%;
+        border: solid 1px black;
+    }
+    .img-sm {
+        width: 50%;
+        border: solid 1px black;
+        margin: 10px 0;
+        display: block;
+    }
+
+</style>
+
+<p>In Lab 6, you built a client-side web app using “Vanilla JavaScript.” In this lab, you will be building the same client using React.</p>
+
+<h2 id="id_1-background-readings-and-resources">1. Background Readings and Resources</h2>
+<p>Some useful React readings:</p>
+<ul>
+  <li><a href="https://nextjs.org/learn/foundations/about-nextjs" target="_blank">NextJS overview of client-side technologies</a>. Please read the following sections:
+    <ul>
+      <li>About Next.js</li>
+      <li>From JavaScript to React</li>
+      <li>From React to Next.js</li>
+      <li>How Next.js works</li>
+    </ul>
+  </li>
+  <li><a href="https://beta.reactjs.org/learn" target="_blank">Quick Start</a></li>
+  <li><a href="https://beta.reactjs.org/learn/thinking-in-react" target="_blank">Thinking in React</a>. Make note of the steps:
+    <ul class="compact">
+      <li>Break the UI into a component hierarchy</li>
+      <li>Build a static version in React</li>
+      <li>Find the minimal but complete representation of UI state (noting the difference between “props” and “state”</li>
+      <li>Identify where your state should live</li>
+      <li>Adding “inverse data flow”</li>
+    </ul>
+  </li>
+  <li><a href="https://beta.reactjs.org/learn/sharing-state-between-components" target="_blank">Sharing state between components</a></li>
+  <li><a href="https://beta.reactjs.org/learn/tutorial-tic-tac-toe" target="_blank">Tic Tac Toe</a>
+    <ul>
+      <li>You are strongly encouraged to do this on your own (see <a href="../activities/react-get-started">Tic Tac Toe</a>)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="id_other-references-as-needed">Other References (As Needed)</h3>
+<ul>
+  <li><a href="https://beta.reactjs.org/learn/synchronizing-with-effects" target="_blank">Synchronizing with effects</a></li>
+  <li><a href="https://beta.reactjs.org/learn/you-might-not-need-an-effect" target="_blank">You might not need an effect</a></li>
+</ul>
+
+<h3 id="id_slides--video-recordings">Slides &amp; Video Recordings</h3>
+<ul>
+  <li><a href="https://docs.google.com/presentation/d/1HehB3NsYtJ8oKenTI1AKN1rIjmG0hXxMbJrNfumUIgg/edit#slide=id.p" target="_blank">React Slides from Class</a> + <a href="https://drive.google.com/file/d/1Q-jBMgt22UUpIKsNE7SlbW8j0fggb4O1/view?usp=sharing" target="_blank">Lecture Recording</a> (10/24/2023)</li>
+</ul>
+
+<h2 id="id_2-set-up">2. Set-up</h2>
+
+<blockquote class="blockquote-no-margin">
+  <h3 id="id_tips-before-you-begin">Tips before you begin</h3>
+  <p>In this version of the task list app, you are using React and Parcel. React is a client-side framework that will ultimately need to be transpiled to HTML, CSS, and JavaScript. Parcel is a tool that helps you transpile / bundle your code everytime you save. Given this:</p>
+  <ul>
+    <li>We recommend that you <strong>disable VS Code’s Auto Save feature</strong> for this lab, because you don’t want to activate your bundler on every keystroke (which may be invalid JavaScript…which could trigger transpiler errors that aren’t really errors).</li>
+    <li>Conversely, if you think the transpiler is confused and you want to trigger the build process again, just add a blank line to your code and save (all saves trigger the build process).</li>
+  </ul>
+</blockquote>
+
+<h3 id="id_21-create-a-lab07-your-username-branch">2.1. Create a lab07-your-username branch</h3>
+<p>After completing <a href="lab06">Lab 6</a>, you will create a new branch from your existing <code class="highlighter-rouge">lab06-your-username</code> branch (from within your <code class="highlighter-rouge">class-exercises-fall2024</code> repository) as follows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status  <span class="c"># make sure you've committed all of your files</span>
+git branch  <span class="c"># verify that you're on the lab06-your-username branch</span>
+git checkout <span class="nt">-b</span> lab07-your-username  <span class="c"># should create a new branch based on your lab05 branch</span>
+git branch  <span class="c"># verify that you're on your new branch</span>
+</code></pre></div></div>
+
+<p>When you’re done, please make the following modifications to your code:</p>
+
+<h3 id="id_22-modify-existing-files-and-add-some-new-ones">2.2. Modify existing files and add some new ones</h3>
+<p>In order to run your Task app using React, we’re going use two different Docker images – one for Python + Fast API, and one for Node.js + React. To do this, please open VS Code and make the following changes (within your <code class="highlighter-rouge">lab07-your-username</code> branch) to your version of <code class="highlighter-rouge">lab05</code>:</p>
+
+<h4 id="id_221-dockerfile">2.2.1. Dockerfile</h4>
+<p>Replace the contents of your current Dockerfile (within the <code class="highlighter-rouge">lab05</code> directory) with this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Image for Node.js and React:</span>
+from node:lts
+COPY ./src/ui /ui
+WORKDIR /ui
+RUN npm run build
+
+<span class="c"># Image for Python / Fast API</span>
+from python:3.11
+COPY ./src /app
+COPY <span class="nt">--from</span><span class="o">=</span>0 /ui/dist /app/ui/dist
+WORKDIR /app
+RUN pip <span class="nb">install </span>poetry
+RUN poetry <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Note that there are now two images:</p>
+<ul>
+  <li>One for the client that uses Node (Lines 1-5), and</li>
+  <li>One for the server that uses Python (Lines 7-13).</li>
+</ul>
+
+<h4 id="id_222-composeyaml">2.2.2. compose.yaml</h4>
+<p>Also in the <code class="highlighter-rouge">lab05</code> directory – on the same level as your Docker file – create a new file called <code class="highlighter-rouge">compose.yaml</code> that contains the following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
+  server:
+    build:
+      context: <span class="nb">.</span>
+    ports:
+      - <span class="s2">"8000:8000"</span>
+    volumes:
+      - ./src:/app
+    depends_on:
+      ui:
+       condition: service_healthy
+    entrypoint: poetry run uvicorn server:app <span class="nt">--host</span> 0.0.0.0 <span class="nt">--reload</span>
+
+  ui:
+    image: node:lts
+    <span class="c"># user: "${UID}:${GID}"</span>
+    ports:
+      - <span class="s2">"1234:1234"</span>
+    volumes:
+      - ./src/ui:/app
+    working_dir: /app
+    healthcheck:
+      <span class="nb">test</span>: <span class="s2">"ls dist"</span>
+      <span class="nb">timeout</span>: 90s
+      interval: 10s
+    entrypoint: npm run watch
+</code></pre></div></div>
+
+<p>The Docker compose file’s job is to provide instructions regarding how each container should be built from its respective image.</p>
+
+<h4 id="id_223-packagejson">2.2.3. package.json</h4>
+<p>Inside of <code class="highlighter-rouge">src/ui</code>, create a new file called <code class="highlighter-rouge">package.json</code> with the following code:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"html-validate *.html &amp;&amp; stylelint ./css/*.css &amp;&amp; eslint ./js/*.js"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm install &amp;&amp; parcel build index.html"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"watch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm install &amp;&amp; parcel watch index.html --no-hmr"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prettier -w ./js/*.js"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.51.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"eslint-plugin-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^7.33.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"html-validate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.6.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"parcel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.10.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prettier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.11.10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stylelint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^15.11.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stylelint-config-standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^34.0.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^18.2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"react-dom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^18.2.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="id_224-create-an-eslintrcjson-file">2.2.4. Create an .eslintrc.json file</h4>
+<p>Inside of <code class="highlighter-rouge">src/ui</code>, create a new file called <code class="highlighter-rouge">.eslintrc.json</code> with the following code:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"react"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"detect"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"es2021"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"eslint:recommended"</span><span class="p">,</span><span class="w"> </span><span class="s2">"plugin:react/recommended"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parserOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ecmaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"module"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"react"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"react/prop-types"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"no-unused-vars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"off"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="id_225-create-a-stylelintrcjson-file">2.2.5. Create a .stylelintrc.json file</h4>
+<p>Inside of <code class="highlighter-rouge">src/ui</code>, create a new file called <code class="highlighter-rouge">.stylelintrc.json</code> with the following code:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stylelint-config-standard"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"declaration-block-no-redundant-longhand-properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"no-descending-specificity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"color-function-notation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="id_226-update-the-gitignore-file">2.2.6. Update the .gitignore file</h4>
+<p>Since we will now be introducing React, some new folders will get created (<code class="highlighter-rouge">node_modules</code>, <code class="highlighter-rouge">.parcel-cache</code>, and <code class="highlighter-rouge">dist</code>). Because these directories contain code that has been generated by third-party modules, they are typically <strong><em>excluded</em></strong> from version control using the <code class="highlighter-rouge">.gitignore</code> file. Therefore, please open your <code class="highlighter-rouge">.gitignore</code> file (at the root of your <code class="highlighter-rouge">lab05</code>) and add the following lines:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules
+.parcel-cache
+dist
+</code></pre></div></div>
+
+<h3 id="id_23-build-new-docker-images--container">2.3. Build New Docker Images &amp; Container</h3>
+<p>You are now ready to build your Docker containers using the Docker compose command, which you will issue from within your <code class="highlighter-rouge">lab05</code> directory (on the command line):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up
+</code></pre></div></div>
+
+<p>Unlike before, the shell processes runs in the foreground (which is actually a good thing because you can debug!). When the installation and build scripts finish, you should see an output line that says something like:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Uvicorn running on http://0.0.0.0:8000 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Your server is now ready to be tested. Please verify that your old “vanilla” client is running: <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a></p>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_two-docker-images-two-containers">Two Docker Images, Two Containers</h4>
+  <p>Notice that in your Docker Dashboard, there are two images (one for node and one for python) and two containers. Pretty neat! This means that if you need to issue any node commands, hop onto the <code class="highlighter-rouge">task-list-labs-ui</code> container. Similarly, if you need to issue any python commands, hop onto <code class="highlighter-rouge">task-list-labs-server</code> container. Reminder of how to get to the shell prompt for each:</p>
+</blockquote>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>
+docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_id&gt; sh
+</code></pre></div></div>
+
+<h3 id="id_24-setup-your-app-to-work-with-react">2.4. Setup your app to work with React</h3>
+<p>Finally, now that your new Docker instance is configured, you’re ready to rewrite your code using react. Please make the following changes:</p>
+
+<h4 id="id_241-server-side-updates">2.4.1. Server-Side Updates</h4>
+<p>In <code class="highlighter-rouge">server.py</code>, change your mount point to <code class="highlighter-rouge">ui/dist</code> (which is the directory where your bundled client-side files will live). This line should be at the very bottom of <code class="highlighter-rouge">server.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
+</span><span class="n">app</span><span class="p">.</span><span class="n">mount</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s">"ui/dist"</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">"ui"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>By changing this path, you’re telling Fast API that all of your client-side files will come from the bundled version of your files created by Parcel (which happens to be <code class="highlighter-rouge">ui/dist</code>).</p>
+
+<h4 id="id_242-client-side-file-updates">2.4.2. Client-Side File Updates</h4>
+
+<h5 id="id_indexhtml">index.html</h5>
+<p>Rename your current <code class="highlighter-rouge">index.html</code> file (in <code class="highlighter-rouge">ui</code>) to <code class="highlighter-rouge">index-vanilla.html</code>. Then create a new, blank, <code class="highlighter-rouge">index.html</code> file in the same folder. When you’re done, add the following code to <code class="highlighter-rouge">index.html</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"./css/tasks.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"./js/main.js"</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;title&gt;</span>React Client<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h5 id="id_mainjs">main.js</h5>
+<p>Rename your current <code class="highlighter-rouge">main.js</code> file (in <code class="highlighter-rouge">ui/js</code>) to <code class="highlighter-rouge">main-vanilla.js</code>. You’ll be creating a new React version of <code class="highlighter-rouge">main.js</code> in the next section.</p>
+
+<h3 id="id_25-test-your-formatter-and-linter">2.5. Test your formatter and linter</h3>
+<p>From the command line on your laptop (or on the UI Docker container), navigate to the <code class="highlighter-rouge">src/ui</code> directory and run the linter and formatter:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run format  <span class="c"># will automatically fix your JavaScript formatting</span>
+npm run lint    <span class="c"># will check your HTML, CSS, and JavaScript formatting</span>
+</code></pre></div></div>
+
+<p>You are now ready to build your React app.</p>
+
+<h2 id="id_3-implement-your-react-application">3. Implement Your React Application</h2>
+<p>React and other client-side frameworks offer many convenient features including:</p>
+<ul>
+  <li>A way to encapsulate smaller snippets of functionality into components</li>
+  <li>A set of design patterns that other developers are likely also familiar with (so you can hit the ground running)</li>
+  <li>A set of convenience functions for managing common tasks (like DOM Manipulation and managing state)</li>
+</ul>
+
+<h3 id="id_31-create-component-stubs">3.1. Create Component Stubs</h3>
+<p>For our React version of our “Task Client”, we’re going to break up our functionality into 4 components:</p>
+
+<ul>
+  <li><a href="#form">Form</a></li>
+  <li><a href="#task">Task</a></li>
+  <li><a href="#task-list">TaskList</a></li>
+  <li><a href="#app">App</a></li>
+</ul>
+
+<p>Before we implement all of the server requests and event handlers, let’s first create stubs for each of our components (just the JSX).</p>
+
+<h4 id="form">3.1.1. Form.js</h4>
+<p>The <code class="highlighter-rouge">Form</code> component’s job is to provide a way to:</p>
+
+<ul class="checkbox-list">
+  <li>Accept information about a new task from the user</li>
+  <li>Create a new task (by issuing a <strong>POST</strong> request to <code class="highlighter-rouge">/tasks</code>)</li>
+  <li>Handle bad user input / server errors</li>
+  <li>Notify the rest of the application if a new task has been successfully created</li>
+</ul>
+
+<p><img class="img-sm" src="../assets/images/lab07/form.jpg" alt="Screenshot of a form" /></p>
+
+<p>Let’s beging by creating a <code class="highlighter-rouge">Form.js</code> file inside of the <code class="highlighter-rouge">ui/js</code> directory. Paste the code shown below into <code class="highlighter-rouge">Form.js</code>, which returns a JSX representation of the form:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Form</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">className</span><span class="p">=</span><span class="s">"add-task"</span> <span class="na">method</span><span class="p">=</span><span class="s">"post"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Add New Task<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">htmlFor</span><span class="p">=</span><span class="s">"name"</span><span class="p">&gt;</span>Name:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+                <span class="na">placeholder</span><span class="p">=</span><span class="s">"Task name"</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">htmlFor</span><span class="p">=</span><span class="s">"description"</span><span class="p">&gt;</span>Description:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+                <span class="na">placeholder</span><span class="p">=</span><span class="s">"Task description"</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Add<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>We’ll handle the communication logic later.</p>
+
+<h4 id="task">3.1.2. Task.js</h4>
+<p>The <code class="highlighter-rouge">Task</code> component’s job is to:</p>
+
+<ul class="checkbox-list">
+  <li>Display the details of a task</li>
+  <li>Provide a way to delete the task (by issuing a <strong>DELETE</strong> request to <code class="highlighter-rouge">/tasks/&lt;task_id&gt;</code>)</li>
+  <li>Notify the rest of the application if a new task has been successfully deleted</li>
+</ul>
+
+<p><img class="img-sm" src="../assets/images/lab07/task.png" alt="Screenshot of a task" /></p>
+
+<p>Create a <code class="highlighter-rouge">Task.js</code> file inside of the <code class="highlighter-rouge">ui/js</code> directory.  Paste the code shown below into <code class="highlighter-rouge">Task.js</code>, which returns a JSX representation of a task with hardcoded data.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Task</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"item"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>Dishes<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Do the dishes.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We’ll handle the communication logic later.</p>
+
+<h4 id="task-list">3.1.3. TaskList.js</h4>
+<p>The <code class="highlighter-rouge">TaskList</code> component’s job is to:</p>
+
+<ul class="checkbox-list">
+  <li>Display all of the user’s tasks</li>
+  <li>When notified of an update, re-display and updated version of the user’s tasks (we haven’t yet decided if this component will be issuing a <strong>GET</strong> request to <code class="highlighter-rouge">/tasks</code> of if that should happen “higher up” in the component hierarchy).</li>
+</ul>
+
+<p><img class="img-sm" src="../assets/images/lab07/task-list.png" alt="Screenshot of a task list component" /></p>
+
+<p>Create a <code class="highlighter-rouge">TaskList.js</code> file inside of the <code class="highlighter-rouge">ui/js</code> directory.  Paste the code shown below into <code class="highlighter-rouge">TaskList.js</code>, which returns a JSX representation of a list of tasks.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Task</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Task</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskList</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"task-list"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that we’ve hardcoded 3 tasks in this component (which will change when we start fetching data from the server). We’ll modify this component later so that it’s data-driven.</p>
+
+<h4 id="app">3.1.4. App.js</h4>
+<p>The <code class="highlighter-rouge">App</code> component’s job is to:</p>
+
+<ul class="checkbox-list">
+  <li>Hold all of the other components</li>
+  <li>Pass messages between the components (by giving the child components access to its variables and functions)</li>
+</ul>
+
+<p><img class="img-sm" src="../assets/images/lab07/app.png" alt="Screenshot of a app component" /></p>
+
+<p>Create an <code class="highlighter-rouge">App.js</code> file inside of the <code class="highlighter-rouge">ui/js</code> directory.  Paste the code shown below into <code class="highlighter-rouge">App.js</code>, which returns a JSX representation of a list of tasks.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span><span class="p">,</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Form</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Form</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TaskList</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./TaskList</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Task List<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TaskList</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Form</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that <code class="highlighter-rouge">App</code> imports <code class="highlighter-rouge">Form</code> and <code class="highlighter-rouge">TaskList</code>. We’ll figure out the communication logic, including who passes which message where.</p>
+
+<h4 id="id_315-mainjs">3.1.5. main.js</h4>
+<p>Finally, create a <code class="highlighter-rouge">main.js</code> file inside of the <code class="highlighter-rouge">ui/js</code> directory, which will “kick off” your React application. Then, paste in the following code:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createRoot</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-dom/client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./App</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">app</span><span class="dl">"</span><span class="p">));</span>
+    <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nc">App</span> <span class="p">/&gt;);</span>
+<span class="p">}</span>
+
+<span class="c1">// Invoke the function that kicks off React!</span>
+<span class="nx">main</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>This code reaches into the DOM (which is initialized via <code class="highlighter-rouge">index.html</code>), and appends our React app to the DOM element with an id of “app”.</p>
+
+<h4 id="id_316-verify-that-everything-works">3.1.6. Verify that everything works</h4>
+<p>After making the changes described above, please run your new react app: <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a>. You should see a screen that looks like this:</p>
+
+<p><img class="img-sm" src="../assets/images/lab07/stubs.png" alt="Screenshot of a app component" /></p>
+
+<p>Note that none of the functionality has been implemented yet.</p>
+
+<h3 id="id_32-making-the-task-component-data-driven">3.2. Making the Task component data-driven</h3>
+<p>Our next step is to display our tasks based on data returned from the server. But, before we do this, let’s jazz-up our <code class="highlighter-rouge">Task</code> component so that the task name and description aren’t hard-coded. To do this, we’re going to make use of <strong>props</strong>.</p>
+
+<p>In <strong><code class="highlighter-rouge">Task.js</code></strong>, please make the following changes:</p>
+
+<ol>
+  <li>Pass a <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">description</code> <strong>props</strong> into the <code class="highlighter-rouge">Task</code> component function</li>
+  <li>Replace the hard coded data with the name and description expressions:</li>
+</ol>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Task</span><span class="p">({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"item"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">description</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In <strong><code class="highlighter-rouge">TaskList.js</code></strong>, please make the corresponding changes:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Task</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Task</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskList</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"task-list"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="na">name</span><span class="p">=</span><span class="s">"Dishes"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Do the dishes"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="na">name</span><span class="p">=</span><span class="s">"Trash"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Take out the trash"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Task</span> <span class="na">name</span><span class="p">=</span><span class="s">"Lawn"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Mow the lawn"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Take a look at <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a>. If you did it correctly, your screen should look like this:</p>
+
+<p><img class="img-sm" src="../assets/images/lab07/props-added.png" alt="Screenshot of a app component" /></p>
+
+<p><strong>Congratulations!</strong> Your Task Component can now accept data from its parent.</p>
+
+<h3 id="id_33-fetching-data-from-the-server">3.3. Fetching data from the server</h3>
+
+<blockquote>
+  <h4 id="id_hint-ensure-that-you-have-some-predefined-tasks-in-serverpy">Hint: Ensure that you have some predefined tasks in server.py</h4>
+  <p>Before completing this section, you may want to add some dummy tasks to <code class="highlighter-rouge">server.py</code> (if you haven’t already). See Lab 6 for a suggested starter <code class="highlighter-rouge">taskdb</code>.</p>
+</blockquote>
+
+<p>Next, we need to display tasks from the server, so we’ll need to issue a <strong>GET</strong> request to <code class="highlighter-rouge">/tasks</code>. For now, let’s do this in <code class="highlighter-rouge">App.js</code> and pass the resulting data to the <code class="highlighter-rouge">TaskList</code> component. This may or may not be the “right” choice, but we can always switch things around if we need to.</p>
+
+<p>We’ll fetch data the usual way, but instead of manually updating the DOM (like in Lab 6), we’ll create a state variable to do our work for us. Take a look at the following code snippet:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">taskData</span><span class="p">,</span> <span class="nx">setTaskData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchTasks</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// for debugging</span>
+    <span class="nx">setTaskData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>Line 1 creates the state variable and setter, and initializes the state variable to an empty array.</li>
+  <li>Line 7 sets the state variable, which will trigger a DOM update</li>
+</ul>
+
+<p>To invoke our <code class="highlighter-rouge">fetchTasks</code> function safely, we need to use a <code class="highlighter-rouge">useEffect</code> as follows:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// invoke side effects function safely:</span>
+    <span class="nx">fetchTasks</span><span class="p">();</span>
+<span class="p">},</span> <span class="p">[])</span>
+</code></pre></div></div>
+
+<p>This will ensure that <code class="highlighter-rouge">fetchTasks()</code> is only called once (and not every time the component re-renders…which happens every time a state variable is set…which would cause an infinite loop).</p>
+
+<ul>
+  <li><strong>If you’re curious:</strong> Move the <code class="highlighter-rouge">fetchTasks()</code> invocation out of the useEffect hook and see what happens (check the console).</li>
+</ul>
+
+<p>Finally, we need to pass the resulting <code class="highlighter-rouge">taskData</code> to the <code class="highlighter-rouge">TaskList</code> component so that <code class="highlighter-rouge">TaskList</code> can generate all of the tasks:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TaskList</span> <span class="na">taskData</span><span class="p">=</span><span class="si">{</span><span class="nx">taskData</span><span class="si">}</span> <span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<p>To summarize, your <code class="highlighter-rouge">App</code> component should now look like this:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span><span class="p">,</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Form</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Form</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TaskList</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./TaskList</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// state variable initialized:</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">taskData</span><span class="p">,</span> <span class="nx">setTaskData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchTasks</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">setTaskData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">useEffect</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// invoke side effects function safely:</span>
+        <span class="nx">fetchTasks</span><span class="p">();</span>
+    <span class="p">},</span> <span class="p">[]);</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Task List<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TaskList</span> <span class="na">taskData</span><span class="p">=</span><span class="si">{</span><span class="nx">taskData</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Form</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="id_34-displaying-server-data-in-tasklist">3.4. Displaying server data in TaskList</h3>
+<p>Now that you’ve got some data to display and your <code class="highlighter-rouge">App</code> component is passing this data to <code class="highlighter-rouge">TaskList</code>, we need to modify <code class="highlighter-rouge">TaskList</code> so that it displays the task. To do this, we’ll make two changes.</p>
+
+<p>First, we’ll update the <code class="highlighter-rouge">TaskList</code> function signature to accept the new <code class="highlighter-rouge">taskData</code> prop:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskList</span><span class="p">({</span> <span class="nx">taskData</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Second, we’ll remove the hard-coded tasks and use JavaScript’s built-in map function to loop through each task and generate a list of <code class="highlighter-rouge">Task</code> components. The <code class="highlighter-rouge">Array.map</code> function takes a list and performs a data transformation on each element of the list. “I’ll give you a list of JSON objects, and you’ll give me back a list of <code class="highlighter-rouge">Task</code> components”:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"task-list"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="nx">taskData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Task</span>
+            <span class="na">idx</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+            <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+            <span class="na">name</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>
+            <span class="na">description</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+    <span class="p">))</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div></div>
+<p>One other change to note here: Because a user is allowed to delete any task, we need to keep track of the position (<code class="highlighter-rouge">idx</code>) of the task and pass it to the <code class="highlighter-rouge">Task</code> component.</p>
+
+<p>Your <code class="highlighter-rouge">TaskList.js</code> file should now look like this:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Task</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Task</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskList</span><span class="p">({</span> <span class="nx">taskData</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">TaskList</span><span class="dl">"</span><span class="p">,</span> <span class="nx">taskData</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"task-list"</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="nx">taskData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                <span class="p">&lt;</span><span class="nc">Task</span>
+                    <span class="na">idx</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+                    <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+                    <span class="na">name</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>
+                    <span class="na">description</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span>
+                <span class="p">/&gt;</span>
+            <span class="p">))</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Take a look at <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a>. If you did it correctly, your screen should look something like this (but with your data from <code class="highlighter-rouge">server.py</code>):</p>
+
+<p><img class="img-sm" src="../assets/images/lab07/data-driven.png" alt="Screenshot of a app component" /></p>
+
+<p><strong>Congratulations!</strong> You should now be viewing tasks that originated from the server.</p>
+
+<h3 id="id_35-deleting-tasks">3.5. Deleting Tasks</h3>
+<p>Recall that the code from section 3.4. is now passing in a new <strong>prop</strong> to the <code class="highlighter-rouge">Task</code> component – <code class="highlighter-rouge">idx</code>. We’re going to use this prop to know which task to delete.</p>
+
+<p>To implement our delete functionality, you’ll first need to update the <code class="highlighter-rouge">Task</code> function signature to accept the new <code class="highlighter-rouge">idx</code> prop:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Task</span><span class="p">({</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Next, you’ll create a <code class="highlighter-rouge">deleteTask</code> function that will issue a <strong>DELETE</strong> request to <code class="highlighter-rouge">/tasks/&lt;id&gt;</code> as follows:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">deleteTask</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/tasks/</span><span class="p">${</span><span class="nx">idx</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then, you’ll attach the <code class="highlighter-rouge">deleteTask</code> function to the click event of the button:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">deleteTask</span><span class="si">}</span><span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>Your <code class="highlighter-rouge">Task.js</code> file should now look like this:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Task</span><span class="p">({</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">deleteTask</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/tasks/</span><span class="p">${</span><span class="nx">idx</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"item"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">description</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">deleteTask</span><span class="si">}</span><span class="p">&gt;</span>Delete<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Navigate to your browser (with the console open) and try deleting one of your tasks. Then refresh your browser. The task should be gone. However, your screen didn’t redraw! We need to fix this!</p>
+
+<h3 id="id_36-notifying-tasklist-that-a-task-has-been-deleted">3.6. Notifying TaskList that a task has been deleted</h3>
+<p>We need a way for <code class="highlighter-rouge">Task</code> to tell the <code class="highlighter-rouge">App</code> to re-fetch the tasks from the server and redraw them. To do this, <code class="highlighter-rouge">Task</code> needs access to the <code class="highlighter-rouge">fetchTasks</code> function we made in <code class="highlighter-rouge">App</code>. But how? The answer is that we need to pass the <code class="highlighter-rouge">fetchTasks</code> function definition as a <code class="highlighter-rouge">prop</code>! Please make the following changes:</p>
+
+<h4 id="id_appjs">App.js</h4>
+<p>Pass <code class="highlighter-rouge">fetchTasks</code> as a prop to <code class="highlighter-rouge">TaskList</code>:</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TaskList</span> <span class="na">taskData</span><span class="p">=</span><span class="si">{</span><span class="nx">taskData</span><span class="si">}</span> <span class="na">fetchTasks</span><span class="p">=</span><span class="si">{</span><span class="nx">fetchTasks</span><span class="si">}</span> <span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="id_tasklistjs">TaskList.js</h4>
+<p>Modify the <code class="highlighter-rouge">TaskList</code> signature to include the <code class="highlighter-rouge">fetchTasks</code> prop:</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskList</span><span class="p">({</span> <span class="nx">taskData</span><span class="p">,</span> <span class="nx">fetchTasks</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Pass <code class="highlighter-rouge">fetchTasks</code> as a prop to <code class="highlighter-rouge">Task</code>:</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Task</span>
+    <span class="na">idx</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+    <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span>
+    <span class="na">name</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>
+    <span class="na">description</span><span class="p">=</span><span class="si">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span>
+    <span class="na">fetchTasks</span><span class="p">=</span><span class="si">{</span><span class="nx">fetchTasks</span><span class="si">}</span>
+<span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="id_taskjs">Task.js</h4>
+<p>Modify the <code class="highlighter-rouge">Task</code> signature to include the <code class="highlighter-rouge">fetchTasks</code> prop:</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Task</span><span class="p">({</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">fetchTasks</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Invoke <code class="highlighter-rouge">fetchTasks</code> after the delete happens (which will redraw the screen):</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">deleteTask</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/tasks/</span><span class="p">${</span><span class="nx">idx</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">fetchTasks</span><span class="p">();</span> <span class="c1">// new</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Take a look at <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a> and try to delete some tasks. If it worked, the screen should be redrawn to reflect the deleted task.</p>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_pro-tip">Pro Tip</h4>
+  <p>To get your tasks to come back, add a blank line to <code class="highlighter-rouge">server.py</code> and save it (which will trigger the server’s hot reload and restore the original dummy tasks).</p>
+</blockquote>
+
+<h3 id="id_37-creating-a-new-task">3.7. Creating a new task</h3>
+<p>Last but not least, we’re going to create a way to add a new task to the server by issuing a <strong>POST</strong> request to <code class="highlighter-rouge">/tasks</code>. Open <code class="highlighter-rouge">Form.js</code> and make the following modifications (which aren’t exactly intuitive):</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">React</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Form</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">description</span><span class="p">,</span> <span class="nx">setDescription</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">handleSubmit</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/tasks</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+                <span class="na">name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="c1">// read from state variable</span>
+                <span class="na">description</span><span class="p">:</span> <span class="nx">description</span><span class="p">,</span> <span class="c1">// read from state variable</span>
+            <span class="p">}),</span>
+        <span class="p">});</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">className</span><span class="p">=</span><span class="s">"add-task"</span> <span class="na">method</span><span class="p">=</span><span class="s">"post"</span> <span class="na">onSubmit</span><span class="p">=</span><span class="si">{</span><span class="nx">handleSubmit</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Add New Task<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">htmlFor</span><span class="p">=</span><span class="s">"name"</span><span class="p">&gt;</span>Name:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+                <span class="na">placeholder</span><span class="p">=</span><span class="s">"Task name"</span>
+                <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="si">}</span>
+                <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setName</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">htmlFor</span><span class="p">=</span><span class="s">"description"</span><span class="p">&gt;</span>Description:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+                <span class="na">placeholder</span><span class="p">=</span><span class="s">"Task description"</span>
+                <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">description</span><span class="si">}</span>
+                <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setDescription</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Add<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Some notes here:</p>
+<ul>
+  <li>In the React documentation, they suggest that each form data field should be mapped to its own state variable. Since we have two form inputs, let’s make two state variables (name and description). The state variables are set on lines 4-5, and are updated on lines 32 and 39 via <code class="highlighter-rouge">onChange</code> event handlers. That means that every keystroke triggers a state change so that the state variable and the form input control are always in sync. This is weird, but it’s what the docs suggest.</li>
+  <li>The <code class="highlighter-rouge">handleSubmit</code> function gets triggered on the form submit (see line 25). At this point, the form data are posted to the server (<strong>POST</strong> request to <code class="highlighter-rouge">/tasks</code>) and a new task should be created on the server.</li>
+</ul>
+
+<p>Navigate to <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a> and try to add a new task. Then refresh your browser. You should see the new task. However, your screen didn’t redraw!</p>
+
+<blockquote>
+  <h4 id="id_your-final-job">Your Final Job</h4>
+  <p>Your final task is to figure out how to redraw the screen (w/o a browser refresh) when a new task is added. When you’re done, you are done with this lab. Congrats!</p>
+</blockquote>
+
+<h2 id="id_4-what-to-turn-in">4. What to Turn In</h2>
+<p>Before you submit, ensure that your react version of the lab successfully reads, deletes, and adds tasks; and that the screen redraws to reflect any task data changes. When you’re done, please create a pull request with the fully implemented web client (which should be completed inside of your version of your <code class="highlighter-rouge">lab05</code> folder).</p>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>

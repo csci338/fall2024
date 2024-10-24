@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>UNCA Course Lookup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_introduction">Introduction</a>
+    <ol>
+      <li><a href="#heading_JrkvNfuJ">Learning Goals</a></li>
+      <li><a href="#heading_wRlNVOHv">Product Requirements</a></li>
+      <li><a href="#heading_jKPZlEfN">System Architecture (Done as a Class)</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_tasks">Tasks</a>
+    <ol>
+      <li><a href="#heading_VV6Yuu9l">1. Course</a></li>
+      <li><a href="#heading_pwiw87Kj">2. Courses</a></li>
+      <li><a href="#heading_JOPkjRbm">3. UserPreferences</a></li>
+      <li><a href="#heading_wyITGKnl">4. Course Filter</a></li>
+      <li><a href="#heading_aVd0CNgG">5. User Interface (UI)</a></li>
+      <li><a href="#heading_ZpbfVmxq">6. Schedule</a></li>
+      <li><a href="#heading_MBnHAMEy">7. Schedule Emailer</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_1-logistics">1. Logistics</a>
+    <ol>
+      <li><a href="#heading_jPHzmXZC">1. Team &amp; Task Assignments</a></li>
+      <li><a href="#heading_eQ3SqXaf">2. Working with Feature Branches</a></li>
+      <li><a href="#heading_pLBmtY8R">3. Testing Tips</a></li>
+      <li><a href="#heading_gTvzA3TG">4. Formatting Tips</a></li>
+      <li><a href="#heading_YMD18bV5">5. GitHub Workflows &amp; Continuous Integration Notes</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_2-set-up">2. Set Up</a>
+    <ol>
+      <li><a href="#heading_c0ETPU1o">1. Set up your repository</a></li>
+      <li><a href="#heading_ZNhbkAah">2. Building Your Docker Container</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_3-grading-and-assessment">3. Grading and assessment</a>
+    <ol>
+      <li><a href="#heading_IrbYnfqI">1. How to submit work for review</a></li>
+      <li><a href="#heading_zcFjMjjb">2. Rubric</a></li>
+    </ol>
+  </li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Project 1: UNCA Course Lookup
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Thu, 11/14 @ 11:59PM.
+    
+    
+        20 Points.
+    
+    
+</p>
+
+<style>
+h4 {
+    margin: 5px 0;
+}
+</style>
+
+<style>
+    #toggle-button {
+        position: fixed;
+        top: 45px;
+        right: 15px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    @media (max-width: 600px) {
+
+        #toggle-button,
+        #toggle-button.show {
+            display: none;
+        }
+    }
+</style>
+
+<p><button id="toggle-button" class="nu-button" onclick="toggleAll()">Collapse All</button></p>
+
+<h2 id="id_introduction">Introduction</h2>
+<p>For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. It should work like the video shown here (TODO).</p>
+
+<!-- ## Introduction
+For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. It should work like the video shown here (TODO). -->
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_lJbpa6s8" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_JrkvNfuJ" target-panel="#panel_lJbpa6s8" onclick="toggleExpandable(this)" style="cursor: pointer;">Learning Goals</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_lJbpa6s8"><p>This project will help you practice the concepts we have been covering so far, including:</p>
+
+<ol>
+  <li>Breaking requirements up into logical units that can be worked on in parallel (i.e., minimizing the dependencies between components).</li>
+  <li>Thinking about which “jobs” each component will have.</li>
+  <li>Working with a common development environment usind Docker (e.g., operating system, python versions, coding conventions, testing suite) so that the app runs identically on any machine.</li>
+  <li>Working with static analysis tools.</li>
+  <li>Devising a workflow for integrating work.</li>
+  <li>Coordinating and communicating across tasks to make sure everything can be successfully integrated.</li>
+</ol>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_sJECgqQd" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_wRlNVOHv" target-panel="#panel_sJECgqQd" onclick="toggleExpandable(this)" style="cursor: pointer;">Product Requirements</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_sJECgqQd"><p>You and your team will create an app that implements the following features:</p>
+
+<ol>
+  <li>A way to download the UNCA data file from the Internet (JSON)</li>
+  <li>A way to display the search options.</li>
+  <li>A way to allow the user to specify the search options</li>
+  <li>A way to store the user’s preferences (for any of the options)</li>
+  <li>A way to filter the courses according to the user’s preferences</li>
+  <li>A way to display the courses that match a user’s preferences</li>
+  <li>A way to add, remove, and view courses from a user’s schedule</li>
+  <li>A way to download the schedule as a CSV file</li>
+</ol>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_ThlfwOKk" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_jKPZlEfN" target-panel="#panel_ThlfwOKk" onclick="toggleExpandable(this)" style="cursor: pointer;">System Architecture (Done as a Class)</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_ThlfwOKk"><p>During class on Tuesday (9/24), we discussed how to organize our system, and we collectively created the following diagram:</p>
+
+<p>[diagram]</p>
+</div>
+        </div>
+
+<h2 id="id_tasks">Tasks</h2>
+<p>Each task is listed below. Each student on your team has been assigned a task.</p>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_2iWJzQPJ" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_VV6Yuu9l" target-panel="#panel_2iWJzQPJ" onclick="toggleExpandable(this)" style="cursor: pointer;">1. Course</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_2iWJzQPJ"><p>The job of the Course class (<code class="highlighter-rouge">course.py</code>) is to parse the incoming dictionary into a more useable form. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.</p>
+
+<h4 id="id_sample-dictionary-item-to-be-parsed">Sample dictionary item to be parsed</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">"CRN"</span><span class="p">:</span> <span class="mi">60002</span><span class="p">,</span>
+    <span class="s">"Code"</span><span class="p">:</span> <span class="s">"ACCT 215.001"</span><span class="p">,</span>
+    <span class="s">"Department"</span><span class="p">:</span> <span class="s">"ACCT"</span><span class="p">,</span>
+    <span class="s">"Title"</span><span class="p">:</span> <span class="s">"Principles of Accounting I"</span><span class="p">,</span>
+    <span class="s">"Instructors"</span><span class="p">:</span> <span class="p">[{</span><span class="s">"Username"</span><span class="p">:</span> <span class="s">"chughes"</span><span class="p">,</span> <span class="s">"Name"</span><span class="p">:</span> <span class="s">"Hughes, Carolyn"</span><span class="p">}],</span>
+    <span class="s">"Hours"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s">"Days"</span><span class="p">:</span> <span class="s">"MW"</span><span class="p">,</span>
+    <span class="s">"StartTime"</span><span class="p">:</span> <span class="s">"2019-05-07T21:30:00Z"</span><span class="p">,</span>
+    <span class="s">"EndTime"</span><span class="p">:</span> <span class="s">"2019-05-07T23:10:00Z"</span><span class="p">,</span>
+    <span class="s">"Location"</span><span class="p">:</span> <span class="p">{</span><span class="s">"FullLocation"</span><span class="p">:</span> <span class="s">"DEL 110"</span><span class="p">,</span> <span class="s">"Building"</span><span class="p">:</span> <span class="s">"DEL"</span><span class="p">,</span> <span class="s">"Room"</span><span class="p">:</span> <span class="s">"110"</span><span class="p">},</span>
+    <span class="s">"EnrollmentCurrent"</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+    <span class="s">"EnrollmentMax"</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+    <span class="s">"WaitlistMax"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">"WaitlistAvailable"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">"TermPart"</span><span class="p">:</span> <span class="s">"1"</span><span class="p">,</span>
+    <span class="s">"StartDate"</span><span class="p">:</span> <span class="s">"2024-08-19T04:00:00Z"</span><span class="p">,</span>
+    <span class="s">"EndDate"</span><span class="p">:</span> <span class="s">"2024-12-11T05:00:00Z"</span><span class="p">,</span>
+    <span class="s">"Classification"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"DiversityIntensive"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"DiversityIntensiveR"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"DistanceLearning"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"FirstYearSeminar"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"Graduate"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"Honors"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"Arts"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"ServiceLearning"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">"Open"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s">"AdditionalMeetings"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s">"InstructionalMethod"</span><span class="p">:</span> <span class="s">"In-Person"</span><span class="p">,</span>
+    <span class="s">"Async"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="id_properties">Properties</h4>
+<p>It should allow setting and getting of the following properties:</p>
+<ul>
+  <li><code class="highlighter-rouge">crn</code> (str)</li>
+  <li><code class="highlighter-rouge">code</code> (str)</li>
+  <li><code class="highlighter-rouge">department</code> (str)</li>
+  <li><code class="highlighter-rouge">title</code> (str)</li>
+  <li><code class="highlighter-rouge">instructors</code> (list[str]) - array of strings</li>
+  <li><code class="highlighter-rouge">hours</code> (int)</li>
+  <li><code class="highlighter-rouge">days</code> (list[str]) - array of strings</li>
+  <li><code class="highlighter-rouge">start_time</code> (datetime)</li>
+  <li><code class="highlighter-rouge">end_time</code> datetime)</li>
+  <li><code class="highlighter-rouge">location</code> (str)</li>
+  <li><code class="highlighter-rouge">enrollment_current</code> (int)</li>
+  <li><code class="highlighter-rouge">enrollment_max</code> (int)</li>
+  <li><code class="highlighter-rouge">term</code> (int)</li>
+  <li><code class="highlighter-rouge">is_di</code> (bool)</li>
+  <li><code class="highlighter-rouge">is_dir</code> (bool)</li>
+  <li><code class="highlighter-rouge">modality</code> (str): In-Person or Online</li>
+</ul>
+
+<p><strong>Empty values:</strong> If no data are available for a particular property, represent “no data” as follows:</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">""</span>  <span class="c1"># empty string
+</span><span class="o">*</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<h4 id="id_methods">Methods</h4>
+<p>Your class should also have the following methods:</p>
+<ul>
+  <li>A <code class="highlighter-rouge">constructor</code> method, which takes a dictionary as an argument and sets the properties right away. A stub has been implemented for you.</li>
+  <li>A <code class="highlighter-rouge">__repr__</code> method (similar to Java’s toString() method, which returns a simple string representation of the course.</li>
+  <li>An <code class="highlighter-rouge">is_full</code> method that returns true or false, depending on whether the course is full or not.</li>
+  <li>An <code class="highlighter-rouge">is_morning</code> method that returns true or false, depending on whether the course starts before 12PM and false otherwise</li>
+  <li>An <code class="highlighter-rouge">is_afternoon</code> method that returns true if the course starts between 12PM-5PM and false otherwise.</li>
+  <li>An <code class="highlighter-rouge">is_evening</code> method that returns true if the course starts on or after 5PM and false otherwise.</li>
+</ul>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_GvZx6dNY" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_pwiw87Kj" target-panel="#panel_GvZx6dNY" onclick="toggleExpandable(this)" style="cursor: pointer;">2. Courses</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_GvZx6dNY"><p>The job of the Courses class (<code class="highlighter-rouge">courses.py</code>) is to make it convenient to print, filter, and download a list of Course objects.</p>
+
+<h4 id="id_properties">Properties</h4>
+<p>It should allow setting and getting of the following properties:</p>
+<ul>
+  <li><code class="highlighter-rouge">courses</code>: Courses (set by the constructor)</li>
+</ul>
+
+<h4 id="id_methods">Methods</h4>
+<p>Your class should also have the following methods:</p>
+
+<ul>
+  <li>A <code class="highlighter-rouge">constructor</code> method, which takes a list of Course objects (list[Course]) as an argument and sets the <code class="highlighter-rouge">courses</code> property right away. A stub has been implemented for you in the starter code.</li>
+  <li>A <code class="highlighter-rouge">to_list</code> method (no parameters) which returns the <code class="highlighter-rouge">courses</code> property</li>
+  <li>A <code class="highlighter-rouge">size()</code> method  (no parameters) which returns the length of the <code class="highlighter-rouge">courses</code> list</li>
+  <li>An <code class="highlighter-rouge">output_courses</code> method (no parameters) that prints a nice, formatted list of courses (or a message if there are no courses in the list).</li>
+  <li>A <code class="highlighter-rouge">get_matching_courses</code> method which takes a UserPreferences object as an argument and return a new Courses object that includes only the courses that match the user’s preferences.
+    <ul>
+      <li>This method will create a new instance of a CourseFilter, which it will use to figure out the courses that match the user’s preferences.</li>
+      <li>
+        <p>Some pseudocode is shown below, using Python’s built-in <code class="highlighter-rouge">filter</code> method:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python's `filter` function returns a new list with only results matching the filter function.
+# Use multiple filter invocations to apply multiple filters:
+</span><span class="n">course_matches</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">some_filter_function</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">courses</span><span class="p">)</span>
+<span class="n">course_matches</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">another_filter_function</span><span class="p">,</span> <span class="n">course_matches</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_7z73cQNy" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_JOPkjRbm" target-panel="#panel_7z73cQNy" onclick="toggleExpandable(this)" style="cursor: pointer;">3. UserPreferences</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_7z73cQNy"><p>The job of the UserPreferences class (<code class="highlighter-rouge">user_preferences.py</code>) is store the user’s search preference information, and to provide methods for modifying the user’s preferences as they browse courses of interest. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.</p>
+
+<h4 id="id_properties">Properties</h4>
+<p>It should allow setting and getting of the following properties.</p>
+<ul>
+  <li><code class="highlighter-rouge">days</code>: list[str] = []</li>
+  <li><code class="highlighter-rouge">department</code>: str = “CSCI” (default to CSCI)</li>
+  <li><code class="highlighter-rouge">di_only</code>: bool = False</li>
+  <li><code class="highlighter-rouge">dir_only</code>: bool = False</li>
+  <li><code class="highlighter-rouge">hours</code>: int = -1</li>
+  <li><code class="highlighter-rouge">instructor</code>: str = “”</li>
+  <li><code class="highlighter-rouge">open_closed_status</code>: str – either “open”, “closed”, or “” (no preference)</li>
+  <li><code class="highlighter-rouge">search_term</code>: str = “”</li>
+  <li><code class="highlighter-rouge">time_of_day</code>: str = “” (either ‘morning’, ‘afternoon’, or ‘evening’)</li>
+</ul>
+
+<p><strong>Empty values:</strong> If the filter is unset (i.e., the user didn’t specify a value one way or the other),  represent “unset” preferences as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>str = ""  # empty string
+int = -1
+list = []
+bool = False
+</code></pre></div></div>
+
+<h4 id="id_methods">Methods</h4>
+<p>Your class should also have the following methods:</p>
+
+<ul>
+  <li>A <code class="highlighter-rouge">constructor</code> method that initializes all of the default property values right away. A stub has been implemented for you:
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># TODO
+</span></code></pre></div>    </div>
+  </li>
+  <li>An <code class="highlighter-rouge">update_search_term</code> method that prompts the user to enter a search term or clear their current <code class="highlighter-rouge">search_term</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_department</code> method that prompts the user to enter a department or clear their current <code class="highlighter-rouge">department</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_instructor</code> method that prompts the user to enter an instructor or clear their current <code class="highlighter-rouge">instructor</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_di</code> method that asks the user whether they want to only see DI courses. This will set the <code class="highlighter-rouge">di_only</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_dir</code> method that asks the user whether they want to only see DI-Race courses. This will set the <code class="highlighter-rouge">dir_only</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_open_closed_status</code> method that asks the user whether they want to only open or only closed courses. This will set the <code class="highlighter-rouge">open_closed_status</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_dir</code> method that asks the user whether they want to only see DI-Race courses. This will set the <code class="highlighter-rouge">dir_only</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_hours</code> method that asks the user whether they only want to see courses with 1, 2, 3, or 4 credit hours. This will set the <code class="highlighter-rouge">hours</code> property.</li>
+  <li>An <code class="highlighter-rouge">update_time_of_day</code> method that asks the user whether they want to specify morning, afternoon or evening classes. This will set the <code class="highlighter-rouge">time_of_day</code> property.</li>
+</ul>
+
+<h5 id="id_a-note-on-the-methods">A note on the methods</h5>
+<ul>
+  <li>All of the update methods must validate the user’s input and re-prompt them if they enter an incorrect value (and explain why the value is incorrect).</li>
+  <li>All of the input methods should also be able to clear out the properties (unset them to empty).</li>
+  <li>Feel free to use as many private helper methods as you want. In python, private methods are named with a leading underscore.</li>
+</ul>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_oVj1Qi3x" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_wyITGKnl" target-panel="#panel_oVj1Qi3x" onclick="toggleExpandable(this)" style="cursor: pointer;">4. Course Filter</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_oVj1Qi3x"><p>The job of the CourseFilter class (<code class="highlighter-rouge">course_filter.py</code>) is to determine whether a course matches a given set of criteria.</p>
+
+<h4 id="id_properties">Properties</h4>
+<p>It should allow setting and getting of the following properties:</p>
+<ul>
+  <li><code class="highlighter-rouge">user_prefs</code>: UserPreferences</li>
+</ul>
+
+<h4 id="id_methods">Methods</h4>
+<ul>
+  <li>A <code class="highlighter-rouge">constructor</code> method, which takes a UserPreferences object as an argument and sets the <code class="highlighter-rouge">user_prefs</code> property right away. A stub has been implemented for you.</li>
+  <li><code class="highlighter-rouge">is_search_term_match</code>: accepts a Course object as an argument. Returns true if the course’s title matches the user’s preference (from the UserPreferences) property or if the search_term preference is not set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_instructor_match</code>: accepts a Course object as an argument. Returns true if the course’s instructor partially matches the user’s preference or if the instructor preference is not set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_di_match</code>: accepts a Course object as an argument. Returns true if the course is a DI course preference or if the di_only preference is not set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_dir_match</code>: accepts a Course object as an argument. Returns true if the course is a DI-Race course preference or if the dir_only preference is not set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_departmental_match</code>: accepts a Course object as an argument. Returns true if the course’s department matches the user’s preference or if the department preference is not set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_hours_match</code>: accepts a Course object as an argument. Returns true if the course’s credit hours matches the user’s preference or if no preference is set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_status_match</code>: accepts a Course object as an argument. Returns true if the course’s <code class="highlighter-rouge">open_closed_status</code> matches the course’s current state or if no preference is set. Returns false otherwise.</li>
+  <li><code class="highlighter-rouge">is_time_of_day_match</code>: accepts a Course object as an argument. Returns true if the course’s <code class="highlighter-rouge">time_of_day</code> matches the course’s time of day status or if no preference is set. Returns false otherwise.</li>
+</ul>
+
+<p>Make sure that all filters are case-insensitive and that they return true if no preference is set.</p>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_KFrlrhWn" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_aVd0CNgG" target-panel="#panel_KFrlrhWn" onclick="toggleExpandable(this)" style="cursor: pointer;">5. User Interface (UI)</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_KFrlrhWn"><p>The job of the User Interface class (<code class="highlighter-rouge">user_interface.py</code>) is to allow people to make choices about what they want to do in the app and receive the appropriate response.</p>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_uq4SDyoT" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_ZpbfVmxq" target-panel="#panel_uq4SDyoT" onclick="toggleExpandable(this)" style="cursor: pointer;">6. Schedule</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_uq4SDyoT"><p>The job of the Schedule class (<code class="highlighter-rouge">schedule.py</code>) is to allow the user to build a schedule. This involves giving the user the ability to:</p>
+<ul>
+  <li>add a course to the schedule</li>
+  <li>remove a course from the schedule</li>
+  <li>print the schedule</li>
+  <li>save schedule as a CSV file (text file)</li>
+</ul>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_InXRptM2" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-right"></i></button>
+                <h3 id="heading_MBnHAMEy" target-panel="#panel_InXRptM2" onclick="toggleExpandable(this)" style="cursor: pointer;">7. Schedule Emailer</h3>
+            </div>
+            <div class="expandable-content" style="display: none;" id="panel_InXRptM2"><ul>
+  <li>Register with Twilio and get an API key</li>
+  <li>Install the python library</li>
+</ul>
+</div>
+        </div>
+
+<h2 id="id_1-logistics">1. Logistics</h2>
+<p>Before you begin working on this project, please read the guidelines <strong>VERY CAREFULLY</strong>.</p>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_vmwCfVjC" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_jPHzmXZC" target-panel="#panel_vmwCfVjC" onclick="toggleExpandable(this)" style="cursor: pointer;">1. Team &amp; Task Assignments</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_vmwCfVjC"><p>Your teams are listed below. Each member of your team has been assigned a task from the GitHub Issue Tracker. Some of you will be working on the same Python class, so  so make sure you only work on the tasks to which you were assigned:</p>
+
+<h4 id="id_team-1">Team 1</h4>
+<p>Please see your team’s <a href="#" target="_blank">repo</a> and <a href="#" target="_blank">issue tracker</a> for more information. Members of Team 2 are:</p>
+
+<ol>
+  <li>Anthony B. (anthonyablazer)</li>
+  <li>Brian (bmungal)</li>
+  <li>Jacob (jforres1)</li>
+  <li>Jasmine (jnarehoo)</li>
+  <li>Josie (jandersoj)</li>
+  <li>Kate (kgary432)</li>
+  <li>Ruby (runuss720)</li>
+  <li>Sergio (sbaguena10)</li>
+  <li>Zejun (Hayden514)</li>
+</ol>
+
+<h4 id="id_team-2">Team 2</h4>
+<p>Please see your team’s <a href="#" target="_blank">repo</a> and <a href="#" target="_blank">issue tracker</a> for more information. Members of Team 2 are:</p>
+
+<ol>
+  <li>Andrew (awillis4)</li>
+  <li>Anthony I. (Aindelic)</li>
+  <li>Brendan (ringojuic)</li>
+  <li>Christian (Csluder2)</li>
+  <li>Eli (eutterba)</li>
+  <li>Isreal (isrealmcd)</li>
+  <li>Tai (tairobinett)</li>
+  <li>Travis (tgroom90)</li>
+  <li>Zachary (zRaNk1995)</li>
+</ol>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_pxLCL2y3" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_eQ3SqXaf" target-panel="#panel_pxLCL2y3" onclick="toggleExpandable(this)" style="cursor: pointer;">2. Working with Feature Branches</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_pxLCL2y3"><ol>
+  <li>You will <strong>never edit the <code class="highlighter-rouge">main</code> branch directly</strong>. Consider <code class="highlighter-rouge">main</code> to be the “source of truth” for the app.</li>
+  <li>All of your work will be committed to your feature branch (which you will create from the <code class="highlighter-rouge">main</code> branch).</li>
+  <li><em>Please</em> pull down the latest changes from <code class="highlighter-rouge">main</code> periodically and rebase your local branch with <code class="highlighter-rouge">main</code>. To do this:
+    <ul class="compact">
+      <li>Commit your feature branch work,</li>
+      <li>Check out main,</li>
+      <li>Pull down the latest changes,</li>
+      <li>Check out your feature branch again, and</li>
+      <li>Rebase your feature branch with main</li>
+    </ul>
+  </li>
+</ol>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_gk5hoxGW" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_pLBmtY8R" target-panel="#panel_gk5hoxGW" onclick="toggleExpandable(this)" style="cursor: pointer;">3. Testing Tips</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_gk5hoxGW"><p>Run the tests using the pytest library (installed via poetry). Some sample commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry run pytest <span class="nt">-v</span>                        <span class="c"># runs all the tests</span>
+poetry run pytest tests/test_courses.py <span class="nt">-v</span>  <span class="c"># runs all the tests in a single file</span>
+poetry run pytest test_courses.py::TestCourses::test_one <span class="nt">-v</span>  <span class="c"># runs a single test (e.g., test_one)</span>
+</code></pre></div></div>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_HBWneQyk" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_gTvzA3TG" target-panel="#panel_HBWneQyk" onclick="toggleExpandable(this)" style="cursor: pointer;">4. Formatting Tips</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_HBWneQyk"><p>We are using <code class="highlighter-rouge">black</code> to format our code, <code class="highlighter-rouge">isort</code> to sort our import statements, and <code class="highlighter-rouge">flake8</code> to validate your Python code.</p>
+<ul>
+  <li><a href="https://black.readthedocs.io/en/stable/usage_and_configuration/index.html">https://black.readthedocs.io/en/stable/usage_and_configuration/index.html</a></li>
+  <li><a href="https://pypi.org/project/isort/">https://pypi.org/project/isort/</a></li>
+  <li><a href="https://flake8.pycqa.org/en/latest/">https://flake8.pycqa.org/en/latest/</a></li>
+</ul>
+
+<p>The following commands will be run on every push to make sure that the code styling rules have been followed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry run black <span class="nb">.</span> <span class="nt">--check</span>        <span class="c"># runs the Python formatter</span>
+poetry run isort <span class="nb">.</span> <span class="nt">--check-only</span>   <span class="c"># run the Python import sorter</span>
+poetry run flake8                 <span class="c"># flake8 just checks things -- you have to fix them manually</span>
+</code></pre></div></div>
+
+<p>You can also use the <code class="highlighter-rouge">bash/check.sh</code> script (for convenience):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/check.sh
+</code></pre></div></div>
+
+<p>To actually APPLY the formatting (which will make changes to your files), make sure you run these two commands before pushing your branch to GitHub:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry run black <span class="nb">.</span>      <span class="c"># runs the Python formatter</span>
+poetry run isort <span class="nb">.</span>      <span class="c"># run the Python import sorter</span>
+</code></pre></div></div>
+<p>You can also use the bash/fix.sh script (for convenience):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/fix.sh
+</code></pre></div></div>
+
+<p>If you want flake8 to ignore a particular line, add a <code class="highlighter-rouge"># noqa</code> comment at the end of the line</p>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_DV6UPnTH" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_YMD18bV5" target-panel="#panel_DV6UPnTH" onclick="toggleExpandable(this)" style="cursor: pointer;">5. GitHub Workflows &amp; Continuous Integration Notes</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_DV6UPnTH"><p>The <code class="highlighter-rouge">.github/workflows/pr.yml</code> is a configuration file that GitHub reads in order to run a series of checks everytime you push your branch to GitHub. Before you make a pull request, make sure that you run the <code class="highlighter-rouge">bash scripts/run_pr_checks.sh</code> script. If everything passes locally, it should also pass on GitHub.</p>
+</div>
+        </div>
+
+<h2 id="id_2-set-up">2. Set Up</h2>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_sPFcmuBs" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_c0ETPU1o" target-panel="#panel_sPFcmuBs" onclick="toggleExpandable(this)" style="cursor: pointer;">1. Set up your repository</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_sPFcmuBs"><p>Once your team lead has added you to their repo, you will set up the code locally as follows:</p>
+<ol>
+  <li>Open the terminal.</li>
+  <li>Clone your team lead’s version of the repository – and please do not clone it inside of another directory that is already under version control:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:&lt;your-team-lead-github-username&gt;/project01.git
+</code></pre></div>    </div>
+  </li>
+  <li>Navigate into the <code class="highlighter-rouge">project01</code> directory you just cloned. Create a new branch (name it whatever you want):
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd project01
+git checkout -b yourname-feature
+</code></pre></div>    </div>
+  </li>
+</ol>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_AxXiwAWh" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_ZNhbkAah" target-panel="#panel_AxXiwAWh" onclick="toggleExpandable(this)" style="cursor: pointer;">2. Building Your Docker Container</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_AxXiwAWh"><ol>
+  <li>Make sure that Docker is running</li>
+  <li>Then, from within the <code class="highlighter-rouge">project01</code> directory, issue the following Docker command:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up
+</code></pre></div>    </div>
+    <p>This command will build your image and your container. Once the container has built, you should see some output like this:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running 2/1
+  ✔ Network project01_default Created                                                                                                                                      
+  ✔ Container project01-app-1  Created                                                                                                                                       
+  Attaching to project01-app-1
+ project01-app-1  | root@d863cf880897:/project01# 
+</code></pre></div>    </div>
+    <p>Keep this terminal open and then open a new shell (for the remaining commands). In other words, you will have two terminals open: one that’s running your Docker container, and one for issuing other system commands (listed below).</p>
+  </li>
+  <li>In your new terminal shell (with the other shell running), find your container pid by listing all of your containers as follows:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps <span class="nt">-a</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Open the terminal shell on the Docker container you just made:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;pid&gt; bash <span class="c"># note that this command will put you onto Docker's bash</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Install the poetry dependencies from within your Docker container:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry <span class="nb">install</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Run the tests:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry run pytest <span class="nt">-v</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Run the app:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry run python course_lookup/driver.py
+</code></pre></div>    </div>
+  </li>
+  <li>Now you’re ready to start coding in VS Code.</li>
+</ol>
+
+<h4 id="id_221-returning-to-docker-later">2.2.1. Returning to Docker later</h4>
+<p>Once you’ve built your container, it should be available to you in the future, even if you close out of Docker or stop the container. To get back to your container:</p>
+
+<ol>
+  <li>Make sure Docker is running</li>
+  <li>Find the pid of the container you want to run:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps <span class="nt">-a</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Start the stopped container with the pid you just found:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker start &lt;pid&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>Use container as per usual (and make sure you’re in the <code class="highlighter-rouge">project01</code> directory when you run the poetry commands).</li>
+</ol>
+
+<p>You could also go to the Docker Dashboard and start your container from the Dashboard.</p>
+
+<h4 id="id_222-some-useful-commands">2.2.2 Some useful commands</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">docker ps -a</code></td>
+      <td>List all of the containers (including stopped containers)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker stop &lt;pid&gt;</code></td>
+      <td>List all of the containers (including stopped containers)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker start &lt;pid&gt;</code></td>
+      <td>List all of the containers (including stopped containers)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker exec -it &lt;pid&gt; bash</code></td>
+      <td>Runs terminal on the container</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker exec -it &lt;pid&gt; poetry run python course_lookup/driver.py</code></td>
+      <td>Runs the <code class="highlighter-rouge">driver.py</code> using poetry.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker exec -it &lt;pid&gt; poetry run pytest -v </code></td>
+      <td>Runs tests</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker exec -it &lt;pid&gt; bash scripts/check.sh</code></td>
+      <td>Runs check script</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">docker exec -it &lt;pid&gt; bash scripts/fix.sh</code></td>
+      <td>Runs fix script</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+
+<h2 id="id_3-grading-and-assessment">3. Grading and assessment</h2>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_JU6Q1Ei0" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_IrbYnfqI" target-panel="#panel_JU6Q1Ei0" onclick="toggleExpandable(this)" style="cursor: pointer;">1. How to submit work for review</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_JU6Q1Ei0"><ul>
+  <li>Implement all of properties and methods needed to support the functionality listed above. You are also welcome to implement private helper methods. In python, private / helper methods are prefixed with an underscore.</li>
+  <li>Make sure you <strong>DO NOT modify the <code class="highlighter-rouge">main</code> branch</strong>. All of your coding should be done on a feature branch.</li>
+  <li>Write tests for your methods.</li>
+  <li>Make sure all of the formatter and linter checks pass before making a pull request.</li>
+  <li>In your pull request (PR):
+    <ul>
+      <li>Reference this issue by using the hash tag followed by the issue number.</li>
+      <li>Describe what has been done in the PR as simply and clearly as possible.</li>
+      <li>You may make multiple PRs to implement subsets of functionality. Remember: it’s better to create smaller, incremental PRs than one big PR (no long-running branches).</li>
+    </ul>
+  </li>
+  <li>In order for your branch to be reviewed:
+    <ul>
+      <li>All of the validation checks on GitHub need to pass</li>
+      <li>Your branch should not have any merge conflicts with <code class="highlighter-rouge">main</code></li>
+      <li>I (Sarah) will review all pull requests from the previous day by 10AM the following morning</li>
+    </ul>
+  </li>
+  <li>Once I approve your pull request, <strong>you will be responsible for merging your branch into <code class="highlighter-rouge">main</code> via GitHub</strong>.</li>
+</ul>
+</div>
+        </div>
+
+<div class="expandable-section">
+            <div class="toggle-header">
+                <button class="toggle-button" target-panel="#panel_wSl953wq" onclick="toggleExpandable(this)"><i class="fa-solid fa-angle-down"></i></button>
+                <h3 id="heading_zcFjMjjb" target-panel="#panel_wSl953wq" onclick="toggleExpandable(this)" style="cursor: pointer;">2. Rubric</h3>
+            </div>
+            <div class="expandable-content" style="display: block;" id="panel_wSl953wq"><table>
+  <tbody>
+    <tr>
+      <td>20%</td>
+      <td>Teamwork and communication</td>
+      <td>Did you show up to class? Did you talk to your teammates? Did you respond to them in a timely manner? If someone else was working on a feature that you depended on, did you coordinate / communicate with them?</td>
+    </tr>
+    <tr>
+      <td>50%</td>
+      <td>Individual code contribution</td>
+      <td>Did you submit at least 2 pull requests (that were approved)? Did you complete your tasks? Does your code work as expected? Do all of your functions / methods have tests? Did the code quality checks pass?</td>
+    </tr>
+    <tr>
+      <td>30%</td>
+      <td>Quality of the final group product</td>
+      <td>Does your app work? Is it complete? Can users browse for courses, filter according to their preferences, and add them to a schedule? Were everyone’s contributions merged by the deadline?</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>

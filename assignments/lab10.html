@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Storing Your Tasks in a Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_introduction">Introduction</a>
+    <ol>
+      <li><a href="#id_why-are-we-learning-to-use-a-relational-database">Why are we learning to use a relational database?</a></li>
+      <li><a href="#id_what-is-sql">What is SQL?</a></li>
+      <li><a href="#id_what-is-an-object-relational-mapping-orm">What is an Object Relational Mapping (ORM)?</a></li>
+      <li><a href="#id_what-is-sql-alchemy">What is SQL Alchemy?</a></li>
+    </ol>
+  </li>
+  <li><a href="#installation">1. Set Up Database Logic</a>
+    <ol>
+      <li><a href="#id_10-create-a-lab08-your-username-branch">1.0. Create a lab08-your-username branch</a></li>
+      <li><a href="#id_11-create-a-secret-file-to-store-protected-database-information">1.1. Create a secret file to store protected database information</a></li>
+      <li><a href="#id_12-create-a-database-script">1.2. Create a Database script</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_2-set-up-object-relational-mapping-logic-in-python">2. Set Up Object-Relational Mapping Logic in Python</a>
+    <ol>
+      <li><a href="#id_21-add-new-python-dependencies">2.1. Add new python dependencies</a></li>
+      <li><a href="#id_22-add-the-orm-models-and-associated-logic">2.2. Add the ORM Models and associated Logic</a></li>
+      <li><a href="#id_23-update-your-serverpy-file-so-that-it-includes-database-connection-logic">2.3. Update your server.py file so that it includes database connection logic</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_3-server-build-updates">3. Server Build Updates</a>
+    <ol>
+      <li><a href="#id_31-create-a-file-to-build-your-tables-and-data">3.1. Create a file to build your tables and data</a></li>
+      <li><a href="#id_32-create-a-file-of-test-sqlalchemy-queries">3.2. Create a file of test SQLAlchemy queries</a></li>
+      <li><a href="#id_33-modify-dockers-composeyaml-file">3.3. Modify Docker’s compose.yaml file</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_4-run-your-server-and-experiment">4. Run your server and experiment</a>
+    <ol>
+      <li><a href="#id_41-build-your-docker-image">4.1. Build your docker image</a></li>
+      <li><a href="#id_42-postgresql-tests">4.2. PostgreSQL Tests</a></li>
+      <li><a href="#id_43-python--fastapi-tests">4.3. Python / FastAPI Tests</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_5-start-the-lab">5. Start the Lab</a>
+    <ol>
+      <li><a href="#id_51-data-model-notes">5.1. Data Model Notes</a></li>
+      <li><a href="#id_52-new-helper-functions-in-serverpy">5.2. New Helper functions in server.py</a></li>
+      <li><a href="#id_53-create-new-rest-endpoints-to-interact-with-the-database">5.3. Create new REST endpoints to interact with the database</a></li>
+      <li><a href="#id_54-modifying-your-react-client-to-interact-with-new-endpoints">5.4. Modifying your REACT Client to interact with new Endpoints</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_6-what-to-turn-in">6. What to turn in</a></li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 10: Storing Your Tasks in a Database
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Tue, 12/03 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<style>
+
+    td ul {
+        margin-top: 10px !important;
+    }
+    table th:first-child, 
+    table td:first-child {
+        width: auto;
+        max-width: 200px;
+        /* min-width:200px; */
+    }
+
+    table th:last-child, 
+    table td:last-child {
+        width: auto;
+        min-width:130px !important;
+    }
+
+    table th:nth-child(3), 
+    table td:nth-child(3) {
+        width: auto;
+        min-width:200px !important;
+    }
+
+    table code {
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+
+</style>
+
+<h2 id="id_introduction">Introduction</h2>
+
+<p>In this lab, you will be modifying your <code class="highlighter-rouge">server.py</code> routes so that they are performing CRUD (create, read, update, delete) operations to your database. We will be using postgreSQL as our database, and SQLAlchemy to interact with our database via python.</p>
+
+<h3 id="id_why-are-we-learning-to-use-a-relational-database">Why are we learning to use a relational database?</h3>
+
+<p>Relational databases offer a standardized way to store and query structured data using SQL (Structured Query Language). Many website backends use some form of a relational database. We will be using <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a> as our database, though there are many other options, including Oracle, Microsoft’s SQL Server, MySQL, SQLite, and more!</p>
+
+<h3 id="id_what-is-sql">What is SQL?</h3>
+<p>SQL is a declarative programming language that functions at a higher level of abstraction than, say, Python or JavaScript. Using SQL, you tell the database what data operations you want it to execute, but the underlying database system figures out how to actually go about manipulating / retrieving the data. Another nice thing about SQL is that these queries can be optimized to be very efficient (though this is well beyond the scope of this course). If you want to learn more, consider taking <strong>CSCI 343. Database Management Systems</strong>.</p>
+
+<h3 id="id_what-is-an-object-relational-mapping-orm">What is an Object Relational Mapping (ORM)?</h3>
+<p>ORMs allow a programmer to associate user-defined Python classes with database tables, and instances of those classes (objects) with rows in their corresponding tables (<a href="https://docs.sqlalchemy.org/en/14/orm/tutorial.html" target="_blank">more on ORM here</a>). In other words, rather than writing SQL directly, you interact with SQL Alchemy “models” that issue SQL queries under-the-hood.</p>
+
+<h3 id="id_what-is-sql-alchemy">What is SQL Alchemy?</h3>
+<p>As stated on the <a href="https://www.sqlalchemy.org/" target="_blank">SQL Alchemy project page</a>: “SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.” In other words, SQL Alchemy is a python abstraction that makes communication with databases easier. It is database agnostic, meaning that you use the same commands, regardless of whether you’re interacting with PostgreSQL, SQLite, MySQL, or some other relational database.</p>
+
+<h2 id="installation">1. Set Up Database Logic</h2>
+<p>In order to complete today’s lab, you will need a PostgreSQL database. However, rather than installing one on your laptop, we will be creating another Docker image and container, and using Docker compose to manage the interaction between our Client, Server, and Database containers.</p>
+
+<h3 id="id_10-create-a-lab08-your-username-branch">1.0. Create a lab08-your-username branch</h3>
+<p>After completing <a href="lab07">Lab 7</a>, you will create a new branch called <code class="highlighter-rouge">lab08-your-username</code> branch from your <code class="highlighter-rouge">lab07-your-username</code> branch (from within your <code class="highlighter-rouge">class-exercises-fall2024</code> repository) as follows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status  <span class="c"># make sure you've committed all of your files</span>
+git branch  <span class="c"># verify that you're on the lab07-your-username branch</span>
+git checkout <span class="nt">-b</span> lab08-your-username  <span class="c"># should create a new branch based on your lab07 branch</span>
+git branch  <span class="c"># verify that you're on your new branch</span>
+</code></pre></div></div>
+
+<p>When you’re done, please make the following modifications to your code:</p>
+
+<h3 id="id_11-create-a-secret-file-to-store-protected-database-information">1.1. Create a secret file to store protected database information</h3>
+<p>In software development, you never want to include any protected information (database passwords, API keys, etc.) in the codebase. To accomplish this, you typically create an <code class="highlighter-rouge">.env</code> file, which is used to set environment variables on your operating system that your system can read. This <code class="highlighter-rouge">.env</code> file is then excluded from your repo and created manually on your production server.</p>
+
+<p>Create a new file called <code class="highlighter-rouge">.env</code> at the root of your copy of the <code class="highlighter-rouge">lab05</code> directory, with the following information:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Remember: IRL, never commit your .env file to GitHub</span>
+<span class="nv">PGPASSWORD</span><span class="o">=</span>postgres
+<span class="nv">DB_USERNAME</span><span class="o">=</span>csci338_user
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>12345
+<span class="nv">DB_HOST</span><span class="o">=</span>db
+<span class="nv">DB_PORT</span><span class="o">=</span>5432
+<span class="nv">DB_NAME</span><span class="o">=</span>taskdb
+</code></pre></div></div>
+
+<p>You will also copy the <code class="highlighter-rouge">.env</code> file into your <code class="highlighter-rouge">src</code> directory. In other words, you will have two copies of <code class="highlighter-rouge">.env</code> – one at the root of your lab05, and one inside of <code class="highlighter-rouge">src</code>.</p>
+
+<h4 id="id_exclude-env-files-from-the-repo">Exclude .env files from the repo</h4>
+<p>Please also edit your .gitignore file to exclude the <code class="highlighter-rouge">.env</code> file from the repo (see line 7 below):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.DS_Store
+__pycache__
+<span class="k">*</span>.pyc
+node_modules
+.parcel-cache
+dist
+.env
+</code></pre></div></div>
+
+<h3 id="id_12-create-a-database-script">1.2. Create a Database script</h3>
+<p>Within the <code class="highlighter-rouge">app</code> directory of your copy of the <code class="highlighter-rouge">lab05</code> directory, create a new file called <code class="highlighter-rouge">db_setup.sh</code> with the following information:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># read environment variables from .env file and use them to create a new database (with custom username, password, etc.)</span>
+<span class="nv">pg_pass</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>PGPASSWORD | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+<span class="nv">DB_USERNAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>DB_USERNAME | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>DB_PASSWORD | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+<span class="nv">DB_HOST</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>DB_HOST | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>DB_PORT | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+<span class="nv">DB_NAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> ./.env | <span class="nb">grep </span>DB_NAME | <span class="nb">awk</span> <span class="nt">-F</span><span class="o">=</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
+
+
+<span class="c"># set the postgres password environment variable</span>
+<span class="nb">export </span><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="nv">$pg_pass</span>
+
+<span class="c"># build a new DB user and a new database based on the environment variables:</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"DROP DATABASE IF EXISTS "</span><span class="nv">$DB_NAME</span><span class="s2">";"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"CREATE DATABASE "</span><span class="nv">$DB_NAME</span><span class="s2">";"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"DROP USER IF EXISTS "</span><span class="nv">$DB_USERNAME</span><span class="s2">";"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"CREATE USER "</span><span class="nv">$DB_USERNAME</span><span class="s2">" with encrypted password '"</span><span class="nv">$DB_PASSWORD</span><span class="s2">"';"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"ALTER DATABASE "</span><span class="nv">$DB_NAME</span><span class="s2">" OWNER TO "</span><span class="nv">$DB_USERNAME</span><span class="s2">";"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"GRANT all privileges on database "</span><span class="nv">$DB_NAME</span><span class="s2">" to "</span><span class="nv">$DB_USERNAME</span><span class="s2">";"</span>
+psql <span class="nt">-U</span> postgres <span class="nt">-h</span> <span class="nv">$DB_HOST</span> <span class="nt">-p</span> <span class="nv">$DB_PORT</span> <span class="nt">-c</span> <span class="s2">"GRANT USAGE ON SCHEMA public TO "</span><span class="nv">$DB_USERNAME</span><span class="s2">";"</span>
+</code></pre></div></div>
+
+<p>This bash script does the following:</p>
+<ol>
+  <li>Reads in your database connection variables from the secret <code class="highlighter-rouge">.env</code> file you just made.</li>
+  <li>Creates a new database called <code class="highlighter-rouge">taskdb</code> (see <code class="highlighter-rouge">.env</code> file)</li>
+  <li>Creates a new database user called <code class="highlighter-rouge">csci338_user</code></li>
+  <li>Grants the new user administrative privileges on the new <code class="highlighter-rouge">taskdb</code> database</li>
+</ol>
+
+<h2 id="id_2-set-up-object-relational-mapping-logic-in-python">2. Set Up Object-Relational Mapping Logic in Python</h2>
+<p>Now that you’ve set up your database initialization script, we’re going to add logic that enables python to easily communicate with the database.</p>
+
+<h3 id="id_21-add-new-python-dependencies">2.1. Add new python dependencies</h3>
+<p>Because we are adding new python dependencies, we first need to delete the <code class="highlighter-rouge">.poetry.lock</code> file if you have one (it should be in the same directory as your <code class="highlighter-rouge">pyproject.toml</code> file). The lock file will regenerate when we install our new python dependencies via poetry.</p>
+
+<p>Within your <code class="highlighter-rouge">pyproject.toml</code> file (inside the <code class="highlighter-rouge">src</code> directory), please add the following dependencies below the <code class="highlighter-rouge">pytest</code> dependency:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>asyncpg = "^0.28.0"
+psycopg2 = "^2.9.9"
+SQLAlchemy = "^2.0.0"
+Faker = "^19.12.0"
+python-dotenv = "^1.0.0"
+</code></pre></div></div>
+<p>A few new modules have been introduced:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">psycopg2</code> and <code class="highlighter-rouge">asyncpg</code> are two modules that enable python to connect with our PostgreSQL database (both synchronously and asynchronously).</li>
+  <li><code class="highlighter-rouge">SQLAlchemy</code>` is our object relational mapping library.</li>
+  <li><code class="highlighter-rouge">Faker</code> is a convenience module for generating fake data for our database.</li>
+  <li><code class="highlighter-rouge">python-dotenv</code> is a convenience module for reading environment variables (from our <code class="highlighter-rouge">.env</code> file).</li>
+</ul>
+
+<h3 id="id_22-add-the-orm-models-and-associated-logic">2.2. Add the ORM Models and associated Logic</h3>
+<p>In this unit, we’re not going to issue SQL queries directly from python. Instead, we’re going to use an object-relational mapping library whereby we create python “models” (i.e., classes) to interact with our database for us. Give this, please create a folder inside your <code class="highlighter-rouge">src</code> directory called <code class="highlighter-rouge">models</code>. Then, inside <code class="highlighter-rouge">models</code>, you will create 6 files:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>models
+├── __init__.py   <span class="c"># two underscores before and after the "init"</span>
+├── base.py
+├── db.py
+├── db_async.py
+├── task.py
+└── user.py
+</code></pre></div></div>
+
+<h4 id="id_221-dbpy">2.2.1. db.py</h4>
+<p>Add the following code to <code class="highlighter-rouge">src/models/db.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># https://mattermost.com/blog/building-a-crud-fastapi-app-with-sqlalchemy/
+</span><span class="kn">from</span> <span class="nn">sqlalchemy.engine</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">drivername</span><span class="o">=</span><span class="s">"postgresql"</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_USERNAME'</span><span class="p">),</span>
+    <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_PASSWORD'</span><span class="p">),</span>
+    <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_HOST'</span><span class="p">),</span>
+    <span class="n">port</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_PORT'</span><span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_NAME'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># engine = create_engine(url, echo=True)
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>This file contains a few different things:</p>
+<ul>
+  <li>A way to read database environment variables from <code class="highlighter-rouge">.env</code></li>
+  <li>A way to make <strong>synchronous</strong> database connections and sessions</li>
+</ul>
+
+<h4 id="id_222-db_asyncpy">2.2.2. db_async.py</h4>
+<p>Add the following code to <code class="highlighter-rouge">src/models/db_async.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># https://stribny.name/blog/fastapi-asyncalchemy/
+</span><span class="kn">from</span> <span class="nn">sqlalchemy.engine</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">create_async_engine</span><span class="p">,</span> <span class="n">AsyncSession</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">drivername</span><span class="o">=</span><span class="s">"postgresql+asyncpg"</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_USERNAME'</span><span class="p">),</span>
+    <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_PASSWORD'</span><span class="p">),</span>
+    <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_HOST'</span><span class="p">),</span>
+    <span class="n">port</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_PORT'</span><span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DB_NAME'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">async_session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span>
+    <span class="n">engine</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="n">expire_on_commit</span><span class="o">=</span><span class="bp">False</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>This file does the same thing as <code class="highlighter-rouge">db.py</code> but makes <strong>asynchronous</strong> database connections and sessions</p>
+
+<h4 id="id_223-basepy">2.2.3. base.py</h4>
+<p>Add the following code to <code class="highlighter-rouge">src/models/base.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span>
+
+<span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">c</span><span class="p">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">__table__</span><span class="p">.</span><span class="n">columns</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">DeclarativeBase</code> is the base class for SQLAlchemy models. All models need to inherit from this base class. There is also a convenience method, <code class="highlighter-rouge">to_dict()</code> in this class to make it easy for our API to convert from a Python object to a JSON object.</p>
+
+<h4 id="id_224-userpy">2.2.4. user.py</h4>
+<p>Add the following code to <code class="highlighter-rouge">src/models/user.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">"users"</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>For Lab 8, we are introducing the idea of users into our system. In the real world, there will be many users creating tasks on your system. That said, we need a way to figure out which task belongs to whom, so that when a user logs into your system, they will only see their tasks. The <code class="highlighter-rouge">User</code> model will be used to interact with the <code class="highlighter-rouge">users</code> table in the <code class="highlighter-rouge">taskdb</code> database. Note that it inherits from the <code class="highlighter-rouge">Base</code> model we just created.</p>
+
+<h4 id="id_225-taskpy">2.2.5. task.py</h4>
+<p>Add the following code to <code class="highlighter-rouge">src/models/task.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">mapped_column</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">ForeignKey</span>
+
+
+<span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">"tasks"</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">"users.id"</span><span class="p">))</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">"User"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">Task</code> model will be used to interact with the <code class="highlighter-rouge">tasks</code> table in the <code class="highlighter-rouge">taskdb</code> database. Note that we have introduced the idea of a foreign key that links the tasks table to the users table. This makes table joins easier (we’ll look at this in a moment).</p>
+
+<h4 id="id_226-initpy">2.2.6. <strong>init</strong>.py</h4>
+<p>Finally, add the following code to <code class="highlighter-rouge">src/models/__init__.py</code>:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># order matters (models with dependencies must come first)
+</span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">.user</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">.task</span> <span class="kn">import</span> <span class="n">Task</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">__init__.py</code> is a file that tells python that the current folder is a package. Among other things, this file makes import syntax easier for other python files that want to import the models we’ve just made.</p>
+
+<h3 id="id_23-update-your-serverpy-file-so-that-it-includes-database-connection-logic">2.3. Update your server.py file so that it includes database connection logic</h3>
+<p>At the top of <code class="highlighter-rouge">server.py</code> (inside of your <code class="highlighter-rouge">src</code> directory), add the following import statements:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Task</span>
+<span class="kn">from</span> <span class="nn">models.db_async</span> <span class="kn">import</span> <span class="n">async_session</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</code></pre></div></div>
+
+<p>Then, add a new route to the bottom of your existing routes that queries the <code class="highlighter-rouge">tasks</code> table:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/api/tasks"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">async_session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">begin</span><span class="p">():</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">tasks</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+            <span class="c1"># Convert each SQLAlchemy Object into a JSON object
+</span>            <span class="c1"># so that you can send it over HTTP:
+</span>            <span class="k">return</span> <span class="p">[</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="id_3-server-build-updates">3. Server Build Updates</h2>
+<p>In order to build our new database and run it using Docker, we need to make some updates to our initialization scripts.</p>
+
+<h3 id="id_31-create-a-file-to-build-your-tables-and-data">3.1. Create a file to build your tables and data</h3>
+<p>In SQLAlchemy, there are some utility functions that can build tables based on the model structure you set up in the <code class="highlighter-rouge">models</code> folder. Given this, we will create a file inside of <code class="highlighter-rouge">src</code> called <code class="highlighter-rouge">populate.py</code> that will initialize our database. This file should be run anytime you want to rebuild your database, and will be run when Docker first builds your app. Please add the following code to <code class="highlighter-rouge">src/populate.py</code></p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">models.db</span> <span class="kn">import</span> <span class="n">engine</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">faker</span> <span class="kn">import</span> <span class="n">Faker</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s">'Dishes'</span><span class="p">,</span> <span class="s">'Do the dishes'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Sweep'</span><span class="p">,</span> <span class="s">'Sweep the floor'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Mow'</span><span class="p">,</span> <span class="s">'Mow the lawn'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Trash'</span><span class="p">,</span> <span class="s">'Take out the trash'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Groceries'</span><span class="p">,</span> <span class="s">'Buy groceries'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Exercise'</span><span class="p">,</span> <span class="s">'Do some jumping jax'</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">create_tables</span><span class="p">():</span>
+    <span class="n">Base</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">drop_tables</span><span class="p">():</span>
+    <span class="n">Base</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">create_user</span><span class="p">():</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">fake</span><span class="p">.</span><span class="n">simple_profile</span><span class="p">()</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">profile</span><span class="p">[</span><span class="s">'name'</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="s">' '</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">'{0}_{1}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span>
+        <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="s">'_'</span><span class="p">)).</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">provider</span> <span class="o">=</span> <span class="n">profile</span><span class="p">[</span><span class="s">'mail'</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">'@'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="s">'{0}@{1}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">provider</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
+        <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">user</span>
+
+
+<span class="k">def</span> <span class="nf">create_fake_users</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">()</span>
+        <span class="n">users</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">users</span>
+
+
+<span class="k">def</span> <span class="nf">create_fake_tasks</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="n">dummy_task</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">dummy_task</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">dummy_task</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">done</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">user</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">task</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+
+    <span class="c1"># drop all tables:
+</span>    <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'{0}. Dropping all tables...'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">step</span><span class="p">))</span>
+    <span class="n">drop_tables</span><span class="p">()</span>
+    <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># create all tables:
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">'{0}. creating DB tables (if they don</span><span class="se">\'</span><span class="s">t already exist)...'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">step</span><span class="p">))</span>
+    <span class="n">create_tables</span><span class="p">()</span>
+    <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># fake users:
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">'{0}. creating some fake users...'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">step</span><span class="p">))</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">create_fake_users</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># fake tasks:
+</span>    <span class="n">create_fake_tasks</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'{0}. creating some fake tasks...'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">step</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The job of the code above is to recreate the database (if it exists) and populate the <code class="highlighter-rouge">users</code> and <code class="highlighter-rouge">tasks</code> table with fake data (generated by the Faker library).</p>
+
+<h3 id="id_32-create-a-file-of-test-sqlalchemy-queries">3.2. Create a file of test SQLAlchemy queries</h3>
+<p>Create another file inside of <code class="highlighter-rouge">src</code> called <code class="highlighter-rouge">sample_orm_queries.py</code>, which will hold some test SQLAlchemy queries. Then paste the following code into this file:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##############################################
+# This file uses a synchronous DB connection #
+##############################################
+</span>
+
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">Task</span>
+<span class="kn">from</span> <span class="nn">models.db</span> <span class="kn">import</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span><span class="p">,</span> <span class="n">or_</span>
+
+<span class="c1">###################
+# SELECT PRACTICE #
+###################
+# https://docs.sqlalchemy.org/en/14/orm/tutorial.html#querying
+</span>
+<span class="c1"># Query all of the users:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="c1"># users = session.execute(query)
+</span><span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Output all of the users using regular Python:
+</span><span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>  <span class="c1"># prints the SQL
+</span><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># Query all of the tasks:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Print them:
+</span><span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># Query all of the tasks owned by Keith Taylor:
+</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"keith_taylor"</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># Query all of the tasks owned by Keith Taylor or Misty Baker:
+</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="p">.</span><span class="nb">filter</span><span class="p">(</span>
+        <span class="n">or_</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"keith_taylor"</span><span class="p">,</span>
+            <span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"misty_baker"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1">###################
+# INSERT PRACTICE #
+###################
+</span>
+<span class="c1"># create a user:
+</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s">'walter_jones'</span><span class="p">,</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="s">'Walter'</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="s">'Jones'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s">'walter_jones@gmail.com'</span>
+<span class="p">)</span>
+
+<span class="c1"># save it:
+</span><span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify that it worked:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+
+<span class="c1"># create a task:
+</span><span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">'Gym'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">'Lift weights'</span><span class="p">,</span>
+    <span class="n">done</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="n">user</span>
+<span class="p">)</span>
+
+<span class="c1"># save it:
+</span><span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify that it worked:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+
+<span class="c1">###################
+# UPDATE PRACTICE #
+###################
+</span>
+<span class="c1"># get task #5 from the database:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># returns as a tuple, so get the first task from the tuple
+</span><span class="n">task</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>  <span class="c1"># before
+</span>    <span class="n">task</span><span class="p">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>  <span class="c1"># after
+</span>
+
+<span class="c1">###################
+# DELETE PRACTICE #
+###################
+</span>
+<span class="c1"># delete task #5
+</span><span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># None
+</span>
+</code></pre></div></div>
+
+<h3 id="id_33-modify-dockers-composeyaml-file">3.3. Modify Docker’s compose.yaml file</h3>
+<p>Finally, please modify your <code class="highlighter-rouge">compose.yaml</code> file so that it looks like the one below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
+  server:
+    build:
+      context: <span class="nb">.</span>
+    ports:
+      - <span class="s2">"8000:8000"</span>
+    volumes:
+      - ./src:/app
+    depends_on:
+      ui:
+       condition: service_healthy
+      db_setup:
+        condition: service_completed_successfully
+    entrypoint: <span class="o">&gt;</span> 
+      bash <span class="nt">-c</span> <span class="s2">"poetry run python populate.py &amp;&amp; poetry run uvicorn server:app --host 0.0.0.0 --reload"</span>
+
+  ui:
+    image: node:lts
+    <span class="c"># user: "${UID}:${GID}"</span>
+    ports:
+      - <span class="s2">"1234:1234"</span>
+    volumes:
+      - ./src/ui:/app
+      - /app/.parcel-cache
+      - /app/node_modules
+    working_dir: /app
+    healthcheck:
+      <span class="nb">test</span>: <span class="s2">"ls dist"</span>
+      <span class="nb">timeout</span>: 90s
+      interval: 10s
+    entrypoint: npm run watch
+
+  db:
+    image: postgres:15
+    env_file:
+    - .env
+    environment:
+      - <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span><span class="k">${</span><span class="nv">PGPASSWORD</span><span class="k">}</span>
+    healthcheck:
+      <span class="nb">test</span>: <span class="s2">"psql -U postgres -h </span><span class="k">${</span><span class="nv">DB_HOST</span><span class="k">}</span><span class="s2"> -p </span><span class="k">${</span><span class="nv">DB_PORT</span><span class="k">}</span><span class="s2">"</span>
+      <span class="nb">timeout</span>: 10s
+      interval: 10s
+    volumes:
+      - ./src:/script
+    working_dir: /script
+
+  db_setup:
+    image: postgres:15
+    env_file:
+    - .env
+    volumes:
+      - ./src:/script
+    depends_on:
+      db:
+        condition: service_healthy
+    working_dir: /script
+    entrypoint: <span class="s2">"bash ./db_setup.sh"</span>
+</code></pre></div></div>
+
+<p>A few things have been added here:</p>
+<ol>
+  <li>A new image for your postgreSQL database</li>
+  <li>A new container to test that your database is running</li>
+  <li>Also note that your docker file is reading from the <code class="highlighter-rouge">.env</code> file at the root of your <code class="highlighter-rouge">lab05</code> folder.</li>
+</ol>
+
+<h2 id="id_4-run-your-server-and-experiment">4. Run your server and experiment</h2>
+<p>Now that you have made the updates, verify that everything worked as follows:</p>
+
+<h3 id="id_41-build-your-docker-image">4.1. Build your docker image</h3>
+<p>On the command line from the root of your <code class="highlighter-rouge">lab05 folder</code>, type:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up
+</code></pre></div></div>
+
+<p>Wait for the file to build. If it worked, you should be able to see data from the database when you navigate to: <a href="http://localhost:8000/api/tasks" target="_blank">http://localhost:8000/api/tasks”</a></p>
+
+<h3 id="id_42-postgresql-tests">4.2. PostgreSQL Tests</h3>
+<p>First, list all of your docker containers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>Then, activate the bash shell on your database server:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_id&gt; bash
+</code></pre></div></div>
+
+<p>Once on your database’s bash shell, connect to your <code class="highlighter-rouge">taskdb</code> database with the <code class="highlighter-rouge">csci338_user</code> account:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>psql <span class="nt">-U</span> csci338_user <span class="nt">-d</span> taskdb
+</code></pre></div></div>
+
+<p>Once on the psql shell, execute some queries:</p>
+
+<h4 id="id_select">SELECT</h4>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">-- all columns, all rows from users table:</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">users</span><span class="p">;</span>
+
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tasks</span><span class="p">;</span> 
+
+<span class="c1">-- 3 columns from both the tasks and users table</span>
+<span class="c1">-- joining on the user_id column</span>
+<span class="c1">-- returns records for user #5 only</span>
+<span class="k">SELECT</span> <span class="n">tasks</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tasks</span><span class="p">.</span><span class="n">done</span><span class="p">,</span> <span class="n">users</span><span class="p">.</span><span class="n">username</span>
+<span class="k">FROM</span> <span class="n">tasks</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="k">ON</span> <span class="n">tasks</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">users</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">users</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Use the spacebar to page to see more results</li>
+  <li>Type q to get back to the sql prompt</li>
+  <li>Type \q to get back to the bash shell</li>
+</ul>
+
+<p>Select cheat sheet:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clause</th>
+      <th>Example</th>
+      <th>Documentation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SELECT</td>
+      <td>SELECT statement that retrieves data from a single table:<br /><br />SELECT * FROM users;<br />SELECT name, done FROM tasks;</td>
+      <td><a href="https://www.postgresqltutorial.com/postgresql-select/" target="_blank">SELECT docs</a></td>
+    </tr>
+    <tr>
+      <td>ORDER BY</td>
+      <td>The ORDER BY clause allows you to sort rows returned by a SELECT clause in ascending or descending order based on a sort expression:<br /><br />SELECT * FROM users ORDER BY last_name;<br />SELECT * FROM users ORDER BY last_name desc;</td>
+      <td><a href="https://www.postgresqltutorial.com/postgresql-order-by/" target="_blank">ORDER BY docs</a></td>
+    </tr>
+    <tr>
+      <td>WHERE</td>
+      <td>The WHERE clause uses a condition to filter the rows returned from the SELECT clause:<br /><br />SELECT * FROM users WHERE id = 3;<br />SELECT * FROM users WHERE id &lt; 3;</td>
+      <td><a href="https://www.postgresqltutorial.com/postgresql-where/" target="_blank">WHERE docs</a></td>
+    </tr>
+    <tr>
+      <td>INNER JOIN</td>
+      <td>Joins two tables where the values of two columns are equal. For instance, to query the tasks and usernames of people who who have have outstanding tasks, we could issue this query:<br /><br />SELECT tasks.name, tasks.done, users.username<br />FROM tasks<br />INNER JOIN users ON tasks.user_id = users.id<br />WHERE tasks.done = false;</td>
+      <td><a href="https://www.postgresqltutorial.com/postgresql-inner-join/" target="_blank">INNER JOIN docs</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="id_update">UPDATE</h4>
+<p>Updating allows you to alter records in a table. The syntax is as follows:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="k">table_name</span>
+<span class="k">SET</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">value1</span><span class="p">,</span>
+    <span class="n">column2</span> <span class="o">=</span> <span class="n">value2</span><span class="p">,</span>
+    <span class="p">...</span>
+<span class="k">WHERE</span> <span class="n">condition</span><span class="p">;</span>
+
+<span class="c1">-- specific example:</span>
+<span class="k">UPDATE</span> <span class="n">tasks</span>
+<span class="k">SET</span> <span class="n">done</span> <span class="o">=</span> <span class="k">true</span>
+<span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>A common mistake is forgetting to include the where clause. Without it, the update will be made to EVERY RECORD of your table.</p>
+
+<p><a href="https://www.postgresqltutorial.com/postgresql-update/" target="_blank">UPDATE docs</a></p>
+
+<h4 id="id_insert">INSERT</h4>
+<p>Inserting allows you to add records to a table. The syntax is as follows:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span><span class="p">(</span><span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">,</span> <span class="err">…</span><span class="p">);</span>
+
+<span class="c1">-- Specific example:</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">tasks</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="s1">'Exercise'</span><span class="p">,</span> <span class="s1">'Run a mile'</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+<span class="c1">-- Verify that it worked (use space bar to see more results, q to quit):</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tasks</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><a href="https://www.postgresqltutorial.com/postgresql-insert/" target="_blank">INSERT docs</a></p>
+
+<h4 id="id_delete">DELETE</h4>
+<p>The DELETE statement allows you to delete one or more rows from a table.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="n">condition</span><span class="p">;</span>
+
+<span class="c1">-- specific example:</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">tasks</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- Note that if you try to delete a user, you can't because there are</span>
+<span class="c1">-- records in the task table that depend on user_id = 1.</span>
+<span class="c1">-- Database constraints (like primary key - foreign key relationships) prevent this:</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">users</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Note: if you forget to include the where clause, you will delete every record in your table by accident. Yikes!</p>
+
+<p><a href="https://www.postgresqltutorial.com/postgresql-delete/" target="_blank">DELETE docs</a></p>
+
+<h3 id="id_43-python--fastapi-tests">4.3. Python / FastAPI Tests</h3>
+
+<p>Activate the bash shell on your python server:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_id&gt; bash
+</code></pre></div></div>
+
+<p>Then activate the poetry shell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry shell
+</code></pre></div></div>
+
+<h4 id="id_rebuild-the-database">Rebuild the database</h4>
+
+<p>For practice, try running the <code class="highlighter-rouge">populate.py</code> script from the command line to see what happens:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python populate.py
+</code></pre></div></div>
+
+<p>You should have seen something like this output to the screen:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dropping all tables...
+creating DB tables (if they don't already exist)...
+creating some fake users...
+creating some fake tasks...
+</code></pre></div></div>
+
+<p>This script rebuilds the database and repopulates your database with new fake data. Issue a SQL command on the DB shell to see…</p>
+
+<h4 id="id_experiment-with-sqlalchemy">Experiment with SQLAlchemy</h4>
+<p>Now, type <code class="highlighter-rouge">python</code> on the command prompt of your server shell to activate the interactive python shell.</p>
+
+<p>Once you’re in there, paste the following commands into the interactive shell:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">Task</span>
+<span class="kn">from</span> <span class="nn">models.db</span> <span class="kn">import</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span><span class="p">,</span> <span class="n">or_</span>
+</code></pre></div></div>
+
+<p>These import statements are needed to experiment with the SQLAlchemy models.</p>
+
+<h5 id="id_select-1">SELECT</h5>
+<p>Let’s try some select statements:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Query all of the users:
+</span>
+<span class="c1"># create the query
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+
+<span class="c1"># create the query session
+</span><span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>  <span class="c1"># prints the SQL
+</span>
+<span class="c1"># Output all of the users using regular Python:
+</span><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Take a look at the results in your interactive shell. Note that when you issue the <code class="highlighter-rouge">print(query)</code> command, it shows you the underlying SQL that your code executes.</p>
+
+<p>Practice with a few more SELECT statements. Paste in each statement one by one and see what happens:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Query all of the tasks:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Print them:
+</span><span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># Query all of the tasks owned by Keith Taylor:
+# change keith_taylor to someone who is in your DB:
+</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"keith_taylor"</span><span class="p">)</span> 
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+<span class="c1"># Query all of the tasks owned by Keith Taylor or Misty Baker
+# (use actual users in your DB):
+</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="p">.</span><span class="nb">filter</span><span class="p">(</span>
+        <span class="n">or_</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"keith_taylor"</span><span class="p">,</span>
+            <span class="n">User</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">"misty_baker"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+</code></pre></div></div>
+
+<h5 id="id_insert-1">INSERT</h5>
+<p>Let’s try a DB insert:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###################
+# INSERT PRACTICE #
+###################
+</span>
+<span class="c1"># create a user:
+</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s">'walter_jones'</span><span class="p">,</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="s">'Walter'</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="s">'Jones'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s">'walter_jones@gmail.com'</span>
+<span class="p">)</span>
+
+<span class="c1"># save it:
+</span><span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify that it worked:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+
+<span class="c1"># create a task:
+</span><span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">'Gym'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">'Lift weights'</span><span class="p">,</span>
+    <span class="n">done</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="n">user</span>
+<span class="p">)</span>
+
+<span class="c1"># save it:
+</span><span class="n">session</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify that it worked:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h5 id="id_update-1">UPDATE</h5>
+<p>Let’s try a DB update:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###################
+# UPDATE PRACTICE #
+###################
+</span>
+<span class="c1"># get task #5 from the database:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># returns as a tuple, so get the first task from the tuple
+</span><span class="n">task</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>  <span class="c1"># before
+</span>    <span class="n">task</span><span class="p">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">())</span>  <span class="c1"># after
+</span></code></pre></div></div>
+
+<h5 id="id_delete-1">DELETE</h5>
+<p>Let’s try a DB delete:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###################
+# DELETE PRACTICE #
+###################
+</span>
+<span class="c1"># delete task #5
+</span><span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># verify:
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># None
+</span></code></pre></div></div>
+
+<h2 id="id_5-start-the-lab">5. Start the Lab</h2>
+<p>Last Thursday, you configured your <code class="highlighter-rouge">lab08</code> branch to work with SQLAlchemy and the PostgreSQL database. You are now ready to complete the lab.</p>
+
+<h3 id="id_51-data-model-notes">5.1. Data Model Notes</h3>
+<p>Before implementing your endpoints, a few notes:</p>
+
+<ul>
+  <li>Since we are now building a system where multiple users can have tasks, we have a new table called <code class="highlighter-rouge">users</code>. Each record in the user table represents a different user of your system. The JSON represention of the <code class="highlighter-rouge">User</code> model is shown below.</li>
+  <li>Each <code class="highlighter-rouge">Task</code> object also needs to be extended to account for the user to which the task belongs. The JSON represention of the <code class="highlighter-rouge">Task</code> model is shown below.</li>
+</ul>
+
+<h4 id="id_user-model">User Model</h4>
+<p>Below is a sample JSON representation of the <code class="highlighter-rouge">User</code> model:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jane_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jane_doe@gmail.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="id_task-model">Task Model</h4>
+<p>Below is a sample JSON representation of the <code class="highlighter-rouge">Task</code> model. Note that there are two new data fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">done</code> – flag indicating whether the task has been completed, and</li>
+  <li><code class="highlighter-rouge">user_id</code> – foreign key to the <code class="highlighter-rouge">User</code> model:</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jane_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="id_52-new-helper-functions-in-serverpy">5.2. New Helper functions in server.py</h3>
+<p>Now that we are (a) using a database and (b) assumping that a user is logged into your system, we will need to make three modifications to <code class="highlighter-rouge">server.py</code>:</p>
+
+<h4 id="id_521-session-function">5.2.1. Session Function</h4>
+<p>First, we will create a function to generate a reusable session object, which we will use to connect to our PostgreSQL database. Please add this code directly below the <code class="highlighter-rouge">app = FastAPI()</code> statement in your <code class="highlighter-rouge">server.py</code> file:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_session</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_session</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_session</span>
+    <span class="k">if</span> <span class="n">_session</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">_session</span> <span class="o">=</span> <span class="n">async_session</span><span class="p">()</span>
+        <span class="k">await</span> <span class="n">_session</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_session</span>
+</code></pre></div></div>
+
+<h4 id="id_522-logged-in-user-function">5.2.2. Logged In User Function</h4>
+<p>Second, create a function that spoofs a logged in user (let’s just assume that the user with <code class="highlighter-rouge">id=1</code> is the user logged into the system). Add this code directly below the session function you just added:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_user</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_current_user</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_user</span>
+    <span class="k">if</span> <span class="n">_user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_session</span><span class="p">()</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">record</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">record</span><span class="p">:</span>
+            <span class="n">_user</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s">'No User in database with id=</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_user</span>
+</code></pre></div></div>
+
+<h4 id="id_523-modify-get_tasks">5.2.3. Modify get_tasks()</h4>
+<p>Finally, now that we have a simpler way to create a database session and a way to access the logged in user, we will replace the <code class="highlighter-rouge">get_tasks()</code> function as follows:</p>
+
+<p><strong>Replace this code…</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/api/tasks"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">async_session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">begin</span><span class="p">():</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">tasks</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+            <span class="c1"># Convert each SQLAlchemy Object into a JSON object
+</span>            <span class="c1"># so that you can send it over HTTP:
+</span>            <span class="k">return</span> <span class="p">[</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p><strong>…with this code (simplified session syntax with only the current user’s tasks)</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/api/tasks"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">():</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_session</span><span class="p">()</span>
+    <span class="c1"># get the (fake) current user:
+</span>    <span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_current_user</span><span class="p">()</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="nb">id</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">select</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">task</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The updated function uses the reusable database session, and filters the task  list according to the user who is logged into the system.</p>
+
+<h3 id="id_53-create-new-rest-endpoints-to-interact-with-the-database">5.3. Create new REST endpoints to interact with the database</h3>
+<p>You are now ready to create the following endpoints:</p>
+
+<table>
+<thead>
+    <tr>
+        <th>Method/Route</th>
+        <th>Description and Examples</th>
+        <th>Parameters</th>
+        <th>Response Type</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>GET /api/tasks</td>
+        <td>Returns all of the tasks in the database that belong to the current user. If the user specifies a <code>status</code> parameter, then only return the tasks that correspond to the status (open or closed).
+            <ul>
+                <li><a href="http://localhost:8000/api/tasks">http://localhost:8000/api/tasks</a>
+                    <br />Returns all tasks associated with the current user
+                </li>
+                <li><a href="http://localhost:8000/api/tasks?status=open">http://localhost:8000/api/tasks?status=open</a>
+                    <br />Returns open tasks associated with the current user
+                </li>
+                <li><a href="http://localhost:8000/api/tasks?status=closed">http://localhost:8000/api/tasks?status=closed</a> <br />Returns completed tasks associated with the current user
+                </li>
+            </ul>
+            Note that this endpoint is already partially implemented for you.
+        </td>
+        <td>
+            <ul>
+                <li><code>status (string, optional)</code> Specifies whether to return open or closed tasks. If not set, return all tasks.</li>
+            </ul>
+        </td>
+        <td>List of Task objects</td>
+    </tr>
+    <tr>
+        <td>POST /api/tasks/</td>
+        <td>Creates a new user (database insert).
+            Note that tasks now require a user. Before inserting into the DB, make sure you assign the user to the current user logged into the system (using the <code>get_logged_in_user()</code> function).
+            <br /><br />
+            If invalid data is posted, return a 400 error with a JSON message that says something like:<br /><code>{"error": "actual description of the error"}</code>. 
+        </td>
+        <td>
+            <ul>
+                <li><code>name (string, required)</code> Name of the task</li>
+                <li><code>description (string, required)</code> Description of the task</li>
+                <li><code>done (boolean, required)</code> Whether or not the task is completed.</li>
+            </ul>
+        </td>
+        <td>Task object that was just created</td>
+    </tr>
+    <tr>
+        <td>GET /api/tasks/{task_id}</td>
+        <td>Returns the task associated with the <code>task_id</code>.
+            <br /><br />
+            If the task does not belong to the current user or if it doesn't exist, throw a 404 error with a JSON message that says:<br /><code>{"error": "task does not exist"}</code>
+        </td>
+        <td></td>
+        <td>Single task object</td>
+    </tr>
+    <tr>
+        <td>DELETE /api/tasks/{task_id}</td>
+        <td>Deletes the task associated with the <code>task_id</code> from the database. 
+            <br /><br />
+            If the task does not belong to the current user or if it doesn't exist, throw a 404 error with a JSON message that says:<br /><code>{"error": "task does not exist"}</code>. 
+        </td>
+        <td></td>
+        <td>Empty object <code>{}</code></td>
+    </tr>
+    <tr>
+        <td>GET /api/user</td>
+        <td>Returns the current user who is logged into the system
+            <br /><br />
+        This is an easy one: just return a JSON representation of the user returned by the <code>get_logged_in_user()</code> function.</td>
+        <td></td>
+        <td>User object</td>
+    </tr>
+        <tr>
+        <td><strong>OPTIONAL</strong>: PATCH /api/tasks/{task_id}</td>
+        <td>
+            Updates the task associated with the <code>task_id</code>. 
+            <ul>
+                <li>If the task does not belong to the current user or if it doesn't exist, throw a 404 error (same as GET).
+                </li>
+                <li>
+                    If invalid data is posted, return a 400 error (same as POST). 
+                </li>
+            </ul>
+        </td>
+        <td>Same as POST</td>
+        <td>Single task object</td>
+    </tr>
+</tbody>
+</table>
+
+<h3 id="id_54-modifying-your-react-client-to-interact-with-new-endpoints">5.4. Modifying your REACT Client to interact with new Endpoints</h3>
+<p>Once you have implemented all of the required endpoints, update your React app so that it interacts with your new endpoints.</p>
+
+<h2 id="id_6-what-to-turn-in">6. What to turn in</h2>
+<p>Before you submit, please verify that you have completed all of the tasks:</p>
+
+<p><strong>Task Routes</strong></p>
+
+<ul class="checkbox-list">
+  <li>GET (List) - Only shows the current user’s tasks (filtered by whether the tasks are closed or open if applicable). Examples:
+    <ul>
+      <li>/api/tasks</li>
+      <li>/api/tasks?status=open</li>
+      <li>/api/tasks?status=closed</li>
+    </ul>
+  </li>
+  <li>GET (Detail) - Shows the corresponding task (if it exists and belongs to the current user). Example:
+    <ul>
+      <li>/api/tasks/3</li>
+    </ul>
+  </li>
+  <li>DELETE - Deletes task if it exists and belongs to the current user). Example:
+    <ul>
+      <li>/api/tasks/3</li>
+    </ul>
+  </li>
+  <li>POST - Adds a task if valid information is submitted (and handles invalid data with an appropriate error message)
+    <ul>
+      <li>/api/tasks</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>User Route</strong></p>
+
+<ul class="checkbox-list">
+  <li>GET - Shows the current user. Example:
+    <ul>
+      <li>/api/user</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>React App</strong></p>
+
+<ul class="checkbox-list">
+  <li>React App interacts with the <strong>database version of the endpoints,</strong> including listing, creating, and deleting tasks belonging to the current logged in user.</li>
+</ul>
+
+<p>When you’re done, please create a pull request with the fully implemented web client (which should be completed inside of your version of your <code class="highlighter-rouge">lab05</code> folder).</p>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>

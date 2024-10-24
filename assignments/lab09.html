@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>AsyncIO, FastAPI, and Python</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_lab-5-hints">Lab 5 Hints</a></li>
+  <li><a href="#id_1-reading--reference-materials">1. Reading &amp; Reference Materials</a></li>
+  <li><a href="#id_2-setup">2. Setup</a>
+    <ol>
+      <li><a href="#id_1-get-the-latest-files--make-a-new-branch">1. Get the latest files &amp; make a new branch</a></li>
+      <li><a href="#id_2-create-the-docker-image-and-container">2. Create the Docker image and container</a></li>
+      <li><a href="#id_3-activate-the-docker-shell">3. Activate the Docker Shell</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_3-asyncio-walkthrough">3. AsyncIO Walkthrough</a>
+    <ol>
+      <li><a href="#id_note">Note</a></li>
+      <li><a href="#step1">1. What is asyncio?</a></li>
+      <li><a href="#step2">2. Basic Concepts</a></li>
+      <li><a href="#step3">3. Getting Started with asyncio</a></li>
+      <li><a href="#step4">4. Defining a coroutine with async</a></li>
+      <li><a href="#step5">5. Running multiple asynchronous coroutines at once</a></li>
+      <li><a href="#step6">6. Working with asyncio Event Loops</a></li>
+      <li><a href="#step7">7. Using asyncio with I/O Operations</a></li>
+      <li><a href="#step8">8. Error Handling</a></li>
+      <li><a href="#step9">9. Timeouts and Cancellation</a></li>
+      <li><a href="#step10">10. Real-World Example: Fetching Multiple URLs</a></li>
+      <li><a href="#step11">11. Conclusion and Further Resources</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_4-fast-api-walkthrough">4. Fast API Walkthrough</a>
+    <ol>
+      <li><a href="#id_walkthrough-of-existing-endpoints">Walkthrough of Existing Endpoints</a></li>
+      <li><a href="#id_your-task">Your Task</a></li>
+    </ol>
+  </li>
+  <li><a href="#id_5-what-to-turn-in">5. What to Turn In</a></li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 9: AsyncIO, FastAPI, and Python
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Sun, 11/24 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<blockquote>
+  <h2 id="id_lab-5-hints">Lab 5 Hints</h2>
+  <p>Resources from Tuesday’s class (10/03/2023) to help you get started on Lab 5:</p>
+  <ul>
+    <li><a href="https://docs.google.com/presentation/d/1VEV7xnxnW_oA-XVCumJL5L7ooYo4DDzqwtWIm3DeMZs/edit?usp=sharing">Slides</a></li>
+    <li><a href="https://github.com/csci338/class-exercises-fall2024/tree/main/lab05/src/hints">Hints directory</a> in the <code class="highlighter-rouge">main</code> branch.</li>
+    <li><a href="https://drive.google.com/drive/folders/10fr-iDlzEn2Oh06HdUCvhU73sg2sg32C">Video Walkthrough</a></li>
+  </ul>
+</blockquote>
+
+<h2 id="id_1-reading--reference-materials">1. Reading &amp; Reference Materials</h2>
+<ul>
+  <li><a href="https://realpython.com/async-io-python/" target="_blank">AsyncIO</a></li>
+  <li><a href="https://www.pythoncheatsheet.org/cheatsheet/basics" target="_blank">Python Reference</a></li>
+  <li><a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a></li>
+</ul>
+
+<h2 id="id_2-setup">2. Setup</h2>
+
+<h3 id="id_1-get-the-latest-files--make-a-new-branch">1. Get the latest files &amp; make a new branch</h3>
+<p>From within your <code class="highlighter-rouge">class-exercises-fall2024</code> repo on your local computer:</p>
+<ul>
+  <li>Make sure you’re at a stopping point and commit all of your current changes.</li>
+  <li>Checkout the <code class="highlighter-rouge">main</code> branch.</li>
+  <li>Pull down the lastest updates from the <code class="highlighter-rouge">class-exercises-fall2024</code></li>
+  <li>You will notice a new folder called <code class="highlighter-rouge">lab05</code>.</li>
+  <li>From the <code class="highlighter-rouge">main</code> branch, create a new branch called <code class="highlighter-rouge">lab05-your-username</code>
+    <ul>
+      <li><code class="highlighter-rouge">git checkout -b lab05-your-username</code></li>
+    </ul>
+  </li>
+  <li>Copy the <code class="highlighter-rouge">lab05</code> directory into <code class="highlighter-rouge">your-username</code> folder. When When you’re done, you shoud have a folder structure that looks something like this (within your-username folder):</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class-exercises-fall2024
+...
+├── lab04           # original copy
+├── lab05           # original copy
+...
+└── your-username
+    ├── README.md
+    ├── getting-started-app
+    ├── lab04       # your copy -- you may not have this one yet if your changes have not yet been reviewed
+    └── lab05       # your copy -- you will edit the files in this folder
+</code></pre></div></div>
+
+<h3 id="id_2-create-the-docker-image-and-container">2. Create the Docker image and container</h3>
+<p><strong>Credit:</strong> Taken from Hayden’s Docker file <code class="highlighter-rouge">README.md</code></p>
+
+<p>Make sure docker is installed and the daemon is running.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>Build the container image. You only need to do this once:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> csci338-lab05:latest <span class="nb">.</span>
+</code></pre></div></div>
+
+<h4 id="id_run-the-fastapi-app-lab-5-using-docker">Run the FastAPI app (Lab 5) using Docker</h4>
+<p>Run the container using <code class="highlighter-rouge">docker run</code> followed by any options and the image
+name.</p>
+
+<p>The <code class="highlighter-rouge">-d</code> option runs the container in “Detached” mode, which frees up your terminal.</p>
+
+<p>The <code class="highlighter-rouge">-p 8000:8000</code> option maps port 8000 on your host machine to the
+container’s port 8000. Without this option you will not be able to see the app
+from the browser on your host machine.</p>
+
+<p>The <code class="highlighter-rouge">-v ./src:/app</code> option tells docker to map the <code class="highlighter-rouge">./src</code> directory on your
+host machine to the <code class="highlighter-rouge">/app</code> directory inside the container. This allows you to
+edit the code on your machine and see the updates in the container without
+restarting the container.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 <span class="nt">-v</span> ./src:/app csci338-lab05
+</code></pre></div></div>
+
+<p>Visit <code class="highlighter-rouge">http://localhost:8000</code> and behold! The app running in a container!</p>
+
+<h3 id="id_3-activate-the-docker-shell">3. Activate the Docker Shell</h3>
+<p>To run and test individual python files using your Docker container, you need to activate the docker shell, and then run your python files from within the Docker environment. To do this:</p>
+
+<p>List the containers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>     
+</code></pre></div></div>
+
+<p>Open the Docker shell for your container of interest:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container-id&gt; bash
+</code></pre></div></div>
+
+<p>Activate the poetry shell (virtual environment) and run the tests:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry shell <span class="c"># activates the python virtual environment</span>
+<span class="nb">pwd</span> <span class="c"># check that you're in the app directory</span>
+</code></pre></div></div>
+
+<h4 id="id_other-useful-docker-commands-just-fyi">Other Useful Docker Commands (just FYI)</h4>
+
+<h5 id="id_stopping-and-starting-the-container">Stopping and starting the container</h5>
+<p>You do not need to run a new container each time you want to work on the code. Instead, you can restart a stopped container using <code class="highlighter-rouge">docker start</code> followed by the container name or container id. Some helpful commands:</p>
+
+<p>List all of the containers and their ids:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>Stop the container using <code class="highlighter-rouge">docker stop</code> followed by the container name or id.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stop &lt;container-id&gt;
+</code></pre></div></div>
+
+<p>Start the container using <code class="highlighter-rouge">docker start</code> followed by the container name or id.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker start &lt;container-id&gt;
+</code></pre></div></div>
+
+<h5 id="id_remove-old-images">Remove old images</h5>
+<p>When a new version of the Dockerfile is available you will need to build the
+image again using <code class="highlighter-rouge">docker build</code> and run a new container using <code class="highlighter-rouge">docker run</code>.</p>
+
+<p>After a while you may end up with old versions of the image on your system.
+These can take up quite a bit of disk space, so it is good to check every so
+often and remove old images from your system.</p>
+
+<p>To show the images on your local machine use <code class="highlighter-rouge">docker image ls</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>Remove any unneeded images using <code class="highlighter-rouge">docker image rm</code> followed by a list of one or
+more image ids or image names.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">rm</span> &lt;image-id&gt;
+</code></pre></div></div>
+
+<h5 id="id_remove-old-containers">Remove old containers</h5>
+<p>You may want to remove old containers after building and running a new image.
+List the containers on your system using <code class="highlighter-rouge">docker container ls</code>. This will only
+show running containers, add the `-a’ flag to see stopped containers as well.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>You can remove any containers you need by using <code class="highlighter-rouge">docker container rm</code> followed
+by container name or id.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">rm</span> &lt;container-id&gt;
+</code></pre></div></div>
+
+<h2 id="id_3-asyncio-walkthrough">3. AsyncIO Walkthrough</h2>
+
+<blockquote class="blockquote-no-margin">
+  <h3 id="id_note">Note</h3>
+  <p>This tutorial was generated with the help of ChatGPT!</p>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">asyncio</code> module in Python is a powerful library that provides a framework for writing asynchronous, concurrent code using the <code class="highlighter-rouge">async</code> and <code class="highlighter-rouge">await</code> syntax. Asynchronous programming allows you to write programs that can perform multiple tasks concurrently without blocking the main execution thread, making it particularly useful for I/O-bound and network-bound operations.</p>
+
+<p>In this tutorial, we will cover the following topics:</p>
+
+<ol>
+  <li><a href="#step1">What is asyncio?</a></li>
+  <li><a href="#step2">Basic Concepts</a></li>
+  <li><a href="#step3">Getting Started with asyncio</a></li>
+  <li><a href="#step4">Defining a coroutine with async</a></li>
+  <li><a href="#step5">Running multiple coroutines at once</a></li>
+  <li><a href="#step6">Working with asyncio Event Loops</a></li>
+  <li><a href="#step7">Using asyncio with I/O Operations</a></li>
+  <li><a href="#step8">Error Handling</a></li>
+  <li><a href="#step9">Timeouts and Cancellation</a></li>
+  <li><a href="#step10">Real-World Example: Fetching Multiple URLs</a></li>
+  <li><a href="#step11">Conclusion and Further Resources</a></li>
+</ol>
+
+<h3 id="step1">1. What is asyncio?</h3>
+<p>asyncio is a Python library that provides a framework for asynchronous programming. It is designed to handle concurrent I/O operations efficiently and is particularly useful for network programming, web scraping, and other tasks where you might otherwise be waiting for data to arrive.</p>
+
+<h3 id="step2">2. Basic Concepts</h3>
+<p>Before diving into asyncio, it’s essential to understand some basic concepts:</p>
+
+<ul>
+  <li><strong>Coroutines (Asynchronous Functions)</strong>: Coroutines are special functions defined with the async keyword. They can be paused and resumed, allowing non-blocking execution of tasks.</li>
+  <li><strong>Event Loop</strong>: The event loop manages and schedules the execution of coroutines.</li>
+  <li><strong>Tasks</strong>: Tasks represent units of work in asyncio. You can create and manage multiple tasks within an event loop.</li>
+</ul>
+
+<h3 id="step3">3. Getting Started with asyncio</h3>
+<p>To use <code class="highlighter-rouge">asyncio</code>, you need Python 3.5 or later. Most modern Python installations come with asyncio built-in, so you don’t need to install it separately.</p>
+
+<h3 id="step4">4. Defining a coroutine with async</h3>
+<p>To create a coroutine, use the <code class="highlighter-rouge">async</code> keyword:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_coroutine</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Hello, asyncio!"</span><span class="p">)</span>
+
+<span class="c1"># To run a coroutine, you need an event loop.
+</span><span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">my_coroutine</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_your-turn">Your Turn</h4>
+  <p><strong>See demo file:</strong> <code class="highlighter-rouge">lab05/asyncio-exercises/demo1_coroutine.py</code></p>
+</blockquote>
+
+<h4 id="id_to-test-your-python-files-from-docker-you-need-to-activate-the-docker-shell-to-do-this">To test your python files from Docker, you need to activate the docker shell. To do this:</h4>
+
+<p>List the containers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>     
+</code></pre></div></div>
+
+<p>Open the Docker shell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container-id&gt; /bin/bash
+</code></pre></div></div>
+
+<p>Activate the poetry shell (virtual environment) and run the tests:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry shell <span class="c"># activates virtual environment</span>
+<span class="nb">pwd</span> <span class="c"># check that you're in the app directory</span>
+<span class="nb">cd </span>asyncio-exercises
+python demo1_coroutine.py
+</code></pre></div></div>
+
+<h3 id="step5">5. Running multiple asynchronous coroutines at once</h3>
+<p>You can create and run tasks concurrently:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine1</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Coroutine 1 completed"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">6</span>  <span class="c1"># fake data to be returned
+</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine2</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Coroutine 2 completed"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">9</span>  <span class="c1"># fake data to be returned
+</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">result1</span><span class="p">,</span> <span class="n">result2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span>
+        <span class="n">coroutine1</span><span class="p">(),</span> <span class="n">coroutine2</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Note that the statements below only execute once both
+</span>    <span class="c1"># coroutines have executed. This is because of the "await"
+</span>    <span class="c1"># keyword.
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">asyncio.gather</code> – a function in the asyncio library – allows you to concurrently execute multiple coroutines and collect their results. It’s a way to run multiple asynchronous tasks concurrently and wait for all of them to complete.</li>
+  <li><code class="highlighter-rouge">asyncio</code> also has an event loop that manages coroutine execution.</li>
+  <li><code class="highlighter-rouge">await</code> – used if you don’t want the next statement in your current execution block to start until your asynchronous task completes.</li>
+</ul>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_your-turn-1">Your Turn</h4>
+  <p><strong>See demo file:</strong> <code class="highlighter-rouge">lab05/asyncio-exercises/demo2_two_coroutines.py</code></p>
+</blockquote>
+
+<h3 id="step6">6. Working with asyncio Event Loops</h3>
+<p>The event loop serves as the core of <code class="highlighter-rouge">asyncio</code>, managing the execution of asynchronous tasks (also known as coroutines) and coordinating their execution without blocking the main program’s execution.</p>
+
+<p>In the example below, the <code class="highlighter-rouge">sleep</code> statement doesn’t block other coroutines from completing.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_coroutine</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Coroutine executed"</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">my_coroutine</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">asyncio</code> encourages an event-driven programming style where you define event handlers (coroutines) that react to specific events, such as incoming network data or user input – which we will see in more detail when we work with FastAPI.</p>
+
+<h3 id="step7">7. Using asyncio with I/O Operations</h3>
+<p><code class="highlighter-rouge">asyncio</code> excels at I/O-bound operations. Here’s an example of reading files asynchronously:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiofiles</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">aiofiles</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">file</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Read </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s"> characters from </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">read_file</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">))</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Certain kinds of tasks – like File I/O, database calls, and queries over the network – are slow. Given this, if you execute these kinds of commands serially, where they block other processes, this can be inefficient. Hence, running I/O processes as coroutines conserves resources.</p>
+
+<p>Sidebar:</p>
+<ul>
+  <li>You can also do this with threads, but then you have to manage the shared memory (which can be complicated, and is overkill for webdev).</li>
+</ul>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_your-turn-2">Your Turn</h4>
+  <p><strong>See demo file:</strong> <code class="highlighter-rouge">lab05/asyncio-exercises/demo3_file_io.py</code></p>
+</blockquote>
+
+<h3 id="step8">8. Error Handling</h3>
+<p>Use try and except to handle errors within coroutines:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_coroutine</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Your code here
+</span>    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">my_coroutine</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="step9">9. Timeouts and Cancellation</h3>
+<p>asyncio allows you to set timeouts and cancel tasks:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">timeout_task</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">long_running_task</span><span class="p">(),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">asyncio</span><span class="p">.</span><span class="nb">TimeoutError</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Task timed out"</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">timeout_task</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Sometimes, services are just down (not running, network glitches, etc.). In this case, think about how you would handle errors like this gracefully using timeouts (so as not to use up resources needlessly).</p>
+
+<h3 id="step10">10. Real-World Example: Fetching Multiple URLs</h3>
+<p>Here’s a simple example of fetching multiple URLs concurrently using <code class="highlighter-rouge">aiohttp</code>. This is a good use of <code class="highlighter-rouge">asyncio</code> because retrieving resources over the network can be slow and unpredictable, making blocking inefficient.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">fetch_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="p">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Message:"</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">"https://openai.com"</span><span class="p">,</span> <span class="s">"https://example.com"</span><span class="p">]</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+
+    <span class="c1"># delegate execution management to the event loop via the gather method:
+</span>    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="c1"># once all of the coroutines have completed, output the results
+</span>    <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Fetched </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">}</span><span class="s"> bytes from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote class="blockquote-no-margin">
+  <h4 id="id_your-turn-3">Your Turn</h4>
+  <p><strong>See demo files:</strong></p>
+  <ul>
+    <li><code class="highlighter-rouge">lab05/asyncio-exercises/demo4_remote_data.py</code></li>
+    <li><code class="highlighter-rouge">lab05/asyncio-exercises/demo5_remote_data_timed.py</code> (times the sequential v. parallel to see which one is faster)</li>
+  </ul>
+</blockquote>
+
+<p>For those of you who are new to Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># this...
+</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+
+<span class="c1"># is a shortcut for this...
+</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+    <span class="n">tasks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">fetch_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="step11">11. Conclusion and Further Resources</h3>
+<p>This tutorial provides a basic introduction to the asyncio module in Python. Asynchronous programming can significantly improve the performance of I/O-bound tasks and concurrent operations. To dive deeper into asyncio, explore the official documentation and try building more complex applications.</p>
+
+<p>Official asyncio documentation: <a href="https://docs.python.org/3/library/asyncio.html" target="_blank"></a></p>
+
+<p>Remember that asynchronous programming can be complex, so practice and experimentation are essential for mastering it.</p>
+
+<h2 id="id_4-fast-api-walkthrough">4. Fast API Walkthrough</h2>
+<p>This Fast API walkthrough will use the same poetry environment as the <strong>app</strong> application (HW1), but we’ve downgraded the python dependency to &gt;= 3.8 to better accommodate WSL users.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">asyncio</code> was introduced to Python in version 3.5.</li>
+  <li><code class="highlighter-rouge">uvicorn</code> was introduced in Python 3.8 (it’s a method to manage asyncronous loops via our web server)</li>
+</ul>
+
+<p>To run the Fast API server, make sure that you are in <strong>your version</strong> of the <code class="highlighter-rouge">lab05/src</code> folder on the CLI. Then run your Docker container using the commands described above in the Docker section.</p>
+
+<p>This should start your webserver on this address: <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>. Go check it out.</p>
+
+<h3 id="id_walkthrough-of-existing-endpoints">Walkthrough of Existing Endpoints</h3>
+<p>Please open <code class="highlighter-rouge">server.py</code> in the <code class="highlighter-rouge">src</code> directory and take a look at it. In this file, there are 6 “endpoints” defined that can be accessed through <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Route</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/</td>
+      <td><a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a></td>
+    </tr>
+    <tr>
+      <td>/items/{item_id}</td>
+      <td><a href="http://127.0.0.1:8000/items/123?search_term=chocolate" target="_blank">http://127.0.0.1:8000/items/123?search_term=chocolate</a></td>
+    </tr>
+    <tr>
+      <td>/data/yelp</td>
+      <td><a href="http://127.0.0.1:8000/data/yelp" target="_blank">http://127.0.0.1:8000/data/yelp</a></td>
+    </tr>
+    <tr>
+      <td>/data/spotify</td>
+      <td><a href="http://127.0.0.1:8000/data/spotify" target="_blank">http://127.0.0.1:8000/data/spotify</a></td>
+    </tr>
+    <tr>
+      <td>/ui/yelp</td>
+      <td><a href="http://127.0.0.1:8000/ui/yelp" target="_blank">http://127.0.0.1:8000/ui/yelp</a></td>
+    </tr>
+    <tr>
+      <td>/ui/spotify</td>
+      <td><a href="http://127.0.0.1:8000/ui/spotify" target="_blank">http://127.0.0.1:8000/ui/spotify</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note that the last 4 endpoints fetch data over the network (remote calls), which present some unique challenges for testing – something we will discuss in more detail when we get to integration testing.</p>
+
+<h4 id="id_run-the-starter-tests">Run the starter tests</h4>
+
+<p>To run the tests, you will need to navigate to the Docker shell and run <code class="highlighter-rouge">pytest</code> (our Python testing framework). To to this:</p>
+
+<p>Find your container id:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-a</span>     
+</code></pre></div></div>
+
+<p>Open the Docker shell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container-id&gt; /bin/bash
+</code></pre></div></div>
+
+<p>Activate the poetry shell (virtual environment) and run the tests:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry shell <span class="c"># activates virtual environment</span>
+<span class="nb">pwd</span> <span class="c"># check that you're in the app directory</span>
+pytest <span class="nt">--disable-warnings</span>
+</code></pre></div></div>
+
+<h3 id="id_your-task">Your Task</h3>
+<p>For your Lab 5 submission, you will be creating a few additional endpoints for managing a list of tasks. 
+Begin by doing the following:</p>
+<ol>
+  <li>rename the current <code class="highlighter-rouge">server.py</code> file to <code class="highlighter-rouge">server_old.py</code></li>
+  <li>rename the current <code class="highlighter-rouge">test_server.py</code> file to <code class="highlighter-rouge">test_server_old.py</code></li>
+  <li>create a brand new <code class="highlighter-rouge">server.py</code> file</li>
+  <li>create a brand new <code class="highlighter-rouge">test_server.py</code> file</li>
+</ol>
+
+<p>The requirements are as follows:</p>
+
+<h4 id="id_1-implement-endpoints">1. Implement Endpoints</h4>
+
+<p>Start by adding the relevant code and import statements into your new <code class="highlighter-rouge">server.py</code> file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
+
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">root</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'Hello world!'</span>
+</code></pre></div></div>
+
+<p>Then, create a FastAPI application with the following endpoints:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">GET /tasks</code>: Retrieve a list of all tasks.</li>
+  <li><code class="highlighter-rouge">GET /tasks/{task_id}</code>: Retrieve details of a specific task by its <code class="highlighter-rouge">task_id</code>.</li>
+  <li><code class="highlighter-rouge">POST /tasks</code>: Create a new task with a JSON request body containing a <code class="highlighter-rouge">title</code> and description.</li>
+  <li><code class="highlighter-rouge">PUT /tasks/{task_id}</code>: Update an existing task’s title and description using a JSON request body.</li>
+  <li><code class="highlighter-rouge">DELETE /tasks/{task_id}</code>: Delete a task by its <code class="highlighter-rouge">task_id</code>.</li>
+</ul>
+
+<h4 id="id_2-data-storage">2. Data Storage</h4>
+<p>Implement data storage using an in-memory data structure (e.g., a Python list or dictionary) to store tasks. You don’t need to use a database for this assignment.</p>
+
+<h4 id="id_3-validation">3. Validation</h4>
+<p>Implement validation for request payloads:</p>
+
+<ul>
+  <li>Ensure that the title and description fields are present and non-empty when creating or updating a task.</li>
+  <li>Return appropriate error responses with clear error messages for invalid requests.</li>
+  <li>Provide interactive API documentation using FastAPI’s built-in Swagger UI or ReDoc. The documentation should include details of all endpoints, request/response formats, and example requests and responses.</li>
+</ul>
+
+<h4 id="id_4-testing">4. Testing</h4>
+<ul>
+  <li>Write unit tests to ensure the functionality and correctness of your API endpoints.</li>
+</ul>
+
+<h4 id="id_5-bonus-optional">5. Bonus (Optional)</h4>
+<ul>
+  <li>Add features like task priority, due dates, and status (e.g., “completed” or “in progress”) to the task model.</li>
+  <li>Implement query parameters to filter tasks based on their status, priority, or other attributes.</li>
+</ul>
+
+<h2 id="id_5-what-to-turn-in">5. What to Turn In</h2>
+<p>Please create a pull request with all of your <code class="highlighter-rouge">lab05</code> files.</p>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script>
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>
