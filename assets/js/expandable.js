@@ -5,11 +5,11 @@ function toggleExpandable(srcElement) {
     const target = srcElement.getAttribute("target-panel");
     const content = document.querySelector(target);
     const tagName = srcElement.tagName.toLowerCase();
-    console.log(target, content);
-    console.log(tagName);
+    // console.log(target, content);
+    // console.log(tagName);
     const button =
-        tagName === "button" ? srcElement : srcElement.querySelector("button");
-    console.log(button);
+        tagName === "button" ? srcElement : srcElement.previousElementSibling;
+    // console.log(button);
     if (content.style.display === "none") {
         content.style.display = "block";
         button.innerHTML = openIcon;
@@ -39,7 +39,7 @@ function toggleAll() {
 
 window.addEventListener("scroll", function () {
     const button = document.getElementById("toggle-button");
-    console.log(document.documentElement.scrollTop);
+    // console.log(document.documentElement.scrollTop);
     // Check the scroll position
     if (document.documentElement.scrollTop > 70) {
         // console.log("show");

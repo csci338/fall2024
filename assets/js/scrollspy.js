@@ -39,7 +39,7 @@
                 aside.classList.remove("sticky");
             }
         }
-        initPositions();
+        // initPositions();
     };
 
     const findElementByAttributeWorkaround = (
@@ -92,35 +92,30 @@
         });
     };
 
-    document.querySelectorAll("aside a").forEach((e) => {
-        e.onclick = (ev) => {
-            scrollToAnchor(ev);
-        };
-    });
+    // document.querySelectorAll("aside a").forEach((e) => {
+    //     e.onclick = (ev) => {
+    //         scrollToAnchor(ev);
+    //     };
+    // });
     initPositions();
 
     window.onscroll = () => {
         scrollPosition =
             document.documentElement.scrollTop || document.body.scrollTop;
         for (let key in sections) {
-            //console.log(scrollPosition + 10);
             if (sections[key] <= scrollPosition + fixedMenuBuffer + 10) {
                 const currentLink = document.querySelector("aside .active");
                 if (currentLink) {
                     currentLink.setAttribute("class", " ");
                 }
-                // console.log(`a[href="#${key}"]`);
                 const link = document.querySelector(`a[href="#${key}"]`);
                 if (link) {
                     link.setAttribute("class", "active");
                 }
-                // findElementByAttributeWorkaround("href", key, "a").setAttribute(
-                //     "class",
-                //     "active"
-                // );
             }
         }
-        stickyToggle();
+        // stickyToggle();
+        initPositions();
         prevScroll = scrollPosition;
     };
 })();
