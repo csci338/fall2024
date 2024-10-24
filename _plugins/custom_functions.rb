@@ -74,7 +74,6 @@ module Jekyll
 
       def display_link_or_badge(page, hide_title=false, new_line=true, simple=false, show_notes=true)
         type = page['type'] == "homework" ? "hw" : page['type']
-        link_class = simple ? "" : type
         class_name = new_line ? "block" : "inline"
         badge_text = type ? type.capitalize : ""
         badge_text = simple ? page['title'] : "#{badge_text} #{page['num']}"
@@ -86,6 +85,8 @@ module Jekyll
         extras = (page['type'] == "reading" and page['skim'] == 1) ? " <span class='optional'>skim</span>" : extras
         colon = "<span style='display: none'>: </span>"
         is_draft = (page['draft'] == 1)
+        link_class = simple ? "" : (is_draft ? "badge" : type)
+        
         notes = show_notes ? "<div>#{page['notes']}</div>" : ""
 
         if !is_draft && url
@@ -104,7 +105,7 @@ module Jekyll
             # Return a span if no url exists
             return "<span class='mb-1 #{class_name}'>"\
                "#{extras}"\
-               "<span class='badge'>#{badge_text}</span>#{colon}"\
+               "<span class='#{link_class}'>#{badge_text}</span>#{colon}"\
                   "#{title}"\
               "</span>"\
               "#{notes}"

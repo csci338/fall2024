@@ -26,8 +26,7 @@ For your first project, you are going to create a command line tool to replicate
 <!-- ## Introduction
 For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. It should work like the video shown here (TODO). -->
 
-{% expandable expanded="true" %}
-### Learning Goals
+{% expandable expanded="true" level=3 title="Learning Goals"%}
 This project will help you practice the concepts we have been covering so far, including:
 
 1. Breaking requirements up into logical units that can be worked on in parallel (i.e., minimizing the dependencies between components).
@@ -38,8 +37,7 @@ This project will help you practice the concepts we have been covering so far, i
 1. Coordinating and communicating across tasks to make sure everything can be successfully integrated.
 {% endexpandable %}
 
-{% expandable expanded="true" %}
-### Product Requirements
+{% expandable expanded="true" level=3 title="Product Requirements"%}
 You and your team will create an app that implements the following features:
 
 1. A way to download the UNCA data file from the Internet (JSON)
@@ -52,8 +50,7 @@ You and your team will create an app that implements the following features:
 1. A way to download the schedule as a CSV file
 {% endexpandable %}
 
-{% expandable expanded="true" %}
-### System Architecture (Done as a Class)
+{% expandable expanded="true" level=3 title="System Architecture (Done as a Class)"%}
 During class on Tuesday (9/24), we discussed how to organize our system, and we collectively created the following diagram:
 
 [diagram]
@@ -62,8 +59,7 @@ During class on Tuesday (9/24), we discussed how to organize our system, and we 
 ## Tasks
 Each task is listed below. Each student on your team has been assigned a task.
 
-{% expandable %}
-### 1. Course
+{% expandable level=3 title="1. Course"%}
 The job of the Course class (`course.py`) is to parse the incoming dictionary into a more useable form. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.
 
 #### Sample dictionary item to be parsed
@@ -141,8 +137,7 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable %}
-### 2. Courses
+{% expandable level=3 title="2. Courses"%}
 The job of the Courses class (`courses.py`) is to make it convenient to print, filter, and download a list of Course objects.
 
 #### Properties
@@ -169,8 +164,7 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable %}
-### 3. UserPreferences
+{% expandable level=3 title="3. UserPreferences"%}
 The job of the UserPreferences class (`user_preferences.py`) is store the user's search preference information, and to provide methods for modifying the user's preferences as they browse courses of interest. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.
 
 
@@ -220,8 +214,7 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable %}
-### 4. Course Filter
+{% expandable level=3 title="4. Course Filter"%}
 The job of the CourseFilter class (`course_filter.py`) is to determine whether a course matches a given set of criteria. 
 
 #### Properties
@@ -243,13 +236,11 @@ Make sure that all filters are case-insensitive and that they return true if no 
 {% endexpandable %}
 
 
-{% expandable %}
-### 5. User Interface (UI)
+{% expandable level=3 title="5. User Interface (UI)"%}
 The job of the User Interface class (`user_interface.py`) is to allow people to make choices about what they want to do in the app and receive the appropriate response.
 {% endexpandable %}
 
-{% expandable %}
-### 6. Schedule
+{% expandable level=3 title="6. Schedule"%}
 The job of the Schedule class (`schedule.py`) is to allow the user to build a schedule. This involves giving the user the ability to:
 * add a course to the schedule
 * remove a course from the schedule
@@ -257,24 +248,15 @@ The job of the Schedule class (`schedule.py`) is to allow the user to build a sc
 * save schedule as a CSV file (text file)
 {% endexpandable %}
 
+{% expandable  level=3 title="7. Schedule Emailer" %}
+* Register with Twilio and get an API key
+* Install the python library
+{% endexpandable %}
 
 ## 1. Logistics
 Before you begin working on this project, please read the guidelines **VERY CAREFULLY**.
 
-{% expandable expanded="true" %}
-### 1.1 How to submit work for review
-* Implement all of properties and methods needed to support the functionality listed above. You are also welcome to implement private helper methods. In python, private / helper methods are prefixed with an underscore.
-* Make sure you **DO NOT modify the `main` branch**. All of your coding should be done on a feature branch.
-* Write tests for your methods.
-* Make sure all of the formatter and linter checks pass before making a pull request.
-* In your pull request (PR):
-    * Reference this issue by using the hash tag followed by the issue number.
-    * Describe what has been done in the PR as simply and clearly as possible.
-    * You may make multiple PRs to implement subsets of functionality. Remember: it's better to create smaller, incremental PRs than one big PR (no long-running branches)
-{% endexpandable %}
-
-{% expandable expanded="true" %}
-### 1.2. Team & Task Assignments
+{% expandable expanded="true" level=3 title="1. Team & Task Assignments" %}
 Your teams are listed below. Each member of your team has been assigned a task from the GitHub Issue Tracker. Some of you will be working on the same Python class, so  so make sure you only work on the tasks to which you were assigned:
 
 #### Team 1
@@ -302,15 +284,77 @@ Please see your team's <a href="#" target="_blank">repo</a> and <a href="#" targ
 1. Tai (tairobinett) 
 1. Travis (tgroom90)
 1. Zachary (zRaNk1995)
+{% endexpandable %}
 
+{% expandable expanded="true" level=3 title="2. Working with Feature Branches" %}
+1. You will **never edit the `main` branch directly**. Consider `main` to be the "source of truth" for the app. 
+2. All of your work will be committed to your feature branch (which you will create from the `main` branch).
+3. _Please_ pull down the latest changes from `main` periodically and rebase your local branch with `main`. To do this:
+    * Commit your feature branch work,
+    * Check out main,
+    * Pull down the latest changes,
+    * Check out your feature branch again, and
+    * Rebase your feature branch with main
+    {:.compact}
+
+{% endexpandable %}
+
+
+{% expandable expanded="true" level=3 title="3. Testing Tips" %}
+Run the tests using the pytest library (installed via poetry). Some sample commands:
+
+```bash
+poetry run pytest -v                        # runs all the tests
+poetry run pytest tests/test_courses.py -v  # runs all the tests in a single file
+poetry run pytest test_courses.py::TestCourses::test_one -v  # runs a single test (e.g., test_one)
+```
+{% endexpandable %}
+
+
+{% expandable expanded="true" level=3 title="4. Formatting Tips" %}
+We are using `black` to format our code, `isort` to sort our import statements, and `flake8` to validate your Python code. 
+* [https://black.readthedocs.io/en/stable/usage_and_configuration/index.html](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)
+* [https://pypi.org/project/isort/](https://pypi.org/project/isort/)
+* [https://flake8.pycqa.org/en/latest/](https://flake8.pycqa.org/en/latest/)
+
+The following commands will be run on every push to make sure that the code styling rules have been followed:
+
+```bash
+poetry run black . --check        # runs the Python formatter
+poetry run isort . --check-only   # run the Python import sorter
+poetry run flake8                 # flake8 just checks things -- you have to fix them manually
+```
+
+You can also use the `bash/check.sh` script (for convenience):
+
+```bash
+bash scripts/check.sh
+```
+
+To actually APPLY the formatting (which will make changes to your files), make sure you run these two commands before pushing your branch to GitHub:
+
+```bash
+poetry run black .      # runs the Python formatter
+poetry run isort .      # run the Python import sorter
+```
+You can also use the bash/fix.sh script (for convenience):
+
+```bash
+bash scripts/fix.sh
+```
+
+If you want flake8 to ignore a particular line, add a `# noqa` comment at the end of the line
+{% endexpandable %}
+
+{% expandable expanded="true" level=3 title="5. GitHub Workflows & Continuous Integration Notes" %}
+The `.github/workflows/pr.yml` is a configuration file that GitHub reads in order to run a series of checks everytime you push your branch to GitHub. Before you make a pull request, make sure that you run the `bash scripts/run_pr_checks.sh` script. If everything passes locally, it should also pass on GitHub.
 {% endexpandable %}
 
 
 
 ## 2. Set Up
 
-{% expandable %}
-### 2.1 Set up your repository
+{% expandable expanded="true" level=3 title="1. Set up your repository" %}
 Once your team lead has added you to their repo, you will set up the code locally as follows:
 1. Open the terminal.
 1. Clone your team lead's version of the repository -- and please do not clone it inside of another directory that is already under version control: 
@@ -324,8 +368,7 @@ git checkout -b yourname-feature
 ```
 {% endexpandable %}
 
-{% expandable %}
-### 2.2. Building Your Docker Container
+{% expandable expanded="true" level=3 title="2. Building Your Docker Container" %}
 1. Make sure that Docker is running
 1. Then, from within the `project01` directory, issue the following Docker command:
    ```bash
@@ -394,87 +437,25 @@ You could also go to the Docker Dashboard and start your container from the Dash
 | `docker exec -it <pid> bash scripts/fix.sh` | Runs fix script |
 {% endexpandable %}
 
+## 3. Grading and assessment
 
-## 3. Your Job
-Once you have signed up for a task, you will implement it on a new branch (see tips below).
-
-{% expandable expanded="true" %}
-### 3.1. Creating Feature Branches
-1. You will **never edit the `main` branch directly**. Consider `main` to be the "source of truth" for the app. 
-2. All of your work will be committed to your feature branch.
-{% endexpandable %}
-
-{% expandable expanded="true" %}
-### 3.2. Formatting Tips
-We are using `black` to format our code, `isort` to sort our import statements, and `flake8` to validate your Python code. 
-* [https://black.readthedocs.io/en/stable/usage_and_configuration/index.html](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)
-* [https://pypi.org/project/isort/](https://pypi.org/project/isort/)
-* [https://flake8.pycqa.org/en/latest/](https://flake8.pycqa.org/en/latest/)
-
-The following commands will be run on every push to make sure that the code styling rules have been followed:
-
-```bash
-poetry run black . --check        # runs the Python formatter
-poetry run isort . --check-only   # run the Python import sorter
-poetry run flake8                 # flake8 just checks things -- you have to fix them manually
-```
-
-You can also use the `bash/check.sh` script (for convenience):
-
-```bash
-bash scripts/check.sh
-```
-
-To actually APPLY the formatting (which will make changes to your files), make sure you run these two commands before pushing your branch to GitHub:
-
-```bash
-poetry run black .      # runs the Python formatter
-poetry run isort .      # run the Python import sorter
-```
-You can also use the bash/fix.sh script (for convenience):
-
-```bash
-bash scripts/fix.sh
-```
-
-If you want flake8 to ignore a particular line, add a `# noqa` comment at the end of the line
-
-3. When you're ready to have your code reviewed by Sarah, push your branch to GitHub and make a pull request.
-{% endexpandable %}
-
-{% expandable expanded="true" %}
-### 3.3. Testing Tips
-Run the tests using the pytest library (installed via poetry). Some sample commands:
-
-```bash
-poetry run pytest -v                        # runs all the tests
-poetry run pytest tests/test_courses.py -v  # runs all the tests in a single file
-poetry run pytest test_courses.py::TestCourses::test_one -v  # runs a single test (e.g., test_one)
-```
-{% endexpandable %}
-
-{% expandable expanded="true" %}
-### 3.4. GitHub Workflows
-The `.github/workflows/pr.yml` is a configuration file that GitHub reads in order to run a series of checks everytime you push your branch to GitHub. Before you make a pull request, make sure that you run the `bash scripts/run_pr_checks.sh` script. If everything passes locally, it should also pass on GitHub.
-{% endexpandable %}
-
-
-## 4. Grading and assessment
-
-{% expandable expanded="true" %}
-### Submission Workflow
-* Each member of the team should submit at least 2 PRs before the deadline. 
-* Each PR should have some subset of your task complete, including tests. 
+{% expandable expanded="true" level=3 title="1. How to submit work for review" %}
+* Implement all of properties and methods needed to support the functionality listed above. You are also welcome to implement private helper methods. In python, private / helper methods are prefixed with an underscore.
+* Make sure you **DO NOT modify the `main` branch**. All of your coding should be done on a feature branch.
+* Write tests for your methods.
+* Make sure all of the formatter and linter checks pass before making a pull request.
+* In your pull request (PR):
+    * Reference this issue by using the hash tag followed by the issue number.
+    * Describe what has been done in the PR as simply and clearly as possible.
+    * You may make multiple PRs to implement subsets of functionality. Remember: it's better to create smaller, incremental PRs than one big PR (no long-running branches).
 * In order for your branch to be reviewed:
     * All of the validation checks on GitHub need to pass
     * Your branch should not have any merge conflicts with `main`
-    * Sarah will review all pull requests from the previous day by 10AM the following morning
+    * I (Sarah) will review all pull requests from the previous day by 10AM the following morning
 * Once I approve your pull request, **you will be responsible for merging your branch into `main` via GitHub**.
 {% endexpandable %}
 
-{% expandable expanded="true" %}
-### Rubric
-
+{% expandable expanded="true" level=3 title="2. Rubric"  %}
 | 20% | Teamwork and communication | Did you show up to class? Did you talk to your teammates? Did you respond to them in a timely manner? If someone else was working on a feature that you depended on, did you coordinate / communicate with them? | 
 | 50% | Individual code contribution | Did you submit at least 2 pull requests (that were approved)? Did you complete your tasks? Does your code work as expected? Do all of your functions / methods have tests? Did the code quality checks pass? |
 | 30% | Quality of the final group product | Does your app work? Is it complete? Can users browse for courses, filter according to their preferences, and add them to a schedule? Were everyone's contributions merged by the deadline? |

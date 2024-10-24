@@ -8,7 +8,7 @@ function toggleExpandable(srcElement) {
     console.log(target, content);
     console.log(tagName);
     const button =
-        tagName === "button" ? srcElement : srcElement.querySelector("button");
+        tagName === "button" ? srcElement : srcElement.previousElementSibling;
     console.log(button);
     if (content.style.display === "none") {
         content.style.display = "block";
