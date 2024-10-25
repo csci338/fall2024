@@ -62,6 +62,11 @@
 
         {% include footer.html %}
         {% include scripts.html %}
+        {% if page.h_max %}
+        <script>
+            window.h_max = "{{page.h_max}}";
+        </script>
+        {% endif %}
         <script type="text/javascript" src="{{site.baseurl}}/assets/js/scrollspy.js"></script>
         <script type="text/javascript" src="{{site.baseurl}}/assets/js/expandable.js"></script>
     </body>

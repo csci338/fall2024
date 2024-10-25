@@ -409,7 +409,7 @@ If you are new to web development, this modal may not look like much, but buildi
 
 {:#p4}
 ## Part 4: Answer the Discussion Questions
-Please answer all of the discussion questions in the `class-exercises-fall2024/lab04/answers.md` file.
+Please answer all of the discussion questions in the `class-exercises-fall2024/lab05/answers.md` file.
 
 
 ### Submission

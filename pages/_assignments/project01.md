@@ -6,7 +6,7 @@ draft: 0
 points: 20
 abbreviation: Project 1
 num: 1
-h_max: 5
+h_max: 3
 start_date: 2024-10-31
 due_date: 2024-11-14
 ---
@@ -20,11 +20,8 @@ h4 {
 {% include toggle-button.html %}
 
 ## Introduction
-For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. It should work like the video shown here (TODO).
+For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. A subset of the app's functionality is shown in <a href="https://drive.google.com/file/d/1DlmCIw0_sXJYLQNjyt1qnHmrXpekU2lY/view?usp=drive_link" target="_blank">this video</a> (please watch).
 
-
-<!-- ## Introduction
-For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. It should work like the video shown here (TODO). -->
 
 {% expandable expanded="true" level=3 title="Learning Goals"%}
 This project will help you practice the concepts we have been covering so far, including:
@@ -48,19 +45,21 @@ You and your team will create an app that implements the following features:
 1. A way to display the courses that match a user's preferences
 1. A way to add, remove, and view courses from a user's schedule
 1. A way to download the schedule as a CSV file
+1. A way to email one's schedule to someone (using Twilio's SendGrid API)
 {% endexpandable %}
 
 {% expandable expanded="true" level=3 title="System Architecture (Done as a Class)"%}
 During class on Tuesday (9/24), we discussed how to organize our system, and we collectively created the following diagram:
 
-[diagram]
+<img class="large" src="/fall2024/assets/images/projects/project-1-diagram.png" />
+
 {% endexpandable %}
 
 ## Team Assignments
 Your teams are listed below. Each member of your team has been assigned a task from the GitHub Issue Tracker. Some of you will be working on the same Python class, so  so make sure you only work on the tasks to which you were assigned:
 
 {% expandable expanded="true" level=3 title="Team 1" %}
-Please see your team's <a href="#" target="_blank">repo</a> and <a href="#" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
+Please see your team's <a href="https://github.com/csci338/p01-team01-fall2024" target="_blank">repo</a> and <a href="https://github.com/csci338/p01-team01-fall2024/issues" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
 
 1. Anthony B. (anthonyablazer)
 1. Brian (bmungal) 
@@ -74,7 +73,7 @@ Please see your team's <a href="#" target="_blank">repo</a> and <a href="#" targ
 {% endexpandable %}
 
 {% expandable expanded="true" level=3 title="Team 2" %}
-Please see your team's <a href="#" target="_blank">repo</a> and <a href="#" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
+Please see your team's <a href="https://github.com/csci338/p01-team02-fall2024" target="_blank">repo</a> and <a href="https://github.com/csci338/p01-team02-fall2024/issues" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
 
 1. Andrew (awillis4)
 1. Anthony I. (Aindelic) 
@@ -88,9 +87,9 @@ Please see your team's <a href="#" target="_blank">repo</a> and <a href="#" targ
 {% endexpandable %}
 
 ## Tasks
-Each task is listed below. Each student on your team has been assigned a task.
+Each task is listed below. Each student on your team has been assigned a task via the GitHub Issue Tracker, and will be completing some subset of the functionality described below:
 
-{% expandable level=3 title="1. Course"%}
+{% expandable level=3 title="1. Course" id="course" expanded="true" %}
 The job of the Course class (`course.py`) is to parse the incoming dictionary into a more useable form. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.
 
 #### Sample dictionary item to be parsed
@@ -159,7 +158,8 @@ It should allow setting and getting of the following properties:
 #### Methods
 Your class should also have the following methods:
 * A `constructor` method, which takes a dictionary as an argument and sets the properties right away. A stub has been implemented for you.
-* A `__repr__` method (similar to Java's toString() method, which returns a simple string representation of the course.
+* A `__repr__` method (similar to Java's toString() method, which returns the crn and name of the course.
+* A `to_row` method that returns a more detailed representation of the course (e.g., name, crn, instructor, location, time / day, etc.)
 * An `is_full` method that returns true or false, depending on whether the course is full or not.
 * An `is_morning` method that returns true or false, depending on whether the course starts before 12PM and false otherwise
 * An `is_afternoon` method that returns true if the course starts between 12PM-5PM and false otherwise.
@@ -168,7 +168,7 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable level=3 title="2. Courses"%}
+{% expandable level=3 title="2. Courses" id="courses" expanded="true" %}
 The job of the Courses class (`courses.py`) is to make it convenient to print, filter, and download a list of Course objects.
 
 #### Properties
@@ -179,13 +179,12 @@ It should allow setting and getting of the following properties:
 Your class should also have the following methods:
 
 * A `constructor` method, which takes a list of Course objects (list[Course]) as an argument and sets the `courses` property right away. A stub has been implemented for you in the starter code.
-* A `to_list` method (no parameters) which returns the `courses` property
-* A `size()` method  (no parameters) which returns the length of the `courses` list
-* An `output_courses` method (no parameters) that prints a nice, formatted list of courses (or a message if there are no courses in the list).
+* A `to_list` method (no required parameters) which returns the `courses` property
+* A `size` method  (no required parameters) which returns the length of the `courses` list
+* A `display_to_terminal` method (no required parameters) that prints a nice, formatted list of courses (or a message if there are no courses in the list). Use the course's `to_row` method to help you.
 * A `get_matching_courses` method which takes a UserPreferences object as an argument and return a new Courses object that includes only the courses that match the user's preferences.
-  * This method will create a new instance of a CourseFilter, which it will use to figure out the courses that match the user's preferences. 
-  * Some pseudocode is shown below, using Python's built-in `filter` method:
-  
+    * As you iterate through the available courses, use the CourseFiler object (made by one of your classmates to figure out whether each course is a match).
+    * Consider chaining your filtering methods together using Python's built-in `filter` method. Some pseudocode is shown below: 
     ```python
     # Python's `filter` function returns a new list with only results matching the filter function.
     # Use multiple filter invocations to apply multiple filters:
@@ -195,21 +194,21 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable level=3 title="3. UserPreferences"%}
+{% expandable level=3 title="3. UserPreferences" id="user_prefs" expanded="true" %}
 The job of the UserPreferences class (`user_preferences.py`) is store the user's search preference information, and to provide methods for modifying the user's preferences as they browse courses of interest. If you have been assigned this issue, please note that the rest of the app is highly dependent on this class, so the earlier you complete this task, the easier it will be for your teammates.
 
 
 #### Properties
 It should allow setting and getting of the following properties. 
 * `days`: list[str] = []
-* `department`: str = "CSCI" (default to CSCI) 
+* `department`: str = ""
 * `di_only`: bool = False 
 * `dir_only`: bool = False
 * `hours`: int = -1
 * `instructor`: str = ""
-* `open_closed_status`: str -- either "open", "closed", or "" (no preference)
+* `open_closed_status`: str = "" (either "open", "closed", or "" (no preference))
 * `search_term`: str = ""
-* `time_of_day`: str = "" (either 'morning', 'afternoon', or 'evening')
+* `time_of_day`: str = "" (either "morning", "afternoon", or "evening")
 
 
 **Empty values:** If the filter is unset (i.e., the user didn't specify a value one way or the other),  represent "unset" preferences as follows:
@@ -224,10 +223,7 @@ bool = False
 #### Methods
 Your class should also have the following methods:
 
-* A `constructor` method that initializes all of the default property values right away. A stub has been implemented for you:
-  ```py
-  # TODO
-  ```
+* A `constructor` method that initializes all of the default property values right away.
 * An `update_search_term` method that prompts the user to enter a search term or clear their current `search_term` property.
 * An `update_department` method that prompts the user to enter a department or clear their current `department` property.
 * An `update_instructor` method that prompts the user to enter an instructor or clear their current `instructor` property.
@@ -236,6 +232,7 @@ Your class should also have the following methods:
 * An `update_open_closed_status` method that asks the user whether they want to only open or only closed courses. This will set the `open_closed_status` property.
 * An `update_dir` method that asks the user whether they want to only see DI-Race courses. This will set the `dir_only` property.
 * An `update_hours` method that asks the user whether they only want to see courses with 1, 2, 3, or 4 credit hours. This will set the `hours` property.
+* An `update_days` method that asks the user which days they're looking for classes. This will set the `days` property.
 * An `update_time_of_day` method that asks the user whether they want to specify morning, afternoon or evening classes. This will set the `time_of_day` property.
 
 ##### A note on the methods
@@ -245,7 +242,7 @@ Your class should also have the following methods:
 {% endexpandable %}
 
 
-{% expandable level=3 title="4. Course Filter"%}
+{% expandable level=3 title="4. Course Filter" id="course_filter" expanded="true" %}
 The job of the CourseFilter class (`course_filter.py`) is to determine whether a course matches a given set of criteria. 
 
 #### Properties
@@ -267,36 +264,55 @@ Make sure that all filters are case-insensitive and that they return true if no 
 {% endexpandable %}
 
 
-{% expandable level=3 title="5. User Interface (UI)"%}
-The job of the User Interface class (`user_interface.py`) is to allow people to make choices about what they want to do in the app and receive the appropriate response.
-{% endexpandable %}
+{% expandable level=3 title="5. User Interface (UI)" id="ui" expanded="true" %}
+The job of the User Interface file (`ui.py`) is to allow people to make choices about what they want to do in the app and receive the appropriate response. This is the main driver of the app and is just a series of function and method calls. 
 
-{% expandable level=3 title="6. Schedule"%}
-The job of the Schedule class (`schedule.py`) is to allow the user to build a schedule. This involves giving the user the ability to:
-* add a course to the schedule
-* remove a course from the schedule
-* print the schedule
-* save schedule as a CSV file (text file)
-{% endexpandable %}
+#### Helper Objects
+Because `ui.py` is the primary way in which users will interact with the app's functionality, this file will initialize `UserPreferences`, `Courses`, and `Schedule` objects and make use of their public methods. A small portion of this has already been done for you, but you will continue to use methods from these objects based on user input.
 
-{% expandable  level=3 title="7. Schedule Emailer" %}
-* Register with Twilio and get an API key
-* Install the python library
+#### Functions
+* A `fetch_courses` method that queries for the course data from the following url: <a href="https://meteor.unca.edu/registrar/class-schedules/api/v1/courses/2025/spring" target="_blank">https://meteor.unca.edu/registrar/class-schedules/api/v1/courses/2025/spring</a>, converts each result into a `Course` object, and returns a `Courses` object (read more about these objects above).
+* A `generate_menu` method that returns a string representation of all of the menu choices in the system (watch the demo video to get ideas). This menu should also indicate to the user which preferences they have selected. 
+* A `show_menu` function that prints the menu generated (these two functions have been separated so that they're easier to test).
+* A `process_menu_choice` function (which can accept as many arguments as needed) to handle the user's selection. This function will invoke functionality from `UserPreferences`, `Courses`, and `Schedule` objects that are initialized when the app starts. It will return the string "quit" if the user asks to terminate the program (so that the application loop knows to break).
+* A `start_app` method that continues showing the user the menu and re-prompting them until they quit the application.
 {% endexpandable %}
 
 
+{% expandable level=3 title="6. Schedule" id="schedule" expanded="true" %}
+The job of the Schedule class (`schedule.py`) is to allow the user to build a schedule based on the courses the user finds interesting. Eventually, you may want this class to extend the `Courses` class (optional) if it makes sense.
+
+#### Properties
+It should allow setting and getting of the following properties:
+* `courses`: a list of `Course` objects (set by the constructor)
+
+#### Methods
+* A `to_list` method (no required parameters) which returns the `courses` property
+* A `size` method  (no required parameters) which returns the length of the `courses` list
+* A `display_to_terminal` method (no required parameters) that prints a nice, formatted list of courses (or a message if there are no courses in the list). Use the course's `to_row` method to help you.
+* An `add_courses` method, which takes a list of Course objects (list[Course]) as an argument and appends them to `courses`.
+* A `remove_courses` method, which takes a list of Course objects (list[Course]) and removes them from `courses`.
+* A `save_schedule` method that saves the current schedule as a CSV file (text file).
+* An `send_email`, which will email the schedule to a selected recipient.
+{% endexpandable %}
 
 
 ## Set Up
 
+> I have also made a <a href="https://drive.google.com/file/d/10h6CsMGXYFRHe4y95x32moJs-u6P9rjo/view?usp=drive_link" target="_blank">video walkthrough</a> of the set up if it helps.
+
 {% expandable expanded="true" level=3 title="1. Set up your repository" %}
 Once your team lead has added you to their repo, you will set up the code locally as follows:
 1. Open the terminal.
-1. Clone your team lead's version of the repository -- and please do not clone it inside of another directory that is already under version control: 
+1. Clone your team's version of the repository:
 ```
-git clone git@github.com:<your-team-lead-github-username>/project01.git
+git clone git@github.com:csci338/p01-<your-team-number>-fall2024.git project01
 ```
-1. Navigate into the `project01` directory you just cloned. Create a new branch (name it whatever you want):
+    * Note that the second argument of the clone command allows you to specify the name of the local folder (`project01`) even if the remote repo name is different.
+    * Please do not clone this repo inside of another directory that is already under version control.
+    * Make sure that the folder you just created is called `project01` (important for Docker).<br><br>
+
+1. Navigate into the `project01` directory you just cloned. Create a new branch that describes the feature you will be working on (name it whatever you want):
 ```
 cd project01
 git checkout -b yourname-feature
@@ -305,7 +321,7 @@ git checkout -b yourname-feature
 
 {% expandable expanded="true" level=3 title="2. Building Your Docker Container" %}
 1. Make sure that Docker is running
-1. Then, from within the `project01` directory, issue the following Docker command:
+1. Then, from within the `project01` directory on your command line, issue the following Docker command:
    ```bash
    docker compose up
    ```
@@ -337,7 +353,7 @@ git checkout -b yourname-feature
    ```
 1. Run the app:
    ```bash
-   poetry run python course_lookup/driver.py
+   poetry run python course_lookup/ui.py
    ```
 1. Now you're ready to start coding in VS Code.
 
@@ -442,30 +458,44 @@ The `.github/workflows/pr.yml` is a configuration file that GitHub reads in orde
 
 ## Grading and Assessment
 
-{% expandable expanded="true" level=3 title="1. How to submit work for review" %}
-Please read this section very carefully.
+{% expandable expanded="true" level=3 title="1. How to submit work for review" id="submissions" %}
 
 #### Submissions
 You will submit your work by making a pull request (PR) and tagging `svanwart` as a reviewer. Before making your PR, make sure that you have:
-* Implemented all of properties and methods needed to support the functionality listed above. You are also welcome to implement private helper methods. In python, private / helper methods are prefixed with an underscore.
+
+{:.checkbox-list}
+* Implemented all of properties and methods needed to support the functionality listed above (using private helper methods as needed).
 * Written tests for all public methods.
 * Ensured all of the formatter and linter checks pass before making a pull request.
-* In the text of your PR:
-    * Reference this issue by using the hash tag followed by the issue number.
-    * Describe what has been done in the PR as simply and clearly as possible.
-    * You may make multiple PRs to implement subsets of functionality. Remember: it's better to create smaller, incremental PRs than one big PR (no long-running branches).
-* In order for your branch to be reviewed:
-    * All of the validation checks on GitHub need to pass
-    * Your branch should not have any merge conflicts with `main`
-    * I (Sarah) will review all pull requests from the previous day by 10AM the following morning
+
+#### Pull Request Details
+In the text of your PR, be sure that:
+
+{:.checkbox-list}
+* You reference this issue by using the hash tag followed by the issue number.
+* You describe what has been done in the PR as simply and clearly as possible.
+* All of the validation checks on GitHub need to pass
+* There are no merge conflicts with the `main` branch. You will need to coordinate with your teammmates to figure out how to integrate some of the work.
+
+A few other PR details:
+
+* You may make multiple PRs to implement subsets of functionality. Remember: it's better to create smaller, incremental PRs than one big PR (no long-running branches).
+* I (Sarah) will review all pull requests from the previous day by 10AM the following morning
+* Once I approve your pull request, **you will be responsible for merging your branch into `main` via GitHub**.
 
 #### Revisions
-I may ask you for revisions on your code -- this is normal, and won't have an impact on your grade or anything like that. 
-* Once I approve your pull request, **you will be responsible for merging your branch into `main` via GitHub**.
+I may ask you for revisions on your code, which is a normal, expected part of the development process. If this happens:
+* Please make the requested changes on your feature branch
+* Push your new changes to the remote branch
+* Modify the PR text to explain what you changed
+* Tag `svanwart` again so that I can review your changes.
+
 {% endexpandable %}
 
 {% expandable expanded="true" level=3 title="2. Rubric"  %}
-| 20% | Teamwork and communication | Did you show up to class? Did you talk to your teammates? Did you respond to them in a timely manner? If someone else was working on a feature that you depended on, did you coordinate / communicate with them? | 
-| 50% | Individual code contribution | Did you submit at least 2 pull requests (that were approved)? Did you complete your tasks? Does your code work as expected? Do all of your functions / methods have tests? Did the code quality checks pass? |
-| 30% | Quality of the final group product | Does your app work? Is it complete? Can users browse for courses, filter according to their preferences, and add them to a schedule? Were everyone's contributions merged by the deadline? |
+| 20% | Teamwork and communication | Where you a good team player? Did you talk to your teammates? If someone else was working on a feature that you depended on, did you reach out / coordinate / communicate with them? If someone reached out to you because they depended on a task you were doing, did you respond to them in a timely manner? | 
+| 50% | Individual code contribution | Did you complete your tasks? Does your code work as expected? Do all of your functions / methods have tests? Did the code quality checks pass? Was your PR(s) approved? Were your (PRs) approved by the deadline? |
+| 30% | Quality of the final group product | Does your app work? Is it complete? Can users browse for courses, filter according to their preferences, and add them to a schedule? Were everyone's contributions merged by the deadline (recognizing that the deadline may be a moving target, given the contraints we are operating under)? |
+
+At the end of Project 1, you will be asked to complete a brief, anonymous survey about the contributions of person in your group. Even though we are all remote and operating on different sets of constraints, it is still possible to shoot a quick email or text to give a brief status report. If you are concerned about your ability to participate in this project please talk to Sarah **as soon as possible** so that the appropriate accommodations can be made.
 {% endexpandable %}

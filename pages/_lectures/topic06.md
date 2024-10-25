@@ -17,6 +17,13 @@ readings:
       title: Please read the Project 1 description before class
       type: reading
       url: /assignments/project01
+      required: 1
+    - start_date: 2024-10-31
+      title: Setting up Project 1 using Docker (video)
+      type: reading
+      url: https://drive.google.com/file/d/10h6CsMGXYFRHe4y95x32moJs-u6P9rjo/view?usp=drive_link
+      required: 1
+      notes: If you need help getting set up, here's a video walkthrough
 
 projects: [ 1 ]
 ---

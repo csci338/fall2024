@@ -5,11 +5,8 @@ function toggleExpandable(srcElement) {
     const target = srcElement.getAttribute("target-panel");
     const content = document.querySelector(target);
     const tagName = srcElement.tagName.toLowerCase();
-    // console.log(target, content);
-    // console.log(tagName);
     const button =
         tagName === "button" ? srcElement : srcElement.previousElementSibling;
-    // console.log(button);
     if (content.style.display === "none") {
         content.style.display = "block";
         button.innerHTML = openIcon;

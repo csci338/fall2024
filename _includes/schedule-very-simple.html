@@ -32,7 +32,7 @@
                 {% if assignment.draft == 1 %}
                     {{ assignment.title }}
                 {% else %} 
-                    <a href="{{site.baseurl}}{{lab.url}}">{{ assignment.title }}</a>
+                    <a href="{{site.baseurl}}{{assignment.url}}">{{ assignment.title }}</a>
                 {% endif %}
             </li>
         {% endfor %}

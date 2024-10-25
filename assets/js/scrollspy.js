@@ -10,80 +10,88 @@
     const sticky = nav.offsetTop;
     const fixedMenuBuffer = 70;
 
-    const stickyToggle = (yPos) => {
-        const hasMinHeight = () => {
-            // only do sticky menu if page is tall enough to avoid weird blinking thing.
-            var body = document.body,
-                html = document.documentElement;
-            var height = Math.max(
-                body.scrollHeight,
-                body.offsetHeight,
-                html.clientHeight,
-                html.scrollHeight,
-                html.offsetHeight
-            );
-            return height - window.innerHeight > 200;
-        };
-        if (!hasMinHeight()) {
-            return;
-        }
-        yPos = yPos || window.pageYOffset;
-        if (yPos > sticky) {
-            nav.classList.add("sticky");
-            if (aside) {
-                aside.classList.add("sticky");
-            }
-        } else {
-            nav.classList.remove("sticky");
-            if (aside) {
-                aside.classList.remove("sticky");
-            }
-        }
-        // initPositions();
-    };
+    // const stickyToggle = (yPos) => {
+    //     const hasMinHeight = () => {
+    //         // only do sticky menu if page is tall enough to avoid weird blinking thing.
+    //         var body = document.body,
+    //             html = document.documentElement;
+    //         var height = Math.max(
+    //             body.scrollHeight,
+    //             body.offsetHeight,
+    //             html.clientHeight,
+    //             html.scrollHeight,
+    //             html.offsetHeight
+    //         );
+    //         return height - window.innerHeight > 200;
+    //     };
+    //     if (!hasMinHeight()) {
+    //         return;
+    //     }
+    //     yPos = yPos || window.pageYOffset;
+    //     if (yPos > sticky) {
+    //         nav.classList.add("sticky");
+    //         if (aside) {
+    //             aside.classList.add("sticky");
+    //         }
+    //     } else {
+    //         nav.classList.remove("sticky");
+    //         if (aside) {
+    //             aside.classList.remove("sticky");
+    //         }
+    //     }
+    //     // initPositions();
+    // };
 
-    const findElementByAttributeWorkaround = (
-        attribute,
-        value,
-        element_type
-    ) => {
-        // useful b/c querySelector breaks if ids start w/numbers:
-        element_type = element_type || "*";
-        const elements = document.getElementsByTagName(element_type);
-        for (let i = 0; i < elements.length; i++) {
-            const target = elements[i].getAttribute(attribute).replace("#", "");
-            //console.log(target, value);
-            if (target === value) {
-                return elements[i];
-            }
-        }
-    };
+    // const findElementByAttributeWorkaround = (
+    //     attribute,
+    //     value,
+    //     element_type
+    // ) => {
+    //     // useful b/c querySelector breaks if ids start w/numbers:
+    //     element_type = element_type || "*";
+    //     const elements = document.getElementsByTagName(element_type);
+    //     for (let i = 0; i < elements.length; i++) {
+    //         const target = elements[i].getAttribute(attribute).replace("#", "");
+    //         //console.log(target, value);
+    //         if (target === value) {
+    //             return elements[i];
+    //         }
+    //     }
+    // };
 
-    const scrollToAnchor = (ev) => {
-        const distanceToTop = (el) => {
-            return (
-                Math.floor(el.getBoundingClientRect().top) -
-                fixedMenuBuffer +
-                10
-            );
-        };
-        var targetID = ev.target.getAttribute("href");
-        if (targetID != "#") {
-            const targetAnchor = document.querySelector(targetID);
-            if (targetAnchor) {
-                window.scrollBy({
-                    top: distanceToTop(targetAnchor),
-                    left: 0,
-                    behavior: "smooth",
-                });
-                ev.preventDefault();
-            }
-        }
-    };
+    // const scrollToAnchor = (ev) => {
+    //     const distanceToTop = (el) => {
+    //         return (
+    //             Math.floor(el.getBoundingClientRect().top) -
+    //             fixedMenuBuffer +
+    //             10
+    //         );
+    //     };
+    //     var targetID = ev.target.getAttribute("href");
+    //     if (targetID != "#") {
+    //         const targetAnchor = document.querySelector(targetID);
+    //         if (targetAnchor) {
+    //             window.scrollBy({
+    //                 top: distanceToTop(targetAnchor),
+    //                 left: 0,
+    //                 behavior: "smooth",
+    //             });
+    //             ev.preventDefault();
+    //         }
+    //     }
+    // };
 
     const initPositions = () => {
         sections = {};
-        document.querySelectorAll("h1, h2, h3, h4, h5").forEach((element) => {
+        const selectors = [];
+        const numHeadings = window.h_max ? Number(window.h_max) : 5;
+        for (let i = 1; i <= numHeadings; i++) {
+            selectors.push(`h${i}`);
+        }
+        const selectors_str = selectors.join(", ");
+        console.log(selectors_str);
+        // const selectors_str = "h1, h2, h3, h4, h5";
+        document.querySelectorAll(selectors_str).forEach((element) => {
             if (element.id.length > 0) {
                 sections[element.id] = Math.abs(
                     element.offsetTop - element.clientTop

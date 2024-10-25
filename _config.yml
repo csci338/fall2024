@@ -12,6 +12,7 @@ timezone: "America/New_York"
 # Build settings
 markdown: kramdown
 kramdown:
+  # auto_ids: true
   auto_id_prefix: "id_"
 # kramdown:
 #   syntax_highlighter_opts:
