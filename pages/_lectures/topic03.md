@@ -49,7 +49,7 @@ videos:
 labs: [4]
 questions:
     - What were servers "back in the day"? What are servers now?
-    - What kinds of challenges do current server administrators need to be able to navigate gracefully?
+    - What kinds of server challenges do administrators need to be able to handle?
     - What is virtualization? What is containerization? How are they different?
     - What is the difference between declarative and imperative code? What are some examples of each?
     - Besides your application's source code, what other kinds of things should you also represent as code?

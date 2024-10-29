@@ -79,7 +79,7 @@ questions:
     - How is software engineering different from programming?
     - Is software engineering actually engineering? Why or why not?
     - Why not just aim for "nothing changes"?
-    - What is What is Hyrum's Law?
+    - What is Hyrum's Law?
     - How should decisions be made on software engineering teams? Name some better and worse ways of making decisions.
     - What do we mean by trade-offs?
 

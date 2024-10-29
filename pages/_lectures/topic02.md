@@ -93,10 +93,15 @@ questions:
     - What is the difference between git and GitHub?
     - What is the difference between a merge commit and rebasing? What would you want to do one over the other (i.e., what are the the tradeoffs of each)?
     - What does the "origin" typically refer to?
+    - What is a public / private key pair?
     - > 
         What do the following git commands do? 
         <code>clone</code>, <code>status</code>,
         <code>add</code>, <code>log</code>, <code>commit</code>, <code>push</code>, <code>pull</code>, <code>merge</code>, <code>rebase</code>
+    - > 
+        What do the following bash commands do? 
+        <code>ls</code>, <code>cat</code>,
+        <code>mv</code>, <code>pwd</code>, <code>cd</code>, <code>rm</code>
 ---
 
 
