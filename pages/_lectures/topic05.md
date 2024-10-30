@@ -15,6 +15,10 @@ videos:
       type: video
       title: Lecture recording
       url: https://drive.google.com/file/d/14vHyDyt-wZfVBMGjaDmLpupI5MFowU1a/view?usp=drive_link
+    - start_date: "2024-10-29"
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/19C311-H-dVs015bqy4c0zeLHF7NcDQMz/view?usp=drive_link
 slides: 
     - start_date: 2024-09-24
       type: lecture
