@@ -9,8 +9,8 @@ slides:
     - start_date: 2024-10-31
       type: lecture
       num: 9
-      draft: 1
-      url: https://docs.google.com/presentation/d/16V_3mXeItKBO5eOSv2AiftR8V20QwH0CQjSi_5zfngw/edit?usp=sharing
+      draft: 0
+      url: https://docs.google.com/presentation/d/1VzRUmJnQLpmxLWt-Vd03Xl5dzvKXXEbP/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true 
       title: Mid-Semester Review
 readings:
     - start_date: 2024-10-31
@@ -24,7 +24,12 @@ readings:
       url: https://drive.google.com/file/d/10h6CsMGXYFRHe4y95x32moJs-u6P9rjo/view?usp=drive_link
       required: 1
       notes: If you need help getting set up, here's a video walkthrough
-
+activities:
+    - start_date: 2024-10-31
+      title: Mid Semester Review Cheat Sheet
+      type: activity
+      num: 3
+      url: https://docs.google.com/document/d/142IWxEKUjtkfkvBo6lpJt012a7_QbppKJZpRDpW45MQ/edit?usp=sharing
 projects: [ 1 ]
 ---
 <!-- 

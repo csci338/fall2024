@@ -30,6 +30,7 @@ This project will help you practice the concepts we have been covering so far, i
 1. Thinking about which "jobs" each component will have.
 1. Working with a common development environment usind Docker (e.g., operating system, python versions, coding conventions, testing suite) so that the app runs identically on any machine.
 1. Working with static analysis tools.
+1. Writing tests.
 1. Devising a workflow for integrating work.
 1. Coordinating and communicating across tasks to make sure everything can be successfully integrated.
 {% endexpandable %}
@@ -59,31 +60,35 @@ During class on Tuesday (9/24), we discussed how to organize our system, and we 
 Your teams are listed below. Each member of your team has been assigned a task from the GitHub Issue Tracker. Some of you will be working on the same Python class, so  so make sure you only work on the tasks to which you were assigned:
 
 {% expandable expanded="true" level=3 title="Team 1" %}
-Please see your team's <a href="https://github.com/csci338/p01-team01-fall2024" target="_blank">repo</a> and <a href="https://github.com/csci338/p01-team01-fall2024/issues" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
+Please see your team's <a href="https://github.com/csci338/p01-team01-fall2024" target="_blank">repo</a> and <a href="https://github.com/csci338/p01-team01-fall2024/issues" target="_blank">issue tracker</a> for more information. Members of Team 1 are:
 
-1. Anthony B. (anthonyablazer)
-1. Brian (bmungal) 
-1. Jacob (jforres1)
-1. Jasmine (jnarehoo)
-1. Josie (jandersoj)
-1. Kate (kgary432)	
-1. Ruby (runuss720)	
-1. Sergio (sbaguena10)	 
-1. Zejun (Hayden514)	
+
+| 1. | Jacob (jforres1) | Implement the Course class |
+| 2. | Anthony B. (anthonyablazer) | Implement the Courses class |
+| 3. | Brian (bmungal) | Implement some of the UserPreferences class (Part 1) |
+| 4. | Josie (jandersoj) | Implement some of the UserPreferences class (Part 2) |
+| 5. | Jasmine (jnarehoo) | Implement the CourseFilter class |
+| 6. | Ruby (runuss720)| Implement the UI functions (ui.py) |
+| 7. | Kate (kgary432) | Implement the Schedule class (except for `save_schedule` and `send_email`)|
+| 8. | Zejun (Hayden514) | Implement the `save_schedule` method of the Schedule class |
+| 9. | Sergio (sbaguena10)|Implement the `send_email` method of the Schedule class |
+
 {% endexpandable %}
 
 {% expandable expanded="true" level=3 title="Team 2" %}
 Please see your team's <a href="https://github.com/csci338/p01-team02-fall2024" target="_blank">repo</a> and <a href="https://github.com/csci338/p01-team02-fall2024/issues" target="_blank">issue tracker</a> for more information. Members of Team 2 are:
 
-1. Andrew (awillis4)
-1. Anthony I. (Aindelic) 
-1. Brendan (ringojuic) 
-1. Christian (Csluder2)
-1. Eli (eutterba)	
-1. Isreal (isrealmcd)
-1. Tai (tairobinett) 
-1. Travis (tgroom90)
-1. Zachary (zRaNk1995)
+
+| 1. | Travis (tgroom90)| Implement the Course class |
+| 2. | Isreal (isrealmcd) | Implement the Courses class |
+| 3. | Eli (eutterba) | Implement some of the UserPreferences class (Part 1) |
+| 4. | Zachary (zRaNk1995)| Implement some of the UserPreferences class (Part 2) |
+| 5. | Christian (Csluder2) | Implement the CourseFilter class |
+| 6. | Tai (tairobinett) | Implement the UI functions (ui.py) |
+| 7. | Andrew (awillis4) | Implement the Schedule class (except for `save_schedule` and `send_email`) |
+| 8. | Anthony I. (Aindelic)|Implement the `save_schedule` method of the Schedule class |
+| 9. | Brendan (ringojuic)|Implement the `send_email` method of the Schedule class |
+
 {% endexpandable %}
 
 ## Tasks
