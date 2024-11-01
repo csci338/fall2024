@@ -24,6 +24,11 @@ readings:
       url: https://drive.google.com/file/d/10h6CsMGXYFRHe4y95x32moJs-u6P9rjo/view?usp=drive_link
       required: 1
       notes: If you need help getting set up, here's a video walkthrough
+videos:
+    - start_date: 2024-10-31
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/1MXodhoD2twARR92mlkPfJ-FsIBOVkPhh/view?usp=drive_link
 activities:
     - start_date: 2024-10-31
       title: Mid Semester Review Cheat Sheet
