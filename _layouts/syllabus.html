@@ -31,11 +31,9 @@
                                 {{ instructor.name }} ({{ instructor.pronouns }})
                                 <ul>
                                     <li>{{ instructor.email }}
-                                        {% if instructor.location %}
-                                            &bull; {{ instructor.location  }}
-                                        {% endif %}
                                     </li>
-                                    <li>Office Hours: {{ instructor.office_hours }}</li>
+                                    <li>Office Hours: {{ instructor.office_hours }}<br>
+                                        Zoom Link: <a href="https://unca-edu.zoom.us/j/7543717427" target="_blank">https://unca-edu.zoom.us/j/7543717427</a></li>
                                 </ul>
                             {% endfor %}
                         </td>
@@ -45,8 +43,12 @@
                         <td>{{ page.prerequisites }}</td>
                       </tr>
                       <tr>
-                        <td><strong>Time / Location</strong></td>
-                        <td>{{ page.time_location }}</td>
+                          <td><strong>Time</strong></td>
+                          <td>{{ page.time }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Zoom Link</strong></td>
+                          <td><a href="{{ page.zoom_link }}" target="_blank">{{ page.zoom_link }}</a></td>
                       </tr>
                       <tr>
                         <td><strong>UNCA Catalog Description</strong></td>

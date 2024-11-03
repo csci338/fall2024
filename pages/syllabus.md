@@ -6,13 +6,14 @@ course: "CSCI 338: Software Engineering"
 term: "Fall 2024"
 prerequisites: "CSCI 202 and CSCI 235"
 professor1: "Dr. Sarah Van Wart"
-time_location: "Tu/Th 9:55 AM - 11:35 AM, Zeis Hall, Rm. 203"
+time: "Tu/Th 9:55 AM - 11:35 AM"
+zoom_link: https://unca-edu.zoom.us/j/91825973279?pwd=1GeaiT1yTpbdIRciGlkipajxSaEHej.1
 instructors:
   - name: "Dr. Sarah Van Wart"
     email: "svanwart@unca.edu"
     pronouns: "she / her"
-    office_hours: "Mo, Tu, Fr 3:30pm - 4:30pm (in person) or by appointment"
-    location: "220 Rhoades Robinson Hall"
+    office_hours: "Mo, Tu, Fr 3:30pm - 4:30pm (on zoom)"
+    location: "ONLINE"
 catalog_description: "CSCI 338 is project-oriented course in which students working in teams complete one or more projects encompassing software design and development. Students will develop their communication skills by writing project requirements, creating and evaluating prototypes, interfacing with end users, and developing and implementing test plans."
 ---
 
