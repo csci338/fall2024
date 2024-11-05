@@ -1,5 +1,5 @@
 ---
-title: Intro to Client-Side Programming with React
+title: Communicating with external services using React
 layout: assignment-two-column
 type: lab
 draft: 1

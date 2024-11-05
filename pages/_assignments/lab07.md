@@ -1,6 +1,6 @@
 ---
 layout: assignment-two-column
-title: Build a "Vanilla" Web Client
+title: Intro to client-side programming with React
 type: lab
 draft: 1
 points: 6
