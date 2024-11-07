@@ -46,13 +46,13 @@ slides:
       title: Client-Side Engineering (Part I)
       url: https://docs.google.com/presentation/d/1IU6O1AZIKdXMepvPcMZxYS2kYmlK469f/edit#slide=id.p1
     - start_date: 2024-11-07
-      num: 12
-      type: lecture
-      draft: 1
-      title: React
-      url: https://docs.google.com/presentation/d/1HehB3NsYtJ8oKenTI1AKN1rIjmG0hXxMbJrNfumUIgg/edit?usp=sharing
-    - start_date: 2024-11-12
       num: 11
+      type: lecture
+      draft: 0
+      title: React
+      url: https://docs.google.com/presentation/d/1UqhChRR-yn_K1jgKnZSMkhbEo02zyih4/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
+    - start_date: 2024-11-12
+      num: 12
       draft: 1
       type: lecture
       title: Client-Server Communication via JavaScript
@@ -61,10 +61,14 @@ labs: [7, 8]
 questions:
     - What is front-end engineering? What is UI engineering?
     - When did it become a distinct subdiscipline of computer programming?
+    - What are some of the specific challenges that front-end engineers must navigate?
     - What are some common technologies used in front-end engineering?
     - What's the best way to get a job in UI engineering?
     - Is UI engineering easier than other forms of engineering?
-
+    - What is functional programming?
+    - What is a bundler?
+    - What are the tradeoffs of using a client-side framework?
+    - What is the purpose of the <code>package.json</code> and <code>package-lock.json</code> files?
 ---
 
 
