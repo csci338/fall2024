@@ -62,6 +62,10 @@ videos:
       type: video
       title: Lecture recording
       url: https://drive.google.com/file/d/1FbhH8UDGjokK-4VtmKIt9v8Yn3v8VPeN/view?usp=drive_link
+    - start_date: 2024-11-07
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/1LJEDTVkWibDyCXTz_2U9K20f9z1_AlpK/view?usp=drive_link
 labs: [7, 8]
 questions:
     - What is front-end engineering? What is UI engineering?
