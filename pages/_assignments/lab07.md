@@ -493,3 +493,6 @@ Can you figure out how to modify the `ButtonCount` component so that it initiali
 1. ***Takeaway***: Every time you want to trigger a screen redraw, use a state variable as follows:
     1. Create a state variable and setter using React's built-in `useState` function
     1. Invoke the setter function to set the state variable, which will automatically redraw the component.
+
+## What to Submit
+When you're done, push your `lab07` branch to GitHub and make a pull request. Please ensure that the destination (left-hand side) is pointing to the `main` branch of **your repo** and the source (right-hand side) is pointing to the `lab07` branch of **your repo**. Then, please paste a link to your PR in the Moodle.

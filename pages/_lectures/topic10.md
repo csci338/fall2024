@@ -1,26 +1,23 @@
 ---
 layout: module
-title: "Back-End: Databases and Object Relational Mappings"
+title: "Back-End: Concurrency, State, and Model-View-Controller"
 type: topic
-draft: 1
 num: 10
-start_date: 2024-11-21
+draft: 1
+start_date: 2024-11-26
 labs: [10]
 projects: [2]
-readings: 
-    - start_date: 2024-11-21
-      type: reading
-      title: Databases
-      url: /resources/databases
-      required: 1
 slides: 
-    - start_date: 2024-11-21
-      type: lecture
+    - start_date: 2024-11-26
       draft: 1
       num: 15
-      title: Intro to Relational Databases & ORMs
-      url: https://docs.google.com/presentation/d/1PTFnOHjnZShjloXJGN2kvmFvy4f4AKCEzM27FG86tzE/edit?usp=sharing
+      type: lecture
+      title: Back-End Crash Course
+      url: #
 ---
- 
-<!-- ## Activities
-* Today's Repo: <a href="https://github.com/csci338/orm-demo" target="_blank">https://github.com/csci338/orm-demo</a> -->
+
+Take a look at Semmy's Materials: https://github.com/cs-at-unca/software-engineering/blob/main/slides/concurrency/slides.md
+
+Sarah's old slides here: https://docs.google.com/presentation/d/1aG-tQJL0L1FKAEiM21JVAPm63Ai0sevQQHdfugEyjds/edit#slide=id.g2842c0945b8_1_37
+
+Spring slides go into a lot of depth w/threads and processes -- perhaps too much for this semester.
