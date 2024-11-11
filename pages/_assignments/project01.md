@@ -163,7 +163,7 @@ It should allow setting and getting of the following properties:
 #### Methods
 Your class should also have the following methods:
 * A `constructor` method, which takes a dictionary as an argument and sets the properties right away. A stub has been implemented for you.
-* A `__repr__` method (similar to Java's toString() method, which returns the crn and name of the course.
+* A `__repr__` method (similar to Java's toString() method, which returns the code and name of the course.
 * A `to_row` method that returns a more detailed representation of the course (e.g., name, crn, instructor, location, time / day, etc.)
 * An `is_full` method that returns true or false, depending on whether the course is full or not.
 * An `is_morning` method that returns true or false, depending on whether the course starts before 12PM and false otherwise
