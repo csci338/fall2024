@@ -15,9 +15,51 @@ due_date: 2024-11-14
 h4 {
     margin: 5px 0;
 }
+.info {
+    background-color: #0076a514;
+    padding: 25px 50px;
+    border-width: 0;
+    padding: 20px 0px 20px 40px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
 </style>
 
 {% include toggle-button.html %}
+
+<div class="info">
+{% expandable expanded="true" level=2 title="How do I rebase main against my current working branch? "%}
+1. Stage and commit all of the changes on the branch you're currently on. 
+1. Checkout main and pull down changes:<br><br>
+  ```bash
+     git checkout main
+     git pull
+  ```
+1. Check out your working branch<br><br>
+  ```bash
+     git checkout <your-feature-branch>
+  ```
+1. Rebase:<br><br>
+  ```bash
+     git rebase main
+  ```
+1. If there are conflicts:	
+      * Manually resolve them in VS code
+      * Then stage the changes you just made: `git add .`
+      * Then continue the rebase process: `git rebase --continue`
+      * And when you're done, modify latest commit message (optional).
+1. Verify that nothing broke by:
+      * run the tests
+      * run the app
+      * run the linter (and formatter if needed)
+1. Force push: because we rewrote history, we need to use the force flag:<br><br>
+  ```bash
+     git push --force
+  ```
+{% endexpandable %}
+</div>
 
 ## Introduction
 For your first project, you are going to create a command line tool to replicate aspects of the <a href="https://www.unca.edu/schedules/" target="_blank">UNCA Course Search</a> app. A subset of the app's functionality is shown in <a href="https://drive.google.com/file/d/1DlmCIw0_sXJYLQNjyt1qnHmrXpekU2lY/view?usp=drive_link" target="_blank">this video</a> (please watch).
