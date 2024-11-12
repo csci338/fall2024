@@ -1,12 +1,12 @@
 ---
-title: Communicating with external services using React
+title: Design Systems & External Data
 layout: assignment-two-column
 type: lab
-draft: 1
+draft: 0
 points: 6
 abbreviation: Lab 8
 num: 8
-start_date: 2024-11-12
+start_date: 2024-11-14
 due_date: 2024-11-17
 ---
 
@@ -24,103 +24,51 @@ due_date: 2024-11-17
     }
 </style>
 
-To become familiar with client-side software engineering considerations, we need a concrete example to work with. Given this, we have decided to delve into client-side web programming -- mostly because web clients are accessible and ubiquitous (and client-side web programming is a valuable skillset). 
-
-Therefore, in this lab, you will learn a bit about HTML, CSS, and JavaScript. Please refer to the web resources below to familiarize yourself with these languages. We will also be doing a very brief "crash course" of these languages during class.
-
-## 1. Background Readings and Resources
-* [CSCI 344 HTML Resources](https://csci344.github.io/spring2023/lectures/topic03)
-* [CSCI 344 CSS Resources](https://csci344.github.io/spring2023/lectures/topic04)
-* JavaScript
-    * [Language Features & the DOM](https://csci344.github.io/spring2023/lectures/topic05)
-    * [Looping, Iteration, & Higher-Order Functions](https://csci344.github.io/spring2023/lectures/topic06)
-    * [The Fetch API](https://csci344.github.io/spring2023/lectures/topic07)
-* Slides: Intro to Client-Side Web Tech
-
-## 2. Set-up
-> ### Note: Lab 6 builds on Lab 5
-> In order to begin Lab 6, your Lab 5 code needs to be working correctly. If you haven't yet finished Lab 5, please make it a priority.
 
 
-After completing [Lab 5](lab05), you will create a new branch from your existing `lab05-your-username` branch (from within your `class-exercises-fall2024` repository) as follows:
+## Overview
+In this lab, you will be using the Ant Design System / Component library and the Spotify API to create way to search and listen to songs on Spotify. When you're done with your lab, it should look something like this:
+* <a href="https://svanwart.github.io/spotify-project/" target="_blank">https://svanwart.github.io/spotify-project/</a>
 
-```sh
-git status  # make sure you've committed all of your files
-git branch  # verify that you're on the lab05-your-username branch
-git checkout -b lab06-your-username  # should create a new branch based on your lab05 branch
-git branch  # verify that you're on your new branch
-```
+Try it out to get a feel of how it should work. The goals with this lab are as follows:
 
-By branching from your `lab05-your-username` branch, your Lab 5 code will be included in your `lab06-your-username` branch (so that your client can interact with it). When you're done, please make the following modifications to your code:
+1. Continue practicing your React skills
+1. Work with a design system / component library -- we will be using Ant Design (`antd` node module) by Alibaba
 
-### 1. Edit server.py
-At the top of `server.py`, add the following import statement:
-```python
-from fastapi.staticfiles import StaticFiles
-```
+## 1. Getting Started
 
-Then, at the very bottom of `server.py`, add this line:
+For this lab, you will create a brand new repository called `lab08`. 
 
-```python
-app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
-```
+Like before, you will build your React app from scratch, which will involve:
+1. Creating a `package.json` at the root of your `lab08` directory.
+    * Hint: `npm init`
+2. Installing the following 4 packages: `react`, `react-dom`, `vite`, and `antd`.
+    * Hint: `npm install`
+3. Creating the following 5 base files: `index.html`, `styles.css`,  `main.jsx`, `App.jsx`, and `.gitignore`
 
-This code allows us to server static files from the `ui` directory as if they were coming from the root of the website. Verify that you did it correctly by trying to access these static files via FastAPI (note that the Docker container you made in Lab 5 must be running):
+## 2. Setting up your files
+Please add the following starter code to your files:
 
-* <a href="http://localhost:8000/js/main.js" target="_blank">http://localhost:8000/js/main.js</a>
-* <a href="http://localhost:8000/css/styles.css" target="_blank">http://localhost:8000/css/styles.css</a>
-
-If you see a JavaScript file and a CSS file, it worked.
-
-### 2. Create a new HTML file
-Within the `ui` directory, create a new file called `index.html` and add the following code to it:
-
+### index.html
+Paste the following code in `index.html`:
 ```html
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+  <head>
+    <title>Spotify Practice</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- link to React module -->
+    <script type="module" src="./main.jsx" type="text/javascript" defer></script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/tasks.css">
-    <script src="/js/main.js" type="text/javascript" defer></script>
-    <title>Web Client</title>
-</head>
-
-<body>
-    <header>
-        <h1>My Tasks</h1>
-    </header>
-
-    <main>
-
-        <section>
-            <h2>Task List</h2>
-            <div class="task-list">
-                <!-- tasks go here -->
-            </div>
-        </section>
-
-        <form class="add-task">
-            <h2>Add New Task</h2>
-            
-            <label for="name">Name:</label>
-            <input type="text" placeholder="Task name" id="name">
-            
-            <label for="description">Description:</label>
-            <input type="text" placeholder="Task description" id="description">
-            
-            <button>Add</button>
-        </form>
-
-    </main>
-</body>
-
+  <body>
+    <div id="app" />
+  </body>
 </html>
 ```
 
-### 3. Add a new stylesheet
-Within the `ui/css` directory, create a new file called `tasks.css` and add the following code to it:
+### styles.css
+Paste the following code in `styles.css` (simple formatting to start you off):
 
 ```css
 body {
@@ -129,374 +77,271 @@ body {
 }
 
 header {
+    border-bottom: solid 2px;
+    height: 100px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 75px;
-    border-bottom: solid 1px #000;
-    margin-bottom: 20px;
 }
 
 main {
-    max-width: 600px;
+    max-width: 1100px;
     margin: auto;
-}
-
-section,
-form {
-    border: solid 1px #000;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.item {
-    display: grid;
-    grid-template-columns: auto 100px;
-    align-items: center;
-    margin-bottom: 10px;
-    border: solid 1px #000;
-    padding: 10px;
-}
-
-.item strong,
-.item p {
-    grid-column: 1 / 2;
-    margin: 0;
-}
-
-.item p {
-    grid-row: 2 / 3;
-}
-
-.item button {
-    grid-row: 1 / 3;
-}
-
-.add-task {
-    display: grid;
-    grid-template-columns: 100px auto;
-    row-gap: 10px;
-    column-gap: 10px;
-    align-items: center;
-}
-
-.add-task h2 {
-    grid-column: 1 / 3;
-}
-
-.add-task button {
-    grid-column: 2 / 3;
-    justify-self: flex-start
-}
-
-label {
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-input {
-    border: solid 1px #CCC;
-    border-radius: 4px;
-    padding: 6px 12px;
-}
-
-button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: solid 1px #FFF;
-}
-
-form button {
-    background-color: rgb(79, 67, 182);
-    color: white;
-}
-
-button:hover {
-    border: solid 1px #CCC;
-    font-weight: 600;
-
+    padding: 30px;
 }
 ```
 
-You don't really need to understand the style declarations in any detail (save that for CSCI 344). What you do need to know is that this file is in charge of styling your web client and controlling the layout.
+### App.jsx
+Paste the following code in `App.jsx` (sets up an HTML skeleton that you will later be enhancing):
 
-### 4. View your starter client
-When you're done with steps 1-3 above, you should be able to view your starter client as follows (make sure your Docker container from Lab 5 is running):
-* <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a>
+```jsx
+import React from "react";
 
-If you see something like this in your web browser, you're all set up:
-
-<img class="img" src="../assets/images/lab06-setup.png" alt="Screenshot of what your starter client should look like" />
-
-## 3. Your Tasks
-Now that you've set up your "starter client," your job is to get your client to interact with the server routes that you implemented in [Lab 5](lab05) using the browser's built-in `fetch` API. 
-
-{:.blockquote-no-margin}
-> When you are finished with all of the tasks described in this section, your client should function like this:
->
-> <img class="img-sm" src="../assets/images/lab06-demo-client.gif" alt="Animation of what the final product should look like" />
-
-Since this is not a webdev class, we're just going to ask you to interact with three of the routes you made in Lab 5:
-
-| Route | Method | Description |
-|--|--|--|
-| `/tasks` | GET | Reads (downloads) the task list from the server |
-| `/tasks` | POST | Creates (adds) a new task on the server in the following format:<br> `{ "name": "Task 1", "description": "Some description." }` |
-| `/tasks/<id>` | DELETE | Deletes the task stored in the `id` slot of the array. Example:<br>`/tasks/3` will delete the task stored in array position 3. |
-
-
-### 1. Read (download) and display all of the tasks
-To display all of the tasks on the client, you are going to create some JavaScript functions. Before you begin, take a look at `index.html`. Note that at the top of the file, there's a link to `main.js`, which indicates that the webpage will have access to all of the logic in the `main.js` file.
-
-```html
-    <script src="/js/main.js" type="text/javascript" defer></script>
-```
-
-The "defer" attribute indicates that the script will only run after the entire HTML page has been loaded and rendered. Currently, `main.js` outputs "Hello world" to the console. Use the browser's built-in inspector to view the console output.
-
-
-#### Get the tasks
-Your first job is to create a JavaScript function to fetch all of the server tasks, and then display them to the screen. To do this, add the following function definition and invocation to `main.js`:
-
-```js
-// definition
-async function getTasks() {
-    const response = await fetch("/tasks");
-    const tasks = await response.json();
-    console.log(tasks);
-}
-
-// invocation
-getTasks();
-```
-
-Now, refresh your web browser and take a look at the console. It should have outputted all of your tasks to the screen. A few notes on this code:
-
-* Like with Python's asyncio, fetching is asynchronous.
-* Fetching data is a two step process: 
-    * The first function invocation -- `fetch("/tasks")` -- returns the response headers from the server.
-    * The second function invocation -- `response.json()` -- returns the actual response payload (data). 
-* The `await` keywords means that the next statement will not execute until the asynchronous function resolves.
-
-
-#### Display a task
-Now that you know how to get data back from the server using fetch, your next step is to display the tasks in a visual form on the browser screen. To do this, we need to build some HTML. Let's create a function that converts a task object to an HTML snippet:
-
-```js
-function taskToHTML(task) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-        </div>
-    `;
+export default function App() {
+            
+    return (
+        <>
+            <header>
+                <h1>Spotify Demo</h1>
+            </header>
+            <main>
+                <p>Hello React!</p>
+            </main>
+        </>
+    );
 }
 ```
 
-This function takes a task objet as an argument and returns an HTML representation of the task. A few notes about this code:
-* In JavaScript, a template literal (everything surrounded by the "backtick" character) is evaluated as a "smart string" (linebreaks OK).
-* Within the template literal, anything surrounded by the `${ }` symbol is treated like a JavaScript expression. Any expression inside of this symbol -- within a template literal -- will be evaluated. For example:
-    * `${ 2 + 2 }` evaluates to 4.
-    * `${ foo }` evaluates to the value stored inside of `foo`.
+### main.jsx
+Paste the following code in `main.jsx` (imports your `App.jsx` component and renders it inside of `<div id="app" />`):
 
-#### Display all of the tasks
-Finally, you're going to modify the `getTasks()` function you just made so that it iterates through the task array and appends each HTML representation of the task to the screen. 
+```jsx
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
 
-Final code:
-
-```js
-
-function taskToHTML(task) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-        </div>
-    `;
+function main() {
+    const rootEl = document.getElementById("app");
+    const root = createRoot(rootEl);
+    root.render(<App />);
 }
 
-async function getTasks() {
-    // access an existing HTML element (from index.html):
-    const listEl = document.querySelector(".task-list");
-    listEl.innerHTML = "";
-
-    // go get the data:
-    const response = await fetch("/tasks");
-    const tasks = await response.json();
-    console.log(tasks);
-
-    // append each task as an HTML element to the DOM:
-    if (tasks.length === 0) {
-        listEl.innerHTML = "No tasks found.";
-    } else {
-        // loop through 
-        tasks.forEach((task, idx) => {
-            listEl.insertAdjacentHTML("beforeend", taskToHTML(task));
-        });
-    }
-}
-
-// kick off the fetch
-getTasks();
+main();
 ```
 
-This code should display all of the tasks to the screen.
+### package.json
+In the scripts section of your `package.json`, add the following two entries to configure the vite bundler (recall that you already installed vite via npm):
 
-> #### Pro Tips
-> * Before moving on to the next section, make sure you can follow the logic of the code above (as you'll need to understand it for Homework 2).
-> * To test the code, add some hard-coded tasks to `taskdb` in the `server.py` file (see below).
-
-```py
-taskdb = [{
-    "name": "Lab 5",
-    "description": "Finish implementing and writing tests for Lab 5"
-}, {
-    "name": "Topic 8 Readings",
-    "description": "Make sure you do this week's readings for CSCI338!"
-}]
+```json
+  ...
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
+  }
+  ...
 ```
 
-### 2. Create new tasks on the server from the web client
-We can now fetch and display tasks (from the server). But how do we create new tasks? Well, we can use fetch for this too! 
 
-#### Creating a hard-coded task
-To create a new task, we'll need to issue a POST request to `/tasks`. To do this, we'll start by adding another function to `main.js`:
+### .gitignore
+Exclude `node_modules`, `.DS_Store`, and any other system files you don't want in your repo
 
-```js
-// function definition:
-async function createTask() {
 
-    // create a fake task:
-    const name = "New Task";
-    const description = "Description of new task.";
-    const newTask = {
-        "name": name,
-        "description": description
-    }
+## 3. Test Your files
+Run your react app by issuing the following command via the command line:
 
-    // post the task to the server using the "POST" method:
-    const response = await fetch("/tasks", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
+```
+$ npm run dev
+```
+
+You should see the following output:
+
+```bash
+
+  VITE v5.2.7  ready in 84 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+```
+
+If you configured everything correctly, when you navigate to [http://localhost:5173/](http://localhost:5173/) in your web browser, your react app should appear with the message "Hello React".
+
+## 4. Querying Spotify
+For this React project, we will be working with Spotify's REST API. Ordinarily, to use their API, you would register for an API key with Spotify. However, to save time, Sarah has created a proxy server called <a href="https://apitutor.org" target="_blank">API Tutor</a> that simplifies the API requests to Spotify (and a few other providers). The proxy server does two things:
+
+1. Simplifies the data structure that is returned from Spotify 
+2. Appends Sarah's Spotify API key in the header so that you don't have to register for an account.
+    * Footnote: this isn't technically kosher, but it's only for educational purposes and I would never do this for a "real world" app.
+
+The API endpoint that you will all be using is this one:
+
+<a href="https://www.apitutor.org/spotify/simple/v1/search?q=beyonce&type=album&limit=2" target="_blank">https://www.apitutor.org/spotify/simple/v1/search?q=beyonce&type=album&limit=2</a>
+
+There are three query parameters that you can adjust:
+* `q`: the search term
+* `type`: the resource type. Valid options are `album`, `track`, or `artist`
+* `limit`: how many results to return
+
+Try playing around with these three parameters to see what happens.
+
+## 5. Warmup: Using the antd component library
+Recall from lecture on Thursday, that you can use Ant Design components by importing them from the `antd` component library. Let's practice doing this.
+
+### Make some antd images
+In `App.jsx`, import the Image component from the `antd` library, and add some image tags inside of the `<main></main>` tag. Check out the documentation to figure out how to do this:
+
+* [https://ant.design/components/image](https://ant.design/components/image)
+
+If you want some dummy photos, you can use a random image generator like [https://picsum.photos](https://picsum.photos). In the samples below, the first number specifies the width of the photo you want and the second number specifies the height. To "trick" your browser to make more than one image request (versus caching the same image and using it over and over again), append a unique query parameter at the end of each url (could be anything).
+
+* https://picsum.photos/400/400?id=1
+* https://picsum.photos/300/300?foo=bar
+
+### Make a carousel
+Using the antd `Carousel` component, see if you can make a carousel of Beyonce albums. Here is a list of JSON objects representing 5 of Beyonce's albums:
+
+```json
+[
+   {
+      "id": "6BzxX6zkDsYKFJ04ziU5xQ",
+      "name": "COWBOY CARTER",
+      "image_url": "https://i.scdn.co/image/ab67616d0000b2731572698fff8a1db257a53599",
+      "spotify_url": "https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ"
+   },
+   {
+      "id": "2UJwKSBUz6rtW4QLK74kQu",
+      "name": "BEYONCÉ [Platinum Edition]",
+      "image_url": "https://i.scdn.co/image/ab67616d0000b2730d1d6e9325275f104f8e33f3",
+      "spotify_url": "https://open.spotify.com/album/2UJwKSBUz6rtW4QLK74kQu"
+   },
+   {
+      "id": "6PeoltoiWQWCyWA0JBHVGN",
+      "name": "16 CARRIAGES",
+      "image_url": "https://i.scdn.co/image/ab67616d0000b273f5220893852002a2a3078bab",
+      "spotify_url": "https://open.spotify.com/album/6PeoltoiWQWCyWA0JBHVGN"
+   },
+   {
+      "id": "6oxVabMIqCMJRYN1GqR3Vf",
+      "name": "Dangerously In Love",
+      "image_url": "https://i.scdn.co/image/ab67616d0000b27345680a4a57c97894490a01c1",
+      "spotify_url": "https://open.spotify.com/album/6oxVabMIqCMJRYN1GqR3Vf"
+   },
+   {
+      "id": "2m1enA3YrMLVvR3q0MqLpL",
+      "name": "COWBOY CARTER",
+      "image_url": "https://i.scdn.co/image/ab67616d0000b2734903a9678d5664b9cd9a3fd8",
+      "spotify_url": "https://open.spotify.com/album/2m1enA3YrMLVvR3q0MqLpL"
+   }
+]
+```
+
+See if you can figure out how to use JavaScript's built-in `Array.map()` function to programmatically generate each slide of the carousel. Try asking ChatGPT something like 
+
+> "How do I create JSX components from a list of objects in React?"
+
+
+#### Solution
+Inside the App() function, try this:
+
+```javascript
+
+    ...
+    const carouselStyles = {
+        "width": "640px", 
+        "border": "solid 1px #000", 
+        "margin": "auto"
+    };
+    const albums = [
+        {
+           "id": "6BzxX6zkDsYKFJ04ziU5xQ",
+           "name": "COWBOY CARTER",
+           "image_url": "https://i.scdn.co/image/ab67616d0000b2731572698fff8a1db257a53599",
+           "spotify_url": "https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ"
         },
-        body: JSON.stringify(newTask),
-    });
-    data = await response.json();
-    console.log(data);
+        {
+           "id": "2UJwKSBUz6rtW4QLK74kQu",
+           "name": "BEYONCÉ [Platinum Edition]",
+           "image_url": "https://i.scdn.co/image/ab67616d0000b2730d1d6e9325275f104f8e33f3",
+           "spotify_url": "https://open.spotify.com/album/2UJwKSBUz6rtW4QLK74kQu"
+        }
+        ...
+     ];
 
-    // requery and redraw the tasks (lazy, but OK for now)
-    await getTasks();
-}
+    function albumToJSX(albumJSON) {
+        return (
+            <div key={albumJSON.id}>
+                <img src={albumJSON.image_url} />
+                <h3>{albumJSON.name}</h3>
+            </div>
+        )
+    }
 
-// function invocation:
-createTask();
+    return (
+        <div style={carouselStyles}>
+            <Carousel dotPosition="top">
+                { 
+                    albums.map(albumToJSX)
+                }
+            </Carousel>
+        </div>
+    );
 ```
 
-After adding this code, refresh your browser. You should see that a new task has been created. Refresh your browser again. You should see another new task (with the same name and description).
-* Each time you refresh your browser, a new task is created, because the `createTask()` always runs once (when the page first loads).
-* This is obviously not how we ultimately want the program to function, but it's a start!
+Note that the argument within `albums.map()` is a function definition that is invoked for each JSON object in the list. The job of "map()" is to return a new array with a data transformation applied to each element. In this case, map returns a list of JSX objects, where each JSX object is a visual representation of the album.
 
-Please study the code above carefully:
-* Note that unlike with a GET request, a POST request typically has a payload -- stored in a data field called `body`. 
-* Also note that the header of the request specifies the data format that's being sent (in this case, we're sending JSON over the network).
 
-#### Creating a task when the user clicks the add button
-Hopefully you're asking yourself: how do I only create a new task when I actually click the "Add" button (versus when the page loads)? Well, to do this, we need to add an **event handler** to our form, and override the default action that the browser takes when a form gets submitted.
+## 6. Your Task: Allow your user to query, display, and listen to songs
+To complete this lab, please do the following:
 
-##### HTML Edit
-Please add an event handler to the form tag of `index.html`. The event handler tells your browser that when the user submits the form, it should invoke the `createTask` function:
+1. Create a form -- using the `antd` form components (that we reviewed during lecture) -- that allows a user to input:
+    * A search term (e.g., "Beyonce")
+    * The number of songs they want (max is 20)
+2. When the clicks the search button, issue a query to Spotify with the user-specified `q` and `limit` arguments.
+3. When the response comes back from the server draw a carousel with an audio player (iframe) for each song -- one per slide.
+
+<a href="https://svanwart.github.io/spotify-project/" target="_blank">Here's a demo</a> of what your app should roughly do.
+
+
+### Hints
+
+Create a state variable to hold the tracks:
+
+```javascript
+const [tracks, setTracks] = useState([]);
+```
+
+Create a function that transforms each track JSON object to an iframe JSX. Your JSX iframe should look something like this:
 
 ```html
-<form class="add-task" onsubmit="createTask(event)">
+<iframe
+    key="1EjQRTG53jsinzk2xlVVJP"
+    src="https://open.spotify.com/embed/track/1EjQRTG53jsinzk2xlVVJP?utm_source=generator" 
+    width="100%" 
+    border="0"
+    height="352" 
+    frameBorder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+    loading="lazy"></iframe>
 ```
 
-##### JavaScript Edit
-You will also need to modify the `createTask` function as follows:
+The function that fetches the data should look something like this:
 
-```js
-// function definition:
-async function createTask(ev) {
-    ev.preventDefault();
-
-    // everything else stays the same
-    ...
-}
-// createTask();
-```
-
-This change allows us to pass a browser event object as an argument into the function (so that we can override its behavior). The `ev.preventDefault()` invocation basically says to the browser, "instead of doing what the form is supposed to do, execute my code instead." Note that you will also comment out the `createTask()` invocation so that the function not longer runs on pageload. 
-
-Now that you have made these changes, you can add a new task by clicking the "Add" button.
-
-
-#### Allowing the user to specify the name and description
-Although we're making progress, we're still not able to name or describe the task (because it's hard coded). To fix this, let's have our function read from the form inputs given by our user by making the following changes to the `createTask()` function:
-
-```js
-// function definition:
-async function createTask(ev) {
-    ev.preventDefault();
-
-    // modify the name and description variables to read from the DOM (instead of using hard-coded values):
-    const name = document.getElementById("name").value;
-    const description = document.getElementById("description").value;
-
-    // everything else stays the same
-    ...
-
-
-
-    // at the very end, clear out the form:
-    document.getElementById("name").value = "";
-    document.getElementById("description").value = "";
-
-}
-```
-
-Now test again by filling in actual values into the form fields. Hopefully, you can now add your own tasks to the server!
-
-### 3. Delete a task
-You've now created a bunch of tasks! But how do you delete them? To answer this question, we need to both add a new `deleteTask()` function and also modify the `taskToHTML()` function so that each task has a corresponding delete button. Please make the following modifications:
-
-#### A. taskToHTML() changes
-Modify the `taskToHTML()` function as follows:
-
-```js
-function taskToHTML(task, idx) {
-    return `
-        <div class="item">
-            <strong>${task.name}</strong>
-            <p>${task.description}</p>
-            <button onclick="deleteTask(${idx})">Delete</button>
-        </div>
-    `;
-}
-```
-
-* Note that the function now accepts a second argument, `idx`
-* Note that a new HTML tag -- a button -- has been added to the HTML snippet. When the button is clicked, it will invoke the `deleteTask()` function and pass it the position (index) of the task to be removed.
-
-#### B. deleteTask()
-To complete this tutorial, you will add a `deleteTask()` function:
-
-```js
-async function deleteTask(idx) {
-    const response = await fetch(`/tasks/${idx}`, { method: "DELETE" });
-    const data = await response.json();
+```javascript
+async function fetchData() {
+    const baseURL = 'https://www.apitutor.org/spotify/simple/v1/search';
+    const url = `${baseURL}?q=${searchTerm}&type=${dataType}&limit=5`;
+    const request = await fetch(url);
+    const data = await request.json();
     console.log(data);
-
-    // requery and redraw the tasks (lazy, but OK for now)
-    await getTasks();
+    // set state variable to redraw...
 }
 ```
 
-Study this function. You should be able to figure out what it does (ask if you don't understand something...or google it...or use ChatGPT).
 
-Create, read, and delete have now been implemented. If you want, you can implement update (PUT) for extra credit.
-
-
-## 4. What to Turn In
-Please create a pull request with the fully implemented web client (which should be completed inside of your version of your `lab05` folder).
+### Extra Credit
+1. See if you can deploy your React App on GitHub pages. One way of doing this is using the `gh-pages` module (which you can install via npm). Here's a <a href="https://blog.seancoughlin.me/deploying-to-github-pages-using-gh-pages" target="_blank">blog post about it</a>, but you can also use ChatGPT to get some insight.
+2. Refactor `App.jsx` so that the **Form** functionality and the **Carousel** functionality are separated into two standalone components. Then, get them to talk to each other.
+    * In other words, how does the Form component notify the Carousel to redraw after the user submits their search?
+    
+## What to Submit
+When you're done, push your `lab08` branch to GitHub and make a pull request. Please ensure that the destination (left-hand side) is pointing to the `main` branch of **your repo** and the source (right-hand side) is pointing to the `lab08` branch of **your repo**. Then, please paste a link to your PR in the Moodle.

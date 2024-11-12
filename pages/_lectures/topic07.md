@@ -38,6 +38,9 @@ readings:
       type: reading
       title: How A Small Team of Developers Created React at Facebook (video)
       url: https://www.youtube.com/watch?v=8pDqJVdNa44
+    - start_date: 2024-11-12
+      type: reading
+      notes: Readings are light this week so that you can work on <a href="/fall2024/assignments/project01">Project 1</a>!
 slides:
     - start_date: 2024-11-05
       num: 10
@@ -53,10 +56,10 @@ slides:
       url: https://docs.google.com/presentation/d/1UqhChRR-yn_K1jgKnZSMkhbEo02zyih4/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
     - start_date: 2024-11-12
       num: 12
-      draft: 1
+      draft: 0
       type: lecture
       title: Client-Server Communication over HTTP
-      url: https://docs.google.com/presentation/d/1-ALSq8ZmCLhqyIA_2uLOouIa3XihtFLMf4F7ChmCOPY/edit?usp=sharing
+      url: https://docs.google.com/presentation/d/1zqF7V_Ove-n15Ghz2oMNbZZekqeNlea5/edit?usp=sharing&ouid=113376576186080604800&rtpof=true&sd=true
 videos:
     - start_date: 2024-11-05
       type: video
@@ -66,7 +69,7 @@ videos:
       type: video
       title: Lecture recording
       url: https://drive.google.com/file/d/1LJEDTVkWibDyCXTz_2U9K20f9z1_AlpK/view?usp=drive_link
-labs: [7, 8]
+labs: [7]
 questions:
     - What is front-end engineering? What is UI engineering?
     - When did it become a distinct subdiscipline of computer programming?
