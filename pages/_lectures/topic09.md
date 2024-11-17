@@ -2,7 +2,7 @@
 layout: module
 title: "Back-End: Databases and Object Relational Mappings"
 type: topic
-draft: 1
+draft: 0
 num: 9
 start_date: 2024-11-19
 labs: [9]
@@ -11,6 +11,7 @@ readings:
       type: reading
       title: Databases
       url: /resources/databases
+      notes: "Please review the reference materials on the databases resource page. We will practice using these commands in Lab 10."
       required: 1
 slides: 
     - start_date: 2024-11-19
