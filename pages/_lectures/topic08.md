@@ -11,19 +11,6 @@ readings:
       title: Design Systems
       skim: 1
       url: /resources/design-systems
-slides: 
-    - start_date: 2024-11-14
-      draft: 1
-      num: 13
-      type: lecture
-      title: Design Systems
-      url: https://docs.google.com/presentation/d/1303nSLWZkzG_Jmc0o3Gs9Noit25mxvFNMMBZKB9oYBs/edit?usp=sharing
-# activities: 
-#     - start_date: 2024-11-14
-#       draft: 0
-#       type: activity
-#       title: Experiment with a Design System
-#       url: /activities/ant-design
 labs: [8]
 ---
 

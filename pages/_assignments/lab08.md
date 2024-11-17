@@ -7,7 +7,7 @@ points: 6
 abbreviation: Lab 8
 num: 8
 start_date: 2024-11-14
-due_date: 2024-11-17
+due_date: 2024-11-21
 ---
 
 
@@ -37,7 +37,7 @@ Try it out to get a feel of how it should work. The goals with this lab are as f
 
 ## 1. Getting Started
 
-For this lab, you will create a brand new repository called `lab08`. 
+For this lab, you will create a brand new folder in your `class-exercises-fall2024` folder called `lab08`. 
 
 Like before, you will build your React app from scratch, which will involve:
 1. Creating a `package.json` at the root of your `lab08` directory.
@@ -45,6 +45,16 @@ Like before, you will build your React app from scratch, which will involve:
 2. Installing the following 4 packages: `react`, `react-dom`, `vite`, and `antd`.
     * Hint: `npm install`
 3. Creating the following 5 base files: `index.html`, `styles.css`,  `main.jsx`, `App.jsx`, and `.gitignore`
+4. Adding the vite `dev` and `build` scripts under the `scripts` entry of your `package.json` file like this:
+
+    ```json
+    ...
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build"
+    },
+    ...
+    ```
 
 ## 2. Setting up your files
 Please add the following starter code to your files:
