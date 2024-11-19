@@ -7,7 +7,7 @@ points: 6
 abbreviation: Lab 10
 num: 10
 start_date: 2024-11-26
-due_date: 2024-12-01
+due_date: 2024-12-03
 
 ---
 

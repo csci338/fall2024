@@ -1,6 +1,6 @@
 ---
 layout: module
-title: "Back-End: Scalability"
+title: "Back-End: Scalability with Semmy Purewal (Guest Speaker)"
 type: topic
 num: 11
 draft: 1
