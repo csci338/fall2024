@@ -20,5 +20,11 @@ slides:
       num: 14
       title: Intro to Databases & ORMs
       url: https://docs.google.com/presentation/d/1HwD6kQiRwlNMr3WWFPwRnaIWNPn0wl5vwlGdHv2xtVo/edit?usp=sharing
+
+videos:
+    - start_date: 2024-11-21
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/1kVI2yU4Q5QW5UmYqJ9lIru4fP3ZEsh-L/view?usp=drive_link
 ---
  
