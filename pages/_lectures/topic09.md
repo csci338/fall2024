@@ -11,16 +11,14 @@ readings:
       type: reading
       title: Databases
       url: /resources/databases
-      notes: "Please review the reference materials on the databases resource page. We will practice using these commands in Lab 10."
+      notes: "Please review the reference materials on the databases resource page. We will practice using these commands in Lab 9."
       required: 1
 slides: 
     - start_date: 2024-11-21
       type: lecture
-      draft: 1
+      draft: 0
       num: 14
       title: Intro to Databases & ORMs
-      url: https://docs.google.com/presentation/d/1PTFnOHjnZShjloXJGN2kvmFvy4f4AKCEzM27FG86tzE/edit?usp=sharing
+      url: https://docs.google.com/presentation/d/1HwD6kQiRwlNMr3WWFPwRnaIWNPn0wl5vwlGdHv2xtVo/edit?usp=sharing
 ---
  
-<!-- ## Activities
-* Today's Repo: <a href="https://github.com/csci338/orm-demo" target="_blank">https://github.com/csci338/orm-demo</a> -->
