@@ -7,7 +7,7 @@ points: 6
 abbreviation: Lab 8
 num: 8
 start_date: 2024-11-14
-due_date: 2024-11-21
+due_date: 2024-11-26
 ---
 
 

@@ -4,6 +4,7 @@ title: "Back-End: Scalability with Semmy Purewal (Guest Speaker)"
 type: topic
 num: 11
 draft: 1
+projects: [2]
 start_date: 2024-12-03
 slides:
     - start_date: 2024-12-03

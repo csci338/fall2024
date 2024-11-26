@@ -6,7 +6,7 @@ draft: 1
 points: 20
 abbreviation: Project 2
 num: 2
-start_date: 2024-11-26
+start_date: 2024-12-03
 due_date: 2024-12-12
 ---
 
