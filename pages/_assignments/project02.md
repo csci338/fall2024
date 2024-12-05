@@ -2,7 +2,7 @@
 title: "Full Stack Application"
 layout: assignment-two-column
 type: project
-draft: 1
+draft: 0
 points: 20
 abbreviation: Project 2
 num: 2
@@ -10,6 +10,26 @@ h_max: 5
 start_date: 2024-12-03
 due_date: 2024-12-12
 ---
+
+<style>
+    .info .highlight, .info .highlight pre, .info .highlight table {
+        background: transparent !important;
+        color: #242424 !important;
+    }
+
+    .info li {
+        margin-bottom: 20px;
+    }
+
+    .info ol{
+        margin-top: 20px;
+    }
+
+    .info code.highlighter-rouge {
+        font-weight: bold;
+        background: transparent;
+    }
+</style>
 
 ## Introduction
 Some text around how this assignment is the synthesis of everything they've explored in this class...
@@ -73,14 +93,14 @@ psql -U postgres        # connects to the database
 \dt                     # lists all of the tables in the schedulerdb
 ```
 
-
-#### Task #1: SQL
-Please make a copy of <a href="https://docs.google.com/document/d/1nySPayDV4pUvUcwM9eT465TjSKPSiV9r1KBqmWkEHRs/edit?usp=sharing" target="_blank">this Google Doc</a>. Then, complete the following SQL exercises and paste your answers into the Google Doc:
-
-1. Select all rows and columns from the `users` table
-1. Select the `crn` and `title` of the courses in the `courses` table that are in the `CSCI` department.
-1. Write a query to output a ***distinct*** list of all of the department codes in the `courses` table ordered alphabetically.
-
+{:.info}
+> #### Task #1: SQL
+>  Complete the following SQL exercises and paste your answers into your Google Doc (linked to above).
+> 
+> 1. Select all rows and columns from the `users` table
+> 1. Select the `crn` and `title` of the courses in the `courses` table that are in the `CSCI` department.
+> 1. Write a query to output a ***distinct*** list of all of the department codes in the `courses` table ordered alphabetically.
+> 
     ```
     department 
     ------------
@@ -89,22 +109,12 @@ Please make a copy of <a href="https://docs.google.com/document/d/1nySPayDV4pUvU
     AM
     AMS
     ANTH
-    ART
-    ARTH
-    ARTS
-    ASIA
-    ASTR
-    ATMS
-    BIOL
-    BUS
-    CHEM
-    CHER
-    CSCI
+    ...
     ```
-
-1. Write a query that lists the course `crn` and `title` (from the courses table) and the `username` (from the schedule table). You will need to query 4 tables: schedule_courses, schedules users, and courses tables. For instance:
-
-    ```
+> 
+> 1. Write a query that lists the course `crn` and `title` (from the courses table) and the `username` (from the schedule table). You will need to query 4 tables: schedule_courses, schedules users, and courses tables. For instance:
+>
+>    ```
                            title                       |  crn  | username 
     ---------------------------------------------------+-------+----------
     Academic Writing and Critical Inquiry              | 11127 | ablazer1
@@ -115,24 +125,11 @@ Please make a copy of <a href="https://docs.google.com/document/d/1nySPayDV4pUvU
     Advanced Creative Writing Workshop: Hybrid forms - | 10648 | aindelic
     Inquiry-Based Science, Physical Activity, and Heal | 10546 | aindelic
     Spanish for Advanced Beginners                     | 11075 | aindelic
-    ST: Medieval Hollywood                             | 11115 | aindelic
-    ST: Sexual Health & Sexuality                      | 11193 | aindelic
-    Climate Change / Human Health                      | 10944 | awillis4
-    Cooperative Education                              | 10396 | awillis4
-    GSWP: Ideas That Sell: A Fiction Workshop          | 10838 | awillis4
-    Philosophy of Science                              | 11134 | awillis4
-    Senior Research Seminar I                          | 10513 | awillis4
-    Adolescent Literature, 6-12                        | 10259 | bcasey1
-    DI: SL: Multiple Literacies in Content Area Classr | 10547 | bcasey1
-    HONORS: Mod World: Mid 17-20th Century             | 10588 | bcasey1
-    Light and Visual Phenomena                         | 10623 | bcasey1
-    Special Topics: Photo for Non-Majors               | 11004 | bcasey1
-    Applied Music II: Piano                            | 10204 | bmungal
     ...
     ```
 
 ### 2. Querying with SQLAlchemy & Python (Docker Server container)
-In practice, data APIs rarely issue SQL commands directly. Rather, they use some kind of "object relational mapping" library, or ORM. This system uses a library called SQL Alchemy (which you learned about in Lab 9). Let's get some additional practice using SQLAlchemy by hopping onto our web server container and issuing some SQL Alchemy commands:
+In practice, data APIs rarely issue SQL commands directly. Rather, they use some kind of "object relational mapping" library, or ORM. Project 2 uses a library called SQL Alchemy (which you learned about in Lab 9). Let's get some additional practice using SQLAlchemy by hopping onto our web server container and issuing some SQL Alchemy commands:
 
 
 1. Connect to your docker container:
@@ -147,7 +144,15 @@ In practice, data APIs rarely issue SQL commands directly. Rather, they use some
     poetry shell
     ```
 
-1. Examine the `show_courses` function (shown below), which queries for all of the `Course` objects in the `courses` table:
+1. Open your `project02-fall2024` directory in VS Code and navigate to `backend/sample_orm_queries.py`. Then, run `sample_orm_queries.py` on your poetry shell (from the Docker container) to make sure that everything is working:
+
+    ```
+    python sample_orm_queries.py
+    ```
+
+    If it worked, you should see some courses outputting to the screen.
+
+1. Now that you've run `sample_orm_queries.py`, let's take a look at some of the code, starting with the `show_courses` function (shown below):
 
     ```py
     import Course from models
@@ -168,22 +173,120 @@ In practice, data APIs rarely issue SQL commands directly. Rather, they use some
             print(f"{course.crn} ({course.department}) - {course.title}")
     ```
 
-    Try running this code in the docker container (with the poetry shell activated) as follows:
+    The "job" of this function is to query the `courses` table and to convert each record into a `Course` object (which is much easier to work with in Python). Please look at this function carefully and make sure you understand it.
+
+1. Now let's look at how the `Course` model is defined in `backend/models.py` (around line 40). I've pasted it below for your convenience:
+
+    ```py
+    class Course(Base):
+        __tablename__ = "courses"
+        crn = Column(Integer, primary_key=True)
+        code = Column(String, nullable=False)
+        department = Column(String, nullable=False)
+        title = Column(String, nullable=False)
+        hours = Column(Integer, nullable=True)
+        days = Column(String, nullable=True)
+        start_time = Column(DateTime(timezone=True), nullable=True)
+        end_time = Column(DateTime(timezone=True), nullable=True)
+        enrollment_current = Column(Integer, nullable=False)
+        enrollment_max = Column(Integer, nullable=False)
+        waitlist_max = Column(Integer, nullable=False)
+        waitlist_available = Column(Integer, nullable=False)
+        term_part = Column(String, nullable=False)
+        start_date = Column(DateTime(timezone=True), nullable=True)
+        end_date = Column(DateTime(timezone=True), nullable=True)
+        instructional_method = Column(String, nullable=False)
+        async_class = Column(Boolean, nullable=False)
+        diversity_intensive = Column(Boolean, default=False)
+        diversity_intensive_r = Column(Boolean, default=False)
+        distance_learning = Column(Boolean, default=False)
+        first_year_seminar = Column(Boolean, default=False)
+        graduate = Column(Boolean, default=False)
+        honors = Column(Boolean, default=False)
+        arts = Column(Boolean, default=False)
+        service_learning = Column(Boolean, default=False)
+        open = Column(Boolean, default=False)
+
+        # Relationships
+        instructors = relationship(
+            "Instructor", secondary="course_instructors", back_populates="courses"
+        )
+        schedules = relationship(
+            "Schedule", secondary="schedule_courses", back_populates="courses"
+        )
+
+        location_id = Column(Integer, ForeignKey("locations.id"), nullable=True)
+        location = relationship("Location", back_populates="courses")
+    ```
+
+    The first ~25 data fields are just direct mappings to table columns in the `courses` table. However, the "relationship" data fields (`instructors`, `schedules`, `location`) are based on joins to other tables. Under the hood, SQLAlchemy can help you to manage these joins. This is helpful because it allows you to do things like this...
+
+    ```py
+    print(course.location.full_location)
+
+    for instructor in course.instructors:
+        print(instructor.full_name)
 
     ```
-    python sample_orm_queries.py
+
+    ...without having to manually write the code to organize the data from your table joins.
+
+1. Now that you've looked at your `Course` model, you're ready to understand how joins work in SQLAlchemy. To get your joins to populate the relations, there's a few things you have to do when querying. Please take a look at this code sample (also in  the `sample_orm_queries` file):
+
+    ```py
+    import Course from models
+    from sqlalchemy.orm import selectinload
+
+    async def show_courses_with_table_joins(db: AsyncSessionLocal):
+        # query also joins with the instructors and location table
+        query = (
+            select(Course)
+            .options(
+                selectinload(Course.instructors),
+                selectinload(Course.location)
+            )
+            .order_by(Course.department)
+        )
+
+        # execute the query:
+        result = await db.execute(query)
+
+        # convert the query results to a list:
+        courses = result.scalars().all()
+
+        # print select information for each course:
+        for course in courses:
+
+            # print stuff from courses tables
+            print(f"{course.crn} ({course.department}) - {course.title}")
+
+            # because we joined on the instructors table, we  have access to its data:
+            instructor_names = [inst.full_name for inst in course.instructors]
+            print("Intructor(s):", ", ".join(instructor_names))
+
+            # because we joined on the locations table, we can output the location:
+            if course.location:
+                print("Location:", course.location.full_location)
+            print("-" * 70)
     ```
 
-    Notice the output, and make sure you understand what happened and why. Note that the `show_courses()` funciton was invoked  towards the bottom of the file in `main()`
+    Note that the query has a new "options" clause that invokes SQLAlchemy's `selectinload` function to query for related data. Once the joined data is loaded into its corresponding `Course` object and relations (instructors, location). You can now manipulate the data as you would any other python object.
 
+1. The last thing that is important in these examples is the **await/async** concept, which we also saw in JavaScript. In this code example, all database queries are issued asynchronously. Because database queries are "expensive" (they take a lot of time), we don't want our system blocking until the query completes. By using async / await, other parts of the system can continue to work while python is waiting for information to come back from the database server:
+    * The `async` keyword, which is put before a the function definition, indicates that the function is utilizing some asynchronous functionality.
+    * The `await` keyword is ensures that the next line of code within the function does not execute until the asynchronous function call has returned.
 
-
-
-
-#### Task #2: SQL Alchemy
+{:.info}
+> #### Task #2: SQL Alchemy
+> Now that you've taken a look at some SQLAlchemy capabilities in more depth, please complete the following tasks:
+> 1. Please explain, in your own words, how the `print_schedules` function works (located inside of the `sample_orm_queries.py` file) in <a href="https://docs.google.com/document/d/1nySPayDV4pUvUcwM9eT465TjSKPSiV9r1KBqmWkEHRs/edit?usp=sharing" target="_blank">this Google Doc</a>.
+> 1. Then, in `sample_orm_queries.py`, create the following 3 asynchronous functions:
+>     1. `print_usernames` -- prints all of the usernames in the system (query the `User` model).
+>     1. `print_unique_departments`  -- prints a distinct list of departments (query the `Course` model). 
+>     1. `print_open_cs_courses` -- prints the `crn` and `title` of courses in the CSCI department that are currently open (not full). 
 
 ### 3. Building Fast API Endpoints (Docker Server container)
-TBD
+FastAPI is
 
 #### Task #3: Build / modify some endpoints
 
