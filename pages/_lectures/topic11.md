@@ -1,22 +1,20 @@
 ---
 layout: module
-title: "Back-End: Scalability with Semmy Purewal (Guest Speaker)"
+title: "Course Synthesis"
 type: topic
 num: 11
 draft: 0
 projects: [2]
-start_date: 2024-12-03
+start_date: 2024-12-05
 slides:
-    - start_date: 2024-12-03
+    - start_date: 2024-12-05
       num: 16
       type: lecture
-      title: Scaling an App
-      draft: 1
-      url: https://docs.google.com/presentation/d/1cyXi_ZKqdMzDDWBOerW02yPTl2K8chkoNI5htzjkciE/edit#slide=id.g29c926bd7b1_0_477
-readings:
-    - start_date: 2024-12-03
-      type: reading
-      title: Kubernetes Basics (Tutorial)
-      url: https://kubernetes.io/docs/tutorials/kubernetes-basics/
-
+      title: Course Synthesis
+      url: https://docs.google.com/presentation/d/13ZoVNNm5agKxtfgN8SPK6_NVG-ydNjZKFaRmM9dohjg/edit?usp=sharing
+videos:
+    - start_date: 2024-12-05
+      type: video
+      title: Lecture recording
+      url: https://drive.google.com/file/d/18IXsnskGhlBzEKY-pNlw8WdQWJEEveoK/view?usp=drive_link
 ---
