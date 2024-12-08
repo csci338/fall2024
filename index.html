@@ -1,0 +1,2098 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li class="active" ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_post-helene-updates">Post-Helene Updates</a></li>
+  <li><a href="#topic_1">Topic 1.  Intro to Software Engineering: </a>
+    <ol>
+      <li><a href="#heading_gjuLxPYD">Readings &amp; Activities</a></li>
+      <li><a href="#heading_GJzjrQhC">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_2">Topic 2.  Version Control &amp; Branch Management: </a>
+    <ol>
+      <li><a href="#heading_TfsABilH">Readings &amp; Activities</a></li>
+      <li><a href="#heading_LjKiPK3d">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_3">Topic 3.  Everything As Code (+ Docker): </a>
+    <ol>
+      <li><a href="#heading_XhfW7ELz">Readings &amp; Activities</a></li>
+      <li><a href="#heading_tzp8Qt2O">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_4">Topic 4.  Package &amp; Dependency Management: </a>
+    <ol>
+      <li><a href="#heading_6oO16pHa">Readings &amp; Activities</a></li>
+      <li><a href="#heading_DhLBv7CN">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_5">Topic 5.  Testing, Static Analysis, &amp; Continuous Integration (CI): </a>
+    <ol>
+      <li><a href="#heading_Gfu5SZvb">Readings &amp; Activities</a></li>
+      <li><a href="#heading_etfTuCkN">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_6">Topic 6.  Midterm Project &amp; Recap So Far: </a>
+    <ol>
+      <li><a href="#heading_XKNg7g7W">Readings &amp; Activities</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_7">Topic 7.  Challenges in Client-Side Engineering: </a>
+    <ol>
+      <li><a href="#heading_GWLYKF1n">Readings &amp; Activities</a></li>
+      <li><a href="#heading_L2v1D9dq">Study Questions</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_8">Topic 8.  UX / UI Design Patterns: </a>
+    <ol>
+      <li><a href="#heading_586ldMgE">Readings &amp; Activities</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_9">Topic 9.  Back-End: Databases and Object Relational Mappings: </a>
+    <ol>
+      <li><a href="#heading_t9GjxG4B">Readings &amp; Activities</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_10">Topic 10.  Back-End: Scalability with Semmy Purewal (Guest Speaker): </a>
+    <ol>
+      <li><a href="#heading_ymXYTwkb">Readings &amp; Activities</a></li>
+    </ol>
+  </li>
+  <li><a href="#topic_11">Topic 11.  Course Synthesis: </a>
+    <ol>
+      <li><a href="#heading_1CyNDUVF">Readings &amp; Activities</a></li>
+    </ol>
+  </li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+        <h1>Schedule</h1>
+    
+ 
+                <style>
+    h2 a,  h2 a:hover {
+        border-bottom: dotted 1px !important;
+        /* background-color: transparent; */
+    }
+    td .reading,
+    td .lecture,
+    td .badge,
+    td .lab,
+    td .activity {
+        font-size: 0.8rem !important;
+    }
+
+    .mb-1 {
+        margin-bottom: 4px;
+    }
+
+    .reading {
+        vertical-align: bottom;
+    }
+
+    .inline-block span {
+        font-weight: 500;
+    }
+
+    .assignments.topics ul {
+        padding: 0;
+        padding-left: 15px;
+    }
+
+    .assignments.topics table {
+        margin-bottom: 50px;
+        border-color: #CCC;
+        border-width: 0px;
+    }
+
+    .assignments.topics table tr {
+        display: grid;
+        grid-template-columns: 80px 80px 1fr 1fr;
+        border-bottom: dotted 1px #CCC;
+    }
+
+    .assignments.topics p,
+    .assignments.li {
+        margin-bottom: 10;
+        line-height: 1.6em;
+    }
+
+    .card {
+        border: solid 1px #F9F9F9;
+        border-radius: 6px;
+        padding: 20px;
+        background-color: #FAFAFA;
+        margin-bottom: 20px;
+    }
+
+
+
+    @media screen and (max-width: 1000px) {
+        main {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .assignments.topics table tr {
+            display: grid;
+            grid-template-columns: 80px 80px 1fr;
+        }
+
+        .assignments.topics table tr td:nth-child(4) {
+            grid-column: 3 / 4;
+        }
+
+        .assignments.topics table tr th:nth-child(4) {
+            display: none;
+        }
+    }
+</style>
+
+<button id="toggle-button" class="nu-button" onclick="toggleAll()">Collapse All</button>
+
+<blockquote class="info">
+  <h2 id="id_post-helene-updates">Post-Helene Updates</h2>
+  <p>Welcome back! Due to the time lost because of Helene, the following schedule adjustments have been made:</p>
+
+  <ol>
+    <li>The midterm has been cancelled. There will still be a cumulative final exam.</li>
+    <li>Some of the topics have been consolidated, and some of the labs have been shortened.</li>
+    <li>The schedule has been reformatted to be more conducive to remote learning.</li>
+  </ol>
+</blockquote>
+
+<section class="assignments topics">
+
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_1">Topic 1. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic01' target=''> Intro to Software Engineering</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>This unit introduces the idea of software engineering, including how it is similar and different from programming, and a host of considerations for building software that is scalable and maintainable over time.  
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_JroABAEl'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_gjuLxPYD"
+                    target-panel="#panel_JroABAEl"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_JroABAEl'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 1</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 8/20
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1kd3e-BwmrhI-BUV3UGMbqBDdukMOSAmd/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 1</a><span style="display: none">: </span><span>Intro to the Course</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+
+<!-- Activities -->
+
+
+    <span class="mb-1 block" target=""><a class="activity" href="https://docs.google.com/document/d/1lb4iE41b-aJoR9B3M007bYTT-m3p9E8D/edit#heading=h.gl8cimderpa9" target="_blank"> <i class="fa-solid fa-link"></i> Activity 1</a><span style="display: none">: </span><span>Warm Up</span></span><div></div>
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 8/22
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1DR-1d_XeFVWaaO-ZDs7X6N6nFQICx2gI/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 2</a><span style="display: none">: </span><span>What is Software Engineering?</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1VrM42SmCCmwyC98XQnzn3q6gNrAkMsac/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab01" target=""> <i class="fa-solid fa-link"></i> Lab 1</a><span style="display: none">: </span><span>Code Editors</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://abseil.io/resources/swe-book/html/pr01.html" target="_blank"> Preface. Software Engineering at Google</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://abseil.io/resources/swe-book/html/ch01.html" target="_blank"> Chapter 1. What is Software Engineering?</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="/fall2024/resources/wsl" target=""> Configuring WSL</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="/fall2024/resources/command-line" target=""> Command line cheat sheet</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/" target="_blank"> Configuring zsh/bash</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="/fall2024/resources/vs-code" target=""> VS Code</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="/fall2024/resources/vim" target=""> vim</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="/fall2024/resources/emacs" target=""> emacs</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_Rv125pLp'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_GJzjrQhC"
+                    target-panel="#panel_Rv125pLp"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_Rv125pLp'
+                ><ol>
+            
+            <li>How is software engineering different from programming?</li>
+            
+            <li>Is software engineering actually engineering? Why or why not?</li>
+            
+            <li>Why not just aim for "nothing changes"?</li>
+            
+            <li>What is Hyrum's Law?</li>
+            
+            <li>How should decisions be made on software engineering teams? Name some better and worse ways of making decisions.</li>
+            
+            <li>What do we mean by trade-offs?</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_2">Topic 2. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic02' target=''> Version Control & Branch Management</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>Version control is perhaps one of the most important topics in software engineering. Version control systems allow teams to collaborate on projects, review one another's code, experiment with new features and ideas, and revert to previous versions when needed. In this unit, we will explore different approaches that teams might take to organize their code repositories. We will also do various hands-on activities so that you can familiarize yourself with bash and git commands.
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_cNO8rd4a'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_TfsABilH"
+                    target-panel="#panel_cNO8rd4a"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_cNO8rd4a'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 2</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 8/27
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1Caf-Ri8A5TNeYjTNC4yL5aD074NYNJAD/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 3</a><span style="display: none">: </span><span>Intro to Version Control</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1d-UBkRjfNZ7ll_x05zz2EvR5uVE4yN1T/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://abseil.io/resources/swe-book/html/ch16.html" target="_blank"> Chapter 16. Version Control and Branch Management</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 8/29
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/11HyT_sktBgkhoM2_LgQ3cHB68YZj_AZZ/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture </a><span style="display: none">: </span><span>Introduction to Lab 2</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab02" target=""> <i class="fa-solid fa-link"></i> Lab 2</a><span style="display: none">: </span><span>Configuring git and GitHub</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 3</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 9/3
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1Jw5noRHBzAtxJL-j13OCawd615ca7swk/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 4</a><span style="display: none">: </span><span>Version Control and Collaborative Workflows</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/19nCHNg0rMgWyS_XyLr4LcUF4ByB2LJ7-/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+    <span class="mb-1 block" target=""><a class="activity" href="/fall2024/activities/git-in-class-activity" target=""> <i class="fa-solid fa-link"></i> Activity 1</a><span style="display: none">: </span><span>Git Collaboration Activity</span></span><div></div>
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            Read the history section (including all subsections: Naming, Characteristics, Data Structures, and References).
+
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://git-scm.com/book/en/v2" target="_blank"> Pro Git book</a><span style="display: none">: </span></span><div>The Pro Git book provides some useful context and conceptual models, particularly 2.1-2.5, 3.1-3.1, and 3.6.
+</div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 9/5
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+
+<!-- Videos -->
+
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab03" target=""> <i class="fa-solid fa-link"></i> Lab 3</a><span style="display: none">: </span><span>A Tour of git Commands</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://www.youtube.com/watch?v=_wQdY_5Tb5Q" target="_blank"> Collaborating with git and GitHub (video)</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://www.youtube.com/watch?v=_UZEXUrj-Ds" target="_blank"> What is git rebase? (video)</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://www.atlassian.com/git/tutorials/comparing-workflows" target="_blank"> How to rebase + handle merge conflicts</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_fDxf3508'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_LjKiPK3d"
+                    target-panel="#panel_fDxf3508"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_fDxf3508'
+                ><ol>
+            
+            <li>Why is version control important?</li>
+            
+            <li>Why is code history important?</li>
+            
+            <li>What is the difference between centralized and distributed version control?</li>
+            
+            <li>What is the problem with having long-running dev branches? What is the solution?</li>
+            
+            <li>What is the one version rule?</li>
+            
+            <li>What are the tradeoffs of having a "monorepo" versus multiple repos?</li>
+            
+            <li>What is the difference between git and GitHub?</li>
+            
+            <li>What is the difference between a merge commit and rebasing? What would you want to do one over the other (i.e., what are the the tradeoffs of each)?</li>
+            
+            <li>What does the "origin" typically refer to?</li>
+            
+            <li>What is a public / private key pair?</li>
+            
+            <li>What do the following git commands do?  <code>clone</code>, <code>status</code>, <code>add</code>, <code>log</code>, <code>commit</code>, <code>push</code>, <code>pull</code>, <code>merge</code>, <code>rebase</code>
+</li>
+            
+            <li>What do the following bash commands do?  <code>ls</code>, <code>cat</code>, <code>mv</code>, <code>pwd</code>, <code>cd</code>, <code>rm</code>
+</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_3">Topic 3. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic03' target=''> Everything As Code (+ Docker)</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>In this unit, we will explore the idea of formalizing your entire software stack using code (e.g. operating system configurations, dependencies, documentation, and more). Even if your team is collaborating on the same codebase, if each team member is developing software with a different compiler, interpreter, language version, operating system, etc., you will likely run into conflicts and inconsistencies. Give this, you will learn about why "everything as code" is such an important idea, and some tools and strategies for managing your system stack over time.
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_IjOu0cyv'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_XhfW7ELz"
+                    target-panel="#panel_IjOu0cyv"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_IjOu0cyv'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 4</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 9/10
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1DBnb_LjGQLmL4DEBMc0mOFfyUCsyyO6V/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 5</a><span style="display: none">: </span><span>Everything as Code</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1suHYsB0z3enApGFIMMZ5B75UzZ8Dl7DB/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+    <span class="mb-1 block" target=""><a class="activity" href="/fall2024/activities/git-in-class-activity" target=""> <i class="fa-solid fa-link"></i> Activity 1</a><span style="display: none">: </span><span>Git Collaboration Activity</span></span><div></div>
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://youtu.be/HcmPi7-IVQo" target="_blank"> Everything as Code</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://en.wikipedia.org/wiki/Docker_(software)" target="_blank"> Docker Wikipedia article</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 9/12
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+
+<!-- Videos -->
+
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab04" target=""> <i class="fa-solid fa-link"></i> Lab 4</a><span style="display: none">: </span><span>Intro to Docker</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://docs.docker.com/get-started/docker_cheatsheet.pdf" target="_blank"> Docker cheat sheet reference</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_X8BrYlZL'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_tzp8Qt2O"
+                    target-panel="#panel_X8BrYlZL"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_X8BrYlZL'
+                ><ol>
+            
+            <li>What were servers "back in the day"? What are servers now?</li>
+            
+            <li>What kinds of server challenges do administrators need to be able to handle?</li>
+            
+            <li>What is virtualization? What is containerization? How are they different?</li>
+            
+            <li>What is the difference between declarative and imperative code? What are some examples of each?</li>
+            
+            <li>Besides your application's source code, what other kinds of things should you also represent as code?</li>
+            
+            <li>What are some of the advantages of putting all aspects of your system in terms of code?</li>
+            
+            <li>What is Docker and why is it useful?</li>
+            
+            <li>Be able to explain the following Docker concepts:
+ <em>image</em>, <em>container</em>, <em>volume</em>, <em>bind mount</em>
+</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_4">Topic 4. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic04' target=''> Package & Dependency Management</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>When developing software, it is common to rely on dependencies -- code that has been developed by other people. However, <em>your code</em> isn't the only code that changes. Dependencies (and their dependencies, and their dependencies' dependencies) also evolve over time as new features are added and bugs are patched. Given this, in this unit we will examine some tools, approaches, and considerations for managing code dependencies. We will also experiment with a few different dependency management tools, such as npm, poetry, and apt.
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_Cj75VrVw'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_6oO16pHa"
+                    target-panel="#panel_Cj75VrVw"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_Cj75VrVw'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 5</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 9/17
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1L7iqwWTZELObQ8vFDuB7aAc9Kkw5U1EN/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 6</a><span style="display: none">: </span><span>Package &amp; Dependency Management</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1gLVi5z-bXfYlI40dGHObFj-2kKNrorkV/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://abseil.io/resources/swe-book/html/ch21.html" target="_blank"> Chapter 21. Dependency Management</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code" target="_blank"> How one programmer broke the internet by deleting a tiny piece of code.</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://socket.dev/blog/when-everything-becomes-too-much" target="_blank"> NPM’s "everything" debacle.</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://blog.ometer.com/2017/01/10/dear-package-managers-dependency-resolution-results-should-be-in-version-control/" target="_blank"> Havoc Pennington's 2017 blog post</a><span style="display: none">: </span></span><div>Outlines the problems with non-exact dependency resolution</div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://engineering.fb.com/2016/10/11/web/yarn-a-new-package-manager-for-javascript/" target="_blank"> Facebook's blog post upon the release of yarn</a><span style="display: none">: </span></span><div>How did Facebook solve some of the dependency resolution challenges noted in our other readings?</div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 9/19
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+
+<!-- Videos -->
+
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab05" target=""> <i class="fa-solid fa-link"></i> Lab 5</a><span style="display: none">: </span><span>Understanding Package Managers</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_tEn53AQW'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_DhLBv7CN"
+                    target-panel="#panel_tEn53AQW"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_tEn53AQW'
+                ><ol>
+            
+            <li>What do we mean by "dependency management"?</li>
+            
+            <li>What happened in the "leftpad" debacle? What happened in the "everything" debacle? Why should we care?</li>
+            
+            <li>What are the trade-offs associated with relying on dependencies?</li>
+            
+            <li>What should you consider before adding a new dependency to your software project?</li>
+            
+            <li>What are some challenges with upgrading dependencies?</li>
+            
+            <li>What are some dependencies that we have used in this class?</li>
+            
+            <li>What are some common features of a good dependency management system?</li>
+            
+            <li>What is the purpose of the Poetry lock file and the package.json lock file?</li>
+            
+            <li>Different dependency management systems are used for different parts of the software stack. What are some examples of dependency managers that are used for: <em>operating systems</em>, <em>software languages (e.g., python, node.js, ruby, etc.</em>, <em>server configuration</em>?
+</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_5">Topic 5. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic05' target=''> Testing, Static Analysis, & Continuous Integration (CI)</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>Continuous integration (CI), static analysis, and testing are complementary software development techniques that ensure that teams can deploy software continuously with a high degree of confidence in the quality of their code. In this unit, we will learn about ways you and your team can automate code testing and validation procedures before merging code updates into the main branch. By setting up a few tools up front, you will save time and energy and increase the reliability of your code base. 
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_iNxqs3X4'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_Gfu5SZvb"
+                    target-panel="#panel_iNxqs3X4"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_iNxqs3X4'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 6</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 9/24
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1FP8lJuy1C6AzzPxpulNOu9al_SIub2zF/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 7</a><span style="display: none">: </span><span>Intro to Testing &amp; Static Analysis</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/14vHyDyt-wZfVBMGjaDmLpupI5MFowU1a/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+    <span class="mb-1 block" target=""><a class="activity" href="https://github.com/csci338/class-exercises-fall2024/blob/main/topic05/README.md" target="_blank"> <i class="fa-solid fa-link"></i> Activity 2</a><span style="display: none">: </span><span>Practice writing tests and using some static analysis tools</span></span><div>This activity didn't quite work out, but you will have another chance to practice with testing and static analysis in Lab 6.</div>
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            Forgot to post the readings :(
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 11</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 10/29
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1Fp1aWWNRoO9D3PPUf3xbU7mEZec1j8gY/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 8</a><span style="display: none">: </span><span>Shifting Left with Testing, Static Analysis, &amp; Continuous Integration</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/19C311-H-dVs015bqy4c0zeLHF7NcDQMz/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab06" target=""> <i class="fa-solid fa-link"></i> Lab 6</a><span style="display: none">: </span><span>Testing &amp; Static Analysis</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://circleci.com/blog/unit-testing-vs-integration-testing" target="_blank"> High-level overview of unit v. integration testing</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://abseil.io/resources/swe-book/html/ch11.html" target="_blank"> Chapter 11. Testing Overview</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">skim</span><a class="" href="https://abseil.io/resources/swe-book/html/ch20.html" target="_blank"> Chapter 20. Static Analysis</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">skim</span><a class="" href="https://abseil.io/resources/swe-book/html/ch23.html" target="_blank"> Chapter 23. Continuous Integration</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_nb7e4Piw'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_etfTuCkN"
+                    target-panel="#panel_nb7e4Piw"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_nb7e4Piw'
+                ><ol>
+            
+            <li>
+<span class="badge-dark">general</span> What does "shifting left" mean?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What are some of the benefits of automated testing?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What are some of the limits of automated testing?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What are the different test "sizes"? Why are these distinctions important?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What is meant by "nondeterminism" in testing?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What are some important qualities of a testing suite?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What are some considerations that go into writing testable code?</li>
+            
+            <li>
+<span class="badge-dark">testing</span> What is the difference between an interpreted and a compiled language?</li>
+            
+            <li>
+<span class="badge-dark">static analysis</span> What languages are interpreted? What languages are compiled?</li>
+            
+            <li>
+<span class="badge-dark">static analysis</span> What do we mean by "static"?</li>
+            
+            <li>
+<span class="badge-dark">static analysis</span> What are some examples of static analysis tools?</li>
+            
+            <li>
+<span class="badge-dark">static analysis</span> What are some of the benefits of doing static analysis?</li>
+            
+            <li>
+<span class="badge-dark">static analysis</span> What are some of the challenges / limitations of static analysis?</li>
+            
+            <li>
+<span class="badge-dark">CI</span> What is continuous integration?</li>
+            
+            <li>
+<span class="badge-dark">CI</span> What are some of the key benefits and headaches (i.e. tradeoffs) of continuous integration?</li>
+            
+            <li>
+<span class="badge-dark">CI</span> Can you still use CI if you're working on a really big feature that’s not ready for prime time?</li>
+            
+            <li>
+<span class="badge-dark">CI</span> What happens in the "presubmit" phase?</li>
+            
+            <li>
+<span class="badge-dark">CI</span> What is release candidate testing? How is it similar / different from the "presubmit" phase?</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_6">Topic 6. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic06' target=''> Midterm Project & Recap So Far</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p></p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_7Z5VTnuA'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_XKNg7g7W"
+                    target-panel="#panel_7Z5VTnuA"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_7Z5VTnuA'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 11</strong>
+                    
+                    
+                </td>
+                <td>
+                    Thu, 10/31
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1VzRUmJnQLpmxLWt-Vd03Xl5dzvKXXEbP/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 9</a><span style="display: none">: </span><span>Mid-Semester Review</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1MXodhoD2twARR92mlkPfJ-FsIBOVkPhh/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+    <span class="mb-1 block" target=""><a class="activity" href="https://docs.google.com/document/d/142IWxEKUjtkfkvBo6lpJt012a7_QbppKJZpRDpW45MQ/edit?usp=sharing" target="_blank"> <i class="fa-solid fa-link"></i> Activity 3</a><span style="display: none">: </span><span>Mid Semester Review Cheat Sheet</span></span><div></div>
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+    <span class="mb-1 block" target=""><a class="project" href="/fall2024/assignments/project01" target=""> <i class="fa-solid fa-link"></i> Project 1</a><span style="display: none">: </span><span>UNCA Course Lookup</span></span><div></div>
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="/fall2024/assignments/project01" target=""> Please read the Project 1 description before class</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://drive.google.com/file/d/10h6CsMGXYFRHe4y95x32moJs-u6P9rjo/view?usp=drive_link" target="_blank"> Setting up Project 1 using Docker (video)</a><span style="display: none">: </span></span><div>If you need help getting set up, here's a video walkthrough</div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_7">Topic 7. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic07' target=''> Challenges in Client-Side Engineering</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p>In this unit, we will explore some software engineering ideas that are specific to client-side engineering. To do this, we're going to learn some HTML, CSS, JavaScript, and React concepts <em>as a means of learning</em> various client-side software engineering principles
+</p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_2xEaTZfa'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_GWLYKF1n"
+                    target-panel="#panel_2xEaTZfa"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_2xEaTZfa'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 12</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 11/5
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1IU6O1AZIKdXMepvPcMZxYS2kYmlK469f/edit#slide=id.p1" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 10</a><span style="display: none">: </span><span>Client-Side Engineering (Part I)</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1FbhH8UDGjokK-4VtmKIt9v8Yn3v8VPeN/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="https://chat.openai.com/" target="_blank"> Ask ChatGPT to answer the study questions</a><span style="display: none">: </span></span><div>Be ready to have a conversation about the discussion questions,  including what you learned from ChatGPT (and whether you  think ChatGPT got it right).
+</div>
+                        </li>
+                        
+                        <li>
+                            Readings are light this week so that you can work on <a href="/fall2024/assignments/project01">Project 1</a>!
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://csci344.github.io/fall2024/resources/programming-review" target="_blank"> Intro to JavaScript Programming</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    Thu, 11/7
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1UqhChRR-yn_K1jgKnZSMkhbEo02zyih4/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 11</a><span style="display: none">: </span><span>React</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1LJEDTVkWibDyCXTz_2U9K20f9z1_AlpK/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab07" target=""> <i class="fa-solid fa-link"></i> Lab 7</a><span style="display: none">: </span><span>Intro to client-side programming with React</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">skim</span><a class="" href="https://beta.reactjs.org/learn/thinking-in-react" target="_blank"> React Docs: Thinking in React</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">skim</span><a class="" href="https://react.dev/learn/describing-the-ui" target="_blank"> React Docs: Describing the UI</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 13</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 11/12
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1zqF7V_Ove-n15Ghz2oMNbZZekqeNlea5/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 12</a><span style="display: none">: </span><span>Client-Server Communication over HTTP</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1pnxWMZuCZyFgu1N-h11WFiBuq653bVRW/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://www.youtube.com/watch?v=8pDqJVdNa44" target="_blank"> How A Small Team of Developers Created React at Facebook (video)</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                        <li>
+                            Readings are light this week so that you can work on <a href="/fall2024/assignments/project01">Project 1</a>!
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+        <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_mtBRl2aA'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_L2v1D9dq"
+                    target-panel="#panel_mtBRl2aA"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Study Questions</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_mtBRl2aA'
+                ><ol>
+            
+            <li>What is front-end engineering? What is UI engineering?</li>
+            
+            <li>When did it become a distinct subdiscipline of computer programming?</li>
+            
+            <li>What are some of the specific challenges that front-end engineers must navigate?</li>
+            
+            <li>What are some common technologies used in front-end engineering?</li>
+            
+            <li>What's the best way to get a job in UI engineering?</li>
+            
+            <li>Is UI engineering easier than other forms of engineering?</li>
+            
+            <li>What is functional programming?</li>
+            
+            <li>What is a bundler?</li>
+            
+            <li>What are the tradeoffs of using a client-side framework?</li>
+            
+            <li>What is the purpose of the <code>package.json</code> and <code>package-lock.json</code> files?</li>
+            
+        </ol>
+</div>
+        </div>
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_8">Topic 8. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic08' target=''> UX / UI Design Patterns</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p></p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_51gh1OFY'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_586ldMgE"
+                    target-panel="#panel_51gh1OFY"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_51gh1OFY'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 13</strong>
+                    
+                    
+                </td>
+                <td>
+                    Thu, 11/14
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1UTzWWaSNwqmPeM15wG5zSiABx4yHScVC/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab08" target=""> <i class="fa-solid fa-link"></i> Lab 8</a><span style="display: none">: </span><span>Design Systems &amp; External Data</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">skim</span><a class="" href="/fall2024/resources/design-systems" target=""> Design Systems</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 14</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 11/19
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1zqF7V_Ove-n15Ghz2oMNbZZekqeNlea5/edit?usp=sharing&amp;ouid=113376576186080604800&amp;rtpof=true&amp;sd=true" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 13</a><span style="display: none">: </span><span>Communication over HTTP (relevant for both client &amp; server)</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1KRQft38Nkt_dWYE_cCqnRvIvv4GKTxsY/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_9">Topic 9. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic09' target=''> Back-End: Databases and Object Relational Mappings</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p></p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_KceXtjGq'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_t9GjxG4B"
+                    target-panel="#panel_KceXtjGq"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_KceXtjGq'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 14</strong>
+                    
+                    
+                </td>
+                <td>
+                    Thu, 11/21
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/1HwD6kQiRwlNMr3WWFPwRnaIWNPn0wl5vwlGdHv2xtVo/edit?usp=sharing" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 14</a><span style="display: none">: </span><span>Intro to Databases &amp; ORMs</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1kVI2yU4Q5QW5UmYqJ9lIru4fP3ZEsh-L/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+    <span class="mb-1 block" target=""><a class="lab" href="/fall2024/assignments/lab09" target=""> <i class="fa-solid fa-link"></i> Lab 9</a><span style="display: none">: </span><span>Database Lab</span></span><div></div>
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""><a class="" href="/fall2024/resources/databases" target=""> Databases</a><span style="display: none">: </span></span><div>Please review the reference materials on the databases resource page. We will practice using these commands in Lab 9.</div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_10">Topic 10. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic10' target=''> Back-End: Scalability with Semmy Purewal (Guest Speaker)</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p></p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_w7lf7JTS'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_ymXYTwkb"
+                    target-panel="#panel_w7lf7JTS"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_w7lf7JTS'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 16</strong>
+                    
+                    
+                </td>
+                <td>
+                    Tue, 12/3
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block"><span class="badge">Lecture 16</span><span style="display: none">: </span><span>Scaling an App</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/1uSVea89ZXGdJnkbwS9of8BYUgGC5UEs6/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                        <li>
+                            <span class="mb-1 inline" target=""> <span class="optional">optional</span><a class="" href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" target="_blank"> Kubernetes Basics (Tutorial)</a><span style="display: none">: </span></span><div></div>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+
+    
+    <!-- Topic Header -->
+    <h2 id="topic_11">Topic 11. <span class='mb-1 inline' target=''><a class='' href='/fall2024/lectures/topic11' target=''> Course Synthesis</a><span style='display: none'>: </span></span><div></div></h2>
+
+    <p></p>
+
+    
+    
+    <div class='expandable-section'>
+            <div class='toggle-header'>
+                <button class='toggle-button' 
+                    target-panel='#panel_RtEfqHth'
+                    onclick='toggleExpandable(this)'
+                    ><i class='fa-solid fa-angle-down'></i></button>
+                <h3 
+                    id="heading_1CyNDUVF"
+                    target-panel="#panel_RtEfqHth"
+                    onclick="toggleExpandable(this)"
+                    style="cursor: pointer;">Readings & Activities</h3>
+            </div>
+            <div class='expandable-content' 
+                style='display: block;'
+                id='panel_RtEfqHth'
+                ><table>
+        <thead>
+            <th>Week</th>
+            <th></th>
+            <th>Slides / Activities</th>
+            <th>Readings</th>
+        </thead>
+        <tbody>
+            <!-- Topic Details -->
+            
+            
+            <tr>
+                <td>
+                    
+                    <strong>Week 16</strong>
+                    
+                    
+                </td>
+                <td>
+                    Thu, 12/5
+                </td>
+                <td>
+                    <!-- Slides -->
+
+    
+<span class="mb-1 block" target=""><a class="lecture" href="https://docs.google.com/presentation/d/13ZoVNNm5agKxtfgN8SPK6_NVG-ydNjZKFaRmM9dohjg/edit?usp=sharing" target="_blank"> <i class="fa-solid fa-link"></i> Lecture 16</a><span style="display: none">: </span><span>Course Synthesis</span></span><div></div>
+
+
+<!-- Videos -->
+
+
+    <span class="mb-1 block" target=""><a class="video" href="https://drive.google.com/file/d/18IXsnskGhlBzEKY-pNlw8WdQWJEEveoK/view?usp=drive_link" target="_blank"> <i class="fa-solid fa-link"></i> Video </a><span style="display: none">: </span><span>Lecture recording</span></span><div></div>
+
+
+<!-- Activities -->
+
+
+
+<!-- Labs -->
+
+
+
+<!-- Projects -->
+
+
+    <span class="mb-1 block" target=""><a class="project" href="/fall2024/assignments/project02" target=""> <i class="fa-solid fa-link"></i> Project 2</a><span style="display: none">: </span><span>Full Stack Application</span></span><div></div>
+
+                </td>
+                <td>
+                    <!-- Readings -->
+                    
+                    <ul>
+                        
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    
+
+
+    
+
+</div>
+
+
+</section>
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<!-- <script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script> -->
+        
+        <script>
+            window.h_max = "3";
+        </script>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>

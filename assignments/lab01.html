@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fall2024/assets/images/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Code Editors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/fall2024/assets/main.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163192686-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163192686-1');
+    </script>
+    </head>
+    <body class="two-column">
+        <!-- banner -->
+<header>
+    <section>
+        <h1 class="desktop"><a href="/fall2024/">CSCI 338: Fall 2024</a></h1>
+        <h2 class="desktop">Software Engineering</h2>
+        <a class="mobile" href="#">
+            <i class="menu-toggle fas fa-bars"></i>
+        </a>
+        <h1 class="mobile">CSCI 338: Fall 2024</h1>
+    </section>
+    <img src="https://communication.unca.edu/wp-content/themes/tin/assets/logo.svg" />
+</header>
+        <nav>
+    <ul>
+        <li ><a href="/fall2024/syllabus/">Syllabus</a>
+        </li>
+        <li ><a
+                href="/fall2024/">Schedule</a></li>
+        <!-- <li ><a
+                href="/fall2024/topics/">Topics</a></li> -->
+        <li class="active" ><a
+            href="/fall2024/assignments/">Assignments</a></li>
+        <li ><a
+            href="/fall2024/resources/">Resources</a></li> 
+        <li ><a href="/fall2024/repos/">Repos</a>
+        </li>
+        <li><a href="https://drive.google.com/drive/folders/12PKfUx86a0Toz7I7bscB6m3rzPK8EjG0?usp=sharing"
+                target="_blank">Videos</a></li>
+    </ul>
+</nav>
+        <main>
+            <aside>
+                
+                
+                <ol class="side-menu">
+  <li><a href="#id_introduction">Introduction</a></li>
+  <li><a href="#vscode">Part 1. VS Code Exercises</a>
+    <ol>
+      <li><a href="#id_11-install-vs-code-and-extensions">1.1. Install VS Code and Extensions</a></li>
+      <li><a href="#id_12-configuration-tasks">1.2. Configuration Tasks</a></li>
+      <li><a href="#id_before-moving-on-verify-that">Before Moving On, Verify That…</a></li>
+    </ol>
+  </li>
+  <li><a href="#command-line">Part 2. Complete the Command Line Exercises</a>
+    <ol>
+      <li><a href="#id_21-open-a-terminal">2.1 Open a Terminal</a></li>
+      <li><a href="#id_22-navigation">2.2. Navigation</a></li>
+      <li><a href="#id_23-create">2.3. Create</a></li>
+      <li><a href="#id_24-list">2.4. List</a></li>
+      <li><a href="#id_25-read">2.5. Read</a></li>
+      <li><a href="#id_26-write">2.6. Write</a></li>
+      <li><a href="#id_27-move--copy">2.7. Move &amp; Copy</a></li>
+      <li><a href="#id_28-search">2.8. Search</a></li>
+      <li><a href="#id_29-make-a-bash-script">2.9. Make a bash script</a></li>
+      <li><a href="#id_before-moving-on-verify-that-1">Before Moving On, Verify That…</a></li>
+    </ol>
+  </li>
+  <li><a href="#dot-files">Part 3. OS Environment Exercises</a>
+    <ol>
+      <li><a href="#id_before-moving-on-verify-that-2">Before Moving On, Verify That…</a></li>
+    </ol>
+  </li>
+  <li><a href="#vim-emacs">Part 4. Vim / Emacs Exercises</a></li>
+  <li><a href="#id_what-do-i-turn-in">What do I turn in?</a>
+    <ol>
+      <li><a href="#id_other-thoughts">Other Thoughts…</a></li>
+    </ol>
+  </li>
+</ol>
+
+            </aside>
+            <article>
+                
+
+    
+    <h1>
+        <a href="../assignments/">Assignments</a> >
+        Lab 1: Code Editors
+    </h1>
+    
+ 
+                <p>
+    
+        Due on Tue, 08/27 @ 11:59PM.
+    
+    
+        6 Points.
+    
+    
+</p>
+
+<h2 id="id_introduction">Introduction</h2>
+<p>Welcome to your first CSCI 338 lab! The goal of today’s lab is to get you a little more comfortable doing “configuration things,” including working on the command line, configuring your command line environment, and working with command line code editors. You will complete the following tasks:</p>
+<ol>
+  <li><a href="#vscode">VS Code Exercises</a></li>
+  <li><a href="#command-line">Command Line Exercises</a></li>
+  <li><a href="#dot-files">OS Environment Exercises</a></li>
+  <li><a href="#vim-emacs">Vim / Emacs Exercises</a></li>
+</ol>
+
+<p><strong>We have curated a list of useful resources on the <a href="../resources/">course resources page</a>.</strong> Please see the “Command Line” and “Code Editors” sections:</p>
+
+<h2 id="vscode">Part 1. VS Code Exercises</h2>
+
+<h3 id="id_11-install-vs-code-and-extensions">1.1. Install VS Code and Extensions</h3>
+<p>Please install <a href="https://code.visualstudio.com/download">VS Code</a>. When you’re done, please install the following VS Code Extensions:</p>
+<ul>
+  <li>Live Server (by Ritwick Dey)</li>
+  <li>Prettier (by Prettier should have the blue “verified” badge)</li>
+  <li>Prettier ESLint (by Rebecca Vest)</li>
+  <li>Remote - SSH (by Microsoft)</li>
+</ul>
+
+<p>To install VS Code Extensions:</p>
+<ul>
+  <li>Open the extensions window by either clicking the extensions icon (looks like 4 squares on the gray, left-hand bar) or use the keyboard shortcut (Shift+Cmd+X or Shift+Ctrl+X).</li>
+  <li>Search for the extension name using the search textbox.</li>
+</ul>
+
+<h3 id="id_12-configuration-tasks">1.2. Configuration Tasks</h3>
+
+<h4 id="id_configuring-prettier">Configuring Prettier</h4>
+<p><a href="https://www.robinwieruch.de/how-to-use-prettier-vscode/">Configure “Format on Save” using Prettier</a> by modifying <code class="highlighter-rouge">settings.json</code> file (CTRL+, or CMD+,).</p>
+
+<p>When you’re done, test that the “format on save” functionality works by creating a <code class="highlighter-rouge">test.js</code> JavaScript file with following code:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span><span class="kd">const</span> <span class="nx">c</span><span class="o">=</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="p">;</span> <span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">c</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span> <span class="k">return</span> <span class="nx">c</span><span class="o">+</span><span class="nx">d</span><span class="p">;}</span>
+</code></pre></div></div>
+
+<p>When you save the file, it should be autoformatted as follows:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">c</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">d</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="id_configuring-ssh">Configuring SSH</h4>
+<ol>
+  <li>If you haven’t already, register for a CSCI account here: <a href="https://canton.cs.unca.edu/register">https://canton.cs.unca.edu/register</a>. This will allow you to set (or reset) your password. Your username is the same as your email address (without the @unca.edu).</li>
+  <li>Verify that you can ssh into arden as follows:
+    <ul>
+      <li>Open the command line / terminal</li>
+      <li>Type: <code class="highlighter-rouge">ssh your_username@arden.cs.unca.edu</code></li>
+      <li>Enter your password when prompted</li>
+      <li>type ls -la at the command prompt (this should be your home directory)</li>
+    </ul>
+  </li>
+  <li>Make a remote connection via VS code:
+    <ul>
+      <li>Click the green icon in the lower left-hand corner of VS Code</li>
+      <li>Click “connect to host”</li>
+      <li>Enter your credentials (your_username@arden.cs.unca.edu)</li>
+      <li>Enter your password when prompted</li>
+      <li>Open your home directory</li>
+    </ul>
+  </li>
+  <li>Make the simplest homepage imaginable:
+    <ul>
+      <li>Create a file called <code class="highlighter-rouge">index.html</code> inside of your <code class="highlighter-rouge">public_html</code> folder.</li>
+      <li>Edit the file (e.g., add “hello world”)</li>
+      <li>Save it</li>
+      <li>Look at it on http://cs.unca.edu/~your_username (e.g., <a href="http://cs.unca.edu/~svanwart">http://cs.unca.edu/~svanwart</a>)</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <h3 id="id_before-moving-on-verify-that">Before Moving On, Verify That…</h3>
+
+  <ul class="checkbox-list">
+    <li>VS Code autoformats when you save</li>
+    <li>You have successfully created a webpage on Arden</li>
+  </ul>
+</blockquote>
+
+<h2 id="command-line">Part 2. Complete the Command Line Exercises</h2>
+<p>Please complete the following command line exercises with the help of the <a href="../resources/command-line">Command Line Reference</a> that has been compiled for you. Feel free to collaborate with your classmates!</p>
+
+<h3 id="id_21-open-a-terminal">2.1 Open a Terminal</h3>
+<ul>
+  <li>If you are a Mac user, open the Terminal program</li>
+  <li>If you are a Windows user, <a href="/fall2024/resources/wsl">follow these instructions to install WSL and a Linux distribution</a> (Windows Subsystem for Linux). Once you’re done, open a WSL terminal.</li>
+</ul>
+
+<h3 id="id_22-navigation">2.2. Navigation</h3>
+<ol>
+  <li>Figure out which directory you’re in (use <code class="highlighter-rouge">pwd</code>)
+    <ul>
+      <li>Windows users: if you type <code class="highlighter-rouge">explorer.exe</code>, it will open a Windows Explorer window to show you where your files are.</li>
+    </ul>
+  </li>
+  <li>Navigate to the folder where you plan to save your coursework (use <code class="highlighter-rouge">cd</code>). <br /><strong>Pro-tips</strong>:
+    <ul>
+      <li>If any of your folder names have spaces, you’ll have to surround the path with quotes</li>
+      <li>Use the tab key to autocomplete the path</li>
+      <li>Use the up and down keys to revive old commands</li>
+      <li>Use the <code class="highlighter-rouge">history</code> command to see the commands you’ve issued in the past</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="id_23-create">2.3. Create</h3>
+<ol>
+  <li>Create a directory called <code class="highlighter-rouge">csci338</code> (use <code class="highlighter-rouge">mkdir</code>)</li>
+  <li>Navigate into <code class="highlighter-rouge">csci338</code></li>
+  <li>Create a new file called <code class="highlighter-rouge">index.html</code> (use <code class="highlighter-rouge">touch</code>)</li>
+  <li>Create another new file called <code class="highlighter-rouge">style.css</code> (use <code class="highlighter-rouge">touch</code>)</li>
+  <li>Copy the Google homepage locally as follows: <code class="highlighter-rouge">curl https://www.google.com &gt; google-home.html</code></li>
+</ol>
+
+<p>If you did everything correctly, you should have a directory structure that looks like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>csci338
+    ├── google-home.html
+    ├── index.html
+    └── style.css
+</code></pre></div></div>
+
+<h3 id="id_24-list">2.4. List</h3>
+<ol>
+  <li>Verify that the two new files exist in your current directory (use <code class="highlighter-rouge">ls</code>)</li>
+  <li>List all of the files and folders in your home (use <code class="highlighter-rouge">ls ~</code>)</li>
+  <li>List all of the files and folders on your home directory including hidden files (use <code class="highlighter-rouge">ls -la</code>)</li>
+  <li>List all of the files and folders in your home recursively, Try:
+    <ul>
+      <li><code class="highlighter-rouge">tree ~ -La 1</code></li>
+      <li><code class="highlighter-rouge">tree ~ -La 2</code></li>
+      <li><code class="highlighter-rouge">tree ~</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="id_25-read">2.5. Read</h3>
+<ol>
+  <li>Read the contents of the <code class="highlighter-rouge">google-home.html</code> file you just created (use <code class="highlighter-rouge">cat</code>)</li>
+  <li>Inspect the file using some of the other read commands (e.g., <code class="highlighter-rouge">less</code>, <code class="highlighter-rouge">head</code>, <code class="highlighter-rouge">tail</code>, open wc).
+    <ul>
+      <li><strong>Pro-tip</strong>: For <code class="highlighter-rouge">less</code>, <code class="highlighter-rouge">head</code>, and <code class="highlighter-rouge">tail</code>, use the space bar to scroll down, and “q” to quit</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="id_26-write">2.6. Write</h3>
+<ol>
+  <li>Append the sentence “Hello World” to the contents of the <code class="highlighter-rouge">index.html</code> file (<code class="highlighter-rouge">echo "Hello World" &gt;&gt; index.html</code>).</li>
+  <li>Do it again.</li>
+  <li>Read the contents of <code class="highlighter-rouge">index.html</code> (use <code class="highlighter-rouge">cat</code>)</li>
+  <li>Now replace the contents of <code class="highlighter-rouge">index.html</code> with “Goodbye” (<code class="highlighter-rouge">echo "Goodbye" &gt; index.html</code>)</li>
+  <li>Read the contents of <code class="highlighter-rouge">index.html</code> (use <code class="highlighter-rouge">cat</code>)</li>
+  <li>You can also use the <code class="highlighter-rouge">&gt;&gt;</code> and <code class="highlighter-rouge">&gt;</code> operators to direct the output of the terminal to a non-existant file: <code class="highlighter-rouge">echo 'Yo yo' &gt; new.txt</code></li>
+  <li>Read ‘new.txt’ (use cat)</li>
+  <li>Now remove it (rm new.txt)</li>
+  <li>Make sure you understand the difference between <code class="highlighter-rouge">&gt;&gt;</code> and <code class="highlighter-rouge">&gt;</code>?</li>
+</ol>
+
+<h3 id="id_27-move--copy">2.7. Move &amp; Copy</h3>
+<ol>
+  <li>Copy a directory and all subdirectories (try: <code class="highlighter-rouge">cp -r my_folder copy_of_my_folder</code>)</li>
+  <li>Copy a file (try: <code class="highlighter-rouge">cp foo.txt bar.txt</code>)</li>
+  <li>Rename a file (try: <code class="highlighter-rouge">mv bar.txt bar1.txt</code>)</li>
+  <li>Move a file to a parent directory (try <code class="highlighter-rouge">mv bar.txt ../.</code>)</li>
+</ol>
+
+<h3 id="id_28-search">2.8. Search</h3>
+<p>Use grep to search for files for strings / text…</p>
+<ol>
+  <li>To find the word “Goodbye” in your current directory or any descendents (try: <code class="highlighter-rouge">grep "Goodbye" ./ -r</code>)</li>
+  <li>To find the word “goodbye” – case insensitive – in your current directory or any descendents (try: <code class="highlighter-rouge">grep "goodbye" ./ -ri</code>)</li>
+  <li>To find the word “goodbye” – case insensitive – anywhere in your home directory or its descendents (try: <code class="highlighter-rouge">grep "goodbye" ~ -ri</code>)</li>
+</ol>
+
+<h3 id="id_29-make-a-bash-script">2.9. Make a bash script</h3>
+<p>You can also combine multiple commands into a bash script (use the <code class="highlighter-rouge">.sh</code> extension). Let’s make a bash script that sets up a basic web app in your current directory. Try the following:</p>
+<ul>
+  <li>Create a script called <code class="highlighter-rouge">start-web-prj.sh</code></li>
+  <li>Add the following lines of code to the script:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create a new directory called "src"</span>
+<span class="nb">mkdir </span>my_new_folder
+
+<span class="c"># 2. Navigate into it:</span>
+<span class="nb">cd </span>my_new_folder
+
+<span class="c"># 3. Create a new starter index.html file:</span>
+<span class="nb">echo</span> <span class="s1">'''
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;link rel="stylesheet" href="style.css" /&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+    &lt;p&gt;Your starter file.&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+'''</span> <span class="o">&gt;</span> index.html
+
+<span class="c"># 4. Create a new starter style.css file:</span>
+<span class="nb">echo</span> <span class="s1">'''
+body * {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+'''</span> <span class="o">&gt;</span> style.css
+
+<span class="c"># 5. Navigate to original directory:</span>
+<span class="nb">cd</span> ..
+
+<span class="c"># # 6. Open the index.html file in a web browser:</span>
+<span class="c"># open my_new_folder/index.html</span>
+</code></pre></div></div>
+
+<p>When you’re done, execute the script as follows:</p>
+
+<p><code class="highlighter-rouge">bash ./start-web-prj.sh</code></p>
+
+<p>Take a look at the new <code class="highlighter-rouge">src</code> folder (and nested files) that were created by typing: <code class="highlighter-rouge">tree .</code></p>
+
+<p>Now, open the HTML file you just made in a new browser:
+<code class="highlighter-rouge">open my_new_folder/index.html</code></p>
+
+<p>And finally, open the folder you just made in VS Code:</p>
+
+<p><code class="highlighter-rouge">code .</code></p>
+
+<p>If that didn’t work and you’re on a Mac, see <a href="https://stackoverflow.com/questions/29955500/code-is-not-working-in-on-the-command-line-for-visual-studio-code-on-os-x-ma" target="_blank">this Stack Overflow post</a>.</p>
+
+<blockquote>
+  <h3 id="id_before-moving-on-verify-that-1">Before Moving On, Verify That…</h3>
+
+  <ul class="checkbox-list">
+    <li>You have practiced working with the following commands:
+      <ul class="compact">
+        <li>cat (read)</li>
+        <li>cd (change directories)</li>
+        <li>tree (list files and subdirectories)</li>
+        <li>touch (create new empty file)</li>
+        <li>ls (list files)</li>
+        <li>rm (delete a file)</li>
+        <li>mv (rename a file)</li>
+        <li>cp (copy a file)</li>
+        <li>history (view recent bash commands)</li>
+        <li><code class="highlighter-rouge">&gt;&gt;</code> (append operator)</li>
+        <li><code class="highlighter-rouge">&gt;</code> (overwrite operator)</li>
+        <li>grep (search)</li>
+        <li>running a bash script: <code class="highlighter-rouge">bash ./start-web-prj.sh</code></li>
+      </ul>
+    </li>
+    <li>You can open VS Code from the command line</li>
+    <li>Your file structure looks like the file structure below:</li>
+  </ul>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>csci338
+├── google-home.html
+├── index.html
+├── my_new_folder
+│   ├── index.html
+│   └── style.css
+├── start-web-prj.sh
+└── style.css
+</code></pre></div></div>
+
+<h2 id="dot-files">Part 3. OS Environment Exercises</h2>
+<p>Try making a few adjustments to your <code class="highlighter-rouge">.zshrc</code> file on your own. Some suggestions:</p>
+
+<ul>
+  <li><a href="https://dev.to/haamid/how-to-define-custom-alias-in-zsh-3b6a" target="_blank">Create an alias</a> to your <code class="highlighter-rouge">csci338</code> directory in your <code class="highlighter-rouge">.zshrc</code> file so that when you type: <code class="highlighter-rouge">338</code> on the command line, it automatically puts you into the <code class="highlighter-rouge">csci338</code> directory.
+    <ul>
+      <li>Here is what Sarah’s <code class="highlighter-rouge">.zshrc</code> entry looks like:<br /><code class="highlighter-rouge">alias 338='cd /Users/svanwart/unca/csci338'</code></li>
+    </ul>
+  </li>
+  <li>Extend the size of your history file by adding some variables to your <code class="highlighter-rouge">.zshrc</code> file (google it).</li>
+</ul>
+
+<blockquote>
+  <h3 id="id_before-moving-on-verify-that-2">Before Moving On, Verify That…</h3>
+
+  <ul class="checkbox-list">
+    <li><code class="highlighter-rouge">338</code> on the command line, it automatically jumps you to the <code class="highlighter-rouge">csci338</code> directory</li>
+  </ul>
+</blockquote>
+
+<h2 id="vim-emacs">Part 4. Vim / Emacs Exercises</h2>
+
+<p>Using either <a href="../resources/vim">vim</a> or <a href="../resources/emacs">emacs</a>:</p>
+
+<ol>
+  <li>Opening a file from the command line</li>
+  <li>Edit it</li>
+  <li>Save it</li>
+  <li>Exit the editor</li>
+</ol>
+
+<h2 id="id_what-do-i-turn-in">What do I turn in?</h2>
+<p>Under Lab 1, paste the following into the textbox:</p>
+<ol>
+  <li>A link to your “Hello World” website on Arden.</li>
+  <li>A dump of your history (type <code class="highlighter-rouge">history</code> on the command line, copy it, and paste it into the Moodle).</li>
+</ol>
+
+<h3 id="id_other-thoughts">Other Thoughts…</h3>
+<ul>
+  <li>Make sure you can ssh into another server.</li>
+  <li>Make sure your VS code editor is set up.</li>
+  <li>Make sure you know some basic shell commands, and specifically how to navigate, search, create, delete, copy, read, and move files.</li>
+  <li>Make sure you know how to open, edit, save, and exit either vim or emacs.</li>
+</ul>
+
+
+
+            </article>  
+        </main>
+        <footer>
+            <p>    
+                Department of Computer Science, UNC Asheville
+            </p>
+        </footer>
+        
+        <script type="text/javascript" src="/fall2024/assets/js/main.js"></script>
+
+<!-- <script>
+    //little bit of a hack:
+    const scrollLeft = () => {
+        //console.log('scrollLeft');
+        document.documentElement.scrollLeft = 0;
+    };
+    setTimeout(scrollLeft, 100);
+</script> -->
+        
+        <script type="text/javascript" src="/fall2024/assets/js/scrollspy.js"></script>
+        <script type="text/javascript" src="/fall2024/assets/js/expandable.js"></script>
+    </body>
+</html>
